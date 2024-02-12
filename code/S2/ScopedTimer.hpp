@@ -4,9 +4,9 @@
 #include <functional>
 #include <iostream>
 
-inline void DisplayElapsed(const std::string &name, double const durationUs) {
-    double const ms{durationUs * 0.001};
-    std::cout << name << " : " << durationUs << "us (" << ms << "ms)" << std::endl;
+static inline void display_elapsed(std::string const& name, double const duration_us) {
+    double const ms{duration_us * 0.001};
+    std::cout << name << " : " << duration_us << "us (" << ms << "ms)" << std::endl;
 }
 
 template <typename Period = std::micro> class ScopedTimer {
@@ -17,23 +17,23 @@ public:
         : ScopedTimer("unnamed") {}
 
     ScopedTimer(const std::string name)
-        : ScopedTimer(name, DisplayElapsed) {}
+        : ScopedTimer(name, display_elapsed) {}
 
     ScopedTimer(const std::string name, std::function<void(std::string const &, double const &)> callback)
-        : m_last(Clock::now())
-        , m_callback(callback)
-        , m_name(name) {}
+        : _last(Clock::now())
+        , _callback(callback)
+        , _name(name) {}
 
-    ~ScopedTimer() { m_callback(m_name, elapsed()); }
+    ~ScopedTimer() { _callback(_name, elapsed()); }
 
-    void reset() { m_last = Clock::now(); }
+    void reset() { _last = Clock::now(); }
 
     double elapsed() const {
-        return std::chrono::duration<double, Period>(Clock::now() - m_last).count();
+        return std::chrono::duration<double, Period>(Clock::now() - _last).count();
     }
 
 private:
-    std::chrono::time_point<Clock> m_last;
-    std::function<void(std::string const &, double const &)> m_callback;
-    std::string m_name;
+    std::chrono::time_point<Clock> _last;
+    std::function<void(std::string const&, double const&)> _callback;
+    std::string _name;
 };
