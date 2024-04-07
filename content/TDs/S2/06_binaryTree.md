@@ -64,7 +64,7 @@ Node* create_node(int value);
 bool is_leaf() const;
 ```
 
-3. Écrire une **méthode** `insert` à la structure `BinaryTree` qui prend en paramètre une valeur et qui insère un nouveau nœud contenant cette valeur dans l'arbre binaire. On insérera le nœud à gauche si la valeur est inférieure à la valeur du nœud courant et à droite sinon.
+3. Écrire une **méthode** `insert` à la structure `Node` qui prend en paramètre une valeur et qui insère un nouveau nœud contenant cette valeur dans l'arbre binaire. On insérera le nœud à gauche si la valeur est inférieure à la valeur du nœud courant et à droite sinon.
 ```cpp
 void Node::insert(int value);
 ```
@@ -249,7 +249,7 @@ Testons maintenant notre implémentation en créant un programme qui permet de c
 5. Afficher la hauteur de l'arbre binaire.
 
 ## Aller plus loin
-## Exercice 3 (Pointeurs intelligents)
+### Exercice 3 (Pointeurs intelligents) (Bonus)
 
 Nous allons maintenant améliorer et simplifier notre code en utilisant des [**pointeurs intelligents**](/Lessons/S1/MemoryAllocation). En effet la partie la plus compliquée de notre code est la gestion de la mémoire et des pointeurs. Les pointeurs intelligents vont nous permettre de nous débarrasser de cette gestion et de nous passer de la fonction `delete_tree` par exemple.
 
@@ -310,7 +310,7 @@ C'est un peu plus compliqué car il faut utiliser des références vers des poin
 Si vous voulez essayer, n'hésitez pas à demander de l'aide.
 :::
 
-## Exercice 4 (Encapsulation)
+### Exercice 4 (Encapsulation) (Bonus)
 
 Le but est de créer une structure `BinaryTree` qui encapsule la structure `Node` ou `SmartNode` et qui permet d'utiliser les même méthodes sans connaître la structure interne de l'arbre binaire. Cela permet aussi de gérer le cas où l'arbre binaire est vide (c'est à dire que la racine est un pointeur nul).
 
