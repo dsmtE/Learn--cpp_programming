@@ -184,10 +184,10 @@ Je vous donne également une fonction qui permet de générer une liste de carte
 ```cpp
 #include <vector>
 std::vector<Card> get_cards(size_t const size) {
-    std::vector<Card> cards;
+    std::vector<Card> cards {};
     cards.reserve(size);
     for (size_t i {0}; i < size; ++i) {
-        cards.emplace_back(static_cast<CardKind>(rand() % 4), static_cast<CardValue>(rand() % 13));
+        cards.push_back({static_cast<CardKind>(rand() % 4), static_cast<CardValue>(rand() % 13)});
     }
     return cards;
 }
