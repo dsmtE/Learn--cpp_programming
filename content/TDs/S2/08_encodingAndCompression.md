@@ -1,5 +1,5 @@
 ---
-title: TD7 - Encodage et compression
+title: TD8 - Encodage et compression
 ---
 
 ## Exercice 1 (Run-length encoding)

@@ -1,5 +1,5 @@
 ---
-title: TD8 - Graphes
+title: TD7 - Graphes
 ---
 
 Pour ce TD, nous allons travailler sur les graphes. Les graphes peuvent être représentés de différentes manières. Nous allons travailler principalement avec une représentation sous forme de **liste d'adjacence** et d'un graphe pondéré et orienté plus intéressant pour les algorithmes de plus court chemin.
