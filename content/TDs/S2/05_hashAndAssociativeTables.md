@@ -152,7 +152,7 @@ Il faut deux choses pour pouvoir utiliser une **structure** comme clé dans une 
 
 1. **Surchargez l'opérateur** `==` pour la structure `Card` (deux cartes sont égales si elles ont la même valeur et la même couleur).
 
-2. Écrire une **méthode** `hash` pour la structure `Card` qui retourne un entier.
+2. Écrire une **méthode** `hash` **constante** pour la structure `Card` qui retourne un entier.
 
 Vous pouvez utiliser la méthode de hachage que vous souhaitez et qui vous semble la plus adaptée. Mais je vous donne un indice pour trouver une fonction de hachage **parfaite** pour notre structure `Card` dans la question suivante (vous pouvez donc passer à la question suivante si vous le souhaitez).
 
@@ -177,8 +177,12 @@ namespace std {
 }
 ```
 
-> Je ne vous demande pas de comprendre ce code, il y a des notions plus complexes que vous découvrirez l'année prochaine. Gardez simplement en tête que ce code permet de faire en sorte que la bibliothèque standard utilise notre méthode `hash` pour la structure `Card`. (Notamment les tables associatives ont besoin de ça pour indexer les objects).
+> Je ne vous demande pas de comprendre ce code, il y a des notions plus complexes que vous découvrirez l'année prochaine. Gardez simplement en tête que ce code permet de faire en sorte que la bibliothèque standard utilise notre méthode `hash` pour la structure `Card`. (Notamment les tables associatives ont besoin de ça pour indexer les objects). On aurait pu écrire le contenu de la fonction `hash` directement ici mais je préfère que vous ayez une méthode `hash` dans la structure `Card` pour que vous puissiez l'utiliser ailleurs (en appelant `card.hash()`).
 
+:::warning
+⚠️ Votre méthode `hash` doit être `const` pour pouvoir être appelée dans cette fonction qui est `const`.
+:::
+ 
 Je vous donne également une fonction qui permet de générer une liste de cartes aléatoires:
 
 ```cpp
