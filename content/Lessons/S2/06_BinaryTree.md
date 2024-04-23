@@ -256,6 +256,8 @@ Le premier élément inséré dans l'arbre devient la racine. Ensuite, il suffit
 
 Cela permet de faire des recherches efficaces dans l'arbre. Grâce à la relation d'ordre entre les nœuds, on peut savoir dans quel sous-arbre se trouve la valeur recherchée et effectuer une recherche rappelant le fonctionnement de la recherche dichotomique.
 
+Vous pouvez trouver un visuel interactif pour comprendre le fonctionnement d'un arbre binaire de recherche [ici](https://visualgo.net/en/bst).
+
 ### Insertion
 
 L'insertion dans un arbre binaire de recherche est assez simple. Il suffit de trouver le bon endroit pour insérer le nouveau nœud en respectant la relation d'ordre entre les nœuds.
