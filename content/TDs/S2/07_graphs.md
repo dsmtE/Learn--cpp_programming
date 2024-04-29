@@ -23,7 +23,9 @@ namespace Graph {
     };
 
     struct WeightedGraph {
-        // L'utilisation d'un tableau associatif permet d'avoir une complexité en O(1) pour l'ajout et la recherche d'un sommet. Cela permet de stocker les sommets dans un ordre quelconque (et pas avoir la contrainte d'avoir des identifiants (entiers) de sommets consécutifs lors de l'ajout de sommets). Cela permet également de pouvoir utiliser des identifiants de sommets de n'importe quel type (string, char, int, ...) et pas seulement des entiers
+        // L'utilisation d'un tableau associatif permet d'avoir une complexité en O(1) pour l'ajout et la recherche d'un sommet.
+        // Cela permet de stocker les sommets dans un ordre quelconque (et pas avoir la contrainte d'avoir des identifiants (entiers) de sommets consécutifs lors de l'ajout de sommets).
+        // Cela permet également de pouvoir utiliser des identifiants de sommets de n'importe quel type (string, char, int, ...) et pas seulement des entiers.
         std::unordered_map<int, std::vector<WeightedGraphEdge>> adjacency_list {};
 
         void add_vertex(int const id);
@@ -91,19 +93,17 @@ Si le noeuds de destination n'existe pas (comme clé du tableau associatif `adja
 
 3. Implémenter la méthode `add_undirected_edge` en utilisant `add_directed_edge` pour ajouter deux edges dans les deux sens pour connecter deux noeuds passés en paramètre.
 
-4. De même, ajouter les opérateurs de comparaison pour la structure `WeightedGraph` (cela va permettre de vérifier si la fonction de la question suivante fonctionne bien en comparants les listes d'adjacences de deux graphes).
+4. Implémenter la fonction `adjacency_list_from_adjacency_matrix` qui prend en paramètre une **matrice d'adjacence** (sous la forme d'un vecteur de vecteurs d'entiers) et qui retourne un graphe.
 
-5. Implémenter la fonction `adjacency_list_from_adjacency_matrix` qui prend en paramètre une **matrice d'adjacence** (sous la forme d'un vecteur de vecteurs d'entiers) et qui retourne un graphe.
-
-6. Écrire dans la fonction `main` un exemple d'utilisation de la fonction `adjacency_list_from_adjacency_matrix` pour créer un graphe à partir d'une matrice d'adjacence et créer un deuxième graphe en utilisant les méthodes `add_vertex` et `add_undirected_edge` pour ajouter les mêmes sommets et les mêmes arrêtes que dans le premier graphe. Ensuite, comparer les deux graphes pour vérifier qu'ils sont égaux.
+5. Écrire dans la fonction `main` un exemple d'utilisation de la fonction `adjacency_list_from_adjacency_matrix` pour créer un graphe à partir d'une matrice d'adjacence et créer un deuxième graphe en utilisant les méthodes `add_vertex` et `add_undirected_edge` pour ajouter les mêmes sommets et les mêmes arrêtes que dans le premier graphe. Ensuite, comparer les deux graphes pour vérifier qu'ils sont égaux.
 
 ## Exercice 2 (traverser un graphe)
 
-1. Implémenter la méthode `print_DFS` qui prend en paramètre l'id du sommet de départ et qui affiche les sommets du graphe en utilisant un parcours en profondeur (DFS) à partir du sommet de départ (`depth-first search`).
+1. Implémenter la méthode `print_DFS` qui prend en paramètre l'id du sommet de départ et qui affiche les sommets du graphe en utilisant un [parcours en profondeur](/Lessons/S2/graphs#parcours-en-profondeur) (DFS) à partir du sommet de départ (`depth-first search`).
 
-2. Implémenter la méthode `print_BFS` qui utilise cette fois-ci un parcours en largeur (BFS) à partir du sommet de départ (`breadth-first search`).
+2. Implémenter la méthode `print_BFS` qui utilise cette fois-ci un [parcours en largeur](/Lessons/S2/graphs#parcours-en-largeur) (BFS) à partir du sommet de départ (`breadth-first search`).
 
-3. Bonus : Implémenter le parcours en profondeur (BFS) à prenant en paramètre une fonction de **callback** pour chaque sommet visité. L'idée est de ne pas contraindre l'utilisateur à afficher les sommets mais de lui donner la possibilité de faire ce qu'il veut avec les sommets visités.
+3. (Bonus) Implémenter le parcours en profondeur (BFS) à prenant en paramètre une fonction de **callback** pour chaque sommet visité. L'idée est de ne pas contraindre l'utilisateur à afficher les sommets mais de lui donner la possibilité de faire ce qu'il veut avec les sommets visités.
 Voilà la signature de la méthode à implémenter:
 ```cpp
 void DFS(int const start, std::function<void(int const)> const& callback) const;
@@ -142,9 +142,8 @@ Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs#dijkstr
 
 Écrivez les différentes étapes de l'algorithme de Dijkstra selon le même modèle que [l'illustration du cours](/Lessons/S2/graphs#illustration-de-lalgorithme-de-dijkstra) pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.
 
-
-1. (BONUS) En se donnant un bout de code pour démarrer l'implémentation de l'algorithme de Dijkstra, complétez le code pour implémenter l'algorithme de Dijkstra.
-2. (BONUS) Testez votre implémentation avec le graphe donné en exemple pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.
+2. (BONUS) En se donnant un bout de code pour démarrer l'implémentation de l'algorithme de Dijkstra, complétez le code pour implémenter l'algorithme de Dijkstra.
+3. (BONUS) Testez votre implémentation avec le graphe donné en exemple pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.
 ```cpp
 std::unordered_map<int, std::pair<float, int>> dijkstra(WeightedGraph const& graph, int const& start, int const end) {
     // On crée un tableau associatif pour stocker les distances les plus courtes connues pour aller du sommet de départ à chaque sommet visité
