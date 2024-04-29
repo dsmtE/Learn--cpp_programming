@@ -50,6 +50,10 @@ On ne veux pas utiliser la fonction [`std::pow`](https://en.cppreference.com/w/c
 On va donc utiliser une variable `power` et multiplier cette variable par `p` à chaque itération pour obtenir le nombre représentant $p^i$;
 :::
 
+:::tip choix de `p` et `m`
+Le choix de `p` et `m` va influencer la qualité (collision) et les performances de notre fonction de hachage. Sans rentrer dans les détails, on choisit généralement `p` un **nombre premier** et `m` un nombre suffisamment grand pour éviter les collisions tout en restant petit pour rester performant et éviter des erreur numériques. Par exemple, on peut choisir `p` = **31** et `m` = **10^9 + 9** (que l'on peut noter `1e9 + 9` en C++ ou tout simplement `1000000009`).
+:::
+
 ## Exercice 2 (Réparation de Robots)
 
 l'idée de cet exercice est d'utiliser une [table associative](/Lessons/S2/HashAndAssociativeTables#tableau-associatif) pour résoudre un problème.
