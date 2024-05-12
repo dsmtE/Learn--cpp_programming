@@ -95,6 +95,43 @@ Si le noeuds de destination n'existe pas (comme clé du tableau associatif `adja
 
 4. Implémenter la fonction `adjacency_list_from_adjacency_matrix` qui prend en paramètre une **matrice d'adjacence** (sous la forme d'un vecteur de vecteurs d'entiers) et qui retourne un graphe.
 
+:::info Exemple
+Exemple pour le graphe suivant:
+```mermaid
+    graph LR
+    0 --1--> 1
+    0 --2--> 4
+    1 --2--> 2
+    1 --4--> 3
+    2 --1--> 3
+    3 --6--> 4
+```
+
+Représenté par la matrice d'adjacence suivante:
+
+$$
+\begin{bmatrix}
+0 & 1 & 0 & 0 & 2 \\
+0 & 0 & 2 & 4 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 6 \\
+0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}
+$$
+
+la liste d'adjacence correspondante est la suivante:
+```cpp
+std::unordered_map<int, std::vector<WeightedGraphEdge>> adjacency_list {
+    {0, {{1, 1.0f}, {4, 2.0f}}},
+    {1, {{2, 2.0f}, {3, 4.0f}}},
+    {2, {{3, 1.0f}}},
+    {3, {{4, 6.0f}}},
+    {4, {}},
+};
+```
+
+:::
+
 5. Écrire dans la fonction `main` un exemple d'utilisation de la fonction `adjacency_list_from_adjacency_matrix` pour créer un graphe à partir d'une matrice d'adjacence et créer un deuxième graphe en utilisant les méthodes `add_vertex` et `add_undirected_edge` pour ajouter les mêmes sommets et les mêmes arrêtes que dans le premier graphe. Ensuite, comparer les deux graphes pour vérifier qu'ils sont égaux.
 
 ## Exercice 2 (traverser un graphe)
