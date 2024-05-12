@@ -244,7 +244,7 @@ Testons maintenant notre implémentation en créant un programme qui permet de c
 
 3. (**BONUS**) Afficher la valeur minimale et maximale de l'arbre.
 
-4. Afficher la somme des valeurs des nœuds de l'arbre binaire en utilisant la fonction `postfixe` qui retourne un vecteur contenant les nœuds parcourus dans l'ordre **postfixe**.
+4. Afficher la somme des valeurs des nœuds de l'arbre binaire en utilisant la fonction `prefixe` qui retourne un vecteur contenant les nœuds parcourus dans l'ordre **prefixe**.
 
 5. Afficher la hauteur de l'arbre binaire.
 
