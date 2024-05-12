@@ -86,12 +86,12 @@ namespace Graph {
 
 1. Implémenter la méthode `add_vertex` qui prend en paramètre un identifiant de sommet et ajoute un sommet au graphe si il n'existe pas déjà. Il faut donc tester si le sommet existe déjà avant de créer la liste des edges. (vous pouvez utiliser la méthode [`find`](https://cplusplus.com/reference/unordered_map/unordered_map/find) de `std::unordered_map` pour cela).
 
-2. Implémenter la méthode `add_directed_edge` qui ajoute une arrête dans le graphe en prenant en paramètre les IDs des deux noeuds à connecter (source vers destination) et le poids de l'arrête.
+2. Implémenter la méthode `add_directed_edge` qui ajoute une arrête dans le graphe en prenant en paramètre les IDs des deux nœuds à connecter (source vers destination) et le poids de l'arrête.
 :::note
-Si le noeuds de destination n'existe pas (comme clé du tableau associatif `adjacency_list`) il est possible et recommandé de l'ajouter au passage (en utilisant add_vertex). Ainsi, tout les sommets du graphe sont ajoutés automatiquement lors de l'ajout d'une arrête.
+Si le nœuds de destination n'existe pas (comme clé du tableau associatif `adjacency_list`) il est possible et recommandé de l'ajouter au passage (en utilisant add_vertex). Ainsi, tout les sommets du graphe sont ajoutés automatiquement lors de l'ajout d'une arrête.
 :::
 
-3. Implémenter la méthode `add_undirected_edge` en utilisant `add_directed_edge` pour ajouter deux edges dans les deux sens pour connecter deux noeuds passés en paramètre.
+3. Implémenter la méthode `add_undirected_edge` en utilisant `add_directed_edge` pour ajouter deux edges dans les deux sens pour connecter deux nœuds passés en paramètre.
 
 4. Implémenter la fonction `adjacency_list_from_adjacency_matrix` qui prend en paramètre une **matrice d'adjacence** (sous la forme d'un vecteur de vecteurs d'entiers) et qui retourne un graphe.
 
@@ -203,18 +203,18 @@ std::unordered_map<int, std::pair<float, int>> dijkstra(WeightedGraph const& gra
         if (/* TODO */) {
             return distances;
         }
-        // 3. On parcoure la liste des voisins (grâce à la liste d'adjacence) du noeud courant
+        // 3. On parcoure la liste des voisins (grâce à la liste d'adjacence) du nœud courant
         for (/* TODO */) {
-            // 4. on regarde si le noeud existe dans le tableau associatif (si oui il a déjà été visité)
+            // 4. on regarde si le nœud existe dans le tableau associatif (si oui il a déjà été visité)
 
             auto find_node { /* TODO */ };
             bool const visited { /* TODO */ };
 
              if (!visited) {
-                    // 5. Si le noeud n'a pas été visité, on l'ajoute au tableau associatif en calculant la distance pour aller jusqu'à ce noeud
+                    // 5. Si le nœud n'a pas été visité, on l'ajoute au tableau associatif en calculant la distance pour aller jusqu'à ce nœud
                     // la distance actuelle + le point de l'arrête)
 
-                    // 6. On ajout également le noeud de destination à la liste des noeud à visité (avec la distance également pour prioriser les noeuds les plus proches)
+                    // 6. On ajout également le nœud de destination à la liste des nœud à visité (avec la distance également pour prioriser les nœuds les plus proches)
                 }else {
                     // 7. Si il a déjà été visité, On test si la distance dans le tableau associatif est plus grande
                     // Si c'est le cas on à trouvé un plus court chemin, on met à jour le tableau associatif et on ajoute de nouveau le sommet de destination dans la liste à visité

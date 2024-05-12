@@ -256,7 +256,7 @@ Pour l'illustrer on peut prendre une liste de même taille que le nombre de somm
 Dans la pratique:
 - On utilise une **file de priorité** `std::priority_queue` pour stocker les sommets à visiter. Cela permet de retirer le sommet avec la plus petite distance facilement et de manière efficace.
 
-- On utilise un **tableau associatif** pour stocker les distances. Cela permet de ne pas avoir à créer une liste de taille fixe de tout les noeuds avec une distance infinie initialement. On peut simplement ajouter les distances au fur et à mesure que l'on parcourt le graphe et cela permet au passage de savoir quels noeuds ont déjà été visités sans avoir de liste de noeuds visités supplémentaire.
+- On utilise un **tableau associatif** pour stocker les distances. Cela permet de ne pas avoir à créer une liste de taille fixe de tout les nœuds avec une distance infinie initialement. On peut simplement ajouter les distances au fur et à mesure que l'on parcourt le graphe et cela permet au passage de savoir quels nœuds ont déjà été visités sans avoir de liste de nœuds visités supplémentaire.
 De plus, généralement, cet algorithme est utilisé pour trouver le plus court chemin entre deux sommets. On peut donc s'arrêter dès qu'on a trouvé le sommet d'arrivée.
 :::
 
