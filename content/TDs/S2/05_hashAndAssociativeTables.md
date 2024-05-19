@@ -46,8 +46,12 @@ size_t polynomial_rolling_hash(const std::string& s, size_t p, size_t m);
 > - $m$ un nombre (généralement une puissance de 2)
 
 :::warning
-On ne veux pas utiliser la fonction [`std::pow`](https://en.cppreference.com/w/c/numeric/math/pow) de la bibliothèque standard car elle est lente est fonctionne avec des **flottants**. On va donc nous même faire les multiplications.
-On va donc utiliser une variable `power` et multiplier cette variable par `p` à chaque itération pour obtenir le nombre représentant $p^i$;
+On ne veux pas utiliser la fonction [`std::pow`](https://en.cppreference.com/w/c/numeric/math/pow) de la bibliothèque standard car elle est "lente" est fonctionne avec des **flottants** (ce qui nous ferait faire des conversions inutiles).
+
+De plus on ne veux pas recalculer la puissance de `p` à chaque itération car c'est des calculs inutiles. Admettons qu'il faille $n-1$ multiplications pour calculer $p^n$ ($p \times p \times p = p^3$) et que l'on recalculait à chaque fois la puissance. Pour une chaîne de taille $n$ on ferait donc $1 + 2 + \ldots + (n-2) + (n-1)$ multiplications. On peut simplifier cette somme en $n(n-1)/2$ ce qui est de l'ordre de $n^2$ multiplications. On veut éviter ça.
+
+On va donc nous même faire les multiplications. Pour calculer $p^i$ on peut simplement multiplier par `p` le résultat de $p^{i-1}$ c'est à dire la valeur de la puissance à l'itération précédente.
+On va donc utiliser une variable `power` (initialisée à 1 au début) et multiplier cette variable par `p` à chaque itération pour obtenir les puissances de `p`.
 :::
 
 :::tip choix de `p` et `m`
