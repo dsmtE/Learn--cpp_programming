@@ -35,7 +35,7 @@ size_t polynomial_rolling_hash(const std::string& s, size_t p, size_t m);
 > Nous allons utiliser la technique dite de **polynomial rolling hash**. Cette technique consiste à calculer le hash d'une chaîne de caractères en incorporant la position d'une manière plus complexe pour éviter les collisions. On va donc multiplier la valeur de chaque caractère par une puissance de `p` qui dépend de la position du caractère dans la chaîne de caractères.
 > Pour cela, nous allons utiliser la formule suivante:
 > $$
-> \text{hash}(s) = \sum_{i=0}^{n-1} (s[i] \times p^i \mod m)
+> \text{hash}(s) = \sum_{i=0}^{n-1} ((s[i] \times p^i) \mod m)
 > $$
 >
 > Avec:
