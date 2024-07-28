@@ -457,8 +457,24 @@ int main()
 On utilise ici aussi la syntaxe avec <kbd>::</kbd> pour signifier l'appartenance de la valeur à l'**enum** (de la même façon qu'avec la bibliothèque standard comme avec ```std::string```).
 :::
 
-:::caution
+:::info représentation en mémoire
+Une **enum** est stockée en mémoire comme un **entier**. Chaque valeur de l'**enum** est associée à un entier, commençant par **0** pour la première valeur, **1** pour la deuxième, etc.
 
+Il est possible de changer cette valeur en précisant un entier après le nom de la valeur mais ce n'est pas une pratique recommandée.
+
+```cpp
+enum class Season {
+    Spring = 42, 
+    Summer, 
+    Autumn,
+    Winter,
+};
+```
+
+Nous verrons un [exemple](#cast-et-enum) dans la partie conversion de type (cast) pour voir comment récupérer la valeur entière associée à une valeur d'une **enum** et vice versa.
+:::
+
+:::caution
 Mais pourquoi le mot clé **class** ici ?
 
 Il est également possible de l'omettre mais cette syntaxe est un autre "type" d'enum hérité du **C** qui a de nombreux inconvénients:
@@ -501,6 +517,8 @@ int main()
 On parle de "**Scoped enumerations**" avec ```enum class``` (autrement dit ayant une portée limitée pour éviter les collisions de valeurs).
 Pour faire simple on écrira systématiquement ```enum class``` en **C++ moderne** pour s'éviter des problèmes.
 :::
+
+Enfin, il n’existe pas de moyen simple de convertir une **enum** en chaîne de caractères. C'est un problème récurrent en C++ et il existe plusieurs solutions plus ou moins élégantes pour le faire. Nous en verrons une plus tard au deuxième semestre ([ici](/Lessons/S2/HashAndAssociativeTables#cas-dutilisation-avec-les-énumérations)).
 
 ## Des opérateurs pour manipuler nos variables
 
@@ -760,6 +778,34 @@ int integerFromFloating {(int)floating};
 
 Il est à éviter car il est dangereux et fonctionne de différentes manières en fonction des cas sans vérifications et peut donc provoquer des erreurs ou comportements inattendus.
 :::
+
+### Cast et enum
+
+Il est également possible de **caster** une valeur d'une **enum** en **entier** et vice versa. C'est une pratique courante pour afficher et manipuler une valeur d'une **enum**. 
+
+```cpp
+#include <iostream>
+
+enum class Season {
+    Spring, 
+    Summer, 
+    Autumn,
+    Winter,
+};
+
+int main()
+{
+    Season current_season { Season::Spring };
+    int current_season_int { static_cast<int>(current_season) };
+    std::cout << current_season_int << std::endl;
+
+    int season_int { 2 };
+    Season season { static_cast<Season>(season_int) };
+    std::cout << static_cast<int>(season) << std::endl;
+
+    return 0;
+}
+```
 
 ## En résumé
 

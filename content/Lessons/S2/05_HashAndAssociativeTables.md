@@ -192,6 +192,45 @@ int main() {
 ```
 :::
 
+#### Cas d'utilisation avec les énumérations
+
+Les [énumérations](/Lessons/S1/Variables#enum-un-type-supplémentaire) sont des types de données qui permettent de définir un ensemble de valeurs possibles pour une variable.
+
+Mais il n'est pas simplement possible de convertir un élément d'une énumération en une chaîne de caractères.
+
+Mais étant représentées par des entiers en mémoire, il est possible de les utiliser comme clés dans un tableau associatif pour y associer des chaînes de caractères.
+
+C'est un cas d'utilisation très courant des tableaux associatifs et des énumérations.
+
+```cpp
+#include <map>
+#include <iostream>
+#include <string>
+
+enum class Season {
+    Spring,
+    Summer,
+    Autumn,
+    Winter
+};
+
+int main() {
+    std::map<Season, std::string> season_to_string {
+        {Season::Spring, "Printemps"},
+        {Season::Summer, "Été"},
+        {Season::Autumn, "Automne"},
+        {Season::Winter, "Hiver"}
+    };
+
+    Season currentSeason {Season::Spring};
+
+    std::cout << "La saison actuelle est " << season_to_string[currentSeason] << std::endl;
+
+    return 0;
+}
+```
+
+
 ## std::set — Un ensemble d'éléments uniques
 
 Une autre structure de données fournie par la bibliothèque standard de C++ est la classe `std::set` (définie dans la bibliothèque `<set>`).
