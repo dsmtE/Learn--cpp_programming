@@ -58,60 +58,164 @@ On va donc utiliser une variable `power` (initialisée à 1 au début) et multip
 Le choix de `p` et `m` va influencer la qualité (collision) et les performances de notre fonction de hachage. Sans rentrer dans les détails, on choisit généralement `p` un **nombre premier** et `m` un nombre suffisamment grand pour éviter les collisions tout en restant petit pour rester performant et éviter des erreur numériques. Par exemple, on peut choisir `p` = **31** et `m` = **10^9 + 9** (que l'on peut noter `1e9 + 9` en C++ ou tout simplement `1000000009`).
 :::
 
-## Exercice 2 (Réparation de Robots)
+## Exercice 2 (Analyse du nombre d'insectes)
 
-l'idée de cet exercice est d'utiliser une [table associative](/Lessons/S2/HashAndAssociativeTables#tableau-associatif) pour résoudre un problème.
+L'idée de cet exercice est d'utiliser une [table associative](/Lessons/S2/HashAndAssociativeTables#tableau-associatif) pour résoudre un problème.
 
-Nous avons des robots qui sont en panne. Chaque robot est identifié par son nom composé de 2 lettres majuscules. Je vous donne la liste des robots en panne et les différentes dépenses pour les réparer.
+Vous êtes un entomologiste qui a pour mission de **recenser** les insectes dans un jardin afin de vérifier la biodiversité de ce jardin et confirmer vos hypothèses sur la présence de certaines espèces (probabilité de présence de certaines espèces, etc.).
 
-Voilà la fonction qui génère la liste des réparations effectuées en donnant sous forme de `std::pair` le nom du robot et le coût de la réparation:
-
+Vous disposez d'une liste d'insectes que vous pouvez rencontrer dans ce jardin (sous forme d'**énumération**):
 ```cpp
-#include <iostream>
+enum class Insect {
+    ClassicBee,
+    Ladybug,
+    Butterfly,
+    Dragonfly,
+    Ant,
+    Grasshopper,
+    Beetle,
+    Wasp,
+    Caterpillar,
+    Spider,
+    GuimielBee
+};
+```
+
+Je vous fournis également une liste des valeurs de l'énumération `Insect` sous forme de vecteur (pour pouvoir itérer sur les valeurs de l'énumération et éviter de faire des `static_cast` pour obtenir les valeurs de l'énumération à partir d'un entier (index) ou encore avoir le nombre d'éléments de l'énumération). Rappels sur les cast avec enum [ici](/Lessons/S1/Variables#cast-et-enum).
+```cpp
 #include <vector>
-#include <string>
-#include <cstdlib>
-
-std::string random_name(size_t size) {
-    std::string name {""};
-    // Optimisation pour que la chaîne de caractère ne réalloue pas de la mémoire à chaque caractère ajouté
-    // https://cplusplus.com/reference/string/string/reserve/
-    name.reserve(size);
-    for(size_t i {0}; i < size; ++i) {
-        name.push_back('A' + std::rand() % 26);
-    }
-    return name;
-}
-
-std::vector<std::pair<std::string, float>> get_robots_fix(size_t size) {
-    std::vector<std::pair<std::string, float>> robots_fix {};
-    // Meme optimisation que dans random_name()
-    // https://cplusplus.com/reference/vector/vector/reserve/
-    robots_fix.reserve(size);
-    for (size_t i {0}; i < size; ++i) {
-        // random name 
-        std::string robotName { random_name(2) };
-        // random cost
-        float cost {static_cast<float>(std::rand()) / RAND_MAX * 1000.0f};
-        robots_fix.push_back(std::make_pair(robotName, cost));
-    }
-    return robots_fix;
-}
+const std::vector<Insect> insect_values {
+    Insect::ClassicBee,
+    Insect::Ladybug,
+    Insect::Butterfly,
+    Insect::Dragonfly,
+    Insect::Ant,
+    Insect::Grasshopper,
+    Insect::Beetle,
+    Insect::Wasp,
+    Insect::Caterpillar,
+    Insect::Spider,
+    Insect::GuimielBee
+};
 ```
 
-J'aimerai être capable de lister pour un robot donné l'ensemble des réparations effectuées pour ce robot. Par exemple, pour le robot "AB", j'aimerai avoir la liste des réparations effectuées pour ce robot.
+Ainsi qu'un tableau associatif qui permet de convertir une valeur de l'énumération `Insect` en une chaîne de caractères (pour pouvoir afficher le nom de l'insecte):
+:::info
+Il n'existe pas de fonction dans la bibliothèque standard C++ pour obtenir le nom d'une valeur d'une énumération. L'astuce est donc de créer un tableau associatif pour faire cette correspondance. Il existe des bibliothèques comme [Magic Enum](https://github.com/Neargye/magic_enum) qui permettent de manipuler plus facilement les énumérations mais nous n'utiliserons pas de bibliothèque dans cet exercice.
+:::
+```cpp
+#include <unordered_map>
+#include <string>
 
-1. Pour cela, je vous demande d'écrire une fonction qui prend en paramètre la liste des réparations effectuées et qui retourne une [table associative](/Lessons/S2/HashAndAssociativeTables#tableau-associatif) (`std::unordered_map`) qui associe à chaque nom de robot la liste des réparations effectuées pour ce robot (sous forme de `std::vector<float>`).
+const std::unordered_map<Insect, std::string> insect_to_string = {
+    {Insect::ClassicBee, "ClassicBee"},
+    {Insect::Ladybug, "Ladybug"},
+    {Insect::Butterfly, "Butterfly"},
+    {Insect::Dragonfly, "Dragonfly"},
+    {Insect::Ant, "Ant"},
+    {Insect::Grasshopper, "Grasshopper"},
+    {Insect::Beetle, "Beetle"},
+    {Insect::Wasp, "Wasp"},
+    {Insect::Caterpillar, "Caterpillar"},
+    {Insect::Spider, "Spider"},
+    {Insect::GuimielBee, "GuimielBee"}
+};
+```
 
-Vous pouvez utiliser la signature suivante pour cette fonction:
+Enfin, vous disposez d'une liste de comptage d'insectes attendus pour un échantillon de **1000** insectes (obtenue en faisant la moyenne des observations de plusieurs entomologistes):
+Cette liste se présente sous forme d'un vecteur avec les nombres d'individus attendus pour chaque espèce d'insecte (dans le même ordre que l'énumération `Insect`):
 
 ```cpp
-std::unordered_map<std::string, std::vector<float>> robots_fixes_map(std::vector<std::pair<std::string, float>> const& robots_fixes);
+#include <vector>
+const std::vector<int> expected_insect_counts {
+    75, // ClassicBee
+    50, // Ladybug
+    100, // Butterfly
+    20, // Dragonfly
+    400, // Ant
+    150, // Grasshopper
+    60, // Beetle
+    10, // Wasp
+    40, // Caterpillar
+    90, // Spider 
+    5, // GuimielBee
+};
 ```
 
-2. Écrire une fonction qui prend en un `std::vector<float>` et qui retourne la somme des éléments de ce vecteur.
+Vous avez un grand nombre d'insectes à recenser et vous avez besoin d'une méthode pour compter le nombre d'apparitions de chaque insecte.
 
-3. Utiliser les deux fonctions précédentes pour afficher la somme des réparations effectuées pour chaque robot. (à partir de la liste des réparations effectuées obtenue avec la fonction `get_robots_fix`).
+Le plus simple pour vous est juste de **noter au fur et à mesure** vos observations (espèce et nombre d'individus observés) et de faire le compte à la fin. (par exemple, vous notez "2 abeilles" lorsque vous voyez 2 abeilles et "1 coccinelle" lorsque vous voyez une coccinelle).
+
+Voilà une fonction qui génère une liste d'observations aléatoires pour simuler vos observations:
+```cpp
+#include <functional>
+#include <random>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+
+std::vector<std::pair<Insect, int>> get_insect_observations(
+    const size_t number_of_observations,
+    std::vector<float> const& insect_probabilities,
+    const unsigned int seed = std::random_device{}()) {
+    // Create a random engine with a given seed
+    std::default_random_engine random_engine(seed);
+
+    auto randInsectIndex { std::bind(std::discrete_distribution<size_t>{insect_probabilities.begin(), insect_probabilities.end()}, random_engine) };
+    
+    std::vector<std::pair<Insect, int>> observations {};
+    observations.reserve(number_of_observations);
+
+    for(size_t i {0}; i < number_of_observations; ++i) {
+        size_t const random_insect_index { randInsectIndex() };
+        Insect const random_insect { insect_values[random_insect_index] };
+        
+        //If we have already seen the same insect, increment the count on the last observation
+        auto& previous_observation { observations.back() };
+        if(previous_observation.first == random_insect) {
+            previous_observation.second++;
+            i -= 1;
+        } else {
+            observations.push_back({random_insect, 1});
+        }
+    }
+
+    return observations;
+}
+```
+1. Créer une fonction `std::vector<float> probabilities_from_count(std::vector<int> const& counts)` qui prend en paramètre un vecteur de comptages et retourne un vecteur de probabilités à partir de ces comptages. (on divise chaque comptage par la somme de tous les comptages pour obtenir une probabilité normalisée).
+
+2. Utiliser la fonction `get_insect_observations` pour générer une liste suffisamment grande d'observations (par exemple **10000** observations) puis utiliser une table de hachage `std::unordered_map` pour compter le nombre d'apparitions de chaque insecte dans les observations précédemment générées et **afficher le résultat** (le nombre d'individus observés pour chaque insecte).
+:::tip
+On utilisera la valeur de l'énumération `Insect` comme **clé** dans la table de hachage et le nombre d'individus observés (initialisé à 0) comme **valeur** associée à cette clé (`std::unordered_map<Insect, int>`).
+:::
+
+:::info
+Le paramètre `seed` de la fonction `get_insect_observations` permet de fixer la graine du générateur de nombres aléatoires. Cela permet de reproduire les mêmes observations à chaque exécution du programme. Si vous ne spécifiez pas de graine, le générateur de nombres aléatoires utilisera une graine aléatoire à chaque exécution du programme sinon vous pouvez le fixer à une valeur de votre choix pour obtenir les mêmes observations à chaque exécution.
+:::
+
+3. Utiliser de nouveau la fonction `probabilities_from_count` pour obtenir les probabilités des insectes observés. Il faudra au préalable convertir le résultat de la table de hachage en un vecteur de comptage pour pouvoir utiliser la fonction `probabilities_from_count`.
+
+4. **Afficher** et **comparer** les probabilités des insectes observés avec les probabilités initiales. Si la différence entre les probabilités observées et les probabilités initiales est trop grande, indiquer que les observations ne sont pas conformes aux probabilités initiales. On pourra se fixer un seuil de 1% (0.01) pour considérer que les observations sont conformes.
+
+exemple de présentation des résultats:
+```
+Probabilities of observed insects vs expected probabilities
+ClassicBee : 0.076 vs 0.075 OK
+Ladybug : 0.048 vs 0.050 OK
+Butterfly : 0.100 vs 0.100 OK
+Dragonfly : 0.035 vs 0.020 BAD
+...
+```
+
+:::info
+Avec un grand nombre d'observations, on s'attend à ce que les probabilités observées se rapprochent des probabilités initiales. C'est le principe des lois des grands nombres. Plus on a d'observations, plus les probabilités observées se rapprocheront des probabilités initiales. Avec 10 000 vous devriez être sous le seuil de 1% pour chaque insecte (OK).
+:::
+
+:::tip
+Vous pouvez utiliser l'include `<iomanip>` pour formater l'affichage des nombres à virgule flottante.
+Ajouter `std::cout << std::fixed << std::setprecision(3);` avant d'afficher les nombres pour afficher les nombres avec 3 chiffres après la virgule.
+:::
 
 ## Exercice 3 (hash sur une structure)
 
