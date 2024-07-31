@@ -1,11 +1,9 @@
-// @ts-check
-const axios = require("axios");
+import axios from 'axios';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
-import { themes } from 'prism-react-renderer';
-const lightCodeTheme = themes.github;
-const darkCodeTheme = themes.dracula;
-
-const docusaurusLunrSearchPlugin = require("docusaurus-lunr-search");
+import docusaurusLunrSearchPlugin from 'docusaurus-lunr-search';
 
 module.exports = async function configCreatorAsync() {
   const contact_info = await axios.get(
@@ -13,10 +11,9 @@ module.exports = async function configCreatorAsync() {
   ).then((res) => res.data).catch((err) => ({}));
 
   const rehypeKatex = (await import('rehype-katex')).default;
-
   const remarkMath = (await import('remark-math')).default;
 
-  return {
+  const config: Config = {
     title: 'Cours de programmation C++',
     tagline: '',
     url: `https://dsmte.github.io/`,
@@ -48,8 +45,7 @@ module.exports = async function configCreatorAsync() {
     presets: [
       [
         'classic',
-        /** @type {import('@docusaurus/preset-classic').Options} */
-        ({
+        {
           docs: {
             path: "./content",
             routeBasePath: "/",
@@ -60,7 +56,7 @@ module.exports = async function configCreatorAsync() {
           theme: {
             customCss: require.resolve('./src/css/custom.css'),
           },
-        }),
+        } satisfies Preset.Options,
       ],
     ],
 
@@ -73,9 +69,7 @@ module.exports = async function configCreatorAsync() {
       },
     ],
 
-    themeConfig:
-      /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-      ({
+    themeConfig: {
         navbar: {
           title: '',
           logo: {
@@ -127,11 +121,13 @@ module.exports = async function configCreatorAsync() {
             `Copyright © ${new Date().getFullYear()}. Built with <a href="https://docusaurus.io/">Docusaurus</a>.`
         },
         prism: {
-          theme: lightCodeTheme,
-          darkTheme: darkCodeTheme,
+          theme: prismThemes.github,
+          darkTheme: prismThemes.dracula,
           additionalLanguages: ["cmake", "csharp"],
         },
-      }),
+    } satisfies Preset.ThemeConfig,
   };
+
+  return config;
 };
 
