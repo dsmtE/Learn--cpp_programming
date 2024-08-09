@@ -232,23 +232,21 @@ Il existe d'autres algorithmes de tri plus efficaces que les algorithmes de tri 
 
 Le tri fusion est un algorithme de tri qui consiste à **diviser** le tableau en deux parties égales, **trier** les deux parties, puis **fusionner** les deux parties triées.
 
-Le tri fusion est un algorithme efficace, car il a une complexité en $O(n \times log(n))$.
-
-C'est un algorithme "**récursif**", c'est-à-dire qu'il s'appelle lui-même pour trier deux sous-tableaux et les fusionner pour trier le tableau complet.
-
 Il y a donc deux "phases" dans cet algorithme:
 - la phase de **division** du tableau en deux parties égales
 - la phase de **fusion** des deux parties triées
 
 #### Phase de division
 
-Il existe deux façons de procéder pour diviser le tableau en deux parties égales:
-- Créer des **tableaux intermédiaires** pour stocker les deux parties du tableau à trier, puis fusionner les deux tableaux triés.
+Pour la phase de division, on va choisir de diviser et trier le tableau en deux parties égales pour maximiser l'efficacité de l'algorithme (ou presque égales si le tableau a une taille impaire).
+
+Il existe deux façons de procéder pour cibler les deux parties du tableau:
+- Créer des **tableaux intermédiaires** pour stocker les deux parties du tableau à trier.
 - Utiliser des **indices** pour définir les parties du tableau à trier, et trier directement le tableau en place.
 
-La première méthode est plus simple à comprendre, mais utilise plus de mémoire, car il faut créer des tableaux intermédiaires.
+La première méthode est plus simple à comprendre, mais utilise plus de mémoire, car il faut créer des tableaux intermédiaires (allocation de mémoire supplémentaire).
 
-On privilégie donc la deuxième méthode, et c'est celle que je vais détailler ici.
+En pratique, on privilégie donc la deuxième méthode, et c'est celle que je vais détailler ici.
 
 Pour trier un tableau, on va donc utiliser deux indices, un indice de **début** et un indice de **fin**, qui vont définir la **partie du tableau** à trier.
 
@@ -257,17 +255,25 @@ On va calculer la taille de la partie du tableau à trier, ici `6` (indice de fi
 
 On va ensuite diviser cette taille par deux, soit `3` (on peut arrondir à l'entier inférieur).
 
-On va donc utiliser par récursion les indices `0` et `3` pour trier la première partie du tableau, et les indices `4` et `6` pour trier la deuxième partie du tableau.
+On va donc trier les deux parties `[6, 2, 8, 1]` (des indices `0` à `3`) et `[5, 3, 9]` (des indices `4` à `6`).
+Enfin, la fusion des deux parties triées va permettre d'obtenir le tableau trié.
 
-Enfin la fusion des deux parties triées va permettre d'obtenir le tableau trié.
+:::info
+Cela fonctionne à condition que l'algo de tri que l'on va utiliser pour trier les deux sous-tableaux fonctionne "in-place", c'est-à-dire qu'il trie directement le tableau en place sans utiliser de tableau intermédiaire.
+:::
 
 #### Phase de fusion
 
-C'est la phase de **fusion** qui est la plus intéressante, car c'est elle qui va permettre de trier le tableau.
+C'est la phase de **fusion** qui est la plus intéressante, car c'est elle qui va permettre réellement de trier le tableau.
 
-Pour fusionner deux tableaux triés, on va utiliser deux (autres) **indices**, un indice pour chaque tableau, qui vont permettre de parcourir les deux tableaux.
+Dans cette phase de fusion il est plus simple de **copier** les éléments dans deux sous-tableaux intermédiaires, puis d'écrire les éléments triés dans le tableau final directement.
+:::info
+Il existe des méthodes pour effectuer cette fusion sans copier les éléments dans des tableaux intermédiaires, mais elles sont bien plus complexes à mettre en oeuvre.
+:::
 
-On va comparer les éléments des deux tableaux, et ajouter le plus petit des deux dans le tableau final.
+Pour fusionner deux tableaux triés, on va utiliser deux (autres) **indices**, un indice pour chaque sous-tableau, qui vont permettre de parcourir les deux tableaux et de pointer vers les éléments les plus petits des deux tableaux.
+
+On va comparer les deux éléments les plus petits des deux tableaux, et ajouter le plus petit des deux dans le tableau final.
 
 On va incrémenter l'indice du tableau dont on a ajouté l'élément, et on recommence l'opération jusqu'à ce qu'on ait parcouru les deux tableaux.
 
@@ -283,6 +289,36 @@ On obtient ainsi un tableau trié.
 
 :::info
 La **condition d'arrêt** de la récursion est quand la taille de la partie du tableau à trier est inférieure ou égale à `1`, car un tableau de taille `1` est déjà trié (de même pour un tableau vide).
+:::
+
+#### Récursion
+
+Dans l'exemple précédent, je n'ai pas détaillé la phase de tri des deux sous-tableaux, on pourrait par exemple utiliser un tri précédemment vu comme le **tri par sélection** pour trier les deux sous-tableaux.
+
+Cela améliorerait la complexité de l'algorithme mais pas la tendance asymptotique de l'algorithme.
+En reprenant les calculs précédents (où on avait $\frac{n^2 + 3n}{2}$ comparaisons et d'échanges), cela nous donnerait:
+
+$$
+\begin{align*}
+= & \frac{(\frac{n}{2})^2 + 3(\frac{n}{2})}{2} * 2 \\
+= & \frac{n^2}{4} + 3(\frac{n}{2}) \\ 
+\end{align*}
+$$
+
+C'est bien inférieur à la complexité du tri par sélection initial, mais cela reste en $O(n^2)$.
+
+Mais on pourrait très bien de nouveau utiliser le tri fusion pour trier les sous-tableaux, et ainsi de suite.
+
+L'algorithme de tri fusion est un algorithme **récursif**, c'est-à-dire qu'il s'appelle lui-même pour trier les sous-tableaux.
+
+Cela reviens à diviser le tableau en deux parties égales, puis chaque partie en deux parties égales, etc, jusqu'à ce qu'on ait des sous-tableaux de taille `1` ou `0` puis fusionner les sous-tableaux 2 à 2 pour obtenir le tableau trié.
+
+C'est un algorithme très efficace, en faisant cela, on va trier le tableau en $O(n \log n)$ opérations, ce qui est beaucoup plus efficace que les algorithmes de tri par comparaison.
+
+:::info
+Il est plus efficace cependant les copies effectuées pour l'étape de fusion des tableaux intermédiaires triés peuvent être coûteuses et impacter la complexité (en mémoire) de l'algorithme.
+
+On va découvrir un autre algorithme de tri qui à la même complexité en temps que le tri fusion mais qui ne nécessite pas de copies intermédiaires (En TDs, si vous les implémentez tout les deux je vous suggère de comparer les deux algorithmes pour vous rendre compte de la différence de performance).
 :::
 
 ### Tri rapide (quick sort)
