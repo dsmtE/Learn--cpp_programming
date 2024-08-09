@@ -29,7 +29,7 @@ Une fois décompressé, c'est prêt à être utilisé. Il ne reste plus qu'à in
 
 Dans notre cas on va devoir donc ajouter le sous-dossier **"bin"** du dossier précédemment décompressé à la variable d'environnement **PATH**. Par exemple **"C:\Winlibs\bin"**.
 
-C'est expliqué plus bas dans la section [**Variable d'environnement**](#variable-d-environnement).
+C'est expliqué plus bas dans la section [**Variables d'environnement**](#variables-denvironnement).
 
 <details>
 
@@ -118,7 +118,7 @@ Vous devriez voir un retour comme celui là :
 
 </Tabs>
 
-Cela peut ne pas fonctionner si le répertoire contenant le compilateur n'est pas "accessible". Dans ce cas, il faut ajouter le chemin du compilateur aux [variables d'environnement](#variable-d-environnement).
+Cela peut ne pas fonctionner si le répertoire contenant le compilateur n'est pas "accessible". Dans ce cas, il faut ajouter le chemin du compilateur aux [variables d'environnement](#variables-denvironnement).
 
 ## Variables d'environnement
 

@@ -424,9 +424,9 @@ Certains warnings de compilateur permette d'indiquer ce genre de cas mais c'est 
 
 :::warning Switch et chaînes de caractères
 
-Il est important de noter que le mot clé `switch` ne peut pas être utilisé avec des chaînes de caractères. Il ne peut être utilisé qu'avec des types entiers (`int`, `char`, `short`, `long`, etc...) ou encore les [**énumérations**](Lessons/S1/Variables#enum-un-type-supplémentaire).
+Il est important de noter que le mot clé `switch` ne peut pas être utilisé avec des chaînes de caractères. Il ne peut être utilisé qu'avec des types entiers (`int`, `char`, `short`, `long`, etc...) ou encore les [**énumérations**](/Lessons/S1/Variables/#enum-un-type-supplémentaire).
 
-il est possible de faire cela avec des `if` et `else if` mais généralement lors de l'utilisation de switch on connaît à l'avance les valeurs possibles et donc on utilisera de préférence des [**énumérations**](Lessons/S1/Variables#enum-un-type-supplémentaire) ou des constantes.
+il est possible de faire cela avec des `if` et `else if` mais généralement lors de l'utilisation de switch on connaît à l'avance les valeurs possibles et donc on utilisera de préférence des [**énumérations**](/Lessons/S1/Variables/#enum-un-type-supplémentaire) ou des constantes.
 
 ```cpp
 
@@ -438,4 +438,4 @@ il est possible de faire cela avec des `if` et `else if` mais généralement lor
   - la boucle ```for``` plus utile en pratique quand l'on connait à l'avance le nombre d'itérations à effectuer. Elle permet aussi de mieux "scoper" les variables et **limiter leur portée**.
 
 - Il existe deux mots-clés ```break``` et ```continue``` qui permettent de contrôler plus finement les boucles.
-- La structure de contrôle ```switch``` est une alternative au ```else if``` compatible seulement avec des types entiers et les [**énumérations**](Lessons/S1/Variables#enum-un-type-supplémentaire).
+- La structure de contrôle ```switch``` est une alternative au ```else if``` compatible seulement avec des types entiers et les [**énumérations**](/Lessons/S1/Variables#enum-un-type-supplémentaire).

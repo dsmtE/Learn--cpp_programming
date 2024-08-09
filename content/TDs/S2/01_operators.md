@@ -14,7 +14,7 @@ On peut appliquer une simplification sur les fractions retournées par les opér
 
 ## Exercice 2 (affichage)
 
-Transformer la fonction `display` en surcharge de l'opérateur `<<` pour pouvoir afficher une fraction avec `std::cout` ([opérateurs de flux](Lessons/S2/Operators#opérateurs-de-flux)).
+Transformer la fonction `display` en surcharge de l'opérateur `<<` pour pouvoir afficher une fraction avec `std::cout` ([opérateurs de flux](/Lessons/S2/Operators#opérateurs-de-flux)).
 
 ## Exercice 3 (égalité)
 

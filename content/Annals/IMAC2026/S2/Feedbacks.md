@@ -835,7 +835,7 @@ void move_player(Player & player, Direction const direction)
 ```
 
 Cela permet de réduire le temps de calcul et de rendre le code plus lisible.
-Mais cela permet aussi de limiter la gestion des erreurs. Si vous avez une chaîne de caractère qui n’est égale à aucun des cas il faudra gérer le cas ou il pourrait y avoir un comportement inattendu. Avec un ***enum***, vous êtes sûr que la valeur est l’une de celles que vous avez défini. De plus l'utilisation du [switch case](/Lessons/S1/Loops#Switch) n'est pas possible avec des chaines de caractères.
+Mais cela permet aussi de limiter la gestion des erreurs. Si vous avez une chaîne de caractère qui n’est égale à aucun des cas il faudra gérer le cas ou il pourrait y avoir un comportement inattendu. Avec un ***enum***, vous êtes sûr que la valeur est l’une de celles que vous avez défini. De plus l'utilisation du [switch case](/Lessons/S1/Loops#switch) n'est pas possible avec des chaines de caractères.
 
 :::info
 Comparer des chaines de quelques caractères ne représente rien pour un processeur de nos jours mais si la vitesse d'exécution du programme est un critère important C'est tout de même quelques chose à prendre ne compte.
