@@ -39,7 +39,7 @@ module.exports = async function configCreatorAsync() {
 
     plugins: [[ docusaurusLunrSearchPlugin, {
       languages: ['fr'],
-      includeRoutes: ['**/Lessons/**', '**/TDs/**']
+      includeRoutes: ['**/Lessons/**', '**/TDs/**', '**/Annexes/**', '**/Workshop/**', '**/Annals/**'],
     }]],
 
     presets: [
