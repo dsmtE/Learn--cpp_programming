@@ -2,8 +2,6 @@
 title: Des tableaux
 tags:
     - C++
-
-sidebar_position: 5
 ---
 
 Nous avons vu les **variables** pour stocker des valeurs, les **boucles** pour simplifier le code et faire des itérations et il est maintenant légitime de se demander comment manipuler un nombre plus important de variables.

@@ -2,8 +2,6 @@
 title: Un peu de logique avec les conditions
 tags:
     - C++
-
-sidebar_position: 3
 ---
 
 Le C++ va nous permettre d'exprimer des **conditions** sur les valeurs de nos variables afin d'exécuter des instructions différentes en fonction du résultat des conditions.

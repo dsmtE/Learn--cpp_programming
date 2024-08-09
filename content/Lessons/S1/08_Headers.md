@@ -2,8 +2,6 @@
 title: "Compilation et Headers: Séparer en plusieurs fichiers"
 tags:
     - C++
-
-sidebar_position: 8
 ---
 
 import Tabs from '@theme/Tabs';

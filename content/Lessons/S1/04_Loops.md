@@ -2,8 +2,6 @@
 title: Des boucles pour gagner du temps
 tags:
     - C++
-
-sidebar_position: 4
 ---
 
 Nous avons maintenant la capacité d'exécuter des codes différents en fonction de **conditions**.

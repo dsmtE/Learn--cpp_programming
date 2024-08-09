@@ -2,8 +2,6 @@
 title: "Fonctions : Découper son code"
 tags:
     - C++
-
-sidebar_position: 6
 ---
 
 J'ai évoqué rapidement le terme de **fonctions** et de **méthodes** lors du précédent chapitre sur les tableaux, parlons en plus en détails.
