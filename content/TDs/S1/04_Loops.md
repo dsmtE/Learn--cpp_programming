@@ -53,7 +53,7 @@ Utilisez un **algorithme glouton** qui consiste à regarder si on peut rendre la
 
 Vous devrez gérer le cas où l'utilisateur saisit une valeur incorrecte (un nombre négatif ou une lettre par exemple) et redemander à l'utilisateur de saisir un nombre tant qu'il n'a pas saisi une valeur correcte.
 
-Je vous invite à retourner voir l'[exercice 3](/TDs/S1/Conditions#exercice-3) du **TD2** sur les conditions pour vous aider.
+Je vous invite à retourner voir l'[exercice 3](/TDs/S1/Conditions/#exercice-3) du **TD2** sur les conditions pour vous aider.
 
 ## Exercice 6 (conjecture de Syracuse)
 

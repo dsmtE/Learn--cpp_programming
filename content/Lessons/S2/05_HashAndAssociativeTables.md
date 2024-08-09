@@ -90,7 +90,7 @@ Implicitement, cette classe utilise la fonction de hachage `std::hash` pour calc
 Elle utilise aussi la fonction `std::equal_to` pour comparer les clés dans le cas des collisions. Cette fonction est aussi définie pour les types de base et les types de la bibliothèque standard.
 
 On utilise la méthode `insert` pour ajouter une valeur associée à une clé et la méthode `find` pour retrouver la valeur associée à une clé.
-Je vous invite à relire le cours précédent sur les [itérateurs](/Lessons/S2/AutoAndAlgorithm#find) pour comprendre comment utiliser ces méthodes.
+Je vous invite à relire le cours précédent sur les [itérateurs](/Lessons/S2/AutoAndAlgorithm/#find) pour comprendre comment utiliser ces méthodes.
 
 ```cpp
 #include <unordered_map>
@@ -194,7 +194,7 @@ int main() {
 
 #### Cas d'utilisation avec les énumérations
 
-Les [énumérations](/Lessons/S1/Variables#enum-un-type-supplémentaire) sont des types de données qui permettent de définir un ensemble de valeurs possibles pour une variable.
+Les [énumérations](/Lessons/S1/Variables/#enum-un-type-supplémentaire) sont des types de données qui permettent de définir un ensemble de valeurs possibles pour une variable.
 
 Mais il n'est pas simplement possible de convertir un élément d'une énumération en une chaîne de caractères.
 

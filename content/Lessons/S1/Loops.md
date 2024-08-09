@@ -438,4 +438,4 @@ il est possible de faire cela avec des `if` et `else if` mais généralement lor
   - la boucle ```for``` plus utile en pratique quand l'on connait à l'avance le nombre d'itérations à effectuer. Elle permet aussi de mieux "scoper" les variables et **limiter leur portée**.
 
 - Il existe deux mots-clés ```break``` et ```continue``` qui permettent de contrôler plus finement les boucles.
-- La structure de contrôle ```switch``` est une alternative au ```else if``` compatible seulement avec des types entiers et les [**énumérations**](/Lessons/S1/Variables#enum-un-type-supplémentaire).
+- La structure de contrôle ```switch``` est une alternative au ```else if``` compatible seulement avec des types entiers et les [**énumérations**](/Lessons/S1/Variables/#enum-un-type-supplémentaire).

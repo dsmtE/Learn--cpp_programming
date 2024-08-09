@@ -4,7 +4,7 @@ title: TD8 - Encodage et compression
 
 ## Exercice 1 (Run-length encoding)
 
-1. Écrire une fonction qui prend en paramètre une chaîne de caractères composée uniquement de caractères alphabétiques et qui retourne une chaîne de caractères encodée en utilisant le [**run-length encoding**](/Lessons/S2/EncodingAndCompression#codage-par-plages-run-length-encoding).
+1. Écrire une fonction qui prend en paramètre une chaîne de caractères composée uniquement de caractères alphabétiques et qui retourne une chaîne de caractères encodée en utilisant le [**run-length encoding**](/Lessons/S2/EncodingAndCompression/#codage-par-plages-run-length-encoding).
 
     Par exemple, si la chaîne de caractères en entrée est `AAAABBBCCDAA`, la chaîne de caractères encodée est `4A3B2C1D2A`.
 

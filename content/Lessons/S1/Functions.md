@@ -42,7 +42,7 @@ Enfin, entre les accolades <kbd>{}</kbd>, nous avons les instructions qui la com
 
 ### Choisir un nom
 
-Les règles de nommage des fonctions sont les mêmes que pour nommer nos **variables**, vous pouvez aller les relire **[ici](Variables.md#quelques-règles-de-nommage)** si nécessaire.
+Les règles de nommage des fonctions sont les mêmes que pour nommer nos **variables**, vous pouvez aller les relire **[ici](/Lessons/S1/Variables/#quelques-règles-de-nommage)** si nécessaire.
 
 De même que pour les variables, il est important de donner un nom explicite aux **fonctions** afin de définir clairement ce qu’elles font.
 
@@ -57,7 +57,7 @@ Il peut y avoir plusieurs ```return``` dans une fonction. Un si un **if** est **
 
 Mais dès que l'instruction ```return``` est exécutée, on **sort** de la fonction en cours et **tout le code restant n’est pas exécuté**.
 
-Cela coupe le flot d’exécution de la fonction comme avec les mots-clés ```break``` et ```continue``` avec les [boucles](Loops.md#contrôler-lexécution).
+Cela coupe le flot d’exécution de la fonction comme avec les mots-clés ```break``` et ```continue``` avec les [boucles](/Lessons/S1/Loops/#contrôler-lexécution).
 :::
 
 Si votre fonction ne doit **rien renvoyer**, alors on utilise le mot-clé **void**, qui signifie "vide" et qui, dans ce contexte, indique que la fonction ne retourne pas d'information (dans ce cas il n'est pas nécessaire d'utiliser l'instruction ```return``` mais peut tout de même être utilisée pour couper le flot d’exécution).

@@ -93,12 +93,12 @@ On peut utiliser de la récursivité pour supprimer les nœuds de l'arbre.
 
 On va se donner la convention qu'un arbre binaire contenant un seul nœud a une hauteur de 1.
 
-6. Écrire une **méthode** `display_infixe` qui affiche les valeurs des nœuds parcourus dans l'ordre [**infixe**](/Lessons/S2/BinaryTree#parcours-en-profondeur).
+6. Écrire une **méthode** `display_infixe` qui affiche les valeurs des nœuds parcourus dans l'ordre [**infixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
 ```cpp
 void Node::display_infixe() const;
 ```
 
-7. Écrire une **méthode** `prefixe` qui retourne un vecteur contenant des pointeurs vers les nœuds de l'arbre binaire parcourus en [**prefixe**](/Lessons/S2/BinaryTree#parcours-en-profondeur).
+7. Écrire une **méthode** `prefixe` qui retourne un vecteur contenant des pointeurs vers les nœuds de l'arbre binaire parcourus en [**prefixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
 ```cpp
 std::vector<Node const*> Node::prefixe() const;
 ```
@@ -112,7 +112,7 @@ nodes.insert(nodes.end(), left_nodes.begin(), left_nodes.end());
 Cela va permettre de concaténer dans un seul vecteur les nœuds des sous arbres gauche et droit.
 :::
 
-8. (**BONUS**) De même, écrire une autre méthode `postfixe` qui retournent les nœuds parcourus dans l'ordre [**postfixe**](/Lessons/S2/BinaryTree#parcours-en-profondeur).
+8. (**BONUS**) De même, écrire une autre méthode `postfixe` qui retournent les nœuds parcourus dans l'ordre [**postfixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
 
 <details>
 <summary>BONUS: Itératif</summary>

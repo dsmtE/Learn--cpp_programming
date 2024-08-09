@@ -14,7 +14,7 @@ On peut appliquer une simplification sur les fractions retournées par les opér
 
 ## Exercice 2 (affichage)
 
-Transformer la fonction `display` en surcharge de l'opérateur `<<` pour pouvoir afficher une fraction avec `std::cout` ([opérateurs de flux](/Lessons/S2/Operators#opérateurs-de-flux)).
+Transformer la fonction `display` en surcharge de l'opérateur `<<` pour pouvoir afficher une fraction avec `std::cout` ([opérateurs de flux](/Lessons/S2/Operators/#opérateurs-de-flux)).
 
 ## Exercice 3 (égalité)
 
@@ -35,7 +35,7 @@ Il existe une autre façon de faire en comparant les **produits en croix des fra
 ## Exercice 5 (opérations d'affectation)
 
 - Ajouter les opérateurs d'affectation `+=`, `-=`, `*=` et `/=`.
-- Réécrire les opérateurs `+`, `-`, `*` et `/` en utilisant les opérateurs affectation afin d'éviter de dupliquer le code ([deux-en-un](/Lessons/S2/Operators#deux-en-un)) (Commenter l'ancienne version des opérateurs par exemple)
+- Réécrire les opérateurs `+`, `-`, `*` et `/` en utilisant les opérateurs affectation afin d'éviter de dupliquer le code ([deux-en-un](/Lessons/S2/Operators/#deux-en-un)) (Commenter l'ancienne version des opérateurs par exemple)
 
 
 ## Exercice 6 (conversion)

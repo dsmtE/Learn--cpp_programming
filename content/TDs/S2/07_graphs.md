@@ -136,9 +136,9 @@ std::unordered_map<int, std::vector<WeightedGraphEdge>> adjacency_list {
 
 ## Exercice 2 (traverser un graphe)
 
-1. Implémenter la méthode `print_DFS` qui prend en paramètre l'id du sommet de départ et qui affiche les sommets du graphe en utilisant un [parcours en profondeur](/Lessons/S2/graphs#parcours-en-profondeur) (DFS) à partir du sommet de départ (`depth-first search`).
+1. Implémenter la méthode `print_DFS` qui prend en paramètre l'id du sommet de départ et qui affiche les sommets du graphe en utilisant un [parcours en profondeur](/Lessons/S2/graphs/#parcours-en-profondeur) (DFS) à partir du sommet de départ (`depth-first search`).
 
-2. Implémenter la méthode `print_BFS` qui utilise cette fois-ci un [parcours en largeur](/Lessons/S2/graphs#parcours-en-largeur) (BFS) à partir du sommet de départ (`breadth-first search`).
+2. Implémenter la méthode `print_BFS` qui utilise cette fois-ci un [parcours en largeur](/Lessons/S2/graphs/#parcours-en-largeur) (BFS) à partir du sommet de départ (`breadth-first search`).
 
 3. (Bonus) Implémenter le parcours en profondeur (BFS) à prenant en paramètre une fonction de **callback** pour chaque sommet visité. L'idée est de ne pas contraindre l'utilisateur à afficher les sommets mais de lui donner la possibilité de faire ce qu'il veut avec les sommets visités.
 Voilà la signature de la méthode à implémenter:
@@ -159,7 +159,7 @@ std::cout << std::endl;
 
 L'algorithme de Dijkstra permet de trouver le plus court chemin entre un sommet de départ et un sommet d'arrivée dans un graphe pondéré.
 
-Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs#dijkstra);
+Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs/#dijkstra);
 
 1. Donnons nous le graphe suivant:
 
@@ -177,7 +177,7 @@ Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs#dijkstr
     E --3--> F
 ```
 
-Écrivez les différentes étapes de l'algorithme de Dijkstra selon le même modèle que [l'illustration du cours](/Lessons/S2/graphs#illustration-de-lalgorithme-de-dijkstra) pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.
+Écrivez les différentes étapes de l'algorithme de Dijkstra selon le même modèle que [l'illustration du cours](/Lessons/S2/graphs/#illustration-de-lalgorithme-de-dijkstra) pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.
 
 2. (BONUS) En se donnant un bout de code pour démarrer l'implémentation de l'algorithme de Dijkstra, complétez le code pour implémenter l'algorithme de Dijkstra.
 3. (BONUS) Testez votre implémentation avec le graphe donné en exemple pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.

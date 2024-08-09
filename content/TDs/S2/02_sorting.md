@@ -28,8 +28,8 @@ if (is_sorted(array)) {
 Dans cet exercice, vous devez écrire une fonction qui prend en paramètre un tableau d'entiers (`std::vector`) et le trie par ordre croissant.
 
 Vous avez le choix entre deux algorithmes de tri:
-- [**tri à bulle**](/Lessons/S2/Sorting#tri-à-bulles-bubble-sort)
-- [**tri par sélection**](/Lessons/S2/Sorting#tri-par-sélection-selection-sort)
+- [**tri à bulle**](/Lessons/S2/Sorting/#tri-à-bulles-bubble-sort)
+- [**tri par sélection**](/Lessons/S2/Sorting/#tri-par-sélection-selection-sort)
 
 Voilà les prototypes des fonctions:
 ```cpp
@@ -44,8 +44,8 @@ De nouveau, vous devez écrire une fonction qui prend en paramètre un tableau d
 Cette fois-ci, vous devez utiliser un algorithme de tri récursif.
 
 Vous avez le choix entre deux algorithmes de tri:
-- [**tri fusion**](/Lessons/S2/Sorting#tri-fusion-merge-sort)
-- [**tri rapide**](/Lessons/S2/Sorting#tri-rapide-quick-sort)
+- [**tri fusion**](/Lessons/S2/Sorting/#tri-fusion-merge-sort)
+- [**tri rapide**](/Lessons/S2/Sorting/#tri-rapide-quick-sort)
 
 Voilà les prototypes des fonctions à utiliser et implémenter:
 ```cpp
@@ -177,7 +177,7 @@ Exemple simple avec le tableau suivant `[1, 2, 2, 3, 4, 8, 12]` (nombre d'élém
 
 ## Pour aller plus loin: Counting sort
 
-Le [**counting sort**](/Lessons/S2/Sorting#tri-par-dénombrement-counting-sort) est un algorithme de tri qui permet de trier un tableau d'entiers en temps linéaire (c'est à dire en $O(n)$).
+Le [**counting sort**](/Lessons/S2/Sorting/#tri-par-dénombrement-counting-sort) est un algorithme de tri qui permet de trier un tableau d'entiers en temps linéaire (c'est à dire en $O(n)$).
 Il est cependant limité par le fait qu'il ne peut trier que des **entiers** ("positifs" pour le cas le plus simple) et que la valeur **maximale** des entiers du tableau doit être connue (à calculer avant le tri ou connue en fonction du contexte).
 
 Essaye d'implémenter cet algorithme de tri.

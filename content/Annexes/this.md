@@ -9,7 +9,7 @@ Revenons sur le mot clé `this` en **C++**.
 
 ## Pourquoi `this` ?
 
-Le mot clé `this` est un **pointeur** qui pointe vers l'**objet courant**. Il est utilisé principalement pour accéder aux membres de la structure/classe à partir d'une méthode (pour éviter les ambiguïtés avec les paramètres par [exemple](/Lessons/S1/Struct#conflit-de-noms)).
+Le mot clé `this` est un **pointeur** qui pointe vers l'**objet courant**. Il est utilisé principalement pour accéder aux membres de la structure/classe à partir d'une méthode (pour éviter les ambiguïtés avec les paramètres par [exemple](/Lessons/S1/Struct/#conflit-de-noms)).
 
 ## Utilisation de `this` pour accéder aux membres de la structure à partir d'une méthode
 
@@ -65,7 +65,7 @@ void set_x(int const new_x)
 }
 ```
 
-Je t'invite à relire cette section également : [structure et this](/Lessons/S1/MemoryAllocation#structure-et-this).
+Je t'invite à relire cette section également : [structure et this](/Lessons/S1/MemoryAllocation/#structure-et-this).
 
 
 ## Utilisation de `this` pour chaîner les appels de méthodes

@@ -518,7 +518,7 @@ On parle de "**Scoped enumerations**" avec ```enum class``` (autrement dit ayant
 Pour faire simple on écrira systématiquement ```enum class``` en **C++ moderne** pour s'éviter des problèmes.
 :::
 
-Enfin, il n’existe pas de moyen simple de convertir une **enum** en chaîne de caractères. C'est un problème récurrent en C++ et il existe plusieurs solutions plus ou moins élégantes pour le faire. Nous en verrons une plus tard au deuxième semestre ([ici](/Lessons/S2/HashAndAssociativeTables#cas-dutilisation-avec-les-énumérations)).
+Enfin, il n’existe pas de moyen simple de convertir une **enum** en chaîne de caractères. C'est un problème récurrent en C++ et il existe plusieurs solutions plus ou moins élégantes pour le faire. Nous en verrons une plus tard au deuxième semestre ([ici](/Lessons/S2/HashAndAssociativeTables/#cas-dutilisation-avec-les-énumérations)).
 
 ## Des opérateurs pour manipuler nos variables
 

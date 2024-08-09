@@ -60,7 +60,7 @@ Le choix de `p` et `m` va influencer la qualité (collision) et les performances
 
 ## Exercice 2 (Analyse du nombre d'insectes)
 
-L'idée de cet exercice est d'utiliser une [table associative](/Lessons/S2/HashAndAssociativeTables#tableau-associatif) pour résoudre un problème.
+L'idée de cet exercice est d'utiliser une [table associative](/Lessons/S2/HashAndAssociativeTables/#tableau-associatif) pour résoudre un problème.
 
 Vous êtes un entomologiste qui a pour mission de **recenser** les insectes dans un jardin afin de vérifier la biodiversité de ce jardin et confirmer vos hypothèses sur la présence de certaines espèces (probabilité de présence de certaines espèces, etc.).
 
@@ -81,7 +81,7 @@ enum class Insect {
 };
 ```
 
-Je vous fournis également une liste des valeurs de l'énumération `Insect` sous forme de vecteur (pour pouvoir itérer sur les valeurs de l'énumération et éviter de faire des `static_cast` pour obtenir les valeurs de l'énumération à partir d'un entier (index) ou encore avoir le nombre d'éléments de l'énumération). Rappels sur les cast avec enum [ici](/Lessons/S1/Variables#cast-et-enum).
+Je vous fournis également une liste des valeurs de l'énumération `Insect` sous forme de vecteur (pour pouvoir itérer sur les valeurs de l'énumération et éviter de faire des `static_cast` pour obtenir les valeurs de l'énumération à partir d'un entier (index) ou encore avoir le nombre d'éléments de l'énumération). Rappels sur les cast avec enum [ici](/Lessons/S1/Variables/#cast-et-enum).
 ```cpp
 #include <vector>
 const std::vector<Insect> insect_values {

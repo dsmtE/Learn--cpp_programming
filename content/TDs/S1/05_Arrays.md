@@ -118,7 +118,7 @@ Pour la saisie, vous êtes libre de choisir le format ou syntaxe que vous voulez
 
 :::tip
 - Convertissez premièrement la chaîne de caractères en un tableau de chiffres.
-- Pour convertir un caractère en un nombre, vous pouvez utiliser la fonction `std::stoi` (string to integer) ou la valeur **ASCII** du caractère. (voir l'[Exercice 5](/TDs/S1/Variables#exercice-5-ascii) du TD2).
+- Pour convertir un caractère en un nombre, vous pouvez utiliser la fonction `std::stoi` (string to integer) ou la valeur **ASCII** du caractère. (voir l'[Exercice 5](/TDs/S1/Variables/#exercice-5-ascii) du TD2).
 :::
 
 ## Exercice 3 (Points d'énergie)

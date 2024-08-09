@@ -151,7 +151,7 @@ int main() {
 }
 ```
 
-Détail du "Range-based for loop" [ici](/Lessons/S1/Arrays#range-based-for-loop)
+Détail du "Range-based for loop" [ici](/Lessons/S1/Arrays/#range-based-for-loop)
 
 </details>
 
