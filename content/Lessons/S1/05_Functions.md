@@ -55,7 +55,7 @@ Il peut y avoir plusieurs ```return``` dans une fonction. Un si un **if** est **
 
 Mais dès que l'instruction ```return``` est exécutée, on **sort** de la fonction en cours et **tout le code restant n’est pas exécuté**.
 
-Cela coupe le flot d’exécution de la fonction comme avec les mots-clés ```break``` et ```continue``` avec les [boucles](/Lessons/S1/Loops/#contrôler-lexécution).
+Cela coupe le flot d’exécution de la fonction comme avec les mots-clés ```break``` et ```continue``` avec les [boucles](/Lessons/S1/ConditionsAndLoops/#contrôler-lexécution).
 :::
 
 Si votre fonction ne doit **rien renvoyer**, alors on utilise le mot-clé **void**, qui signifie "vide" et qui, dans ce contexte, indique que la fonction ne retourne pas d'information (dans ce cas il n'est pas nécessaire d'utiliser l'instruction ```return``` mais peut tout de même être utilisée pour couper le flot d’exécution).

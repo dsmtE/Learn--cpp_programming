@@ -1,10 +1,10 @@
 ---
-title: TD3 - Conditions
+title: TD3 - Conditions et boucles
 sidebar_position: 3
 ---
 
 ## Exercice 1 (Positif ou négatif)
-Écrire un programme qui demande à l’utilisateur de saisir un entier et aﬀiche si cet entier est positif ou négatif.
+1. Écrire un programme qui demande à l’utilisateur de saisir un **entier** et affiche si cet entier est **positif** ou **négatif**.
 
 Exemples d’exécution:
 
@@ -18,15 +18,48 @@ Saisir un entier : -5
 -5 est négatif
 ```
 
-## Exercice 2 (Pair ou impair)
+2. Modifier le programme pour utiliser une condition ternaire.
+:::info ternaire
 
-Écrire un programme qui demande à l’utilisateur de saisir un entier et aﬀiche si cet entier est **pair** ou **impair**.
+Un **ternaire** est une expression conditionnelle qui permet de faire un test comme un **if/else** et de retourner une valeur en fonction du résultat du test.
+
+```cpp
+int a {5};
+int b {10};
+// condition ? valeur si vrai : valeur si faux
+int c {(a > b) ? a : b }; // c = 10
+```
+
+C'est réservé aux cas simples qui peuvent s'écrire sur une seule ligne.
+Il ne faut pas abuser des ternaires car cela peut rendre le code illisible.
+:::
+
+## Exercice 2 (Somme d'entiers positifs)
+
+Écrire un programme qui demande à l’utilisateur de saisir des entiers positifs (s’arrête dès que l’utilisateur saisit un entier négatif)
+
+1. Gérer l'entrée utilisateur (et son arrêt) à l'aide d'une boucle **while** ou **do while**.
+2. Afficher la **somme** des entiers positifs saisis par l’utilisateur.
+3. Modifier le programme pour qu'il affiche également la **moyenne** des entiers positifs saisis par l’utilisateur.
+
+:::info
+Pour calculer la moyenne, il faut compter le nombre d'entiers positifs saisis par l'utilisateur puis diviser la somme par ce nombre.
+Vous n'avez pas à stocker les entiers saisis par l'utilisateur (vous découvrirez comment faire cela dans le prochain chapitre) vous pouvez simplement stocker la somme et le nombre d'entiers saisis.
+:::
+
+## Exercice 3 (Pair ou impair)
+
+Écrire un programme qui demande à l’utilisateur de saisir un entier et affiche si cet entier est **pair** tout les nombres positifs **pairs** inférieurs à cet entier sinon si il est **impair** tout les nombres positifs **impairs** inférieurs à cet entier.
+
+:::tip
+Vous pourrez utiliser **std::cin** pour demander le nombre à l'utilisateur (aucune gestion d'une éventuelle erreur de saisie n'est demandée ici).
+:::
 
 :::tip
 Vous pouvez utiliser l'opérateur modulo `%` qui donne le reste de la division entière.
 :::
 
-## Exercice 3
+## Exercice 3 (Majeur ou mineur)
 
 Écrire un programme qui demande à l’utilisateur de saisir son **âge** (un nombre entier) et aﬀiche s’il est **majeur** ou **mineur**.
 
@@ -53,7 +86,103 @@ std::cin.ignore(255, '\n'); // On vide les caractères mémorisés.
 ```
 :::
 
-## Exercice 4 (Soldes)
+## Exercice 4 (Le juste prix)
+
+Un nombre entier est tiré au hasard entre `1` et `100` (inclus).
+
+Le joueur doit deviner ce nombre en un minimum de tentatives.
+
+À chaque tentative, le programme indique au joueur si le nombre à deviner est plus grand ou plus petit que celui qu’il a proposé.
+
+Le programme s’arrête lorsque le joueur a trouvé le nombre mystère.
+
+:::info
+Pour générer un nombre aléatoire, vous pouvez utiliser la fonction [**rand()**](https://en.cppreference.com/w/cpp/numeric/random/rand) de la bibliothèque **cstdlib**.
+
+Elle retourne un nombre entier aléatoire entre **0** et **RAND_MAX** (une constante définie dans la bibliothèque **cstdlib**).
+
+Pour obtenir un nombre aléatoire entre **1** et **100**, on peut utiliser l'opérateur **modulo** `%`:
+
+```cpp
+std::rand() % 100 + 1
+```
+
+Pour que le générateur de nombres aléatoires ne génère pas toujours la même séquence de nombres, il faut l’initialiser avec une valeur différente à chaque exécution du programme.
+
+C'est avec la fonction [**srand()**](https://en.cppreference.com/w/cpp/numeric/random/srand).
+
+On peut utiliser la fonction [**time()**](https://en.cppreference.com/w/cpp/chrono/c/time) de la bibliothèque **ctime** pour obtenir l'heure actuelle en secondes et l'utiliser comme valeur d'initialisation du générateur de nombres aléatoires.
+
+```cpp
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+ 
+int main() 
+{
+  // Initialisation du générateur de nombres aléatoires avec la fonction time()
+  std::srand(std::time(nullptr));
+  int random_variable { std::rand() };
+  std::cout << "Random value between 0 and " << RAND_MAX << " : " << random_variable << std::endl;
+}
+```
+
+Il existe une façon plus moderne de générer des nombres aléatoires à partir de **C++11**, nous découvrirons cela au prochain semestre.
+:::
+
+## Exercice 5 (ASCII art)
+
+1. Écrire un programme qui demande à l’utilisateur de saisir un **entier positif** et affiche un triangle rectangle de hauteur `n` comme dans l’exemple ci-dessous.
+
+```bash title="exemple d'exécution"
+Entrez un entier positif : 5
+*
+**
+***
+****
+*****
+```
+
+2. Essayer d'afficher un sapin de noël, autrement dit un triangle rectangle isocèle de hauteur `n` et dont le sommet est composé d'une seule étoile.
+
+```bash title="exemple d'exécution"
+Entrez un entier positif : 3
+  *
+ ***
+*****
+```
+
+3. Essayer d'afficher les contours d'un carré de côté `n` comme dans l’exemple ci-dessous.
+
+```bash title="exemple d'exécution"
+Entrez un entier positif : 5
+*****
+*   *
+*   *
+*   *
+*****
+```
+
+## Exercice 6 (conjecture de Syracuse)
+
+Écrire un programme qui, à partir d’un **entier positif** saisi par l’utilisateur, affiche le nombre de termes de la suite de Syracuse nécessaires pour atteindre `1` (on inclut le terme de départ dans le décompte).
+
+La suite de **Syracuse** est une suite d'entiers dans laquelle chaque terme est obtenu en appliquant une fonction à son terme précédent. Cette fonction est définie comme suit:
+
+- si le terme est pair, le terme suivant est égal à la **moitié** du terme précédent. (x/2)
+- si le terme est impair, le terme suivant est égal à **3** fois le terme précédent **plus 1** (3x+1).
+
+Par exemple, si le terme de départ est `7`, la suite est :
+
+`7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1, 4, 2, 1, 4, 2, 1, ...`
+
+Ici, la suite atteint la valeur `1` au bout de `17` termes (incluant le terme de départ).
+
+Vous remarquez qu’à la fin, une fois qu’on est tombé sur 1, la suite finit par répéter indéfiniment le cycle `4, 2, 1`.
+
+Il est conjecturé que cette suite atteint toujours la valeur `1` quelque soit le terme de départ. Cela a d'ailleurs déjà été vérifiée numériquement jusqu’à 10^20 (par [Tomas Oliveira e Silva](https://www.ams.org/journals/mcom/1999-68-225/S0025-5718-99-01031-5/S0025-5718-99-01031-5.pdf)).
+
+## Exercice 7 (Soldes)
 
 C'est les soldes !
 
@@ -177,38 +306,3 @@ Vous pouvez reprendre mon exemple de saisie d'un enum.
 
 4. L'enseigne offre également un bon d'achat de **10%** du montant total du ticket de caisse, à valoir sur un prochain achat. Le bon d'achat ne peut pas être supérieur à 30€.
 Calculer le montant du bon d'achat et l'afficher en fin de programme.
-
-## Exercice 5
-
-Calcul du temps d'ébullition de l'eau en fonction de l'**altitude** en mètres (un nombre entier), de la **température ambiante** (un nombre flottant) et de l'ajout ou non de **sel** (boolean).
-
-Vous disposez des informations suivantes:
-
-- A **0** mètre d'altitude, l'eau bout à **100°C**.
-- Tout les **300 mètres** d'altitude supplémentaires, l'eau atteint son point d'ébullition **1°C plus bas**.
-- L'action d'ajouter du **sel** dans l'eau fait augmenter son point d'ébullition de **1.5°C**.
-- Il faut **1 min** pour que l'eau gagne **10°C** de température.
-- La température de l'eau initiale est la température ambiante.
-
-1. Demander à l'utilisateur de saisir l'altitude, la température ambiante et s'il ajoute du sel.
-2. Gérer le cas où l'utilisateur saisit une altitude négative et afficher un message d'erreur.
-3. En fonction des informations saisies, afficher le temps d'ébullition de l'eau en minutes.
-
-## Exercice 6
-
-Essayer de refaire les exercices **1** et **2** en utilisant des **ternaires**.
-
-:::note
-
-Un **ternaire** est une expression conditionnelle qui permet de faire un test comme un **if/else** et de retourner une valeur en fonction du résultat du test.
-
-```cpp
-int a {5};
-int b {10};
-// condition ? valeur si vrai : valeur si faux
-int c {(a > b) ? a : b }; // c = 10
-```
-
-C'est réservé aux cas simples qui peuvent s'écrire sur une seule ligne.
-Il ne faut pas abuser des ternaires car cela peut rendre le code illisible.
-:::
