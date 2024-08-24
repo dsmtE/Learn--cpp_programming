@@ -1,6 +1,5 @@
 ---
 title: TD8 - Headers
-sidebar_position: 8
 ---
 
 ## Exercice 1 (Fraction)

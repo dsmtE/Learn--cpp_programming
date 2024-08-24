@@ -1,6 +1,5 @@
 ---
 title: TD3 - Conditions et boucles
-sidebar_position: 3
 ---
 
 ## Exercice 1 (Positif ou négatif)
@@ -182,7 +181,11 @@ Vous remarquez qu’à la fin, une fois qu’on est tombé sur 1, la suite finit
 
 Il est conjecturé que cette suite atteint toujours la valeur `1` quelque soit le terme de départ. Cela a d'ailleurs déjà été vérifiée numériquement jusqu’à 10^20 (par [Tomas Oliveira e Silva](https://www.ams.org/journals/mcom/1999-68-225/S0025-5718-99-01031-5/S0025-5718-99-01031-5.pdf)).
 
-## Exercice 7 (Soldes)
+## Exercices Bonus
+
+<details>
+
+<summary>Soldes: Conditions et gestion de l'entrée utilisateur</summary>
 
 C'est les soldes !
 
@@ -306,3 +309,5 @@ Vous pouvez reprendre mon exemple de saisie d'un enum.
 
 4. L'enseigne offre également un bon d'achat de **10%** du montant total du ticket de caisse, à valoir sur un prochain achat. Le bon d'achat ne peut pas être supérieur à 30€.
 Calculer le montant du bon d'achat et l'afficher en fin de programme.
+
+</details>

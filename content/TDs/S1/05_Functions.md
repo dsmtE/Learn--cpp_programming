@@ -1,6 +1,5 @@
 ---
-title: TD6 - Fonctions
-sidebar_position: 6
+title: TD5 - Fonctions
 ---
 
 ## Exercice 1 (Somme)
@@ -44,7 +43,40 @@ sidebar_position: 6
 1. Écrire une fonction qui permet de calculer la moyenne d'un tableau d'**entiers**.
 2. Écrire une fonction surchargée portant le même nom qui permet de calculer la moyenne d'un tableau de **flottants**.
 
-## Exercice 5 (Suite)
+
+## Exercice 5 (Pangramme)
+
+Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne `true` si la chaîne est un **pangramme**, `false` sinon.
+
+Il faut faire attention à la casse (majuscules/minuscules), un même lettre majuscule et minuscule compte pour la **même** lettre.
+:::info
+Un **pangramme** est une phrase contenant toutes les lettres de l'alphabet au moins une fois.
+:::
+
+## Exercice 6 (String)
+
+1. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui modifie cette chaîne en remplaçant les lettres minuscules par des lettres majuscules et vice-versa.
+
+2. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne le nombre de voyelles de cette chaîne.
+
+3. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne le nombre de mots de cette chaîne. On considère que les mots sont séparés par un ou plusieurs espaces.
+
+4. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne la même chaîne écrite à l'envers.
+
+5. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne `true` si la chaîne est un nombre entier.
+    :::tip
+    L'idée est de parcourir la chaîne de caractères et de vérifier si chaque caractère est un chiffre ou non.
+    Pour tester si un caractère est un chiffre vous pouvez comparer la valeur **ASCII** du caractère avec les valeurs **ASCII** des chiffres (voir l'[Exercice 5](./Variables#exercice-5-ascii) du TD2).
+
+    Il existe aussi la fonction `std::isdigit` (voir la [documentation](https://en.cppreference.com/w/cpp/string/byte/isdigit)) qui permet de tester si un caractère est un chiffre ou non.
+    :::
+
+
+## Exercices Bonus
+
+<details>
+
+<summary>Suite</summary>
 
 Écrire sous forme **récursive** les fonctions $U_n$ et $V_n$ conformément à la description suivante:
 
@@ -72,29 +104,4 @@ U9 = 582535 et V9 = 291278
 Il est possible d'exprimer $U_n$ et $V_n$ en fonction de $U_{n-1}$ et $V_{n-1}$.
 :::
 
-## Exercice 6 (Pangramme)
-
-Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne `true` si la chaîne est un **pangramme**, `false` sinon.
-
-Il faut faire attention à la casse (majuscules/minuscules), un même lettre majuscule et minuscule compte pour la **même** lettre.
-:::info
-Un **pangramme** est une phrase contenant toutes les lettres de l'alphabet au moins une fois.
-:::
-
-## Exercice 7 (String)
-
-1. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui modifie cette chaîne en remplaçant les lettres minuscules par des lettres majuscules et vice-versa.
-
-2. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne le nombre de voyelles de cette chaîne.
-
-3. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne le nombre de mots de cette chaîne. On considère que les mots sont séparés par un ou plusieurs espaces.
-
-4. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne la même chaîne écrite à l'envers.
-
-5. Écrire une fonction qui prend en paramètre une chaîne de caractères et qui retourne `true` si la chaîne est un nombre entier.
-    :::tip
-    L'idée est de parcourir la chaîne de caractères et de vérifier si chaque caractère est un chiffre ou non.
-    Pour tester si un caractère est un chiffre vous pouvez comparer la valeur **ASCII** du caractère avec les valeurs **ASCII** des chiffres (voir l'[Exercice 5](./Variables#exercice-5-ascii) du TD2).
-
-    Il existe aussi la fonction `std::isdigit` (voir la [documentation](https://en.cppreference.com/w/cpp/string/byte/isdigit)) qui permet de tester si un caractère est un chiffre ou non.
-    :::
+</details>

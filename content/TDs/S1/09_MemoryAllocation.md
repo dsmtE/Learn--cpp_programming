@@ -1,6 +1,5 @@
 ---
 title: TD9 - Mémoire
-sidebar_position: 9
 ---
 
 ## Exercice 1 (Allocation dynamique)

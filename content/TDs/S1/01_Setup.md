@@ -1,6 +1,5 @@
 ---
 title: TD1 - Mise en place
-sidebar_position: 1
 ---
 
 Ce TD est destiné à vous familiariser avec l'environnement de développement et les outils utilisés dans le cadre de ce cours.

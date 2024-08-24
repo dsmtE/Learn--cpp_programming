@@ -1,6 +1,5 @@
 ---
-title: TD5 - Tableaux
-sidebar_position: 5
+title: TD4 - Tableaux
 ---
 
 ## Exercice 1 (min & max)
@@ -56,7 +55,70 @@ Exercice inspiré de de l'édition **2022** de l'**advent of code**: https://adv
 C'est un évènement annuel qui propose un problème de code par jour sous forme de calendrier de l'avent.
 :::
 
-## Exercice 2 (Luhn)
+## Exercice 2 (Points d'énergie)
+
+Dans un jeu vidéo de type RPG, dès que le joueur termine un niveau, il gagne des points d’énergie.
+
+Les points d'énergie sont calculés en fonction du niveau terminé et du nombre et du niveau de difficulté des ennemis tués.
+
+Le nombre de points d'énergie gagnés est calculé de la manière suivante:
+
+- Pour chaque ennemi tué, trouver tous les multiples de son niveau de difficulté inférieurs au niveau terminé par le joueur.
+- Combiner tous les multiples trouvés pour chaque ennemi tué en supprimant les doublons.
+- Additionnez tous les nombres restants pour obtenir le nombre de points d'énergie gagnés.
+
+Voici un exemple:
+
+- Le joueur termine le niveau `20`.
+- Il tue 2 ennemis de niveau `3`, `5`.
+
+Les multiples de `3` inférieurs à `20` sont: `3, 6, 9, 12, 15, 18`.
+Les multiples de `5` inférieurs à `20` sont: `5, 10, 15`.
+
+En supprimant les doublons, nous obtenons: `3, 5, 6, 9, 10, 12, 15, 18`.
+
+En additionnant tous les nombres, nous obtenons **78** points d'énergie.
+
+**Vous devez écrire un programme qui demande à l'utilisateur de saisir le niveau terminé et le nombre et le niveau de difficulté des ennemis tués et qui affiche le nombre de points d'énergie gagnés.**
+
+## Exercice 3 (Palindrome)
+
+Un palindrome est un mot qui peut être lu de la même manière de gauche à droite et de droite à gauche.
+
+Par exemple, `kayak` est un palindrome.
+
+Écrire un programme qui demande à l'utilisateur de saisir un mot et qui affiche si ce mot est un **palindrome** ou non.
+
+:::tip
+Une chaîne de caractères est un tableau de caractères.
+:::
+
+## Exercice 4 (Comptage)
+
+Écrire un programme qui demande un nombre **entier positif** (supérieur à **1 000 000**) à l'utilisateur et qui remplit un tableau avec les chiffres de ce nombre.
+Le programme doit ensuite compter le nombre d'occurrences de chiffre et afficher le **chiffre** qui apparaît le plus souvent.
+
+## Exercice 5 (Suppression et tassement)
+
+Écrire un programme qui demande à l'utilisateur de saisir **10** entiers compris entre **0** et **5** et qui les stocke dans un tableau. (vous pouvez aussi demander à l'utilisateur de saisir un nombre puis le décomposer en chiffres et stocker les chiffres dans un tableau).
+
+Vous devez ensuite supprimer toutes les valeurs valant **3** dans le tableau en décalant tous les éléments vers la gauche et en complétant le tableau avec des **0**.
+
+Tableau avant:
+```
+[1, 3, 2, 3, 3, 4, 5, 3, 0, 2]
+```
+
+Tableau après:
+```
+[1, 2, 4, 5, 0, 2, 0, 0, 0, 0]
+```
+
+## Exercices Bonus
+
+<details>
+
+<summary>Algorithmes de Luhn</summary>
 
 Le numéro de carte bancaire est un nombre de 16 chiffres. Il est composé de 4 groupes de 4 chiffres séparés par un espace.
 
@@ -121,61 +183,4 @@ Pour la saisie, vous êtes libre de choisir le format ou syntaxe que vous voulez
 - Pour convertir un caractère en un nombre, vous pouvez utiliser la fonction `std::stoi` (string to integer) ou la valeur **ASCII** du caractère. (voir l'[Exercice 5](/TDs/S1/Variables/#exercice-5-ascii) du TD2).
 :::
 
-## Exercice 3 (Points d'énergie)
-
-Dans un jeu vidéo de type RPG, dès que le joueur termine un niveau, il gagne des points d’énergie.
-
-Les points d'énergie sont calculés en fonction du niveau terminé et du nombre et du niveau de difficulté des ennemis tués.
-
-Le nombre de points d'énergie gagnés est calculé de la manière suivante:
-
-- Pour chaque ennemi tué, trouver tous les multiples de son niveau de difficulté inférieurs au niveau terminé par le joueur.
-- Combiner tous les multiples trouvés pour chaque ennemi tué en supprimant les doublons.
-- Additionnez tous les nombres restants pour obtenir le nombre de points d'énergie gagnés.
-
-Voici un exemple:
-
-- Le joueur termine le niveau `20`.
-- Il tue 2 ennemis de niveau `3`, `5`.
-
-Les multiples de `3` inférieurs à `20` sont: `3, 6, 9, 12, 15, 18`.
-Les multiples de `5` inférieurs à `20` sont: `5, 10, 15`.
-
-En supprimant les doublons, nous obtenons: `3, 5, 6, 9, 10, 12, 15, 18`.
-
-En additionnant tous les nombres, nous obtenons **78** points d'énergie.
-
-**Vous devez écrire un programme qui demande à l'utilisateur de saisir le niveau terminé et le nombre et le niveau de difficulté des ennemis tués et qui affiche le nombre de points d'énergie gagnés.**
-
-## Exercice 4 (Palindrome)
-
-Un palindrome est un mot qui peut être lu de la même manière de gauche à droite et de droite à gauche.
-
-Par exemple, `kayak` est un palindrome.
-
-Écrire un programme qui demande à l'utilisateur de saisir un mot et qui affiche si ce mot est un **palindrome** ou non.
-
-:::tip
-Une chaîne de caractères est un tableau de caractères.
-:::
-
-## Exercice 5 (Comptage)
-
-Écrire un programme qui demande un nombre **entier positif** (supérieur à **1 000 000**) à l'utilisateur et qui remplit un tableau avec les chiffres de ce nombre.
-Le programme doit ensuite compter le nombre d'occurrences de chiffre et afficher le **chiffre** qui apparaît le plus souvent.
-
-## Exercice 6 (Suppression et tassement)
-
-Écrire un programme qui demande à l'utilisateur de saisir **10** entiers compris entre **0** et **5** et qui les stocke dans un tableau. (vous pouvez aussi demander à l'utilisateur de saisir un nombre puis le décomposer en chiffres et stocker les chiffres dans un tableau).
-
-Vous devez ensuite supprimer toutes les valeurs valant **3** dans le tableau en décalant tous les éléments vers la gauche et en complétant le tableau avec des **0**.
-
-Tableau avant:
-```
-[1, 3, 2, 3, 3, 4, 5, 3, 0, 2]
-```
-
-Tableau après:
-```
-[1, 2, 4, 5, 0, 2, 0, 0, 0, 0]
-```
+</details>
