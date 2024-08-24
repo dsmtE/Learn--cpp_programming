@@ -1,5 +1,5 @@
 ---
-title: TD2 - Algorithmes de tri
+title: TD3 - Algorithmes de tri
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';

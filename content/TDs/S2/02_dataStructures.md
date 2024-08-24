@@ -1,5 +1,5 @@
 ---
-title: TD3 - Structures de données
+title: TD2 - Structures de données
 ---
 
 ## Exercice 1 (Evaluation NPI)
@@ -30,10 +30,10 @@ Le but de cet exercice est d'écrire un programme qui permet d'évaluer une expr
 Par simplicité, on se limitera à des expressions contenant des **nombres** (flottants), et les opérateurs `+`, `-`, `*` et `/` (Dans une expression en NPI il y a plus de **parenthèses** (`(` et `)` car l'ordre des opérations est déterminé par l'ordre des opérateurs dans l'expression).
 :::
 
-1. Écrire un programme qui permet de saisir une expression arithmétique en **notation polonaise inversée** (**NPI**) en tant que chaine de caractère. On veut que les éléments de cette expression soient séparés par des espaces.
+1. Écrire un programme qui permet de saisir une expression arithmétique en **notation polonaise inversée** (**NPI**) en tant que chaîne de caractère. On veut que les éléments de cette expression soient séparés par des espaces.
 
 :::tip
-Vous pouvez utiliser [`getline`](https://en.cppreference.com/w/cpp/string/basic_string/getline) pour récupérer d'un flux (comme `std::cin`) une chaine de caractères comportant des espaces.
+Vous pouvez utiliser [`getline`](https://en.cppreference.com/w/cpp/string/basic_string/getline) pour récupérer d'un flux (comme `std::cin`) une chaîne de caractères comportant des espaces.
 :::
 
 2. Je vous donne le code suivant qui permet à l'aide d'une particularité des **streams** de séparer les éléments(mots) de la chaîne de caractères en utilisant les espaces comme séparateurs:
