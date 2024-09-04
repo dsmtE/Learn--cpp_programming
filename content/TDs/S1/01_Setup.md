@@ -50,7 +50,7 @@ int main()
 }
 ```
 
-Ensuite, nous allons créer un fichier `CMakeLists.txt` à la racine du projet avec le contenu suivant:
+Ensuite, nous allons créer un fichier `CMakeLists.txt` à la racine du projet avec le contenu suivant :
 
 ```cmake title="CMakeLists.txt"
 cmake_minimum_required(VERSION 3.0)
@@ -77,6 +77,9 @@ td01
 
 Ouvrez ensuite le dossier `td01` avec VSCode, il devrait vous proposer de configurer CMake comme pour le premier programme.
 
+Pour que CMake vous affiche les liste les différentes targets disponibles, il faut aller changer un paramètre : ouvrez les settings de VSCode, cherchez "cmake visibility" et mettez l'option à "compact" :
+![](./imgs/cmake-visibility-setting.png)
+
 Vous devriez ensuite avoir deux targets dans la barre à droite du bouton "Run" en bas:
 
 ![](imgs/VSCode_targets.png)
@@ -87,4 +90,4 @@ Cela vous permet de choisir quelle target vous voulez exécuter pour travailler 
 C'est la même chose pour les tâches de compilation (à droite du bouton "**Build**").
 :::
 
-Bravo, Vous êtes maintenant prêt à faire du C++ sur vos propres machines ! :partying_face:
+Bravo, vous êtes maintenant prêt à faire du C++ sur vos propres machines ! 🥳
