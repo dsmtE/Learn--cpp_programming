@@ -6,7 +6,7 @@ Ce TD est destiné à vous familiariser avec l'environnement de développement e
 
 Le but est d'**installer** les outils nécessaires pour pouvoir travailler sur vos propres machines.
 
-Je vous invite donc à retourner dans les sections suivantes pour avoir les instructions d'installation:
+Je vous invite donc à retourner dans les sections suivantes pour avoir les instructions d'installation :
 
 - [Installer le compilateur](/Lessons/S1/Setup/Compiler)
 - [Visual Studio Code](/Lessons/S1/Setup/IDE)
@@ -18,7 +18,7 @@ Si vous avez des difficultés à installer, n'hésitez pas à demander à votre 
 
 Une fois que vous avez installé les outils, vous pouvez créer votre premier programme.
 
-Je vous invite à regarder la page suivante pour avoir les instructions: [Premier programme](/Lessons/S1/Setup/HelloImac)
+Je vous invite à regarder la page suivante pour avoir les instructions : [Premier programme](/Lessons/S1/Setup/HelloImac)
 
 ## Plusieurs exécutables
 
@@ -26,9 +26,9 @@ Comme je l'ai expliqué, il ne doit y avoir qu'un seul point d'entrée dans un p
 
 Cependant, dans le cadre des **TDs**, il est parfois utile de pouvoir tester plusieurs fonctions `main` différentes, une par exercice par exemple.
 
-Pour cela, nous allons utiliser une fonctionnalité de CMake qui permet de créer **plusieurs targets** ou exécutables.
+Pour cela, nous allons utiliser une fonctionnalité de CMake qui permet de créer **plusieures targets** ou exécutables.
 
-Je vous invite à créer deux fichiers `td01_ex01.cpp` et `td01_ex02.cpp` dans un dossier `src` et à y mettre le contenu suivant:
+Je vous invite à créer deux fichiers `td01_ex01.cpp` et `td01_ex02.cpp` dans un dossier `src` et à y mettre le contenu suivant :
 
 ```cpp title="src/td01_ex01.cpp"
 #include <iostream>
@@ -77,10 +77,10 @@ td01
 
 Ouvrez ensuite le dossier `td01` avec VSCode, il devrait vous proposer de configurer CMake comme pour le premier programme.
 
-Pour que CMake vous affiche les liste les différentes targets disponibles, il faut aller changer un paramètre : ouvrez les settings de VSCode, cherchez "cmake visibility" et mettez l'option à "compact" :
+Pour que CMake vous affiche la liste des différentes targets disponibles, il faut aller changer un paramètre : ouvrez les settings de VSCode, cherchez "cmake visibility" et mettez l'option à "compact" :
 ![](./imgs/cmake-visibility-setting.png)
 
-Vous devriez ensuite avoir deux targets dans la barre à droite du bouton "Run" en bas:
+Vous devriez ensuite avoir deux targets dans la barre à droite du bouton "Run" en bas :
 
 ![](imgs/VSCode_targets.png)
 

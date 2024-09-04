@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 C'est maintenant le moment de compiler votre premier programme !
 
-Vous pouvez créer un fichier d'extension *cpp* avec le code suivant:
+Vous pouvez créer un fichier d'extension *cpp* avec le code suivant :
 
 ```cpp title="helloImac.cpp"
 #include <iostream>
@@ -24,13 +24,13 @@ int main()
 }
 ```
 
-Une fois le fichier créé, il suffit d'exécuter la commande suivante pour produire l'exécutable compilé:
+Une fois le fichier créé, il suffit d'exécuter la commande suivante pour produire l'exécutable compilé :
 
 ```bash
 g++ helloImac.cpp -o helloImac
 ```
 
-Cela va produire un exécutable du même nom que le fichier cpp.
+Cela va produire un exécutable avec le nom choisi après le `-o`.
 
 Une fois compilé il suffit de l'exécuter avec la commande suivante :
 
@@ -56,7 +56,7 @@ Une fois compilé il suffit de l'exécuter avec la commande suivante :
 C'est donc possible de le faire uniquement avec des lignes de commandes mais par simplicité nous allons dès maintenant utiliser **CMake** dont j'ai parlé précédemment qui s'intègre facilement avec **VSCode**.
 
 Pour utiliser **CMake** il faut tout d'abord créer un fichier nommé **CMakeLists.txt**
-Voici le premier qu'on va utiliser (quelques explications en commentaire **"#"** du fichier):
+Voici le premier qu'on va utiliser (quelques explications en commentaire **"#"** du fichier) :
 
 ```cmake title="CMakeLists.txt"
 # Nous voulons un cmake "récent" pour utiliser les dernières fonctionnalités
@@ -79,7 +79,7 @@ L'extension devrait normalement reconnaître automatiquement qu'il y a un fichie
 
 ![](IDE_imgs/VSCode_projectConfiguration.png)
 
-Si c'est la première fois que vous l'ouvrez ce qui est sûrement le cas il devrait vous demander de choisir un **kit** de compilation et faudra donc sélectionner **MSVC** ou **GCC** en fonction de votre plateforme.
+Si c'est la première fois que vous l'ouvrez ce qui est sûrement le cas il devrait vous demander de choisir un **kit** de compilation et il faudra donc sélectionner **GCC** (ou **MSVC** si c'est ce que vous avez décidé d'installer).
 
 ![](IDE_imgs/VSCode_selectKit.png)
 
@@ -87,7 +87,7 @@ Si c'est la première fois que vous l'ouvrez ce qui est sûrement le cas il devr
 Si ce n'est pas le cas vous pouvez toujours utiliser le raccourci <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> puis taper et sélectionner "CMake: select a kit"
 :::
 
-Une fois tout initialisé, vous devriez voir des logs dans un terminal ressemblant à cela (dans mon cas sous **Linux** avec le compilateur **GCC** ici):
+Une fois tout initialisé, vous devriez voir des logs dans un terminal ressemblant à cela (dans mon cas sous **Linux** avec le compilateur **GCC** ici) :
 
 ```bash
 [variant] Loaded new set of variants
@@ -105,13 +105,13 @@ Une fois tout initialisé, vous devriez voir des logs dans un terminal ressembla
 [cmake] -- Build files have been written to: /home/user/DATA/Cours IMAC1/helloImac/build
 ```
 
-Vous pouvez maintenant cliquer sur le bouton **"play"**  dans la barre en bas pour exécuter le programme. :partying_face:
+Vous pouvez maintenant cliquer sur le bouton **"play"**  dans la barre en bas pour exécuter le programme. 🥳
+
+![](IDE_imgs/VSCode_cmakePlay.png)
 
 :::note
 En cliquant sur ce bouton, l'**IDE** compile automatiquement si nécessaire puis exécute l'exécutable.
 :::
-
-![](IDE_imgs/VSCode_cmakePlay.png)
 
 :::note
 Cmake devrait normalement créer un dossier **build**, c'est normal.
@@ -133,15 +133,15 @@ Sinon, l'extension **CMake** ne détectera pas le dossier ouvert comme un projet
 #include <iostream>
 ```
 
-Le but de notre programme est d’afficher un message. Des développeurs experts ont déjà créé un outil qui permet de le faire facilement. Il se trouve dans un fichier nommé **iostream**, acronyme de **"Input Output Stream"**, soit **"Flux d’Entrées Sorties"**. Ce fichier fait partie de la bibliothèque standard C++ **STD** (pour "C++ **ST**andar**D** library"), un ensemble de fonctionnalités déjà pré-codées et inclues partout avec chaque compilateur C++.
+Le but de notre programme est d’afficher un message. Des développeurs experts ont déjà créé un outil qui permet de le faire facilement. Il se trouve dans un fichier nommé **iostream**, acronyme de **"Input Output Stream"**, soit **"Flux d’Entrées Sorties"**. Ce fichier fait partie de la bibliothèque standard C++ **STD** (pour "C++ **ST**andar**D** library"), un ensemble de fonctionnalités déjà pré-codées et disponibles partout avec n'importe quel compilateur C++.
 
-Pour utiliser les fonctionnalités offertes par ce fichier, notamment écrire un message, on doit l’importer dans notre programme. On dit qu’on l’inclut, d’où l’anglais "**include**". Nous utiliserons beaucoup cette fonctionnalité en C++.
+Pour utiliser les fonctionnalités offertes par ce fichier, notamment écrire un message avec `std::cout`, on doit l’importer dans notre programme. On dit qu’on l’inclut, d’où l’anglais "**include**". Nous utiliserons beaucoup cette fonctionnalité en C++.
 
 Essayez donc de supprimer la ligne, puis compilez de nouveau votre programme et voyez ce qu'il se passe !
 
 ![](HelloImac_imgs/erreur-compil-include.png)
 
-Le compilateur ne peut pas compiler notre programme, et il nous fournit donc une *erreur de compilation*. Il est très important d'apprendre à lire et comprendre ces erreurs, elles vous apportent beaucoup d'informations pour vous aider à corriger votre programme ! En l'occurrence elle nous indique que le symbole `std::cout` est introuvable, et nous donne même une piste pour corriger le problème : rajouter `#include <iostream>` !
+Le compilateur ne peut pas compiler notre programme, et il nous fournit donc une *erreur de compilation*. Il est très important d'apprendre à lire et comprendre ces erreurs car elles vous apportent beaucoup d'informations pour vous aider à corriger votre programme ! En l'occurrence elle nous indique que le symbole `std::cout` est introuvable, et nous donne même une piste pour corriger le problème : rajouter `#include <iostream>` !
 
 Il nous indique même où l'erreur s'est produite :
 ![](HelloImac_imgs/go-to-error.png)
@@ -167,10 +167,10 @@ int main()
 
 Lorsqu’on lance le programme, celui-ci doit savoir par où commencer. On parle de point d’entrée. Ce point d'entrée **doit** être une **fonction** nommée **main** et renvoyer une valeur avec le mot clé **return**.
 
-Nous reviendrons sur les **fonctions** dans un autre chapitre mais retenez que c'est un ensemble d'instructions délimité par des accolades <kbd>\{</kbd> et <kbd>\}</kbd>, et auquel on donne un nom (```main``` dans ce cas)."
+Nous reviendrons sur les **fonctions** dans un autre chapitre mais retenez que c'est un ensemble d'instructions délimité par des accolades <kbd>\{</kbd> et <kbd>\}</kbd>, et auquel on donne un nom (```main``` dans ce cas).
 
 :::note
-La valeur de retour (de type int) du **main** indique si le programme s’est terminé sans erreur. Si tout se passe bien, il faut retourner **0**. N’importe quelle autre valeur indique une erreur.
+La fonction **main** est un peu spéciale et sa valeur de retour (de type int) sert à indiquer si le programme s’est terminé sans erreur. Si tout se passe bien, il faut retourner **0**. N’importe quelle autre valeur indique une erreur.
 :::
 
 ### Hello and welcome to IMAC !
@@ -183,7 +183,7 @@ std::cout << "Hello and welcome to IMAC !" << std::endl;
 
 Premièrement "**std**" fait référence à la bibliothèque standard C++ dont je parlais précédemment.
 
-std**::** permet d'indiquer que l'on veut utiliser une fonctionnalité particulière de cette bibliothèque ici **cout**:
+`std::` permet d'indiquer que l'on veut utiliser une fonctionnalité particulière de cette bibliothèque, ici **cout** :
 
 Il s’agit de l'objet (on parle de *stream* dans le jargon C++) permettant de renvoyer des caractères, généralement pour les afficher dans le terminal. Le **'c'** fait référence à **caractère** et **‘out’** indique **‘sortie’**.
 
@@ -201,7 +201,7 @@ On le retrouve par exemple dans notre programme à la fin du ```return 0;```.
 Ce n'est pas le cas pour les **directives préprocesseur** comme ```#include``` vu précédemment qui, elles, doivent avoir leur **propre ligne** et ne doivent pas se terminer par un point-virgule <kbd>;</kbd> mais un saut de ligne.
 :::
 
-Les sauts de lignes et espacements sont là pour améliorer la lisibilité mais pas pour le bon fonctionnement du compilateur en lui même et on pourrait très bien écrire:
+Les sauts de lignes et espacements sont là pour améliorer la lisibilité mais pas pour le bon fonctionnement du compilateur en lui même et on pourrait très bien écrire :
 ```cpp
 #include <iostream>
 int main() { std::cout << "Hello and welcome to IMAC !" << std::endl; return 0; }

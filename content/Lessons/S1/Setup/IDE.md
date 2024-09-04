@@ -15,7 +15,7 @@ Il possède de nombreuses fonctionnalités supplémentaires qui vous aideront à
 
 Ce cours va présenter principalement [Visual Studio Code](https://code.visualstudio.comp) (VSCode en abrégé) et je vous recommande fortement de l'utiliser pour débuter dans le monde de la programmation.
 
-Il existe évidemment de nombreuses alternatives et si vous savez déjà vous servir d'un **IDE** alors vous pouvez très bien l'utiliser si vous savez bien vous en servir, mais j'aurais peut-être plus de difficultés pour vous aider.
+Il existe évidemment de nombreuses alternatives et si vous savez déjà vous servir d'un **IDE** alors vous pouvez très bien l'utiliser si vous savez bien vous en servir, mais j'aurai peut-être plus de difficultés pour vous aider.
 
 ## Installation
 
@@ -27,13 +27,13 @@ Rendez-vous <Chip label="ici" component="a" href="https://code.visualstudio.com/
 
 Les extensions sont, comme le nom l'indique, des modules qui permettent d'étendre les fonctionnalités de l'IDE.
 
-Elles sont listées [ici](https://marketplace.visualstudio.com/vscode) et vous pouvez également les parcourir pour les installer à l'intérieur de l'IDE via le raccourci <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>X</kbd> ou en cliquant sur cet onglet:
+Elles sont listées [ici](https://marketplace.visualstudio.com/vscode) et vous pouvez également les parcourir pour les installer à l'intérieur de l'IDE via le raccourci <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>X</kbd> ou en cliquant sur cet onglet :
 
 ![](IDE_imgs/VSCode_extensionsPanel.png)
 
 N'hésitez pas à consulter les extensions recommandées par langage ou découvrir ce que d'autres personnes utilisent.
 
-Concernant le C++, nous avons besoin au minimum d'installer ces extensions:
+Concernant le C++, nous avons besoin au minimum d'installer ces extensions :
 - <VSCodeExtension id="ms-vscode.cpptools-extension-pack"/>
 - <VSCodeExtension id="twxs.cmake"/>
 - <VSCodeExtension id="SteveBushResearch.BuildOutputColorizer"/>

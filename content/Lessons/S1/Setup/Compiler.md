@@ -19,7 +19,7 @@ import { Button, Chip } from "@mui/material";
 Dans le cas de Windows, nous installerons le compilateur **GCC** grace au projet [Winlibs](https://winlibs.com).
 C'est un projet qui regroupe des outils de compilation **GCC** pour Windows et qui est très simple et relativement léger à installer (environs 140 Mo au téléchargement et 1,4 Go une fois décompressé). Il existe d'autres alternatives comme **MSVC** mais je ne vais pas les présenter ici. Si vous êtes à l'aise et que vous savez ce que vous faites, vous êtes libre d'utiliser celui que vous voulez.
 
-Il inclus également des outils de développement supplémentaires comme **GDB** (débogueur) et **CMake** (outil de compilation).
+Il inclut également des outils de développement supplémentaires comme **GDB** (débogueur) et **CMake** (outil de compilation).
 
 Rendez vous sur le site de [Winlibs](https://winlibs.com) et téléchargez la dernière version de **GCC** dans la section *Release versions* puis *UCRT runtime* (zip ou 7z). Choisissez la version **Win64** pour un système 64 bits (si vous ne savez pas, c'est probablement le cas et prenez cette version).
 
@@ -62,7 +62,7 @@ Vous avez seulement à exécuter cette commande :
 ```bash
 xcode-select --install
 ```
-Cela va installer les outils de développement d'Apple qui contiennent le compilateur **GCC** (et ou **Clang**).
+Cela va installer les outils de développement d'Apple qui contiennent le compilateur **GCC** (et / ou **Clang**).
 
 Je pratique plus rarement ce genre d'installation sur **MacOS**, n'hésitez pas à venir me voir ou m'envoyer un message ou même à en parler entre vous pour trouver une solution.
 </TabItem>
@@ -74,7 +74,7 @@ Certains compilateurs ne gèrent pas les choses exactement de la même manière 
 
 ## Vérifier que le compilateur est installé
 
-Dans un premier temps, vous allez pouvoir vérifier que le compilateur **GCC** est bien installé avec la commande suivante:
+Dans un premier temps, vous allez pouvoir vérifier que le compilateur **GCC** est bien installé avec la commande suivante :
 
 ```bash
 g++ --version
@@ -147,7 +147,7 @@ C'est également expliqué [ici](https://helpdeskgeek.com/windows-10/add-windows
 
 C'est en général bien configuré lors de l'installation de votre OS.
 
-Mais si vous voulez ajouter par exemple */home/user/test* à la variable **PATH**, il faut écrire la cmd `export PATH=$PATH:/home/user/test` pour ajouter temporairement ce nouveau dossier à la variable **PATH**.
+Mais si vous voulez ajouter par exemple */home/user/test* à la variable **PATH**, il faut écrire la commande `export PATH=$PATH:/home/user/test` pour ajouter temporairement ce nouveau dossier à la variable **PATH**.
 
 Maintenant, vous pouvez utiliser votre commande en écrivant tout simplement son nom et le terminal sera capable de chercher dans ce nouveau répertoire.
 
@@ -165,7 +165,7 @@ Des explications pour le faire sont disponible [ici](https://stackabuse.com/how-
 
 Je suis moins familier de MacOS mais c'est également possible de modifier la variable **PATH**.
 
-Vous trouverez des instructions pour le faire [ici](https://support.apple.com/fr-fr/guide/terminal/apd382cc5fa-4f58-4449-b20a-41c53c006f8f/mac) et [ici](https://apical.xyz/fiches/configurer_son_mac/ajuster_la_variable_d_environnement_path_sous_macos)
+Vous trouverez des instructions pour le faire [ici](https://support.apple.com/fr-fr/guide/terminal/apd382cc5fa-4f58-4449-b20a-41c53c006f8f/mac) et [ici](https://apical.xyz/fiches/configurer_son_mac/ajuster_la_variable_d_environnement_path_sous_macos).
 
 N'hésitez pas à revenir vers moi si vous avez des difficultés.
 </TabItem>
