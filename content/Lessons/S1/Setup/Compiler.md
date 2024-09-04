@@ -56,7 +56,7 @@ De manière générale, toutes les distributions Linux sont livrées avec le com
 
 </TabItem>
 
-<TabItem value="OSX" label="OSX">
+<TabItem value="MacOS" label="MacOS">
 Vous avez seulement à exécuter cette commande :
 
 ```bash
@@ -64,7 +64,7 @@ xcode-select --install
 ```
 Cela va installer les outils de développement d'Apple qui contiennent le compilateur **GCC** (et ou **Clang**).
 
-Je pratique plus rarement ce genre d'installation sur **OSX**, n'hésitez pas à venir me voir ou m'envoyer un message ou même à en parler entre vous pour trouver une solution.
+Je pratique plus rarement ce genre d'installation sur **MacOS**, n'hésitez pas à venir me voir ou m'envoyer un message ou même à en parler entre vous pour trouver une solution.
 </TabItem>
 </Tabs>
 
@@ -113,7 +113,7 @@ Vous devriez voir un retour comme celui là :
 
 <TabItem value="Linux" label="Linux">
 </TabItem>
-<TabItem value="OSX" label="OSX">
+<TabItem value="MacOS" label="MacOS">
 </TabItem>
 
 </Tabs>
@@ -161,9 +161,9 @@ Comme le plus souvent c'est le shell **BASH** qui est utilisé, vous devez édit
 Des explications pour le faire sont disponible [ici](https://stackabuse.com/how-to-permanently-set-path-in-linux/#:~:text=in%20this%20guide.-,Using%20bashrc%20to%20Set%20your%20PATH,-Instead%20of%20setting)
 </TabItem>
 
-<TabItem value="OSX" label="OSX">
+<TabItem value="MacOS" label="MacOS">
 
-Je suis moins familier d'OSX mais c'est également possible de modifier la variable **PATH**.
+Je suis moins familier de MacOS mais c'est également possible de modifier la variable **PATH**.
 
 Vous trouverez des instructions pour le faire [ici](https://support.apple.com/fr-fr/guide/terminal/apd382cc5fa-4f58-4449-b20a-41c53c006f8f/mac) et [ici](https://apical.xyz/fiches/configurer_son_mac/ajuster_la_variable_d_environnement_path_sous_macos)
 
