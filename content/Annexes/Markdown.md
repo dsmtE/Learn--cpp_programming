@@ -37,22 +37,28 @@ En résumé :
 
 \#### Titre (plus ou moins gros en fonction du nombre de #)
 
-\- Listes
-\- avec
-\- plusieurs items
+```md
+- Listes
+- avec
+- plusieurs items
+```
 
-\`\`\`cpp
+```md
+```cpp
 // Bloc de code C++
 int x{0};
 std::cout << "x vaut " << x << '\n';
-\`\`\`
+'``
+```
 
 Bout de code \`int x{0};\` au milieu d'une phrase.
 
 Équations de math avec LaTeX :
-\$\$
+```md
+$$
 \int_{-\infty{}}^{+\infty{}} x^2 dx
-\$\$
+$$
+```
 
 Notes de bas de page \[^1]
 
@@ -60,11 +66,13 @@ Notes de bas de page \[^1]
 
 \> Citation
 
-\| Tableaux      | :grin:        | :sparkles:  |
-\| ------------- |:-------------:| -----:|
-\| col 3 is      | right-aligned | $1600 |
-\| col 2 is      | centered      |   $12 |
-\| zebra stripes | are neat      |    $1 |
+```txt
+| Tableaux      | :grin:        | :sparkles:  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+```
 
 Séparateur :
 
@@ -126,11 +134,13 @@ Et vous également utiliser n'importe quelle balise html à tout moment, si la s
 - `<kbd>F2</kbd>` pour faire des touches : <kbd>F2</kbd>
 - `<summary></summary>` et `<details></details>` pour faire des sections collapsables :
 ```html
-<details><summary>Ouvre-moi !</summary>
+<details>
+  <summary>Ouvre-moi !</summary>
 Salut, ceci est un secret !
 </details>
 ```
-<details><summary>Ouvre-moi !</summary>
+<details>
+  <summary>Ouvre-moi !</summary>
 Salut, ceci est un secret !
 </details>
 

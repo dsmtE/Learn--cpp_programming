@@ -171,7 +171,7 @@ int main()
 
 Lorsqu’on lance le programme, celui-ci doit savoir par où commencer. On parle de point d’entrée. Ce point d'entrée **doit** être une **fonction** nommée **main** et renvoyer une valeur avec le mot clé **return**.
 
-Nous reviendrons sur les **fonctions** dans un autre chapitre mais retenez que c'est un ensemble d'instructions délimité par des accolades <kbd>{</kbd> et <kbd>}</kbd>, et auquel on donne un nom (```main``` dans ce cas)."
+Nous reviendrons sur les **fonctions** dans un autre chapitre mais retenez que c'est un ensemble d'instructions délimité par des accolades <kbd>\{</kbd> et <kbd>\}</kbd>, et auquel on donne un nom (```main``` dans ce cas)."
 
 :::note
 La valeur de retour (de type int) du **main** indique si le programme s’est terminé sans erreur. Si tout se passe bien, il faut retourner **0**. N’importe quelle autre valeur indique une erreur.

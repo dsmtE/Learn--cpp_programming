@@ -1,6 +1,5 @@
 ---
 title: TD2 - Variables
-sidebar_position: 2
 ---
 
 ## Exercice 1 (opérations)
@@ -45,7 +44,7 @@ Vous devriez obtenir une valeur de `5` et non `5.5`. **Pourquoi** ?
 `static_cast<type>(variable)` permet convertir une variable en un autre type.
 :::
 
-## Exercice 4
+## Exercice 4 (conversion)
 
 Écrire un programme qui demande un nombre de jours à l'utilisateur et affiche le nombre d'années, de mois et de jours correspondant à ce nombre de jours.
 
@@ -81,7 +80,35 @@ En ce qui nous concerne, nous allons utiliser le fait que les lettres majuscules
 Vous pouvez trouver la table de correspondance ASCII complète [ici](https://fr.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange#Description).
 :::
 
-## Exercice 6
+## Exercice 6 (problème de compilation et d'exécution)
+```cpp
+#include <iotream>
+
+int main()
+{
+    float const pi {3.141592}
+    int a {pi*3}; // je veux le résultat de pi (environ 3.141592) fois 3
+    int const b {8};
+
+    a += "20";  // je veux ajouter le nombre 20 à la valeur de b
+
+    b = b * 15; // je veux modifier la valeur de b en la multipliant par 15
+
+    std::cout << "a: " < a << std::endl;
+
+    std::cout << "b: " << b << std::endl
+
+    return 0;
+}
+```
+
+- Vérifier que le code ne compile pas et essayez de corriger les erreurs.
+
+## Exercices Bonus
+
+<details>
+
+<summary>Cuisine</summary>
 
 Un cuisinier doit aller au marché pour récupérer ses légumes. Il a besoin de sacs de **pommes de terre**, de **carottes** et de **salades**.
 
@@ -119,34 +146,4 @@ détails:
 ```
 :::
 
-
-## Exercice 7 (problème de compilation)
-
-```cpp
-#include <iotream>
-
-int main()
-{
-    const int a{5};    
-    int b{8};
-    float c{pi*3}; // je veux le résultat de pi (environ 3.141592) fois 3
-
-    b += "20";  // je veux ajouter 20 à la valeur de b
-
-    a = a * 15; // je veux le résultat de a fois 15
-    std::cout << "a: " << a << std::endl;
-
-    std::cout << "b: " << b << std::endl
-
-    std::cout << "c: " << c << std::endl;
-
-    return 0;
-}
-```
-
-- Vérifier que le code ne compile pas et essayez de corriger les erreurs.
-
-:::info
-Pour **pi** vous pouvez utiliser la constante `M_PI` définie dans la bibliothèque `cmath`.
-Il faut ajouter `#include <cmath>` en haut du fichier pour pouvoir l'utiliser.
-:::
+</details>

@@ -1,6 +1,5 @@
 ---
 title: TD9 - Mémoire
-sidebar_position: 9
 ---
 
 ## Exercice 1 (Allocation dynamique)
@@ -16,7 +15,7 @@ sidebar_position: 9
 
 1. Écrire un programme qui génère un tableau (`std::vector`) de `100` entiers aléatoires compris entre 0 et 100.
     :::info
-    Vous pouvez utiliser la fonction `rand()` pour générer un nombre aléatoire. Je vous renvoie à l'[Exercice 1](/TDs/S1/Arrays#exercice-1-min--max) du TD5 pour plus d'informations.
+    Vous pouvez utiliser la fonction `rand()` pour générer un nombre aléatoire. Je vous renvoie à l'[Exercice 1](/TDs/S1/Arrays/#exercice-1-min--max) du TD5 pour plus d'informations.
     :::
 1. Écrire une fonction qui retourne un pointeur sur le plus grand élément du tableau.
 
@@ -25,7 +24,7 @@ sidebar_position: 9
 3. Utiliser les fonctions précédentes pour afficher le plus grand élément du tableau et la somme des éléments du tableau.
     :::tip
     On peut récupérer un pointeur sur le premier élément d'un `std::vector` avec la méthode `data()`.
-    Sinon il est aussi d'utiliser l'opérateur `&` sur le premier élément du `std::vector`.
+    Sinon il est aussi possible d'utiliser l'opérateur `&` sur le premier élément du `std::vector`.
     :::
 
 4. Completer la fonction `sum` suivante pour qu'elle retourne un pointeur sur la somme des éléments du tableau passé en paramètre.
@@ -45,7 +44,7 @@ sidebar_position: 9
 
 Dans cet exercice, on ne doit pas utiliser de `std::vector`.
 
-1. Allouer dynamiquement un tableau de `100` flottants aléatoires compris entre 0 et 100 (utiliser l'allocation dynamique pour des [emplacements mémoire contiguës](/Lessons/S1/MemoryAllocation#tableaux)).
+1. Allouer dynamiquement un tableau de `100` flottants aléatoires compris entre 0 et 100 (utiliser l'allocation dynamique pour des [emplacements mémoire contiguës](/Lessons/S1/MemoryAllocation/#tableaux)).
     :::info
     Vous pouvez utiliser la fonction `rand()` pour générer un nombre aléatoire.
     Pour générer un nombre flottant aléatoire vous pouvez utiliser la fonction `rand()` et la diviser par `RAND_MAX` (qui est une constante définie dans la bibliothèque `cstdlib`) ce qui permet d'obtenir un nombre flottant aléatoire entre 0 et 1.

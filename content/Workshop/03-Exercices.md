@@ -5,7 +5,8 @@ import ExplanationsAboutRandom from './_random.md';
 
 ![](output/keep_green_only.png)
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Mettre le rouge et le bleu à 0.
 </details>
@@ -16,7 +17,8 @@ Mettre le rouge et le bleu à 0.
 
 Par exemple, échangez le canal rouge et le canal bleu.
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Il existe `std::swap(a, b)` pour échanger deux valeurs.
 </details>
@@ -25,7 +27,8 @@ Il existe `std::swap(a, b)` pour échanger deux valeurs.
 
 ![](output/black_and_white.png)
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 N'hésitez pas à **aller chercher la formule sur internet** si besoin !
 </details>
@@ -34,7 +37,8 @@ N'hésitez pas à **aller chercher la formule sur internet** si besoin !
 
 ![](output/negative.png)
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Il faut trouver une formule simple, qui transforme le noir en blanc et le blanc en noir (i.e. qui transforme 0 en 1 et 1 en 0).
 </details>
@@ -51,12 +55,14 @@ sil::Image image{300/*width*/, 200/*height*/};
 puis itérer sur les pixels pour les colorer.
 :::
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 La couleur de chaque pixel doit dépendre de son x uniquement.
 </details>
 
-<details><summary>Indice 2</summary>
+<details>
+    <summary>Indice 2</summary>
 
 Quelle formule permettrait d'avoir 0 (noir) quand x vaut 0 (gauche), et 1 (blanc) quand x vaut `image.width() - 1` (droite) ?
 </details>
@@ -65,7 +71,8 @@ Quelle formule permettrait d'avoir 0 (noir) quand x vaut 0 (gauche), et 1 (blanc
 
 ![](output/mirror.png)
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 On cherche une formule qui, quand x vaut 0, le transforme en `image.width() - 1`, quand x vaut 1, le transforme en `image.width() - 2`, etc.
 </details>
@@ -76,7 +83,8 @@ On cherche une formule qui, quand x vaut 0, le transforme en `image.width() - 1`
 
 <ExplanationsAboutRandom/>
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Remplacez quelques pixels au hasard par une couleur aléatoire.
 </details>
@@ -87,7 +95,8 @@ Remplacez quelques pixels au hasard par une couleur aléatoire.
 
 La formule générique pour un angle quelconque est un peu plus compliquée, mais pour 90° il y a une formule plus simple, essayez de la trouver !
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Créez une nouvelle image avec `sil::Image new_image{new_width, new_height};` pour stocker le résultat de votre effet, car elle n'aura pas la même taille que l'image originale.
 </details>
@@ -96,14 +105,16 @@ Créez une nouvelle image avec `sil::Image new_image{new_width, new_height};` po
 
 ![](output/rgb_split.png)
 
-<details><summary>⚠️ Piège à éviter</summary>
+<details>
+    <summary>⚠️ Piège à éviter</summary>
 
 Créez une nouvelle image et travaillez sur celle-ci. Il ne faut pas modifier l'image originale pendant que vous bouclez pour appliquer l'effet, sinon certains pixels n'utiliseront pas la bonne couleur de l'image originale, mais plutôt la couleur déjà modifiée par un pixel précédent, ce qui pourrait vous donner ce genre de rendu moins intéressant :
 
 ![](output/rgb_split_incorrect.png)
 </details>
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Chaque pixel va prendre comme couleur le rouge d'un pixel un peu à sa droite, son propre vert, et le bleu d'un pixel un peu à sa gauche.
 </details>
@@ -114,12 +125,14 @@ Chaque pixel va prendre comme couleur le rouge d'un pixel un peu à sa droite, s
 |---|----|----|
 | Image originale | Après éclaircissement | Après assombrissement |
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 On voudrait des courbes comme celles-ci, qui diminuent tous les nombres entre 0 et 1 (courbe bleue) (c-à-d assombrisse), ou les augmentent (courbe verte) (c-à-d éclaircisse), tout en gardant 0 à 0 et 1 à 1 (afin de garder la plage dynamique de l'image, pour conserver des noirs purs et des blancs purs).
 ![](image-1.png)
 </details>
-<details><summary>Indice 2</summary>
+<details>
+    <summary>Indice 2</summary>
 
 Les fonctions puissance font exactement ce qu'on veut !<br/>
 La preuve : https://www.desmos.com/calculator/c3ztk51mng
@@ -137,7 +150,8 @@ sil::Image image{500/*width*/, 500/*height*/};
 puis itérer sur les pixels pour les colorer.
 :::
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Quelle est l'équation d'un disque ? Comment peut on s'en servir pour savoir si un pixel est à l'intérieur ou à l'extérieur du disque ?
 </details>
@@ -155,7 +169,8 @@ En reprenant et modifiant légèrement votre code pour le disque, écrivez le co
 Maintenant que vous savez dessiner un cercle, dessinez-en plusieurs sur la même image, à des positions bien choisies, de sorte à dessiner une rosace.
 (PS : il va sûrement falloir faire de la trigo!)
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Comment passer de coordonnées polaires (angle et rayon) à des coordonnées cartésiennes (x et y) ?
 </details>
@@ -164,7 +179,8 @@ Comment passer de coordonnées polaires (angle et rayon) à des coordonnées car
 
 ![](output/mosaic.png)
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Une manière concise de faire ça est d'utiliser un modulo (`%`) quelque part.
 </details>
@@ -181,7 +197,8 @@ Inversez une image sur deux :
 
 <ExplanationsAboutRandom/>
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Prendre un rectangle de pixels et l'intervertir avec un autre rectangle de pixels, ailleurs dans l'image. Faire ça plusieurs fois.
 </details>
@@ -299,7 +316,8 @@ glm::vec2 rotated(glm::vec2 point, glm::vec2 center_of_rotation, float angle)
 Pour obtenir la distance entre deux points, vous pouvez utiliser `glm::distance(p1, p2)`;
 :::
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 Chaque pixel subit une rotation, de plus en plus importante au fur et à mesure qu'on s'éloigne du centre.
 </details>
 
@@ -408,7 +426,8 @@ Appliquez un dégradé de couleur en fonction du niveau de gris de la height map
 Avec `glm::mix(color1, color2, pourcentage);` vous pouvez faire un mélange entre deux couleurs données.
 :::
 
-<details><summary>Indice</summary>
+<details>
+    <summary>Indice</summary>
 
 Essayez par exemple de faire un dégradé d'un bleu sombre à un bleu clair quand le niveau de gris est entre 0 et 0.5, et un autre dégradé entre du vert et du marron quand le niveau de gris est entre 0.5 et 1.
 </details>

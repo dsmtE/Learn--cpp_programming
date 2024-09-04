@@ -39,4 +39,4 @@ Concernant le C++, nous avons besoin au minimum d'installer ces extensions:
 
 Ces extensions vont nous permettre de lancer notre programme C++ sans difficulté.
 
-Si vous voulez aller plus loin et connaître un peu mieux VSCode, je vous invite à aller regarder la page <Chip label="suivante" component="a" href="../../Annexes/VSCode" variant="outlined" clickable/>.
+Si vous voulez aller plus loin et connaître un peu mieux VSCode, je vous invite à aller regarder la page [suivante](/Annexes/VSCode).

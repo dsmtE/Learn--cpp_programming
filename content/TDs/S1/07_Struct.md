@@ -1,6 +1,5 @@
 ---
 title: TD7 - Structures
-sidebar_position: 7
 ---
 
 ## Exercice 1

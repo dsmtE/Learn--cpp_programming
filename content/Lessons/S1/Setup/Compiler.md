@@ -16,18 +16,28 @@ import { Button, Chip } from "@mui/material";
 <Tabs groupId="operating-systems">
 <TabItem value="Windows" label="Windows">
 
-Dans le cas de Windows, nous installerons **MSVC** via l'outil d'installation de **Microsoft Visual Studio**.
+Dans le cas de Windows, nous installerons le compilateur **GCC** grace au projet [Winlibs](https://winlibs.com).
+C'est un projet qui regroupe des outils de compilation **GCC** pour Windows et qui est très simple et relativement léger à installer (environs 140 Mo au téléchargement et 1,4 Go une fois décompressé). Il existe d'autres alternatives comme **MSVC** mais je ne vais pas les présenter ici. Si vous êtes à l'aise et que vous savez ce que vous faites, vous êtes libre d'utiliser celui que vous voulez.
 
-:::note
+Il inclus également des outils de développement supplémentaires comme **GDB** (débogueur) et **CMake** (outil de compilation).
 
-Il existe d'autres alternatives comme **GCC** (via MinGW-w64 et MSYS2 ou WSL), **Clang** mais je ne vais pas les présenter ici. Si vous êtes à l'aise et que vous savez ce que vous faites, vous êtes libre d'utiliser celui que vous voulez, seulement je serais potentiellement moins à même de vous aider.
-Certains compilateurs ne gèrent pas les choses exactement de la même manière et il est possible donc d'obtenir des warnings ou erreurs différentes d'un compilateur à l'autre.
+Rendez vous sur le site de [Winlibs](https://winlibs.com) et téléchargez la dernière version de **GCC** dans la section *Release versions* puis *UCRT runtime* (zip ou 7z). Choisissez la version **Win64** pour un système 64 bits (si vous ne savez pas, c'est probablement le cas et prenez cette version).
 
-:::
+Une fois téléchargé, décompressez l'archive dans un dossier de votre choix où vous souhaitez installer les outils de compilation. Par exemple à la racine de votre disque dur dans un dossier **"C:\Winlibs"** (de préférence sans espaces dans les noms des dossiers et sur votre disque principal).
 
-Il vous suffit pour cela de télécharger l'installateur des outils Microsoft via ce lien
-**[Visual Studio Download](https://visualstudio.microsoft.com/fr/downloads/)**
-et de choisir la version **Community**
+Une fois décompressé, c'est prêt à être utilisé. Il ne reste plus qu'à indiquer à votre système où se trouve le compilateur pour pouvoir l'utiliser depuis n'importe où dans votre système (un terminal ou un éditeur de code par exemple).
+
+Dans notre cas on va devoir donc ajouter le sous-dossier **"bin"** du dossier précédemment décompressé à la variable d'environnement **PATH**. Par exemple **"C:\Winlibs\bin"**.
+
+C'est expliqué plus bas dans la section [**Variables d'environnement**](#variables-denvironnement).
+
+<details>
+
+<summary>Compilateur MSVC </summary>
+
+Il est également possible d'installer le très connu compilateur **MSVC**. C'est un compilateur propriétaire de Microsoft qui est très performant et qui est souvent utilisé pour les projets professionnels pour les plateformes Windows. Cependant il est un peu plus long à installer et à utiliser par la suite et plus volumineux que **GCC**. Vous êtes tout de même libre de l'utiliser si vous le souhaitez. 
+
+Il vous suffit pour cela de télécharger l'installateur des outils Microsoft via ce lien **[Visual Studio Download](https://visualstudio.microsoft.com/fr/downloads/)** et de choisir la version **Community** (gratuite) et de lancer l'installateur.
 
 **MSVC** fait partie de l'éditeur **Microsoft Visual Studio** mais il est possible d'installer seulement les outils de compilation sans l'éditeur et c'est ce que nous allons faire car nous allons nous utiliser **Visual Studio Code** (:warning: différent de **Microsoft Visual Studio**).
 
@@ -36,11 +46,13 @@ Une fois l'installateur téléchargé il faut le lancer et choisir **"Desktop de
 Vous trouverez des infos supplémentaires ici dans la section pré-requis si nécessaire :
 - [visualstudio:config-msvc](https://code.visualstudio.com/docs/cpp/config-msvc#_prerequisites)
 
+</details>
+
 </TabItem>
 
 <TabItem value="Linux" label="Linux">
 
-De manière générale, toutes les distributions Linux sont livrées avec un compilateur installé. Si ce n'est pas le cas, consultez [cet article](https://code.visualstudio.com/docs/cpp/config-linux).
+De manière générale, toutes les distributions Linux sont livrées avec le compilateur installé **GCC**. Si ce n'est pas le cas, consultez [cet article](https://code.visualstudio.com/docs/cpp/config-linux).
 
 </TabItem>
 
@@ -50,30 +62,40 @@ Vous avez seulement à exécuter cette commande :
 ```bash
 xcode-select --install
 ```
+Cela va installer les outils de développement d'Apple qui contiennent le compilateur **GCC** (et ou **Clang**).
 
 Je pratique plus rarement ce genre d'installation sur **OSX**, n'hésitez pas à venir me voir ou m'envoyer un message ou même à en parler entre vous pour trouver une solution.
 </TabItem>
 </Tabs>
 
----
-
+:::info
+Certains compilateurs ne gèrent pas les choses exactement de la même manière et il est possible donc d'obtenir des warnings ou erreurs différentes d'un compilateur à l'autre.
+:::
 
 ## Vérifier que le compilateur est installé
 
-Dans un premier temps, vous allez pouvoir vérifier que le compilateur est bien installé avec la commande suivante:
+Dans un premier temps, vous allez pouvoir vérifier que le compilateur **GCC** est bien installé avec la commande suivante:
+
+```bash
+g++ --version
+```
 
 <Tabs groupId="operating-systems">
 <TabItem value="Windows" label="Windows">
 
-```powershell
-cl
-```
+<details>
+
+<summary>MSVC</summary>
 
 Avec **MSVC** c'est un peu particulier et la commande du compilateur ne sera accessible qu'à travers un terminal particulier.
 
 Vous pouvez le trouver en cherchant **"developer powershell"** ou **"developer Command Prompt"** dans le **Menu Windows**.
 
-Vous pouvez ouvrir un terminal développeur et essayer d'exécuter la commande précédente.
+Vous pouvez ouvrir un terminal développeur et essayer d'exécuter la commande suivante!
+
+```powershell
+cl
+```
 
 Vous devriez voir un retour comme celui là :
 
@@ -85,27 +107,20 @@ Vous devriez voir un retour comme celui là :
 > usage: cl [ option... ] filename... [ /link linkoption... ]
 > ```
 
+</details>
+
 </TabItem>
 
 <TabItem value="Linux" label="Linux">
-
-```bash
-g++ --version
-```
-
 </TabItem>
-
 <TabItem value="OSX" label="OSX">
-
-```bash
-g++ --version
-```
-
 </TabItem>
+
 </Tabs>
 
-:::caution
-Cela peut ne pas fonctionner si le répertoire contenant le compilateur n'est pas "accessible".
+Cela peut ne pas fonctionner si le répertoire contenant le compilateur n'est pas "accessible". Dans ce cas, il faut ajouter le chemin du compilateur aux [variables d'environnement](#variables-denvironnement).
+
+## Variables d'environnement
 
 Les **commandes** sont elles-mêmes des exécutables sous forme de fichiers situés quelque part sur votre ordinateur.
 
