@@ -137,6 +137,16 @@ Le but de notre programme est d’afficher un message. Des développeurs experts
 
 Pour utiliser les fonctionnalités offertes par ce fichier, notamment écrire un message, on doit l’importer dans notre programme. On dit qu’on l’inclut, d’où l’anglais "**include**". Nous utiliserons beaucoup cette fonctionnalité en C++.
 
+Essayez donc de supprimer la ligne, puis compilez de nouveau votre programme et voyez ce qu'il se passe !
+
+![](HelloImac_imgs/erreur-compil-include.png)
+
+Le compilateur ne peut pas compiler notre programme, et il nous fournit donc une *erreur de compilation*. Il est très important d'apprendre à lire et comprendre ces erreurs, elles vous apportent beaucoup d'informations pour vous aider à corriger votre programme ! En l'occurrence elle nous indique que le symbole `std::cout` est introuvable, et nous donne même une piste pour corriger le problème : rajouter `#include <iostream>` !
+
+Il nous indique même où l'erreur s'est produite :
+![](HelloImac_imgs/go-to-error.png)
+cela signifie que c'est dans le fichier *helloImac.cpp*, à la ligne 4, et au 8ème caractère de cette ligne. Vous pouvez aussi <kbd>CTRL</kbd>+click dessus pour que VSCode vous emmène directement au bon endroit !
+
 :::info
 
 ```#include``` s'appelle une **directive préprocesseur**. Le **préprocesseur** est un programme exécuté lors de la première phase de la compilation qui effectue des modifications textuelles sur le fichier source à partir de directives. Ces directives commencent par le caractère <kbd>#</kbd> et doivent se terminer par un saut de ligne.
