@@ -36,6 +36,7 @@ N'hésitez pas à consulter les extensions recommandées par langage ou découvr
 Concernant le C++, nous avons besoin au minimum d'installer ces extensions:
 - <VSCodeExtension id="ms-vscode.cpptools-extension-pack"/>
 - <VSCodeExtension id="twxs.cmake"/>
+- <VSCodeExtension id="SteveBushResearch.BuildOutputColorizer"/>
 
 Ces extensions vont nous permettre de lancer notre programme C++ sans difficulté.
 
