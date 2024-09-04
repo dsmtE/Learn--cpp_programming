@@ -26,23 +26,9 @@ int main()
 
 Une fois le fichier créé, il suffit d'exécuter la commande suivante pour produire l'exécutable compilé:
 
-<Tabs groupId="operating-systems">
-<TabItem value="Windows" label="Windows">
-
-```bash
-cl helloImac.cpp
-```
-
-</TabItem>
-
-<TabItem value="Linux&MacOS" label="Linux et MacOS">
-
 ```bash
 g++ helloImac.cpp -o helloImac
 ```
-
-</TabItem>
-</Tabs>
 
 Cela va produire un exécutable du même nom que le fichier cpp.
 
