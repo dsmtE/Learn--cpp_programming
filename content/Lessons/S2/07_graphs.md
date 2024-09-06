@@ -353,7 +353,7 @@ Vous pouvez trouver une autre façon de représenter l'algorithme avec une liste
 
 ### Pour aller plus loin: A*
 
-L'algorithme de Dijkstra peut être amélioré. En effet, il explore tous les sommets adjacents d'un sommet avant de passer au sommet suivant. Cela peut être très coûteux en temps si le graphe est très grand et ou si le sommet de départ et le sommet d'arrivée sont très éloignés. L'algorithme de **Dijkstra** explore alors beaucoup de sommets inutilement.
+L'algorithme de Dijkstra peut être amélioré. En effet, il explore tous les sommets adjacents d'un sommet avant de passer au sommet suivant. Cela peut être très coûteux en temps si le graphe est très grand et / ou si le sommet de départ et le sommet d'arrivée sont très éloignés. L'algorithme de **Dijkstra** explore alors beaucoup de sommets inutilement.
 
 L'algorithme A* est une amélioration de l'algorithme de **Dijkstra**. Il utilise une **heuristique** pour guider la recherche. L'**heuristique** est une fonction qui permet d'**estimer** la distance entre un sommet et le sommet d'arrivée. L'algorithme **A*** explore alors en priorité les sommets qui sont les plus proches(selon cette estimation) du sommet d'arrivée. Cela permet de réduire le nombre de sommets explorés et donc de gagner du temps.
 

@@ -75,7 +75,7 @@ cl /c helloImac.cpp
 
 </TabItem>
 
-<TabItem value="Linux&OSX" label="Linux et OSX">
+<TabItem value="Linux&MacOS" label="Linux et MacOS">
 
 Avec **G++** le flag est <kbd>-c</kbd>:
 

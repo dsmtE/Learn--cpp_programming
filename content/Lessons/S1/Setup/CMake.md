@@ -38,7 +38,7 @@ Par exemple avec le gestionnaire de paquets **APT** vous pouvez simplement taper
 sudo apt-get install cmake
 ```
 </TabItem>
-<TabItem value="OSX" label="OSX">
+<TabItem value="MacOS" label="MacOS">
 Vous devriez pouvoir l'installer via le gestionnaire de paquets <a href="https://brew.sh/">Brew</a> avec la commande suivante : 
 
 ```bash
