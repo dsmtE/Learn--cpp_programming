@@ -130,7 +130,7 @@ Séparateur :
 </TabItem>
 </Tabs>
 
-Et vous également utiliser n'importe quelle balise html à tout moment, si la syntaxe Markdown ne fournit pas de quoi faire ce que vous voulez. Par exemple :
+Et vous pouvez également utiliser n'importe quelle balise html à tout moment, si la syntaxe Markdown ne fournit pas de quoi faire ce que vous voulez. Par exemple :
 - `<kbd>F2</kbd>` pour faire des touches : <kbd>F2</kbd>
 - `<summary></summary>` et `<details></details>` pour faire des sections collapsables :
 ```html
