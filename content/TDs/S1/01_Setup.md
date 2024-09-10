@@ -91,3 +91,11 @@ C'est la même chose pour les tâches de compilation (à droite du bouton "**Bui
 :::
 
 Bravo, vous êtes maintenant prêt à faire du C++ sur vos propres machines ! 🥳
+
+## Pour aller plus loin avec CMake
+
+Pour en apprendre plus sur CMake, vous pouvez [aller lire ce petit cours sur CMake](https://julesfouchy.github.io/Learn--Clean-Code-With-Cpp/lessons/cmake/) (au moins jusqu'aux sections `Setting your C++ version` et `GLOB`).
+
+Il vous apprendra notamment ce que c'est qu'une *target* dans CMake, et quelles sont les bonnes pratiques autour des targets pour écrire un CMake qui marche bien.
+
+Une fois que vous aurez lu ce cours, vous pouvez reprendre le CMake que vous avez écrit précédemment dans ce TP, et essayer de l'améliorer grâce à ce que vous avez appris. Vous pouvez notamment remplacer le `set(CMAKE_CXX_STANDARD 17)`, et aussi éviter de devoir lister manuellement tous les fichiers .cpp de votre projet (certes vous n'en avez qu'un par target pour l'instant, mais le jour où vous en aurez plusieurs vous serez bien contents de ne pas avoir à tous les lister un par un).
