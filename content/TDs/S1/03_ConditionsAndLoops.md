@@ -48,7 +48,7 @@ Vous n'avez pas à stocker les entiers saisis par l'utilisateur (vous découvrir
 
 ## Exercice 3 (Pair ou impair)
 
-Écrire un programme qui demande à l’utilisateur de saisir un entier et affiche si cet entier est **pair** tout les nombres positifs **pairs** inférieurs à cet entier sinon si il est **impair** tout les nombres positifs **impairs** inférieurs à cet entier.
+Écrire un programme qui demande à l’utilisateur de saisir un entier et affiche si cet entier est **pair** tous les nombres positifs **pairs** inférieurs à cet entier sinon si il est **impair** tous les nombres positifs **impairs** inférieurs à cet entier.
 
 :::tip
 Vous pourrez utiliser **std::cin** pour demander le nombre à l'utilisateur (aucune gestion d'une éventuelle erreur de saisie n'est demandée ici).
@@ -58,7 +58,7 @@ Vous pourrez utiliser **std::cin** pour demander le nombre à l'utilisateur (auc
 Vous pouvez utiliser l'opérateur modulo `%` qui donne le reste de la division entière.
 :::
 
-## Exercice 3 (Majeur ou mineur)
+## Exercice 4 (Majeur ou mineur)
 
 Écrire un programme qui demande à l’utilisateur de saisir son **âge** (un nombre entier) et aﬀiche s’il est **majeur** ou **mineur**.
 
@@ -85,7 +85,7 @@ std::cin.ignore(255, '\n'); // On vide les caractères mémorisés.
 ```
 :::
 
-## Exercice 4 (Le juste prix)
+## Exercice 5 (Le juste prix)
 
 Un nombre entier est tiré au hasard entre `1` et `100` (inclus).
 
@@ -129,7 +129,7 @@ int main()
 Il existe une façon plus moderne de générer des nombres aléatoires à partir de **C++11**, nous découvrirons cela au prochain semestre.
 :::
 
-## Exercice 5 (ASCII art)
+## Exercice 6 (ASCII art)
 
 1. Écrire un programme qui demande à l’utilisateur de saisir un **entier positif** et affiche un triangle rectangle de hauteur `n` comme dans l’exemple ci-dessous.
 
@@ -162,7 +162,7 @@ Entrez un entier positif : 5
 *****
 ```
 
-## Exercice 6 (conjecture de Syracuse)
+## Exercice 7 (conjecture de Syracuse)
 
 Écrire un programme qui, à partir d’un **entier positif** saisi par l’utilisateur, affiche le nombre de termes de la suite de Syracuse nécessaires pour atteindre `1` (on inclut le terme de départ dans le décompte).
 
