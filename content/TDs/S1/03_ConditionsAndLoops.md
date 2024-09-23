@@ -51,10 +51,6 @@ Vous n'avez pas à stocker les entiers saisis par l'utilisateur (vous découvrir
 Écrire un programme qui demande à l’utilisateur de saisir un entier et affiche si cet entier est **pair** tous les nombres positifs **pairs** inférieurs à cet entier sinon si il est **impair** tous les nombres positifs **impairs** inférieurs à cet entier.
 
 :::tip
-Vous pourrez utiliser **std::cin** pour demander le nombre à l'utilisateur (aucune gestion d'une éventuelle erreur de saisie n'est demandée ici).
-:::
-
-:::tip
 Vous pouvez utiliser l'opérateur modulo `%` qui donne le reste de la division entière.
 :::
 
@@ -67,17 +63,12 @@ Vous pouvez utiliser l'opérateur modulo `%` qui donne le reste de la division e
 3. Gérer le cas où l’utilisateur saisit un **âge avec des lettres** et afficher et gérer l’erreur.
 
 :::info
-`std::cin >> x` renvoie **true** si tout est correct ou **false** si on a rencontré une erreur lors de la saisie.
+Après avoir utilisé `std::cin >> x`, il est possible de tester si la saisie a échoué avec `std::cin.fail()` qui renvoie **true** si la saisie a échoué et **false** sinon.
 Dans notre cas, si l'utilisateur saisit un âge avec des lettres, la saisie échoue et la variable âge n'est pas modifiée.
 
-Il est aussi possible de tester si la saisie précédente a échoué avec `std::cin.fail()` qui renvoie **true** si la saisie a échoué et **false** sinon.
-
-`std::cin.fail()` équivaut à `!(std::cin >> x)`.
-
-Dans le cas où la saisie a échoué, il faut réinitialiser la saisie de l'utilisateur pour pouvoir saisir à nouveau un âge.
-
-`std::cin.clear()` restaure std::cin à un état fonctionnel, sans erreur.
-`std::cin.ignore()` permet d’ignorer un nombre défini de caractères, soit jusqu’à un nombre maximum (exemple 500), soit jusqu’à un caractère précis (exemple '\n' ou 'a'). Dans notre cas, nous allons utiliser ceci pour réinitialiser la saisie de l'utilisateur si on a rencontré une erreur.
+Dans le cas où la saisie a échoué, il faut réinitialiser la saisie de l'utilisateur pour pouvoir saisir à nouveau un âge :<br/>
+- `std::cin.clear()` restaure std::cin à un état fonctionnel, sans erreur.
+- `std::cin.ignore()` permet d’ignorer un nombre défini de caractères, soit jusqu’à un nombre maximum (exemple 500), soit jusqu’à un caractère précis (exemple '\n' ou 'a'). Dans notre cas, nous allons utiliser ceci pour réinitialiser la saisie de l'utilisateur si on a rencontré une erreur :
 
 ```cpp
 std::cin.clear(); // On remet std::cin dans un état fonctionnel.
@@ -100,7 +91,7 @@ Pour générer un nombre aléatoire, vous pouvez utiliser la fonction [**rand()*
 
 Elle retourne un nombre entier aléatoire entre **0** et **RAND_MAX** (une constante définie dans la bibliothèque **cstdlib**).
 
-Pour obtenir un nombre aléatoire entre **1** et **100**, on peut utiliser l'opérateur **modulo** `%`:
+Pour obtenir un nombre aléatoire entre **1** et **100**, on peut utiliser l'opérateur **modulo** `%` :
 
 ```cpp
 std::rand() % 100 + 1
@@ -126,7 +117,7 @@ int main()
 }
 ```
 
-Il existe une façon plus moderne de générer des nombres aléatoires à partir de **C++11**, nous découvrirons cela au prochain semestre.
+**NB :** Il existe une façon plus moderne de générer des nombres aléatoires à partir de **C++11**, nous découvrirons cela au prochain semestre.
 :::
 
 ## Exercice 6 (ASCII art)
@@ -185,11 +176,11 @@ Il est conjecturé que cette suite atteint toujours la valeur `1` quelque soit l
 
 <details>
 
-<summary>Soldes: Conditions et gestion de l'entrée utilisateur</summary>
+<summary>Soldes : Conditions et gestion de l'entrée utilisateur</summary>
 
 C'est les soldes !
 
-Créer un programme qui demande à l'utilisateur:
+Créer un programme qui demande à l'utilisateur :
 - le type de produit (à stocker dans un **enum**)
 - le prix du produit (un nombre flottant)
 - s'il a une carte de fidélité (boolean)
@@ -238,7 +229,7 @@ std::istream& operator>>(std::istream& is, Article& article)
 ```
 
 Cela nous permet d'utiliser l'opérateur `>>` pour lire un **enum** comme on pourrait le faire avec un **int** ou un **float**.
-Sans cela, on aurait du utiliser une variable intermédiaire de type **string** ou **int** pour stocker la saisie de l'utilisateur et faire la conversion nous même.
+Sans cela, on aurait dû utiliser une variable intermédiaire de type **string** ou **int** pour stocker la saisie de l'utilisateur et faire la conversion nous-même.
 
 <details>
 
