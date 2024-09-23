@@ -51,6 +51,10 @@ Vous n'avez pas à stocker les entiers saisis par l'utilisateur (vous découvrir
 Écrire un programme qui demande à l’utilisateur de saisir un entier et affiche si cet entier est **pair** tous les nombres positifs **pairs** inférieurs à cet entier sinon si il est **impair** tous les nombres positifs **impairs** inférieurs à cet entier.
 
 :::tip
+Vous pourrez utiliser **std::cin** pour demander le nombre à l'utilisateur (aucune gestion d'une éventuelle erreur de saisie n'est demandée ici).
+:::
+
+:::tip
 Vous pouvez utiliser l'opérateur modulo `%` qui donne le reste de la division entière.
 :::
 
