@@ -55,7 +55,24 @@ Exercice inspiré de de l'édition **2022** de l'**advent of code**: https://adv
 C'est un évènement annuel qui propose un problème de code par jour sous forme de calendrier de l'avent.
 :::
 
-## Exercice 2 (Points d'énergie)
+## Exercice 2 (Palindrome)
+
+Un palindrome est un mot qui peut être lu de la même manière de gauche à droite et de droite à gauche.
+
+Par exemple, `kayak` est un palindrome.
+
+Écrire un programme qui demande à l'utilisateur de saisir un mot et qui affiche si ce mot est un **palindrome** ou non.
+
+:::tip
+Une chaîne de caractères est un tableau de caractères.
+:::
+
+## Exercice 3 (Comptage)
+
+Écrire un programme qui demande un nombre **entier positif** (supérieur à **1 000 000**) à l'utilisateur et qui remplit un tableau avec les chiffres de ce nombre.
+Le programme doit ensuite compter le nombre d'occurrences de chiffre et afficher le **chiffre** qui apparaît le plus souvent.
+
+## Exercice 4 (Points d'énergie)
 
 Dans un jeu vidéo de type RPG, dès que le joueur termine un niveau, il gagne des points d’énergie.
 
@@ -80,23 +97,6 @@ En supprimant les doublons, nous obtenons: `3, 5, 6, 9, 10, 12, 15, 18`.
 En additionnant tous les nombres, nous obtenons **78** points d'énergie.
 
 **Vous devez écrire un programme qui demande à l'utilisateur de saisir le niveau terminé et le nombre et le niveau de difficulté des ennemis tués et qui affiche le nombre de points d'énergie gagnés.**
-
-## Exercice 3 (Palindrome)
-
-Un palindrome est un mot qui peut être lu de la même manière de gauche à droite et de droite à gauche.
-
-Par exemple, `kayak` est un palindrome.
-
-Écrire un programme qui demande à l'utilisateur de saisir un mot et qui affiche si ce mot est un **palindrome** ou non.
-
-:::tip
-Une chaîne de caractères est un tableau de caractères.
-:::
-
-## Exercice 4 (Comptage)
-
-Écrire un programme qui demande un nombre **entier positif** (supérieur à **1 000 000**) à l'utilisateur et qui remplit un tableau avec les chiffres de ce nombre.
-Le programme doit ensuite compter le nombre d'occurrences de chiffre et afficher le **chiffre** qui apparaît le plus souvent.
 
 ## Exercice 5 (Suppression et tassement)
 
