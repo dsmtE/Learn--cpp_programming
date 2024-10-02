@@ -24,7 +24,7 @@ int main()
     // std::srand permet de fixer la "seed" du générateur aléatoire (pour avoir des résultats reproductibles)
     std::srand(42);
     
-    for (int i = 0; i < dwarf_count; ++i)
+    for (size_t i { 0 }; i < dwarf_count; ++i)
     {
       calories.push_back(rand() % 24000 + 100);
     }
