@@ -23,7 +23,7 @@ title: TD5 - Fonctions
     La **factorielle** d'un entier `n` est le **produit** des nombres entiers strictement positifs inférieurs ou égaux à `n`.
     :::
 3. Afficher le résultat.
-4. Gérer les cas d'erreur (nombre négatif, nombre trop grand, etc.).
+4. Gérer les cas d'erreur (nombre négatif, nombre trop grand (limiter arbitrairement la valeur de `n` à 12 par exemple), etc.).
 5. Utiliser une fonction itérative (non récursive).
 
 ## Exercice 3 (Fibonacci)
@@ -99,9 +99,5 @@ U7 = 36403 et V7 = 18210
 U8 = 145629 et V8 = 72824
 U9 = 582535 et V9 = 291278
 ```
-
-:::tip
-Il est possible d'exprimer $U_n$ et $V_n$ en fonction de $U_{n-1}$ et $V_{n-1}$.
-:::
 
 </details>
