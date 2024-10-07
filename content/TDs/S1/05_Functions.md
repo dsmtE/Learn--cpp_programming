@@ -20,7 +20,8 @@ title: TD5 - Fonctions
 1. Écrire un programme qui demande à l’utilisateur de saisir un **entier positif**.
 2. Écrire une fonction **récursive** qui retourne la **factorielle** de `n`.
     :::info
-    La **factorielle** d'un entier `n` est le **produit** des nombres entiers strictement positifs inférieurs ou égaux à `n`.
+    La **factorielle** d'un entier `n` est le **produit** des nombres entiers strictement positifs inférieurs ou égaux à `n` :
+    $2 \times 3 \times 4 \times \dots \times (n-1) \times n$
     :::
 3. Afficher le résultat.
 4. Gérer les cas d'erreur (nombre négatif, nombre trop grand, etc.).
