@@ -33,7 +33,7 @@ blockquote {
 
 # Programmation et Algorithmique S1
 
-## Enguerrand DE SMET (IMAC 2021 - IMAC "6")
+## Enguerrand DE SMET (IMAC 2021)
 
 ---
 
@@ -41,9 +41,10 @@ blockquote {
 
 - Pas besoin de connaissances préalables
 - CM: 10 séances
-- TD: 10 séances (non notées)
-- Examen: 1 séance (~ 1h30 - noté)
+- TD: 10 séances (non notées mais à rendre pour suivi)
+- Mini Examen: Demi séance pendant CM (~30min - noté)
 - Workshop: 1 semaine (noté)
+- Projet (~ 2 semaines - Individuel - noté)
 
 ---
 
@@ -150,3 +151,5 @@ img {
 3.  ```cpp
     std::cout << "Hello and welcome to IMAC !" << std::endl;
     ```
+
+    
