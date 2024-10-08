@@ -29,13 +29,14 @@ title: TD5 - Fonctions
 ## Exercice 3 (Fibonacci)
 
 1. Écrire un programme qui demande à l’utilisateur de saisir un entier positif.
-2. Écrire une fonction **récursive** qui retourne sous la forme d'un tableau les `n` premiers termes de la suite de **Fibonacci**.
+2. Écrire une fonction **récursive** qui retourne le terme `n` de la suite de **Fibonacci**.
     :::info
     La suite de Fibonacci est une suite d'entiers dans laquelle chaque terme est la somme des deux termes qui le précèdent. Ses premiers termes sont `0` et `1`.
     :::
 3. Afficher les `n` premiers termes de la suite de **Fibonacci** à l'aide de la fonction précédente.
     Par exemple, si l’utilisateur saisit `7`, le programme affichera `0, 1, 1, 2, 3, 5, 8`.
 4. Pour aller plus loin: Essayer de trouver une solution **itérative** (non récursive).
+5. Pour aller plus loin: Essayer de faire une fonction **itérative** qui au lieu de retourner seulement le `n`-ième terme, retourne les `n` premiers termes de la suite de **Fibonacci** dans un tableau `std::vector`.
 
 
 ## Exercice 4 (Surcharges)
