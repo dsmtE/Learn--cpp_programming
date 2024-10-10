@@ -13,7 +13,7 @@ Quelques suggestions d'exercices à déboguer:
 
 
 - [Conjecture de Syracuse](/TDs/S1/ConditionsAndLoops#exercice-6-conjecture-de-syracuse)
-    Vous pouvez observer le comportement de la conjecture de Syracuse si le nombre deviens trop grand par exemple.
+    Vous pouvez observer le comportement de la conjecture de Syracuse si le nombre devient trop grand par exemple.
 
 - Tableaux
     Vous pouvez vous servir des [watch](/Lessons/S1/DebuggerAndErrors#inspecter-les-variables) pour observer les valeurs des éléments d'un tableau comme dans l'exercice de [comptage](/TDs/S1/Arrays#exercice-4-comptage) ou de [suppression et tassement](/TDs/S1/Arrays#exercice-5-suppression-et-tassement)
