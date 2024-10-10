@@ -24,7 +24,7 @@ int main()
     // std::srand permet de fixer la "seed" du générateur aléatoire (pour avoir des résultats reproductibles)
     std::srand(42);
     
-    calories.reserve(dwarf_count);
+    calories.reserve(dwarf_count); // Pour optimiser, on dit à l'avance au tableau combien d'éléments vont être ajoutés, afin qu'il puisse allouer la mémoire nécessaire en une seule fois. Si on ne fait pas ça, à chaque push_back dans la boucle le tableau va être obligé d'allouer de la mémoire supplémentaire pour contenir le nouvel élément, ce qui est plus lent.
     for (size_t i { 0 }; i < dwarf_count; ++i)
     {
         // Génération d'un nombre aléatoire entre 100 et 24000

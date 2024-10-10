@@ -27,7 +27,7 @@ Il existe bien d'autres **structures de données** qui stockent de façon diffé
 
 ## std::vector
 
-Comme vous le remarquez, j'ai ajouté **std::** devant vector ce qui nous indique que c'est une fonctionnalité déjà codée pour nous dans la bibliothèque standard. Pour pouvoir s'en servir on va donc inclure le fichier contenant cette fonctionnalité en faisant **#include < vector >**
+Comme vous le remarquez, j'ai ajouté **std::** devant vector ce qui nous indique que c'est une fonctionnalité déjà codée pour nous dans la bibliothèque standard. Pour pouvoir s'en servir on va donc inclure le fichier contenant cette fonctionnalité en faisant `#include <vector>`
 
 **std::vector** est un **tableau dynamique** qui s'**agrandit** et se **rétrécit** en fonction du nombre d'éléments que l'on souhaite stocker à l'intérieur.
 
@@ -93,7 +93,7 @@ Il ne **faut pas** utiliser d’indice **inférieur à 0** ou **supérieur ou é
 Pour connaître la taille du tableau on va utiliser la fonction propre (appelée **méthode**) ```size()```  qui renvoie le nombre d'éléments.
 
 :::note
-Une **fonction** est un regroupement d'instructions que permet de réutiliser du code à plusieurs endroits d'un programme. Une **méthode** est une **fonction** propre à un objet(ici notre ```std::vector```) et qui peut le manipuler ou retourner des informations à son sujet.
+Une **fonction** est un regroupement d'instructions que permet de réutiliser du code à plusieurs endroits d'un programme. Une **méthode** est une **fonction** propre à un objet (ici notre ```std::vector```) et qui peut le manipuler ou retourner des informations à son sujet.
 Nous en reparlerons plus en détail dans un prochain chapitre, mais nous pouvons dès maintenant en utiliser.
 :::
 
@@ -106,7 +106,7 @@ C’est un type **entier** non signé capable de stocker l'index d'un élément 
 
 int main()
 {
-    std::vector<int> const vector { 12, 18, 8, 4, 9 };
+    std::vector<float> const vector { 12.f, 18.f, 8.f, 4.f, 9.f };
 
     std::size_t const size { vector.size() };
     std::cout << "Mon tableau contient " << size << " éléments." << std::endl;
@@ -135,7 +135,7 @@ On pourrait utiliser la taille pour accéder au dernier élément du tableau mai
 
 int main()
 {
-    std::vector<int> const vector { 12, 18, 8, 4, 9 };
+    std::vector<float> const vector { 12.f, 18.f, 8.f, 4.f, 9.f };
 
     // Façon de faire hérité du c en utilisant la taille du tableau (attention au -1 les index commencent à 0)
     std::cout << "Le dernier élément est " << vector[vector.size() - 1] << "." << std::endl;
@@ -180,7 +180,7 @@ Pour afficher les éléments du tableau on peut simplement utiliser sa taille et
 
 int main()
 {
-    std::vector<int> const vector { 12, 18, 8, 4, 9 };
+    std::vector<float> const vector { 12.f, 18.f, 8.f, 4.f, 9.f };
 
     for (std::size_t i {0}; i < vector.size(); i++)
     {
@@ -214,9 +214,9 @@ Plus besoin de récupérer la taille et cela va rendre notre code plus lisible:
 
 int main()
 {
-    std::vector<int> const vector { 12, 18, 8, 4, 9 };
+    std::vector<float> const vector { 12.f, 18.f, 8.f, 4.f, 9.f };
 
-    for (int const value : vector)
+    for (float const value : vector)
     {
         std::cout << value << std::endl;
     }
@@ -236,12 +236,12 @@ C'est avec la méthode **push_back** que l'on ajoute un élément:
 
 int main()
 {
-    std::vector<int> vector { 42 };
+    std::vector<float> vector { 42.f };
     // On ajoute des éléments
-    vector.push_back(23);
-    vector.push_back(5);
+    vector.push_back(23.f);
+    vector.push_back(5.f);
 
-    for (int const value : vector)
+    for (float const value : vector)
     {
         std::cout << value << std::endl;
     }
@@ -258,7 +258,7 @@ On ne pourra pas ajouter un élément de type différent dans notre tableau, un 
 
 Pour supprimer un élément on utilisera les méthodes ```pop_back``` ou ```clear```.
 
-```Clear``` comme son nom l'indique permet de vider entièrement le tableau et ```pop_back``` permet de retirer **et** retourner le dernier élément.
+```clear``` comme son nom l'indique permet de vider entièrement le tableau et ```pop_back``` permet de retirer le dernier élément.
 
 ```cpp
 #include <vector>
@@ -266,7 +266,7 @@ Pour supprimer un élément on utilisera les méthodes ```pop_back``` ou ```clea
 
 int main()
 {
-    std::vector<int> vector { 42, 12 };
+    std::vector<float> vector { 42.f, 12.f };
 
     std::cout << "Taille avant clear : " << vector.size() << std::endl;
 
@@ -274,12 +274,12 @@ int main()
 
     std::cout << "Taille après clear : " << vector.size() << std::endl;
 
-    vector.push_back(23);
-    vector.push_back(42);
-    vector.push_back(25);
+    vector.push_back(23.f);
+    vector.push_back(42.f);
+    vector.push_back(25.f);
 
     std::cout << "Le tableau contient maintenant: ";
-    for (int const value : vector)
+    for (float const value : vector)
     {
         std::cout << value << ", ";
     }
@@ -288,7 +288,7 @@ int main()
     vector.pop_back();
 
     std::cout << "Le tableau contient maintenant: ";
-    for (int const value : vector)
+    for (float const value : vector)
     {
         std::cout << value << ", ";
     }
@@ -296,13 +296,13 @@ int main()
 
     if(!std::empty(vector))
     {
-        int last_value {vector.back()};
+        float last_value {vector.back()};
         vector.pop_back();
 
         std::cout << "La derniere valeur du tableau etait : " << last_value << std::endl;
 
         std::cout << "Le tableau contient maintenant: ";
-        for (int const value : vector)
+        for (float const value : vector)
         {
             std::cout << value << ", ";
         }
@@ -341,7 +341,7 @@ int main()
 std::array est un tableau **statique**, c’est-à-dire que sa taille doit être connue à la compilation et ne peut pas varier.
 En contre-partie, cette structure de données est plus performant et plus rapide qu’un **std::vector** puisqu’il n’y a pas d’opération d’ajout ou de retrait d’éléments.
 
-Pour l’utiliser, il faut inclure le ficher qui contient cette fonctionnalité (```#include < array >```).
+Pour l’utiliser, il faut inclure le ficher qui contient cette fonctionnalité (```#include <array>```).
 
 On l'initialise en précisant entre chevrons le **type** de variable que l'on souhaite stocker et sa **taille**:
 
@@ -374,9 +374,9 @@ int main()
     std::array<float, 6> array_of_float { 45.3f, 142.857f };
 
     std::cout << "Le tableau de flottant contient: ";
-    for (float const integer : array_of_integer)
+    for (float const value : array_of_float)
     {
-        std::cout << integer << ", ";
+        std::cout << value << ", ";
     }
     std::cout << std::endl;
 
@@ -423,9 +423,9 @@ Nous avions découvert le type un peu particulier **std::string** dans le chapit
 
 Ce "type" est lui même une structure de données qui permet de stocker du texte, une suite de caractères (de type **char** donc).
 
-Le type **std::string** n’est donc rien d’autre qu'un **tableau "dynamique" de char**, conçu et optimisé spécialement pour le stockage de texte.
+Le type **std::string** n’est donc rien d’autre qu'un **tableau dynamique de char**, conçu et optimisé spécialement pour le stockage de texte.
 
-On peut donc faire toutes les opérations que nous venons de voir, accéder à sa taille, accéder aux caracatères, les modifier, en ajouter ou supprimer et enfin boucler sur les caractères.
+On peut donc faire toutes les opérations que nous venons de voir, accéder à sa taille, accéder aux caractères, les modifier, en ajouter ou supprimer et enfin boucler sur les caractères.
 
 ```cpp title="des exemples"
 
