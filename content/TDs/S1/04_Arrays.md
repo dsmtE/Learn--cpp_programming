@@ -24,9 +24,12 @@ int main()
     // std::srand permet de fixer la "seed" du générateur aléatoire (pour avoir des résultats reproductibles)
     std::srand(42);
     
+    calories.reserve(dwarf_count);
     for (size_t i { 0 }; i < dwarf_count; ++i)
     {
-      calories.push_back(static_cast<float>(rand() % 24000 + 100));
+        // Génération d'un nombre aléatoire entre 100 et 24000
+        float const random_01 { static_cast<float>(rand()) / static_cast<float>(RAND_MAX) };
+        calories.push_back(100.f + (24000.f-100.f) * random_01);
     }
 
     // affichage optionnel des calories transportées par chaque nain

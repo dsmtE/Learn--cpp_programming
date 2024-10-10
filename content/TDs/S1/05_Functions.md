@@ -24,19 +24,20 @@ title: TD5 - Fonctions
     $2 \times 3 \times 4 \times \dots \times (n-1) \times n$
     :::
 3. Afficher le résultat.
-4. Gérer les cas d'erreur (nombre négatif, nombre trop grand, etc.).
+4. Gérer les cas d'erreur (nombre négatif, nombre trop grand (limiter arbitrairement la valeur de `n` à 12 par exemple), etc.).
 5. Utiliser une fonction itérative (non récursive).
 
 ## Exercice 3 (Fibonacci)
 
 1. Écrire un programme qui demande à l’utilisateur de saisir un entier positif.
-2. Écrire une fonction **récursive** qui retourne sous la forme d'un tableau les `n` premiers termes de la suite de **Fibonacci**.
+2. Écrire une fonction **récursive** qui retourne le terme `n` de la suite de **Fibonacci**.
     :::info
     La suite de Fibonacci est une suite d'entiers dans laquelle chaque terme est la somme des deux termes qui le précèdent. Ses premiers termes sont `0` et `1`.
     :::
 3. Afficher les `n` premiers termes de la suite de **Fibonacci** à l'aide de la fonction précédente.
     Par exemple, si l’utilisateur saisit `7`, le programme affichera `0, 1, 1, 2, 3, 5, 8`.
 4. Pour aller plus loin: Essayer de trouver une solution **itérative** (non récursive).
+5. Pour aller plus loin: Essayer de faire une fonction **itérative** qui au lieu de retourner seulement le `n`-ième terme, retourne les `n` premiers termes de la suite de **Fibonacci** dans un tableau `std::vector`.
 
 
 ## Exercice 4 (Surcharges)
@@ -100,9 +101,5 @@ U7 = 36403 et V7 = 18210
 U8 = 145629 et V8 = 72824
 U9 = 582535 et V9 = 291278
 ```
-
-:::tip
-Il est possible d'exprimer $U_n$ et $V_n$ en fonction de $U_{n-1}$ et $V_{n-1}$.
-:::
 
 </details>
