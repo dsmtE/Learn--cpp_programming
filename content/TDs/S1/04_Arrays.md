@@ -19,18 +19,18 @@ int main()
 {
     size_t const dwarf_count { 20 };
 
-    std::vector<int> calories {};
+    std::vector<float> calories {};
 
     // std::srand permet de fixer la "seed" du générateur aléatoire (pour avoir des résultats reproductibles)
     std::srand(42);
     
     for (size_t i { 0 }; i < dwarf_count; ++i)
     {
-      calories.push_back(rand() % 24000 + 100);
+      calories.push_back(static_cast<float>(rand() % 24000 + 100));
     }
 
     // affichage optionnel des calories transportées par chaque nain
-    for (int const c : calories)
+    for (float const c : calories)
     {
       std::cout << c << ", ";
     }
