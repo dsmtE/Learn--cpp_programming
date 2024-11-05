@@ -92,19 +92,19 @@ Poke2 est KO, il ne peut pas attaquer.
 Poke1 gagne!
 ```
 
-Un dresseur a un Nom et 3 pokémons. Dans un combat entre deux dresseurs, ils font combattre leurs pokémons les uns après les autres, jusqu'à ce que tous les pokémons d'un des dresseurs soient KOs.<br/>
+Un dresseur a un **Nom** et **3 pokémons**. Dans un combat entre deux dresseurs, ils font combattre leurs pokémons les uns après les autres, jusqu'à ce que tous les pokémons d'un des dresseurs soient KOs. (Attention, quand on Pokemon entame son deuxième combat, il doit garder les points de vie qu'il avait à la fin du premier combat, il ne doit pas recommencer avec ses points de vie max !)<br/>
 
 Créer une structure `Dresseur` et une surcharge de la fonction `combat` pour faire combattre deux dresseurs.<br/>
 
 Par exemple:
 
 ```cpp
-Dresseur dresseur1{"Dresseur1", .pokemons = {
+Dresseur dresseur1{"Dresseur1", {
     Pokemon{"Dresseur1_Poke1", 5, 10, 8},
     Pokemon{"Dresseur1_Poke2", 5, 10, 8},
     Pokemon{"Dresseur1_Poke3", 5, 10, 8},
 }};
-Dresseur dresseur2{"Dresseur2", .pokemons = {
+Dresseur dresseur2{"Dresseur2", {
     Pokemon{"Dresseur2_Poke1", 20, 10, 3},
     Pokemon{"Dresseur2_Poke2", 20, 10, 3},
     Pokemon{"Dresseur2_Poke3", 20, 10, 3},
