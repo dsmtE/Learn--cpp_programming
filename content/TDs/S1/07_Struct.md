@@ -14,7 +14,7 @@ Votre position initiale est `(0, 0)` et vous pouvez vous déplacer dans les dire
 
 3. Écrire une **structure** `Move` qui représente un mouvement sous la forme d'une direction et d'une distance à parcourir.
 
-4. Écrire une fonction `moveSubmarine` qui permet de déplacer le sous-marin en fonction d'un mouvement. La fonction ne doit rien retourner et doit modifier la position du sous-marin passée en paramètre.
+4. Écrire une fonction `moveSubmarine` qui permet de déplacer le sous-marin en fonction d'un mouvement. La fonction ne doit rien retourner et doit modifier la **position** du sous-marin passée en **paramètre**.
 
 5. Écrire une fonction `display` qui permet d'afficher la position du sous-marin passée en paramètre.
 
@@ -62,16 +62,16 @@ Exercice inspiré de de l'édition **2021** de l'**advent of code**: https://adv
 
 ## Exercice 2 : combats de Pokémons
 
-Un pokémon a un Nom, des Points de Vie, une Attaque et une Vitesse. Un combat entre deux Pokémons se déroule ainsi:
+Un pokémon a un **Nom**, des **Points de Vie**, une **Attaque** et une **Vitesse**. Un combat entre deux Pokémons se déroule ainsi:
 - À chaque tour, le pokémon avec la plus grande vitesse commence (si égalité, on choisit au hasard lequel de deux commence ce tour)
-- Le pokémon attaquant réduit les Points de Vie de l'autre d'un montant égal à son attaque. Puis, si le deuxième pokémon n'est pas encore KO (Points de Vie encore > 0), il attaque à son tour
+- Le pokémon attaquant réduit les Points de Vie de l'autre d'un montant égal à son attaque. Puis, si le deuxième pokémon n'est pas encore KO (**Points de Vie encore > 0**), il attaque à son tour.
 
-Faites une structure représentant un Pokémon, puis écrivez une fonction faisant le combat entre deux Pokémons.<br/>
+Faites une **structure** représentant un Pokémon, puis écrivez une fonction faisant le combat entre deux Pokémons.<br/>
 Par exemple:
 
 ```cpp
-Pokemon pokemon1{.nom = "Poke1", .points_de_vie = 50, .attaque = 10, .vitesse = 8};
-Pokemon pokemon2{.nom = "Poke2", .points_de_vie = 30, .attaque = 20, .vitesse = 3};
+Pokemon pokemon1{"Poke1", 50, 10, 8};
+Pokemon pokemon2{"Poke2", 30, 20, 3};
 combat(pokemon1, pokemon2);
 ```
 
@@ -92,24 +92,27 @@ Poke2 est KO, il ne peut pas attaquer.
 Poke1 gagne!
 ```
 
-Un dresseur a un Nom et 3 pokémons. Dans un combat entre deux dresseurs, ils font combattre leurs pokémons les uns après les autres, jusqu'à ce que tous les pokémons d'un des dresseurs soient KOs. (Attention, quand on Pokemon entame son deuxième combat, il doit garder les points de vie qu'il avait à la fin du premier combat, il ne doit pas recommencer avec ses points de vie max !)<br/>
+Un dresseur a un **Nom** et **3 pokémons**. Dans un combat entre deux dresseurs, ils font combattre leurs pokémons les uns après les autres, jusqu'à ce que tous les pokémons d'un des dresseurs soient KOs. (Attention, quand on Pokemon entame son deuxième combat, il doit garder les points de vie qu'il avait à la fin du premier combat, il ne doit pas recommencer avec ses points de vie max !)<br/>
+
+Créer une structure `Dresseur` et une surcharge de la fonction `combat` pour faire combattre deux dresseurs.<br/>
+
 Par exemple:
 
 ```cpp
-Dresseur dresseur1{.nom = "Dresseur1", .pokemons = {
-    Pokemon{.nom = "Dresseur1_Poke1", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
-    Pokemon{.nom = "Dresseur1_Poke2", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
-    Pokemon{.nom = "Dresseur1_Poke3", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
+Dresseur dresseur1{"Dresseur1", {
+    Pokemon{"Dresseur1_Poke1", 5, 10, 8},
+    Pokemon{"Dresseur1_Poke2", 5, 10, 8},
+    Pokemon{"Dresseur1_Poke3", 5, 10, 8},
 }};
-Dresseur dresseur2{.nom = "Dresseur2", .pokemons = {
-    Pokemon{.nom = "Dresseur2_Poke1", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
-    Pokemon{.nom = "Dresseur2_Poke2", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
-    Pokemon{.nom = "Dresseur2_Poke3", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
+Dresseur dresseur2{"Dresseur2", {
+    Pokemon{"Dresseur2_Poke1", 20, 10, 3},
+    Pokemon{"Dresseur2_Poke2", 20, 10, 3},
+    Pokemon{"Dresseur2_Poke3", 20, 10, 3},
 }};
 combat(dresseur1, dresseur2);
 ```
 
-doit afficher :
+doit afficher par exemple :
 ```
 Tour 1:
 Dresseur1_Poke1 attaque, il reste 10 PV à Dresseur2_Poke1.
