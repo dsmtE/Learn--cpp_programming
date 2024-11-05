@@ -92,7 +92,7 @@ Poke2 est KO, il ne peut pas attaquer.
 Poke1 gagne!
 ```
 
-Un dresseur a un Nom et 6 pokémons. Dans un combat entre deux dresseurs, ils font combattre leurs pokémons les uns après les autres, jusqu'à ce que tous les pokémons d'un des dresseurs soient KOs.<br/>
+Un dresseur a un Nom et 3 pokémons. Dans un combat entre deux dresseurs, ils font combattre leurs pokémons les uns après les autres, jusqu'à ce que tous les pokémons d'un des dresseurs soient KOs. (Attention, quand on Pokemon entame son deuxième combat, il doit garder les points de vie qu'il avait à la fin du premier combat, il ne doit pas recommencer avec ses points de vie max !)<br/>
 Par exemple:
 
 ```cpp
@@ -100,17 +100,11 @@ Dresseur dresseur1{.nom = "Dresseur1", .pokemons = {
     Pokemon{.nom = "Dresseur1_Poke1", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
     Pokemon{.nom = "Dresseur1_Poke2", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
     Pokemon{.nom = "Dresseur1_Poke3", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
-    Pokemon{.nom = "Dresseur1_Poke4", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
-    Pokemon{.nom = "Dresseur1_Poke5", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
-    Pokemon{.nom = "Dresseur1_Poke6", .points_de_vie = 5, .attaque = 10, .vitesse = 8},
 }};
 Dresseur dresseur2{.nom = "Dresseur2", .pokemons = {
     Pokemon{.nom = "Dresseur2_Poke1", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
     Pokemon{.nom = "Dresseur2_Poke2", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
     Pokemon{.nom = "Dresseur2_Poke3", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
-    Pokemon{.nom = "Dresseur2_Poke4", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
-    Pokemon{.nom = "Dresseur2_Poke5", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
-    Pokemon{.nom = "Dresseur2_Poke6", .points_de_vie = 20, .attaque = 10, .vitesse = 3},
 }};
 combat(dresseur1, dresseur2);
 ```
