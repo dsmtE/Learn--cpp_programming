@@ -19,8 +19,8 @@ On va utiliser un fichier d'en-tête pour définir la structure et les fonctions
     - `div` : prend deux fractions en paramètre et retourne le quotient des deux fractions.
 
 :::info
-Pour simplifier on va considérer que les fractions sont toujours positives et on ne va pas gérer le cas ou le résultat d'une opération est négatif ou le problème de division par zéro.
-Vous êtes toute fois libre de gérer ces cas si vous le souhaitez (et donc changer le type des attributs de la structure et utiliser des entiers signés).
+Pour simplifier on va considérer que les fractions sont toujours positives et on ne va pas gérer le cas où le résultat d'une opération est négatif ou le problème de division par zéro.
+Vous êtes toutefois libres de gérer ces cas si vous le souhaitez (et donc changer le type des attributs de la structure et utiliser des entiers signés).
 :::
 
 :::tip
