@@ -2,75 +2,90 @@
 title: TD8 - Headers
 ---
 
-## Exercice 1 (Fraction)
+import HexColor from '@site/src/components/HexColor';
 
-Le but de cet exercice est de créer une **structure** permettant de représenter une **fraction**. Cette structure devra contenir deux entiers positifs, un pour le **numérateur** et un pour le **dénominateur**.
+Le but de ce TD est de manipuler plusieurs fichiers sources et de les compiler ensemble pour créer un programme.
 
-On va utiliser un fichier d'en-tête pour définir la structure et les fonctions qui vont permettre de manipuler les fractions.
+Nous allons créer une structure qui permet de représenter une couleur avec trois composantes `red`, `green` et `blue`.
 
-1. Créer un fichier `fraction.hpp` qui contiendra la définition de la structure et les prototypes des méthodes.
-    La structure devra s'appeler `Fraction` et contenir deux **entiers positifs** nommés `numerator` et `denominator` de type `unsigned int` avec comme valeur par défaut `0/1`.
-    La structure devra contenir une **méthode** `display` et qui permet d'afficher (`std::cout`) la fraction sous la forme `numerator/denominator`.
-    
-    Vous devrez également définir les **prototypes** des fonctions suivantes :
-    - `add` : prend deux fractions en paramètre et retourne la somme des deux fractions.
-    - `sub` : prend deux fractions en paramètre et retourne la différence des deux fractions.
-    - `mul` : prend deux fractions en paramètre et retourne le produit des deux fractions.
-    - `div` : prend deux fractions en paramètre et retourne le quotient des deux fractions.
+1. Créer un fichier `color.hpp` qui contiendra un [espace de nom](/Lessons/S1/Headers#espaces-de-noms) `Color` avec la définition de la structure `Rgb` et les prototypes des fonctions et méthodes suivantes :
+    - La structure devra s'appeler `Rgb` et contenir trois **entiers** nommés `red`, `green` et `blue` de type `unsigned int` avec une valeur par défaut forcée à `0`.
+    - La structure devra contenir une **méthode** `display` qui permet d'afficher (`std::cout`) la couleur sous la forme `rgb(red, green, blue)`.
 
 :::info
-Pour simplifier on va considérer que les fractions sont toujours positives et on ne va pas gérer le cas ou le résultat d'une opération est négatif ou le problème de division par zéro.
-Vous êtes toute fois libre de gérer ces cas si vous le souhaitez (et donc changer le type des attributs de la structure et utiliser des entiers signés).
+On pourrait aussi utiliser un type `unsigned char` pour les composantes de couleur mais ça va nous poser des problèmes pour les calculs et pour l'affichage. En effet, les types `char` s'affichent comme des caractères ASCII et non comme des entiers. De plus, les calculs avec des `char` peuvent poser des problèmes de débordement de capacité.
 :::
+
+2. Créer un fichier `color.cpp` qui contiendra les définitions des méthodes et fonctions.
+
+---
+
+Maintenant que nous avons notre structure `Color::Rgb`, nous allons ajouter des fonctions pour pouvoir manipuler nos couleurs pour en obtenir de nouvelles.
+
+3. Créer un nouveau fichier `color_utils.hpp` qui contiendra les prototypes des fonctions suivantes :
+    - `mix` qui permet de mélanger deux couleurs en faisant la moyenne des composantes `red`, `green` et `blue`. Elle retourne la couleur résultante et prend en paramètre deux couleurs (références constantes).
+    - `luminance` qui permet de calculer la luminance d'une couleur en utilisant la formule $0.2126 * \text{red} + 0.7152 * \text{green} + 0.0722 * \text{blue}$ (:warning: il faudra convertir au préalable les composantes entières $[0, 255]$ en flottants $[0, 1]$) et retourner le résultat sous forme d'un nombre **flottant** entre 0 et 1.
+    -  `invert` qui permet d'inverser les composantes d'une couleur (255 - composante) et de retourner la couleur inversée.
+    -  `grayscale` qui permet de convertir une couleur en une couleur en niveaux de gris. (Une couleur en niveaux de gris a ses composantes `red`, `green` et `blue` égales à la luminance de la couleur).
+
+4. Créer un nouveau fichier `color_utils.cpp` qui contiendra les définitions des fonctions.
+
+
+5. Créer un nouveau couple de fichiers `color_hex.cpp` et `color_hex.hpp` dans lesquels vous allez ajouter des fonctions pour manipuler des couleurs en hexadécimal. Le fichier contiendra les fonctions suivantes (toujours dans l'espace de nom `Color`):
+   - `Rgb Rgb_from_hex(unsigned int const hex)` qui permet de convertir un entier hexadécimal en une couleur.
+   - `unsigned int rgb_to_hex_int(Rgb const& color)` qui permet de convertir une couleur en un entier hexadécimal.
+
+:::tip couleur en hexadécimal
+Pour convertir un **entier hexadécimal** en composantes `red`, `green` et `blue`, vous pouvez utiliser des opérations de décalage binaire `>>` et des opérations binaires `&` pour extraire les composantes.
+
+En effet, un entier hexadécimal est composé de 3 octets (24 bits) où les 8 premiers bits représentent la composante `red`, les 8 bits suivants la composante `green` et les 8 derniers bits la composante `blue`.
+
+Par exemple, le nombre <HexColor hex="0xff0000"/> se découpe en 3 octets `ff`, `00` et `00` qui correspondent respectivement à `red`, `green` et `blue`. En binaire, cela donne `11111111`, `00000000` et `00000000`.
+
+Ici, le préfixe `0x` indique que l'on parle d'un nombre hexadécimal et pas d'une chaîne de caractères, de la même manière le suffixe `f` pour les nombre flottants par exemple.
+
+Pour extraire la composante `red`, il faut utiliser des opérations de décalage binaires et de masquage.
+
+Par exemple `10100101` & `11110000` donne `10100000` (masquage) et `10100000` >> 4 donne `00001010` (décalage).
+
+Ici on peut utiliser ce mécanisme pour extraire les composantes `red`, `green` et `blue` de l'entier hexadécimal.
+
+<HexColor hex="0xe812f0"/> & <HexColor hex="0xff0000"/> donne <HexColor hex="0xe80000"/> et <HexColor hex="0xe80000"/> >> 16 donne `0xe8` qui correspond à la composante `red` de la couleur.
+
+Pour obtenir la composante `green`, il faut faire un masquage avec `0x00ff00` et un décalage de 8 bits (`>> 8`). Ce qui donne avec les opérations binaires combinées : (<HexColor hex="0xe812f0"/> & <HexColor hex="0x00ff00"/>) >> 8 = `0x12`.
+
+Pour obtenir la composante `blue`, il faut faire un masquage avec `0x0000ff` et un décalage de 0 bit (qui ne change rien et est donc optionnel) ce qui donne : <HexColor hex="0xe812f0"/> & <HexColor hex="0x0000ff"/> = `0xf0`.
+
+Il est aussi possible de faire un **décalage** **puis** un **masquage** (<HexColor hex="0xe812f0"/> >> 16 & `0xff` donne aussi `0xe8` (la composante `red` de la couleur)).
+:::
+
+1. Ajouter les prototypes et définitions des fonctions suivantes permettant de manipuler des **chaînes de caractères** représentant des couleurs en hexadécimal :
+    - `Rgb Rgb_from_hex(std::string const& hex)` qui permet de convertir une chaîne de caractères représentant un entier hexadécimal en une couleur.
+   - `std::string rgb_to_hex_string(Rgb const& color)` qui permet de convertir une couleur en une chaîne de caractères représentant la couleur en hexadécimal.
 
 :::tip
-Petit rappel sur la définition des prototypes de méthodes pour les structures [ici](https://dsmte.github.io/Learn--cpp_programming/Lessons/S1/Struct#prototype-de-méthodes).
+Vous pouvez utiliser la fonction `std::stoi` pour convertir une chaîne de caractères en entier. Pour cela, vous devez spécifier la base de conversion en deuxième paramètre pour que la fonction puisse interpréter la chaîne correctement avec un entier hexadécimal.
+
+Par exemple, `std::stoi("ff", nullptr, 16)` retourne `255`.
+
+Pour la fonction `rgb_to_hex_string`, il faudra donc convertir au préalable la couleur en nombre hexadécimale (fonction `rgb_to_hex_int`) et convertir ce nombre en chaîne de caractère. Je vous laisse regarder comment convertir un entier hexadécimal en chaîne de caractères mais voilà quelques pistes:
+- `std::stringstream` avec le manipulator `std::hex` pour convertir un entier en hexadécimal.
+- `std::format("{:x}", 42)` pour formater un entier en hexadécimal (C++20).
+- Directement remplir une chaîne de caractères avec des opérations de décalage et de masquage (plus compliqué et déconseillé).
 :::
 
-2. Créer un fichier `fraction.cpp` qui contiendra les définitions des méthodes et fonctions.
+1. Créer un fichier `main.cpp` dans lequel vous allez inclure les fichiers nécessaires pour manipuler les couleurs et tester les différentes fonctions que vous avez créées. L'idée est de créer un mélangeur de couleur qui demande à l'utilisateur de saisir deux couleurs en **hexadécimal** et qui affiche la couleur résultante du mélange(format **rgb** et **hexadécimal**) ainsi que sa **luminance** et sa **couleur inversée**.
 
-3. Implémenter les fonctions dans le fichier `fraction.cpp`.
-
-:::warning
-Les fonctions `add`, `sub`, `mul` et `div` ne doivent pas modifier les fractions passées en paramètre mais bien retourner une nouvelle fraction qui est le résultat de l'opération.
-:::
-
-4. Créer un fichier `utils.hpp` qui contiendra les **fonctions** suivantes :
-    - `gcd` : prend deux entiers positifs en paramètre et retourne le plus grand diviseur commun.
-    - `simplify` : prend une fraction en paramètre et retourne la fraction simplifiée.
-
-5. Créer un fichier `utils.cpp` et implémenter les fonctions.
-
-:::tip
-Pour simplifier une fraction, il faut diviser le numérateur et le dénominateur par le plus grand diviseur commun.
-On va donc utiliser la fonction `gcd` pour calculer le plus grand diviseur commun et ensuite diviser le **numérateur** et le **dénominateur** par ce nombre.
-
-la fraction `4/6` devient `2/3` car `gcd(4, 6) = 2` et `4/2 = 2` et `6/2 = 3`.
-
-Il faut importer le fichier `fraction.hpp` dans le fichier `utils.hpp` pour pouvoir utiliser la structure `Fraction` dans la fonction `simplify`.
-:::
+exemple de résultat attendu:
+```bash
+Entrez la première couleur en hexadécimal: ff0000
+Entrez la deuxième couleur en hexadécimal: 00ff00
+Couleur 1: rgb(255, 0, 0) hex: ff0000
+Couleur 2: rgb(0, 255, 0) hex: 00ff00
+Couleur mélangée: rgb(127, 127, 0) hex: 7f7f00
+Luminance: 0.462081
+Couleur mélangée inversée: rgb(128, 128, 255) hex: 8080ff
+```
 
 :::info
-Pour trouver le plus grand diviseur commun, on peut utiliser l'algorithme d'**Euclide** qui consiste à diviser le plus grand nombre par le plus petit et à répéter l'opération avec le reste de la division jusqu'à obtenir un reste nul. Dans ce cas, le plus petit nombre non nul est le plus grand diviseur commun.
-
-exemple avec `22` et `8`:
-
-- `22 % 8 = 6` (reste de la division de `22` par `8`) `6` est différent de `0` donc on continue
-- `8 % 6 = 2` (reste de la division de `8` par `6`) `2` est différent de `0` donc on continue
-- `6 % 2 = 0` (reste de la division de `6` par `2`) `0` est égal à `0` donc on s'arrête et le plus grand diviseur commun est `2`.
-:::
-
-6. Modifier vos fonctions `add`, `sub`, `mul` et `div` pour simplifier le résultat avant de le retourner.
-
-7. Créer un fichier `main.cpp` qui contiendra le programme principal. Ce programme devra :
-    - Créer deux fractions `f1` et `f2` avec les valeurs de votre choix. (idéalement avec des valeurs aléatoires ou saisies par l'utilisateur)
-    - Afficher les deux fractions.
-    - Afficher la somme des deux fractions.
-    - Afficher la différence des deux fractions.
-    - Afficher le produit des deux fractions.
-    - Afficher le quotient des deux fractions.
-
-:::info
-Vous découvrirez au prochain semestre comment améliorer ce programme en utilisant la surcharge d'opérateurs :hammer_and_wrench:.
-:::
-
+La gestion des préfixes `0x` pour les entiers **hexadécimaux** (pour indiquer que l'on parle d'un **nombre hexadécimal**) ou même `#` pour les couleurs en hexadécimal (que l'on rencontre souvent en **CSS**) est **optionnelle**. Vous pouvez les gérer ou non dans votre programme dans les fonctions de conversion. Pour faire au plus simple vous pouvez les ignorer.
