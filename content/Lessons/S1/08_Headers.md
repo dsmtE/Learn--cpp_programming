@@ -221,6 +221,65 @@ Cependant, comme pour les **enums**, une **structure** ne peut être déclarée 
 
 On utilisera dans ce cas la déclaration de la structure avec les **prototypes** des fonctions qui lui sont associées dans notre fichier d'en-tête.
 
+### Espaces de noms
+
+Il est possible de regrouper du code (déclaration, fonction, ect) dans un **espace de noms** (namespace en anglais) pour éviter les conflits de noms.
+
+Nous avons déjà rencontré sans le savoir des espaces de noms avec la **bibliothèque standard** de **C++**. Par exemple, `std::cout` est dans l'espace de noms `std` (pour **standard**).
+
+Cela permet de différencier et séparer des fonctions (venant de différentes bibliothèques par exemple) qui ont le même nom.
+
+Par exemple, si vous avez deux fonctions `sum` (avec la même signature) dans deux fichiers différents, vous allez avoir une erreur de compilation car le compilateur ne saura pas laquelle choisir.
+
+Dans ce cas, vous pouvez les mettre dans un **espace de noms** pour les différencier.
+
+Pour cela on utilise le mot clé `namespace` suivi du nom de l'espace de noms et des accolades pour délimiter le code qui appartient à cet espace de noms.
+
+```cpp title="maths.hpp"
+// highlight-next-line
+namespace Maths
+{
+    int sum (int const a, int const b);
+}
+```
+
+Pour définir la fonction on va devoir préciser l'espace de noms en ajoutant le préfixe `Maths::` devant le nom de la fonction.
+
+On peut également de nouveau utiliser le mot clé `namespace` si on souhaite définir plusieurs fonctions dans le même espace de noms.
+
+```cpp title="maths.cpp"
+#include "maths.hpp"
+
+// highlight-next-line
+int Maths::sum (int const a, int const b)
+{
+    return a + b;
+}
+```
+
+Pour appeler la fonction `sum` dans le fichier `main.cpp` il faudra maintenant préciser l'espace de noms en ajoutant le préfixe `Maths::` devant le nom de la fonction.
+
+```cpp title="main.cpp"
+#include <iostream>
+// highlight-next-line
+#include "maths.hpp"
+
+int sum (int const a, int const b)
+{
+    return a + 2*b;
+}
+
+int main()
+{   
+    // Cette ligne va appeler la fonction sum du namespace Maths
+    std::cout << Maths::sum(42, 27) << std::endl;
+    // Cette ligne va appeler la fonction sum déclarée dans le fichier main.cpp
+    std::cout << sum(42, 27) << std::endl;
+
+    return 0;
+}
+```
+
 ## Utiliser Cmake
 
 Pour résumer nous avons donc maintenant les fichiers suivants:
