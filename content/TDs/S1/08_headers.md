@@ -9,7 +9,7 @@ Le but de ce TD est de manipuler plusieurs fichiers sources et de les compiler e
 Nous allons créer une structure qui permet de représenter une couleur avec trois composantes `red`, `green` et `blue`.
 
 1. Créer un fichier `color.hpp` qui contiendra un [espace de nom](/Lessons/S1/Headers#espaces-de-noms) `Color` avec la définition de la structure `Rgb` et les prototypes des fonctions et méthodes suivantes :
-    - La structure devra s'appeler `Rgb` et contenir trois **entiers** nommés `red`, `green` et `blue` de type `unsigned int` avec une valeur par défaut forcée à `0`.
+    - La structure devra s'appeler `Rgb` et contenir trois **entiers** nommés `red`, `green` et `blue` de type `unsigned int` avec une valeur par défaut initialisée à `0`.
     - La structure devra contenir une **méthode** `display` qui permet d'afficher (`std::cout`) la couleur sous la forme `rgb(red, green, blue)`.
 
 :::info
@@ -36,13 +36,13 @@ Maintenant que nous avons notre structure `Color::Rgb`, nous allons ajouter des 
    - `unsigned int rgb_to_hex_int(Rgb const& color)` qui permet de convertir une couleur en un entier hexadécimal.
 
 :::tip couleur en hexadécimal
-Pour convertir un **entier hexadécimal** en composantes `red`, `green` et `blue`, vous pouvez utiliser des opérations de décalage binaire `>>` et des opérations binaires `&` pour extraire les composantes.
+Pour convertir un **entier hexadécimal** en composantes `red`, `green` et `blue`, vous pouvez utiliser des opérations de décalage binaire (`>>`) et des AND binaires (`&`) pour extraire les composantes.
 
 En effet, un entier hexadécimal est composé de 3 octets (24 bits) où les 8 premiers bits représentent la composante `red`, les 8 bits suivants la composante `green` et les 8 derniers bits la composante `blue`.
 
 Par exemple, le nombre <HexColor hex="0xff0000"/> se découpe en 3 octets `ff`, `00` et `00` qui correspondent respectivement à `red`, `green` et `blue`. En binaire, cela donne `11111111`, `00000000` et `00000000`.
 
-Ici, le préfixe `0x` indique que l'on parle d'un nombre hexadécimal et pas d'une chaîne de caractères, de la même manière le suffixe `f` pour les nombre flottants par exemple.
+Ici, le préfixe `0x` indique que l'on parle d'un nombre hexadécimal et pas d'une chaîne de caractères, de la même manière que le suffixe `f` pour les nombre flottants par exemple.
 
 Pour extraire la composante `red`, il faut utiliser des opérations de décalage binaires et de masquage.
 
@@ -50,21 +50,21 @@ Par exemple `10100101` & `11110000` donne `10100000` (masquage) et `10100000` >>
 
 Ici on peut utiliser ce mécanisme pour extraire les composantes `red`, `green` et `blue` de l'entier hexadécimal.
 
-<HexColor hex="0xe812f0"/> & <HexColor hex="0xff0000"/> donne <HexColor hex="0xe80000"/> et <HexColor hex="0xe80000"/> >> 16 donne `0xe8` qui correspond à la composante `red` de la couleur.
+<HexColor hex="0xe812f0"/> & <HexColor hex="0xff0000"/> donne <HexColor hex="0xe80000"/> et <HexColor hex="0xe80000"/> >> 16 donne `0x0000e8` qui correspond à la composante `red` de la couleur.
 
-Pour obtenir la composante `green`, il faut faire un masquage avec `0x00ff00` et un décalage de 8 bits (`>> 8`). Ce qui donne avec les opérations binaires combinées : (<HexColor hex="0xe812f0"/> & <HexColor hex="0x00ff00"/>) >> 8 = `0x12`.
+Pour obtenir la composante `green`, il faut faire un masquage avec `0x00ff00` et un décalage de 8 bits (`>> 8`). Ce qui donne avec les opérations binaires combinées : (<HexColor hex="0xe812f0"/> & <HexColor hex="0x00ff00"/>) >> 8 = `0x000012`.
 
-Pour obtenir la composante `blue`, il faut faire un masquage avec `0x0000ff` et un décalage de 0 bit (qui ne change rien et est donc optionnel) ce qui donne : <HexColor hex="0xe812f0"/> & <HexColor hex="0x0000ff"/> = `0xf0`.
+Pour obtenir la composante `blue`, il faut faire un masquage avec `0x0000ff` et un décalage de 0 bit (qui ne change rien et est donc optionnel) ce qui donne : <HexColor hex="0xe812f0"/> & <HexColor hex="0x0000ff"/> = `0x0000f0`.
 
-Il est aussi possible de faire un **décalage** **puis** un **masquage** (<HexColor hex="0xe812f0"/> >> 16 & `0xff` donne aussi `0xe8` (la composante `red` de la couleur)).
+Il est aussi possible de faire un **décalage** **puis** un **masquage** (<HexColor hex="0xe812f0"/> >> 16 & `0x0000ff` donne aussi `0x0000e8` (la composante `red` de la couleur)).
 :::
 
-1. Ajouter les prototypes et définitions des fonctions suivantes permettant de manipuler des **chaînes de caractères** représentant des couleurs en hexadécimal :
+6. Ajouter les prototypes et définitions des fonctions suivantes permettant de manipuler des **chaînes de caractères** représentant des couleurs en hexadécimal :
     - `Rgb Rgb_from_hex(std::string const& hex)` qui permet de convertir une chaîne de caractères représentant un entier hexadécimal en une couleur.
    - `std::string rgb_to_hex_string(Rgb const& color)` qui permet de convertir une couleur en une chaîne de caractères représentant la couleur en hexadécimal.
 
 :::tip
-Vous pouvez utiliser la fonction `std::stoi` pour convertir une chaîne de caractères en entier. Pour cela, vous devez spécifier la base de conversion en deuxième paramètre pour que la fonction puisse interpréter la chaîne correctement avec un entier hexadécimal.
+Vous pouvez utiliser la fonction `std::stoi` pour convertir une chaîne de caractères en entier. Pour cela, vous devez spécifier la base de conversion en troisième paramètre pour que la fonction puisse interpréter la chaîne correctement avec un entier hexadécimal.
 
 Par exemple, `std::stoi("ff", nullptr, 16)` retourne `255`.
 
@@ -74,7 +74,7 @@ Pour la fonction `rgb_to_hex_string`, il faudra donc convertir au préalable la 
 - Directement remplir une chaîne de caractères avec des opérations de décalage et de masquage (plus compliqué et déconseillé).
 :::
 
-1. Créer un fichier `main.cpp` dans lequel vous allez inclure les fichiers nécessaires pour manipuler les couleurs et tester les différentes fonctions que vous avez créées. L'idée est de créer un mélangeur de couleur qui demande à l'utilisateur de saisir deux couleurs en **hexadécimal** et qui affiche la couleur résultante du mélange(format **rgb** et **hexadécimal**) ainsi que sa **luminance** et sa **couleur inversée**.
+7. Créer un fichier `main.cpp` dans lequel vous allez inclure les fichiers nécessaires pour manipuler les couleurs et tester les différentes fonctions que vous avez créées. L'idée est de créer un mélangeur de couleur qui demande à l'utilisateur de saisir deux couleurs en **hexadécimal** et qui affiche la couleur résultante du mélange(format **rgb** et **hexadécimal**) ainsi que sa **luminance** et sa **couleur inversée**.
 
 exemple de résultat attendu:
 ```bash
