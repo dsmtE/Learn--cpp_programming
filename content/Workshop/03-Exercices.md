@@ -258,6 +258,29 @@ On passe ce qu'on appelle une *lambda* en 3ème argument : c'est une fonction d�
 
 <ExplanationsAboutRandom/>
 
+## ⭐⭐⭐ Dégradés dans l'espace de couleur Lab
+
+Pour commencer, repartez de l'exo [⭐ Dégradé](#-dégradé) et adaptez-le pour faire un dégradé de couleur :
+
+![](./output/gradient_srgb.png)
+
+<details>
+    <summary>Indice</summary>
+
+    Vous pouvez utiliser la fonction [`glm::mix`](https://glm.g-truc.net/0.9.4/api/a00129.html#ga3f64b3986efe205cf30300700667e761) pour mélanger deux couleurs en fonction d'un pourcentage.
+</details>
+
+Maintenant, on peut remarquer que ce dégradé n'est pas super, et que la couleur au milieu est très sombre par rapport aux couleurs aux extrémités. Le problème c'est que nos couleurs sont exprimées dans l'espace de couleur sRGB, qui n'est pas adapté pour ce genre d'opérations de mélange entre couleurs. D'autres espaces de couleur ont été développés exprès pour ça, notamment Lab :
+
+<YoutubeVideo id="nJlZT5AE9zY"/>
+<br/>
+
+[Voici l'article original introduisant Oklab](https://bottosson.github.io/posts/oklab/), vous y trouverez toutes les infos nécessaires pour implémenter les conversions entre sRGB et Oklab :
+
+![](./output/gradient_oklab.png)
+
+Comparez les dégradés dans les différents espaces de couleur : lequel préférez vous ? Essayez des dégradés avec d'autres couleurs : est-ce que Oklab est toujours mieux que sRGB ? Que se passe-t-il si on fait le mélange dans d'autres espaces de couleur, comme Linear RGB ou HSL ?
+
 ## ⭐⭐⭐(⭐) Fractale de Mandelbrot
 
 ![](output/mandelbrot.png)
@@ -386,17 +409,6 @@ Vous pouvez utiliser `glm::distance(color1, color2)` pour obtenir la distance en
 :::
 
 <ExplanationsAboutRandom/>
-
-### ⭐⭐⭐ Lab, une mesure plus précise de la similarité entre couleurs
-
-En fait, `glm::distance(color1, color2)` n'est pas une très bonne mesure de la distance entre deux couleurs, en tout cas pas de la manière dont l'œil humain les perçoit. Le problème c'est que nos couleurs sont exprimées dans l'espace de couleur sRGB, qui n'est pas adapté à ce genre de calculs. D'autres espaces de couleurs ont été développés exprès pour ça, notamment Lab :
-
-<YoutubeVideo id="nJlZT5AE9zY"/>
-<br/>
-
-[Voici l'article original introduisant Oklab](https://bottosson.github.io/posts/oklab/), vous y trouverez toutes les infos nécessaires pour implémenter la conversion de sRGB vers Oklab.
-
-Dans votre code de K-means, remplacez `glm::distance(color1, color2)` par `glm::distance(srgb_to_oklab(color1), srgb_to_oklab(color2))` et comparez le nouveau résultat avec l'ancien : lequel préférez-vous ?
 
 ## ⭐⭐⭐⭐⭐ Filtre de Kuwahara (effet peinture à l'huile)
 
