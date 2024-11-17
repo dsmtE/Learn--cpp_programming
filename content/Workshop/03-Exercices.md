@@ -162,6 +162,12 @@ Quelle est l'équation d'un disque ? Comment peut on s'en servir pour savoir si 
 
 En reprenant et modifiant légèrement votre code pour le disque, écrivez le code qui donne un cercle. (Son contour aura une épaisseur donnée `thickness`).
 
+### ⭐⭐ Animation
+
+![](output/animation.gif)
+
+Pour faire une animation, on va exporter plein d'images les unes après les autres, en faisant légèrement bouger le disque entre deux images. Vous pouvez ensuite utiliser un outil externe pour assembler ces images en une vidéo / gif. Par exemple [Ezgif](https://ezgif.com/maker).
+
 ### ⭐⭐⭐ Rosace
 
 ![](output/rosace.png)
@@ -380,6 +386,17 @@ Vous pouvez utiliser `glm::distance(color1, color2)` pour obtenir la distance en
 :::
 
 <ExplanationsAboutRandom/>
+
+### ⭐⭐⭐ Lab, une mesure plus précise de la similarité entre couleurs
+
+En fait, `glm::distance(color1, color2)` n'est pas une très bonne mesure de la distance entre deux couleurs, en tout cas pas de la manière dont l'œil humain les perçoit. Le problème c'est que nos couleurs sont exprimées dans l'espace de couleur sRGB, qui n'est pas adapté à ce genre de calculs. D'autres espaces de couleurs ont été développés exprès pour ça, notamment Lab :
+
+<YoutubeVideo id="nJlZT5AE9zY"/>
+<br/>
+
+[Voici l'article original introduisant Oklab](https://bottosson.github.io/posts/oklab/), vous y trouverez toutes les infos nécessaires pour implémenter la conversion de sRGB vers Oklab.
+
+Dans votre code de K-means, remplacez `glm::distance(color1, color2)` par `glm::distance(srgb_to_oklab(color1), srgb_to_oklab(color2))` et comparez le nouveau résultat avec l'ancien : lequel préférez-vous ?
 
 ## ⭐⭐⭐⭐⭐ Filtre de Kuwahara (effet peinture à l'huile)
 

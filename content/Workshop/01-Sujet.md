@@ -9,18 +9,17 @@ Durant ce workshop vous aller apprendre à coder des effets sur des images. (Com
 
 ## Attendus
 
+Vous pouvez faire ce projet en solo ou à deux.
+
 Nous allons vous proposer [une liste d'exercices](./Exercices), plus ou moins difficiles (la difficulté est indiquée par le nombre d'étoiles ⭐). Nous ne nous attendons pas à ce que vous fassiez tous les exercices, mais faites en un maximum ! **Et il faudra au minimum faire un exercice de niveau 3 ou plus (⭐⭐⭐).** Vous êtes aussi les bienvenu.es pour inventer vos propres effets ou en faire que vous avez vu quelque part, même si ils ne sont pas dans la liste !
 
 Vous êtes évalué.es non seulement sur la qualité du travail rendu, mais aussi – de manière tout aussi importante – sur votre sérieux et votre implication tout au long de la semaine de workshop.
 
 À la fin de la semaine il y aura [une mini-soutenance](#soutenance) (optionnelle, et qui est plus un exercice de vulgarisation qu'autre chose), et il faudra rendre [un mini-rapport](#rapport).
 
-Le rendu se fera par groupes de 2 (et 1 groupe de 3 si vous êtes un nombre impair). Cependant, je m'attend à ce que vous fassiez un maximum de choses individuellement, surtout les exercices les plus faciles (niveau 1 et 2). Essayez de ne vous mettre à deux sur le même algo que quand ça commence à devenir compliqué et que réfléchir à deux dessus devient bénéfique.
-
 ## Pour bien démarrer
 
 - [Voici le template à utiliser](https://github.com/Cours-Prog-Imac/S1-Prog-Workshop). Vous pouvez télécharger ça et coder dedans, tout est déjà setup (CMake, librairies, images de test, etc.)
-- Il peut arriver, surtout que vous changez des choses dans le setup / CMake, que vous ayez des erreurs bizarres : supprimez le dossier *build* et recommencez.
 - Nous utiliserons la librairie *sil* pour lire, éditer et sauvegarder les images. Elle est très simple à utiliser et n'expose que le minimum nécessaire. Vous pouvez trouver sa documentation [sur GitHub](https://github.com/JulesFouchy/Simple-Image-Lib/tree/main#usage).
 - Utilisez des images relativement petites (500x500 max), pour que le rendu soit quasi-instantané. Au moins pendant que vous faites vos tests. Vous avez déjà `"images/logo.png"` et `"images/photo.jpg"` dispos dans le template de projet. Certains effets marchent mieux sur une photo, et d'autres mieux sur une image flat, donc choisissez en fonction de l'effet sur quelle image l'appliquer. Vous pouvez aussi mettre vos propres images si vous voulez.
 - Vous pouvez afficher l'image de sortie dans VSCode pour facilement voir le résultat en même temps que vous codez :
@@ -91,16 +90,16 @@ int main()
 - Est-ce qu'il n'y a pas un crash ? Lancez avec le debugger pour savoir !
 - Est-ce que vous ne faites pas une division entre entiers, du genre `1 / image.width()` qui retourne toujours 0 parce que le résultat serait entre 0 et 1 et se retrouve arrondi ?
 
-## Rapport
+## Rendu et Rapport
 
-*À rendre avant dimanche à 9h*.<br/>
-*Pour le rendu, il suffit de mettre votre lien git [ici](https://docs.google.com/spreadsheets/d/1x2uqvKdhndstidmW4xoWkNTlbwHFDWGlpohdb6TRORY/edit?usp=sharing)*. Attention, vérifiez bien que votre repo est en public, ou si il est en privé, pensez à m'inviter dessus (*julesfouchy*).
+__*À rendre avant dimanche à 9h*__.<br/>
+*Pour le rendu, il suffit de [mettre votre lien git ici](https://docs.google.com/spreadsheets/d/1x2uqvKdhndstidmW4xoWkNTlbwHFDWGlpohdb6TRORY/edit?usp=sharing)*. Attention, vérifiez bien que votre repo est en public, ou si il est en privé, pensez à m'inviter dessus ([*julesfouchy*](https://github.com/julesfouchy/)).
 
-Faites une section par exercice que vous avez fait. Montrez une image avant et après application de l'effet (comme c'est fait dans l'énoncé des exercices). Si vous jugez cela utile, vous pouvez mettre un petit texte expliquant des spécificités de l'algo que vous avez implémenté, et les pièges potentiels dans lesquels il ne faut pas tomber.
+Pour le rapport, faites une section par exercice que vous avez fait. Montrez une image avant et après application de l'effet (comme c'est fait dans l'énoncé des exercices). Si vous jugez cela utile, vous pouvez mettre un petit texte expliquant des spécificités de l'algo que vous avez implémenté, et les pièges potentiels dans lesquels il ne faut pas tomber.
 
-À faire en Markdown obligatoirement (si vous ne connaissez pas c'est l'occasion de découvrir, c'est super utile. Je vous montre tout ça vendredi).
+À faire en Markdown obligatoirement (Si vous ne connaissez pas c'est l'occasion de découvrir, c'est super utile. Je vous montre tout ça vendredi).
 
-À mettre directement en tant que ReadMe à la racine du repo.
+À mettre directement en tant que ReadMe.md à la racine du repo.
 
 ## Soutenance
 
