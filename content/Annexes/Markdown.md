@@ -9,13 +9,7 @@ Vous aurez besoin de ces extensions pour facilement écrire du markdown dans VS 
 
 - <VSCodeExtension id="shd101wyy.markdown-preview-enhanced"/> Pour voir le rendu final de votre texte.
 - <VSCodeExtension id="yzhang.markdown-all-in-one"/> Pour que VSCode comprenne la syntaxe Markdown.
-- <VSCodeExtension id="streetsidesoftware.code-spell-checker-french"/> Un correcteur d'orthographe. <b>ATTENTION</b> il est par défaut en anglais, et pour activer le français il faut faire ces manips :
-
-  - Faites <kbd>F1</kbd> puis cherchez et cliquez sur `Show Spell Checker Configuration Info`
-  - Sélectionnez l'onglet "User"
-  - Activez le langage français en plus de l'anglais (quand il demande `Choose Destination`, sélectionnez `User` et pas `Workspace`).
-![](Markdown_imgs/french_spell_checker.png)
-![](Markdown_imgs/french_spell_checker_2.png)
+- <VSCodeExtension id="streetsidesoftware.code-spell-checker-french"/> Un correcteur d'orthographe. <b>ATTENTION</b> il est par défaut en anglais, et pour activer le français il faut faire <kbd>F1</kbd> puis chercher et cliquer sur `Enable French Spell Checker Dictionary`
 
 ## Syntaxe
 
