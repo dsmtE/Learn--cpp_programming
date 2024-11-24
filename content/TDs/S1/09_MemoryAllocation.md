@@ -17,17 +17,17 @@ title: TD9 - Mémoire
     :::info
     Vous pouvez utiliser la fonction `rand()` pour générer un nombre aléatoire. Je vous renvoie à l'[Exercice 1](/TDs/S1/Arrays/#exercice-1-min--max) du TD5 pour plus d'informations.
     :::
-1. Écrire une fonction qui retourne un pointeur sur le plus grand élément du tableau.
+2. Écrire une fonction qui retourne un pointeur sur le premier élément du tableau qui est supérieur à 90, ou `nullptr` si le tableau ne contient pas de tels éléments.
 
-2. Écrire une fonction qui prend en paramètre un pointeur sur un emplacement mémoire contiguë d'entiers et sa taille et qui retourne la **somme** des éléments du tableau.
+3. Écrire une fonction qui prend en paramètre un pointeur sur un emplacement mémoire contiguë d'entiers et sa taille et qui retourne la **somme** des éléments du tableau.
 
-3. Utiliser les fonctions précédentes pour afficher le plus grand élément du tableau et la somme des éléments du tableau.
+4. Utiliser les fonctions précédentes pour afficher la somme des éléments du tableau, et le premier élément > 90 (pensez à gérer le cas `nullptr` !).
     :::tip
     On peut récupérer un pointeur sur le premier élément d'un `std::vector` avec la méthode `data()`.
     Sinon il est aussi possible d'utiliser l'opérateur `&` sur le premier élément du `std::vector`.
     :::
 
-4. Completer la fonction `sum` suivante pour qu'elle retourne un pointeur sur la somme des éléments du tableau passé en paramètre.
+5. Completer la fonction `sum` suivante pour qu'elle retourne un pointeur sur la somme des éléments du tableau passé en paramètre.
     ```cpp
     int* sum(std::vector<int> const& v) {
         int sum {0};
@@ -37,8 +37,8 @@ title: TD9 - Mémoire
     }
     ```
 
-5. Utiliser la fonction `sum` pour afficher la somme des éléments du tableau.
-6. En fonction du résultat obtenu, que pouvez-vous en déduire sur le fonctionnement de la fonction `sum` ? Si elle ne fonctionne pas, corriger la fonction `sum` pour qu'elle fonctionne correctement.
+6. Utiliser la fonction `sum` pour afficher la somme des éléments du tableau.
+7. En fonction du résultat obtenu, que pouvez-vous en déduire sur le fonctionnement de la fonction `sum` ? Si elle ne fonctionne pas, corriger la fonction `sum` pour qu'elle fonctionne correctement.
 
 ## Exercice 3 (Split)
 
