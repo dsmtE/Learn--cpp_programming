@@ -181,6 +181,12 @@ Maintenant que vous savez dessiner un cercle, dessinez-en plusieurs sur la même
 Comment passer de coordonnées polaires (angle et rayon) à des coordonnées cartésiennes (x et y) ?
 </details>
 
+### ⭐⭐ Animation
+
+![](output/animation.gif)
+
+Pour faire une animation, on va exporter plein d'images les unes après les autres, en faisant légèrement bouger le disque entre deux images. Vous pouvez ensuite utiliser un outil externe pour assembler ces images en une vidéo / gif. Par exemple [Ezgif](https://ezgif.com/maker).
+
 ## ⭐⭐ Mosaïque
 
 ![](output/mosaic.png)
@@ -308,6 +314,29 @@ sil::Image image{500/*width*/, 500/*height*/};
 ```
 puis itérer sur les pixels pour les colorer.
 :::
+
+## ⭐⭐⭐(⭐) Dégradés dans l'espace de couleur Lab
+
+Pour commencer, repartez de l'exo [⭐ Dégradé](#-dégradé) et adaptez-le pour faire un dégradé de couleur :
+
+![](./output/gradient_srgb.png)
+
+<details>
+    <summary>Indice</summary>
+
+    Vous pouvez utiliser la fonction [`glm::mix`](https://glm.g-truc.net/0.9.4/api/a00129.html#ga3f64b3986efe205cf30300700667e761) pour mélanger deux couleurs en fonction d'un pourcentage.
+</details>
+
+Maintenant, on peut remarquer que ce dégradé n'est pas super, et que la couleur au milieu est très sombre par rapport aux couleurs aux extrémités. Le problème c'est que nos couleurs sont exprimées dans l'espace de couleur sRGB, qui n'est pas adapté pour ce genre d'opérations de mélange entre couleurs. D'autres espaces de couleur ont été développés exprès pour ça, notamment Lab :
+
+<YoutubeVideo id="nJlZT5AE9zY"/>
+<br/>
+
+[Voici l'article original introduisant Oklab](https://bottosson.github.io/posts/oklab/), vous y trouverez toutes les infos nécessaires pour implémenter les conversions entre sRGB et Oklab. **ATTENTION** : il donne le code entre Oklab et __*LINEAR*__ RGB (qu'il appelle par erreur Linear **s**RGB), nous on est en sRGB donc il faut rajouter les conversions entre Linear RGB et sRGB, que vous pourrez trouver ici : https://entropymine.com/imageworsener/srgbformula/
+
+![](./output/gradient_oklab.png)
+
+Comparez les dégradés dans les différents espaces de couleur : lequel préférez vous ? Essayez des dégradés avec d'autres couleurs : est-ce que Oklab est toujours mieux que sRGB ? Que se passe-t-il si on fait le mélange dans d'autres espaces de couleur, comme Linear RGB ou HSL ?
 
 ## ⭐⭐⭐(⭐) Tramage
 
