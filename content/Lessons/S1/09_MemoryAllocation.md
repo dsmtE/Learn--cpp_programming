@@ -12,7 +12,7 @@ Il existe trois principaux modes d’allocation de la mémoire:
 
 - l’allocation **statique**
 - l’allocation sur la **Stack**
-- l’allocation sur la **Heap**
+- l’allocation sur le **Heap**
 
 ### Allocation statique
 
@@ -22,7 +22,7 @@ Nous n'avons pas rencontré ce type d'allocation pour l'instant mais sachez que 
 
 ### Allocation sur la **Stack**
 
-Jusqu'a présent, nous avons principalement rencontré des allocations de mémoire sur la **Stack**. C'est le cas de toutes nos variables locales (dans des fonctions, y compris dans la fonction ```main```).
+Jusqu'à présent, nous avons principalement rencontré des allocations de mémoire sur la **Stack**. C'est le cas de toutes nos variables locales (quand on fait par exemple `int i{0};` dans des fonctions, y compris dans la fonction ```main```).
 
 La **Stack** (ou **pile** en français) est une zone mémoire qui sert d’espace de stockage aux **variables** déclarées par les fonctions et permet aussi de garder une trace des appels de fonctions.
 
@@ -312,7 +312,7 @@ Comme dit précédemment, l'allocation dynamique (sur la **Heap**) est particuli
 
 En effet, ```std::vector``` n'est rien d'autre qu'une **structure de donnée** qui gère en interne un **pointeur** vers une zone mémoire contiguë. Lorsque celui-ci est trop petit et que l'on souhaite tout de même ajouter une valeur, la structure demande un nouvel espace mémoire plus grand, copie les données dans ce nouvel espace mémoire et enfin libère l'ancien espace mémoire qui n'est donc plus utilisé.
 
-Ce changement (allocation, copie, libération de mémoire) a un coût c'est pourquoi ```std::vector``` prévoit un espace plus grand que nécessaire lors d'une allocation pour anticiper de futurs ajouts dans le tableau dynamique.
+Ce changement (allocation, copie, libération de mémoire) a un coût, c'est pourquoi ```std::vector``` prévoit un espace plus grand que nécessaire lors d'une allocation pour anticiper de futurs ajouts dans le tableau dynamique.
 
 Il est possible de connaître la taille de l'espace de stockage alloué pour le ```std::vector``` avec sa méthode ```capacity()``` qui retourne cette taille exprimée en nombre d'éléments. C'est différent de la taille actuellement utilisée qui s'obtient avec la méthode ```size()```.
 
@@ -425,7 +425,7 @@ Ces deux écritures sont donc équivalentes: ```this->member``` ```(*this).membe
 
 
 Vous avez remarqué des ressemblances entre les **pointeurs** et les **références** ?
-C'est normal c'est le même mécanisme sous-jacent.
+C'est normal, c'est le même mécanisme sous-jacent.
 La référence utilise l'adresse mémoire de la variable ciblée.
 
 :::caution
@@ -511,13 +511,13 @@ int main()
 
 Pendant l’exécution d'un programme, le système ne peut pas écraser ce que les développeurs ont demandé. C’est à nous, humains, de le gérer avec le mot-clé ```delete``` sinon cela provoque une **fuite de mémoire**.
 
-Une **fuite de mémoire** est la mémoire qui a été demandée par l’utilisateur et qui n’a **jamais été libérée**, lorsque le programme s’est terminé ou que des pointeurs vers son emplacement ont été perdus. Pour éviter cela, chaque fois que nous n’avons plus besoin d’un élément de la **Heap** alloué, nous **devons** absolument le libérer.
+Une **fuite de mémoire** est la mémoire qui a été demandée par l’utilisateur et qui n’a **jamais été libérée**. Si on en accumule trop, le programme peut finir par avoir demandé plus de mémoire que disponible sur l'ordinateur, ce qui peut provoquer un **crash** du programme ou ralentir le système d'exploitation ou même dans le pire des cas faire planter l'ordinateur.
 
-L'accumulation de fuites de mémoire risque de provoquer un **crash** du programme ou de ralentir le système d'exploitation ou même dans le pire des cas faire planter l'ordinateur.
+Pour éviter cela, chaque fois que nous n’avons plus besoin d’un élément de la **Heap** alloué, nous **devons** absolument le libérer.
 
 ---
 
-Pour éviter ce problème, et nous aider à gérer la mémoire le **C++11** a introduit des pointeurs dits intelligents (**smart pointer** en anglais) dans la **bibliothèque standard**.
+Pour éviter ce problème, et nous aider à gérer la mémoire, le **C++11** a introduit des pointeurs dits intelligents (**smart pointer** en anglais) dans la **bibliothèque standard**.
 
 Lorsque le **pointeur** est détruit, la mémoire allouée précédemment est également libérée. Il n'est donc pas nécessaire de libérer la mémoire explicitement avec ```delete```, c'est le pointeur intelligent qui s'en charge.
 
@@ -534,7 +534,7 @@ Il ne peut pas être copié, c'est à dire que l'on ne peut pas avoir deux ```st
 
 int main()
 {
-    std::unique_ptr<int> ptr {new int{42}};
+    std::unique_ptr<int> ptr {std::make_unique<int>(42)};
 
     // On ne peut pas copier un unique_ptr
     // std::unique_ptr<int> ptr2 {ptr};
@@ -553,7 +553,7 @@ Il est possible de copier un ```std::shared_ptr``` pour partager la responsabili
 
 int main()
 {
-    std::shared_ptr<int> ptr1 {new int{42}};
+    std::shared_ptr<int> ptr1 {std::make_shared<int>(42)};
 
     {
         // On peut copier un shared_ptr
