@@ -157,7 +157,7 @@ int main() {
 
 ## Rendu
 
-Le projet est à rendre sur **GitHub**(ou **Gitlab**), vous devez m'envoyer le lien de votre dépôt avant la date limite de rendu: le **Mardi 17 Décembre 23h59**.
+Le projet est à rendre sur **GitHub**(ou **Gitlab**), vous devez m'envoyer le lien de votre dépôt avant la date limite de rendu: le **Jeudi 19 Décembre 23h59**.
 
 :warning: Seul les commits avant la date limite seront pris en compte pour la notation.
 
