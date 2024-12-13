@@ -26,7 +26,7 @@ Vous devez réaliser une **structure** `Player` qui contient les informations su
 - `name` : nom du joueur
 - `symbol` : symbole du joueur (e.g. `'X'` ou `'O'`)
 
-Cette structure doit être utilisée pour stocker les informations des joueurs et placée dans des fichiers dédiés `Player.h` et `Player.cpp`.
+Cette structure doit être utilisée pour stocker les informations des joueurs et placée dans des fichiers dédiés `Player.hpp` et `Player.cpp`.
 
 Vous devez réaliser une fonction `create_player` qui ne prend aucun paramètre et qui retourne une structure `Player` initialisée avec les informations du joueur. Cette fonction doit demander le nom du joueur à l'utilisateur (`std::cin`) et lui demander de choisir un symbole (X ou O généralement mais vous pouvez choisir d'autres symboles si vous le souhaitez).
 
@@ -165,9 +165,11 @@ Un document vous sera partagé pour que vous puissiez noter le lien de votre dé
 
 (Évidemment je dois avoir accès à votre dépôt pour pouvoir le consulter, faites bien attention à ce qu'il soit en public (ou, si vous tenez à le garder privé, ajoutez moi en collaborateur ([dsmtE](https://github.com/dsmtE)))).
 
-Vous devez ajouter un fichier `README.md` à la racine de votre dépôt qui explique comment exécuter votre programme et sur quel système d'exploitation vous l'avez testé.
-
-Si améliorations il y a, le dépôt doit contenir un fichier `README.md` qui explique les différentes fonctionnalités supplémentaires que vous avez réalisées et comment les utiliser si besoin.
+Vous devez ajouter un fichier `README.md` à la racine de votre dépôt et qui fera office de **rapport** et contiendra :
+- Des indications pour exécuter votre programme si nécessaire (librairies, système d'exploitation testé).
+- Des explications sur l'organisation de votre code (fichiers, structure, fonctions, etc.) et vos choix d'implémentation.
+- Si améliorations il y a, une description des fonctionnalités supplémentaires que vous avez réalisées (et comment les utiliser si besoin).
+- Un rapide bilan sur les problèmes rencontrés et solutions trouvées.
 
 ⚠️ Attention: Un commit unique la veille de la date limite ne sera pas accepté, vous devez montrer que vous avez travaillé régulièrement sur le projet.
 
