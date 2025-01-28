@@ -173,4 +173,6 @@ Vous devez ajouter un fichier `README.md` à la racine de votre dépôt et qui f
 
 ⚠️ Attention: Un commit unique la veille de la date limite ne sera pas accepté, vous devez montrer que vous avez travaillé régulièrement sur le projet.
 
+## Post-mortem
 
+Après avoir établie le barème de notation pour le sujet, j'ai décidé de tenir compte des améliorations pour obtenir la meilleure note de 20/20 afin de valoriser les élèves ayant réalisé des fonctionnalités supplémentaires. Il était donc nécessaire de réaliser le jeu de base ainsi qu'une petit amélioration à minima pour obtenir la note maximale.
