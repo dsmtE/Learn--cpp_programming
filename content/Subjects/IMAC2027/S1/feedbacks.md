@@ -13,6 +13,8 @@ Ils sont propres à chaque machine et ne doivent pas être versionnés car cela 
 
 De plus, un développeur ne souhaite pas lancer un exécutable inconnu (risque de piratage, virus, ...) et préférera compiler lui-même le projet.
 
+Cela peut se faire en ajoutant le dossier `build` dans le fichier `.gitignore` à la racine du dépôt Git.
+
 ### Tableau statique vs dynamique
 
 Dans le projet TicTacToe, la grille est fixe (3x3). Cela signifie que la taille de la grille est connue à la compilation et ne change pas pendant l'exécution du programme.
@@ -224,4 +226,6 @@ Cela réduit le nombre de vérifications à faire à 3 ou 4 (ligne, colonne, 1 o
 
 J'ai vu pas mal d'implémentations de l'IA qui consistent à choisir une position aléatoire et recommencer si la position est déjà occupée. C'est une solution qui fonctionne mais qui n'est pas très élégante. Si la grille est presque pleine, il y a de fortes chances que l'IA doive recommencer plusieurs fois (et possiblement très longtemps) avant de trouver une position libre. Il y a plusieurs façons d'éviter cela.
 
-On peut lister toutes les positions libres puis choisir parmi ces positions. Cela permet de garantir que l'IA choisira une position libre à chaque coup. Sinon il est possible de choisir une position aléatoire puis, si la position est déjà occupée, aller sur la position suivante (et ainsi de suite jusqu'à trouver une position libre). Cela permet de garantir que l'IA choisira une position libre en un nombre fini de coups.
+On peut lister toutes les positions libres puis choisir parmi ces positions. Cela permet de garantir que l'IA choisira une position libre à chaque coup.
+
+Sinon il est possible de choisir une position aléatoire puis, si la position est déjà occupée, aller sur la position suivante (et ainsi de suite jusqu'à trouver une position libre). Cela permet de garantir que l'IA choisira une position libre en un nombre fini de coups. :warning: Cette méthode est biaisé car la probabilité de choisir une position libre (parmi les restantes) n'est pas uniforme.
