@@ -4,7 +4,7 @@ tags:
     - C++
 ---
 
-import MotionCanvasPlayer from '@site/src/components/MotionCanvasPlayer';
+import OriginalMotionCanvasPlayer from '@site/src/components/OriginalMotionCanvasPlayer';
 
 export const Array = ({values, boldIndices}) => (
     <div style={{display: "flex", justifyContent: "center"}}>
@@ -89,7 +89,7 @@ Voilà les itérations suivantes:
 2. <Array values={[1, 2, 3, 5, 6, 8, 9]} />
 3. Dernier passage, aucun échange n'est effectué. Le tableau est trié.
 
-<MotionCanvasPlayer name="bubbleSort" banner />
+<OriginalMotionCanvasPlayer name="bubbleSort" />
 
 ## Parlons un peu de complexité
 

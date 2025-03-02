@@ -5,16 +5,11 @@ if (ExecutionEnvironment.canUseDOM) {
 	import('@motion-canvas/player');
 }
 
-export default function MotionCanvasPlayer({
-	name,
-	banner,
-	small,
-}) {
+export default function OriginalMotionCanvasPlayer({name}) {
 	return (
 		<div>
 			<motion-canvas-player
-				src={`/animations/${name}.js`}
-				auto={banner}
+				src={`/animations/build/src/projects/${name}.js`}
 			/>
 		</div>
 	);
