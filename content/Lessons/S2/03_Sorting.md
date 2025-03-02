@@ -57,7 +57,7 @@ Voilà les itérations suivantes:
 
 Voilà, le tableau est trié.
 
-Je t'invite à regarder le fonctionnement de cet algorithme sur [cette animation](https://www.toptal.com/developers/sorting-algorithms/selection-sort) ou encore [ici](https://visualgo.net/en/sorting) (clique sur "SEL" ou "Selection Sort" dans la barre de navigation).
+<OriginalMotionCanvasPlayer name="selectionSort" />
 
 ### Tri à bulles (bubble sort)
 
@@ -294,6 +294,8 @@ On obtient ainsi un tableau trié.
 :::info
 La **condition d'arrêt** de la récursion est quand la taille de la partie du tableau à trier est inférieure ou égale à `1`, car un tableau de taille `1` est déjà trié (de même pour un tableau vide).
 :::
+
+<OriginalMotionCanvasPlayer name="mergeSort" />
 
 #### Récursion
 
@@ -532,3 +534,7 @@ Ce qui fait un total de $log_2(8) = 3$ itérations.
         > C'est un algorithme qui fonctionne en comptant le nombre d'occurrences de chaque valeur, puis en reconstruisant le tableau en plaçant les valeurs dans l'ordre.
         > C'est un algorithme qui ne fonctionne que pour des données **entières** et où la valeur maximale des données est connue à l'avance et relativement petite.
 - La **recherche dichotomique** est une méthode de recherche dans un tableau trié qui consiste à diviser le tableau en deux parties égales et à ne garder que la partie qui contient la valeur recherchée. On répète l'opération jusqu'à trouver la valeur souhaitée.
+
+:::info
+Je t'invite à regarder le fonctionnement des algorithmes sur [ce site](https://www.toptal.com/developers/sorting-algorithms) qui propose des visualisation ou encore [ici](https://visualgo.net/en/sorting).
+:::
