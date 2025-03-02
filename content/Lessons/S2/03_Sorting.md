@@ -4,6 +4,8 @@ tags:
     - C++
 ---
 
+import MotionCanvasPlayer from '@site/src/components/MotionCanvasPlayer';
+
 export const Array = ({values, boldIndices}) => (
     <div style={{display: "flex", justifyContent: "center"}}>
     <table>
@@ -86,6 +88,8 @@ Voilà les itérations suivantes:
 1. <Array values={[2, 1, 5, 3, 6, 8, 9]} />
 2. <Array values={[1, 2, 3, 5, 6, 8, 9]} />
 3. Dernier passage, aucun échange n'est effectué. Le tableau est trié.
+
+<MotionCanvasPlayer name="bubbleSort" banner />
 
 ## Parlons un peu de complexité
 
