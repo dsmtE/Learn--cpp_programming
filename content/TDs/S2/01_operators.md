@@ -44,7 +44,7 @@ Il existe une autre façon de faire en comparant les **produits en croix des fra
 
 :::tip
 
-Il est possible d'utiliser la fonction **simplify** sur l'objet courant dans une **méthode** en utilisant "this" qui est le pointeur vers "moi-même":
+Il est possible d'utiliser la fonction **simplify** sur l'objet courant dans une **méthode** en utilisant `this` qui est le pointeur vers "moi-même":
 
 Exemple:
 ```cpp
@@ -59,7 +59,7 @@ void Fraction::operator+=(Fraction const& f) {
 }
 ```
 
-ici "*this" est donc une référence vers "moi même" que je peux donc passer en paramètre à la fonction simplify.
+Ici `*this` est donc une référence vers "moi-même" que je peux donc passer en paramètre à la fonction simplify.
 Enfin, je me sers du résultat pour l'assigner à moi-même avec l'opérateur d'affectation "=" (toujours avec "*this").
 
 :::
@@ -70,7 +70,7 @@ Enfin, je me sers du résultat pour l'assigner à moi-même avec l'opérateur d'
 
 Il est aussi possible de définir des opérateurs de conversion pour convertir une fraction en un autre type.
 
-la syntaxe est la suivante:
+La syntaxe est la suivante :
 
 ```cpp
 operator type() const {
@@ -80,7 +80,7 @@ operator type() const {
 
 2. Ajouter l'opérateur de conversion `float` pour pouvoir convertir une fraction en `float` en utilisant la méthode `to_float`.
 
-le prototype de la méthode pour notre structure `Fraction` sera le suivant:
+Le prototype de la méthode pour notre structure `Fraction` sera le suivant:
 
 ```cpp
 Fraction::operator float() const;
