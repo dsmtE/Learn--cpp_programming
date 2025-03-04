@@ -5,6 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 import docusaurusLunrSearchPlugin from 'docusaurus-lunr-search';
 
+// boolean to check if the site is being built in development mode
+const isDev = process.env.NODE_ENV === 'development';
+
 module.exports = async function configCreatorAsync() {
   const contact_info = await axios.get(
     "https://raw.githubusercontent.com/dsmtE/dsmtE/main/contact.json"
@@ -17,7 +20,7 @@ module.exports = async function configCreatorAsync() {
     title: 'Cours de programmation C++',
     tagline: '',
     url: `https://dsmte.github.io/`,
-    baseUrl: '/Learn--cpp_programming/',
+    baseUrl: isDev ? '/' : '/Learn--cpp_programming/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'imgs/favicon.ico',
@@ -39,7 +42,7 @@ module.exports = async function configCreatorAsync() {
 
     plugins: [[ docusaurusLunrSearchPlugin, {
       languages: ['fr'],
-      includeRoutes: ['**/Lessons/**', '**/TDs/**', '**/Annexes/**', '**/Workshop/**', '**/Annals/**'],
+      includeRoutes: ['**/Lessons/**', '**/TDs/**', '**/Annexes/**', '**/Workshop/**', '**/Subjects/**'],
     }]],
 
     presets: [
@@ -81,7 +84,7 @@ module.exports = async function configCreatorAsync() {
             {to: '/TDs', label: 'TDs', position: 'left'},
             {to: '/Annexes', label: 'Annexes', position: 'left'},
             {to: '/Workshop', label: 'Workshop', position: 'left'},
-            {to: '/Annals', label: 'Annales', position: 'left'},
+            {to: '/Subjects', label: 'Sujets', position: 'left'},
             {to: '/Sources', label: 'Sources', position: 'right'},
           ],
         },

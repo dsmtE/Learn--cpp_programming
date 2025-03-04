@@ -12,8 +12,8 @@ Quelques suggestions d'exercices à déboguer:
     Vous pouvez observer le comportement de la fonction récursive de Fibonacci en mettant un [point d'arrêt conditionnel](/Lessons/S1/DebuggerAndErrors#points-darrêt-conditionnels) sur la valeur de `n` et inspecter la [pile d'appels](/Lessons/S1/DebuggerAndErrors#pile-dappel).
 
 
-- [Conjecture de Syracuse](/TDs/S1/ConditionsAndLoops#exercice-6-conjecture-de-syracuse)
+- [Conjecture de Syracuse](/TDs/S1/ConditionsAndLoops#exercice-7-conjecture-de-syracuse)
     Vous pouvez observer le comportement de la conjecture de Syracuse si le nombre devient trop grand par exemple.
 
 - Tableaux
-    Vous pouvez vous servir des [watch](/Lessons/S1/DebuggerAndErrors#inspecter-les-variables) pour observer les valeurs des éléments d'un tableau comme dans l'exercice de [comptage](/TDs/S1/Arrays#exercice-4-comptage) ou de [suppression et tassement](/TDs/S1/Arrays#exercice-5-suppression-et-tassement)
+    Vous pouvez vous servir des [watch](/Lessons/S1/DebuggerAndErrors#inspecter-les-variables) pour observer les valeurs des éléments d'un tableau comme dans l'exercice de [comptage](/TDs/S1/Arrays#exercice-3-comptage) ou de [suppression et tassement](/TDs/S1/Arrays#exercice-5-suppression-et-tassement)
