@@ -59,6 +59,29 @@ module.exports = async function configCreatorAsync() {
           theme: {
             customCss: require.resolve('./src/css/custom.css'),
           },
+          // Modify the svgo configuration to prevent it from minifying IDs in SVGs and collide with multiple SVGs in the same page.
+          // https://github.com/facebook/docusaurus/issues/8297
+          // https://github.com/facebook/docusaurus/pull/10677
+          svgr: {
+            svgrConfig: {
+              svgoConfig: {
+                plugins: [
+                  {
+                    name: 'preset-default',
+                    params: {
+                      overrides: {
+                        removeTitle: false,
+                        removeViewBox: false,
+                        cleanupIds: {
+                          minify: false
+                        },
+                      },
+                    },
+                  },
+                ],
+              }
+            },
+          }
         } satisfies Preset.Options,
       ],
     ],
