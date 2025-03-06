@@ -240,6 +240,8 @@ Il y a donc deux "phases" dans cet algorithme:
 - la phase de **division** du tableau en deux parties égales
 - la phase de **fusion** des deux parties triées
 
+<OriginalMotionCanvasPlayer name="mergeSort_intro" />
+
 #### Phase de division
 
 Pour la phase de division, on va choisir de diviser et trier le tableau en deux parties égales pour maximiser l'efficacité de l'algorithme (ou presque égales si le tableau a une taille impaire).
@@ -295,7 +297,7 @@ On obtient ainsi un tableau trié.
 La **condition d'arrêt** de la récursion est quand la taille de la partie du tableau à trier est inférieure ou égale à `1`, car un tableau de taille `1` est déjà trié (de même pour un tableau vide).
 :::
 
-<OriginalMotionCanvasPlayer name="mergeSort" />
+<OriginalMotionCanvasPlayer name="mergePhase" />
 
 #### Récursion
 
@@ -326,6 +328,8 @@ Il est plus efficace cependant les copies effectuées pour l'étape de fusion de
 
 On va découvrir un autre algorithme de tri qui à la même complexité en temps que le tri fusion mais qui ne nécessite pas de copies intermédiaires (En TDs, si vous les implémentez tout les deux je vous suggère de comparer les deux algorithmes pour vous rendre compte de la différence de performance).
 :::
+
+<OriginalMotionCanvasPlayer name="recursiveMergeSort" />
 
 ### Tri rapide (quick sort)
 
