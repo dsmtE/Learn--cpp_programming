@@ -28,3 +28,29 @@
   --ifm-color-primary-lightest: hsl(207, 68%, 59%);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+[data-theme='light'] {
+  svg.themed text
+  {
+    fill: black;
+  }
+  svg.themed path, svg.themed rect
+  {
+    stroke: black;
+  }
+}
+
+[data-theme='dark'] {
+  svg.themed text 
+  {
+    fill: white;
+  }
+  svg.themed path, svg.themed rect
+  {
+    stroke: white;
+  }
+}
+
+svg.primaryFillRect rect:not([fill='none']) {
+  fill: var(--ifm-color-primary);
+}
