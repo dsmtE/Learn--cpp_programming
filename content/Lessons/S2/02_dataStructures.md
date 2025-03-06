@@ -4,13 +4,15 @@ tags:
     - C++
 ---
 
-### Pile - std::stack 
+import StackSvg from './imgs/stack.svg';
+import QueueSvg from './imgs/queue.svg';
 
+### Pile - std::stack 
 
 Une **pile** est une structure de données qui permet de stocker des éléments de façon à ce que le **dernier** élément ajouté soit le **premier** à être retiré. On parle de structure de données **LIFO** (Last In First Out).
 
 <div style={{"textAlign": "center"}}>
-    ![stack](./imgs/stack.svg)
+    <StackSvg className="themed primaryFillRect" />
 </div>
 
 La classe [`std::stack`](https://en.cppreference.com/w/cpp/container/stack) permet de représenter une **pile**. Elle est définie dans la bibliothèque `<stack>`.
@@ -42,7 +44,7 @@ int main() {
 Une **file** est une structure de données qui permet de stocker des éléments de façon à ce que le **premier** élément ajouté soit le **premier** à être retiré. On parle de structure de données **FIFO** (First In First Out).
 
 <div style={{"textAlign": "center"}}>
-    ![queue](./imgs/queue.svg)
+    <QueueSvg className="themed primaryFillRect" />
 </div>
 
 La classe [`std::queue`](https://en.cppreference.com/w/cpp/container/queue) permet de représenter une **file**. Elle est définie dans la bibliothèque `<queue>`.
