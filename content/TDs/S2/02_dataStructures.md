@@ -2,11 +2,28 @@
 title: TD2 - Structures de données
 ---
 
+import OriginalMotionCanvasPlayer from '@site/src/components/OriginalMotionCanvasPlayer';
+
 ## Exercice 1 (Evaluation NPI)
 
-La notation polonaise inversée (**NPI**) est une notation mathématique qui permet d'exprimer des expressions arithmétiques sans utiliser de parenthèses. Elle a été inventée par le mathématicien polonais **Jan Lukasiewicz** en 1924.
+Le but de cet exercice est d'écrire un programme qui permet d'évaluer une expression mathématique.
 
-La notation polonaise inversée est une notation **postfixe**, c'est-à-dire que l'opérateur est placé après les deux opérandes. Par exemple, l'expression `3 + 4` s'écrit `3 4 +` en **NPI**.
+Nous allons nous intéresser à une notation particulière, la **notation polonaise inversée** (**NPI**) (ou **Reverse Polish Notation** (**RPN**) en anglais).
+
+C'est une notation différente de la notation "classique" que l'on utilise en mathématiques (que l'on appelle la **notation infixe**).
+
+En effet dans la notation infixe, les opérateurs sont placés entre les opérandes, et l'ordre des opérations est déterminé par les parenthèses et les règles de priorité des opérateurs.
+
+Par exemple, l'expression `3 + 4 * 2` s'interprète comme `3 + (4 * 2) = 11`.
+Ou encore l'expression `(3 + 4) * 2` s'interprète comme `(3 + 4) * 2 = 14`.
+
+Cela rend compliqué l'évaluation d'une expression, car il faut gérer les parenthèses et les priorités des opérateurs.
+
+---
+
+La notation polonaise inversée est une notation mathématique qui permet d'exprimer des expressions arithmétiques sans utiliser de parenthèses ni de priorité d'opérateurs. Elle a été inventée par le mathématicien polonais **Jan Lukasiewicz** en 1924.
+
+On dit que cette notion est une **notation postfixe** car l'opérateur est placé après les deux opérandes. Par exemple, l'expression `3 + 4` s'écrit `3 4 +` en **NPI**.
 
 Ce qui permet ensuite d'interpréter l'expression de gauche à droite, en empilant les opérandes sur une pile, et en déclenchant l'opération lorsque l'on rencontre un opérateur.
 
@@ -25,10 +42,22 @@ Il faut cependant faire attention aux opérateurs **non commutatifs**, comme `-`
 Dans l'algorithmique de l'évaluation, le premier élément défilé de la pile sera l'**opérande de droite** et le deuxième élément défilé sera l'**opérande de gauche**.
 :::
 
+Voilà un exemple plus complexe avec l'expression `1 * 5 + 4 + (8 + 6) / (9 - 2)` qui s'écrit en **NPI** `1 5 * 4 + 8 6 + 9 2 - / +` :
+
+<OriginalMotionCanvasPlayer name="RPN" />
+
 Le but de cet exercice est d'écrire un programme qui permet d'évaluer une expression en **NPI** sous forme d'une chaîne de caractères (les différents éléments de l'expression sont séparés par des espaces), et retourner le résultat de l'expression.
 :::note
 Par simplicité, on se limitera à des expressions contenant des **nombres** (flottants), et les opérateurs `+`, `-`, `*` et `/` (Dans une expression en NPI il y a plus de **parenthèses** (`(` et `)` car l'ordre des opérations est déterminé par l'ordre des opérateurs dans l'expression).
 :::
+
+Je vous donne plusieurs expressions et leur équivalent en NPI pour vous permettre de tester votre programme:
+
+- `1 * 5 + 4 + (8 + 6) / (9 - 2)` =>  `1 5 * 4 + 8 6 + 9 2 - / +`  =  11
+- `3 + 4` =>  `3 4 +`  =  7
+- `2 + 12 * 5`  =>  `2 12 5 * +`  =  62
+- `4 + 6 / ( 1 + 2 )`  =>  `4 6 1 2 + / +`  =  6
+
 
 1. Écrire un programme qui permet de saisir une expression arithmétique en **notation polonaise inversée** (**NPI**) en tant que chaîne de caractère. On veut que les éléments de cette expression soient séparés par des espaces.
 
