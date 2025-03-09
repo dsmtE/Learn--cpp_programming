@@ -501,6 +501,7 @@ Exemple simple avec le tableau suivant `[1, 2, 2, 4, 5, 8, 12]` (nombre d'élém
 
     On peut donc s'arrêter et renvoyer l'indice `5`.
 
+<OriginalMotionCanvasPlayer name="dichotomicSearch" />
 
 ### Complexité
 
