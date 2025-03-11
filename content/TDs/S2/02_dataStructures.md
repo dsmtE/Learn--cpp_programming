@@ -59,13 +59,13 @@ Je vous donne plusieurs expressions et leur équivalent en NPI pour vous permett
 - `4 + 6 / ( 1 + 2 )`  =>  `4 6 1 2 + / +`  =  6
 
 
-1. Écrire un programme qui permet de saisir une expression arithmétique en **notation polonaise inversée** (**NPI**) en tant que chaîne de caractère. On veut que les éléments de cette expression soient séparés par des espaces.
+1. Écrire un programme qui permet de saisir une expression arithmétique en **notation polonaise inversée** (**NPI**) en tant que chaîne de caractère. 
 
 :::tip
 Vous pouvez utiliser [`getline`](https://en.cppreference.com/w/cpp/string/basic_string/getline) pour récupérer d'un flux (comme `std::cin`) une chaîne de caractères comportant des espaces.
 :::
 
-2. Je vous donne le code suivant qui permet à l'aide d'une particularité des **streams** de séparer les éléments(mots) de la chaîne de caractères en utilisant les espaces comme séparateurs:
+2. On veut ensuite que les éléments de cette expression soient séparés (par des espaces) pour pouvoir les traiter. Je vous donne le code suivant qui permet à l'aide d'une particularité des **streams** de séparer les éléments(mots) de la chaîne de caractères en utilisant les espaces comme séparateurs:
 
 ```cpp
 #include <vector>
@@ -83,7 +83,7 @@ std::vector<std::string> split_string(std::string const& s)
 
 Utilisez ce code pour séparer les éléments de l'expression en NPI entrée par l'utilisateur et créer un `std::vector<std::string>` qui représenterons les éléments (`tokens`) de l'expression en **NPI**.
 
-3. Écrire une fonction qui prends une chaîne de caractères et permet de dire si celle-ci représente un nombre flottant ou non.
+3. Écrire une fonction qui prends un **token** (sous forme de chaîne de caractères) et permet de dire si celui-ci représente un nombre flottant ou non.
 On utilisera le prototype suivant:
 ```cpp
 bool is_floating(std::string const& s);
@@ -174,7 +174,7 @@ Vous pouvez tester avec les expressions suivantes:
 Le but est de réécrire le programme précédent en utilisant un **enum** pour représenter les différents **opérateurs** ainsi qu'une structure pour représenter un **token** (un élément de l'expression) avec un champ pour le type (opérateur ou opérande) et des champs pour les valeurs (opérateur ou opérande).
 
 ```cpp
-enum class Operator { ADD, SUB, MUL, DIV, OPEN_PAREN, CLOSE_PAREN};
+enum class Operator { ADD, SUB, MUL, DIV};
 enum class TokenType { OPERATOR, OPERAND };
 struct Token {
   TokenType type;
@@ -210,6 +210,17 @@ Nous avons précédemment vu comment évaluer une expression en **NPI**. Mais co
 Pour cela, il existe un algorithme appelé **Shunting-yard algorithm** (littéralement "algorithme de la cour de triage").
 
 Son principe est d'utiliser également une **pile** pour stocker les opérateurs rencontrés, et de les dépiler lorsque l'on rencontre un opérateur de priorité supérieure. 
+
+
+::info
+
+On va devoir tenir compte des parenthèses pour déterminer l'ordre des opérations.
+On peut donc les ajouter à notre enum `Operator` pour les traiter comme des opérateurs.
+
+```cpp
+enum class Operator { ADD, SUB, MUL, DIV, OPEN_PAREN, CLOSE_PAREN};
+```
+:::
 
 Voilà comment il fonctionne :
 
