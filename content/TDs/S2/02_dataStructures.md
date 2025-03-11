@@ -34,12 +34,12 @@ Par exemple, l'expression `3 4 +` s'interprète comme suit :
 - On rencontre `+`, on dépile `4` et `3`, on calcule `3 + 4 = 7`, et on empile le résultat `7`
 - On a terminé, le résultat est `7`
 
-On va donc pouvoir se servir d'une **pile**(`std::stack`) pour évaluer une expression en **NPI**.
+On va donc pouvoir se servir d'une **pile** (`std::stack`) pour évaluer une expression en **NPI**.
 
 :::info
 Il faut cependant faire attention aux opérateurs **non commutatifs**, comme `-` ou `/`. `3 4 /` ne s'interprète pas comme `4 / 3`, mais comme `3 / 4`. Il faut donc écrire `3 4 /` pour évaluer `3 / 4`.
 
-Dans l'algorithmique de l'évaluation, le premier élément défilé de la pile sera l'**opérande de droite** et le deuxième élément défilé sera l'**opérande de gauche**.
+Dans l'algorithmique de l'évaluation, le premier élément dépilé de la pile sera l'**opérande de droite** et le deuxième élément dépilé sera l'**opérande de gauche**.
 :::
 
 Voilà un exemple plus complexe avec l'expression `1 * 5 + 4 + (8 + 6) / (9 - 2)` qui s'écrit en **NPI** `1 5 * 4 + 8 6 + 9 2 - / +` :
@@ -48,7 +48,7 @@ Voilà un exemple plus complexe avec l'expression `1 * 5 + 4 + (8 + 6) / (9 - 2)
 
 Le but de cet exercice est d'écrire un programme qui permet d'évaluer une expression en **NPI** sous forme d'une chaîne de caractères (les différents éléments de l'expression sont séparés par des espaces), et retourner le résultat de l'expression.
 :::note
-Par simplicité, on se limitera à des expressions contenant des **nombres** (flottants), et les opérateurs `+`, `-`, `*` et `/` (Dans une expression en NPI il y a plus de **parenthèses** (`(` et `)` car l'ordre des opérations est déterminé par l'ordre des opérateurs dans l'expression).
+Par simplicité, on se limitera à des expressions contenant des **nombres** (flottants), et les opérateurs `+`, `-`, `*` et `/` (Dans une expression en NPI il n'y a plus de **parenthèses** (`(` et `)`) car l'ordre des opérations est déterminé par l'ordre des opérateurs dans l'expression).
 :::
 
 Je vous donne plusieurs expressions et leur équivalent en NPI pour vous permettre de tester votre programme:
@@ -65,7 +65,7 @@ Je vous donne plusieurs expressions et leur équivalent en NPI pour vous permett
 Vous pouvez utiliser [`getline`](https://en.cppreference.com/w/cpp/string/basic_string/getline) pour récupérer d'un flux (comme `std::cin`) une chaîne de caractères comportant des espaces.
 :::
 
-2. On veut ensuite que les éléments de cette expression soient séparés (par des espaces) pour pouvoir les traiter. Je vous donne le code suivant qui permet à l'aide d'une particularité des **streams** de séparer les éléments(mots) de la chaîne de caractères en utilisant les espaces comme séparateurs:
+2. On veut ensuite que les éléments de cette expression soient séparés (par des espaces) pour pouvoir les traiter. Je vous donne le code suivant qui permet à l'aide d'une particularité des **streams** de séparer les éléments (mots) de la chaîne de caractères en utilisant les espaces comme séparateurs :
 
 ```cpp
 #include <vector>
@@ -84,7 +84,7 @@ std::vector<std::string> split_string(std::string const& s)
 Utilisez ce code pour séparer les éléments de l'expression en NPI entrée par l'utilisateur et créer un `std::vector<std::string>` qui représenterons les éléments (`tokens`) de l'expression en **NPI**.
 
 3. Écrire une fonction qui prends un **token** (sous forme de chaîne de caractères) et permet de dire si celui-ci représente un nombre flottant ou non.
-On utilisera le prototype suivant:
+On utilisera le prototype suivant :
 ```cpp
 bool is_floating(std::string const& s);
 ```
@@ -94,7 +94,7 @@ Pour y arriver il faut parcourir la chaîne de caractères et de tester si chaqu
 Vous pouvez utiliser la fonction `std::isdigit` de la bibliothèque `<cctype>` qui permet de tester si un caractère représente un chiffre.
 :::
 
-Cela va être utile pour distinguer si un **token** (sous forme d'une chaîne de caractère) est un nombre(opérandes) ou un opérateur dans l'expression en NPI.
+Cela va être utile pour distinguer si un **token** (sous forme d'une chaîne de caractère) est un nombre (opérandes) ou un opérateur dans l'expression en NPI.
 
 <details>
 <summary>solution C++17</summary>
@@ -113,7 +113,7 @@ bool is_floating(std::string const& s)
 ```
 
 Vous pouvez utiliser cette fonction si vous le souhaitez pour confirmer votre solution.
-Mais il est important de faire soit même l'implémentation de la fonction `is_floating` pour apprendre à manipuler les chaînes de caractères.
+Mais il est important de faire soi-même l'implémentation de la fonction `is_floating` pour apprendre à manipuler les chaînes de caractères.
 </details>
 
 4. Écrire une fonction qui prend en paramètre un vecteur de chaînes de caractères représentant les **tokens** de l'expression en **NPI**, et qui retourne le résultat de l'expression.
@@ -184,7 +184,7 @@ struct Token {
 ```
 
 :::info
-Il existe des fonctionnalités plus avancés qui permettraient de faire ça plus proprement, et de se passer de l'enum `TokenType` dans la structure `Token` (les **variantes**). Vous pouvez vous renseigner ou me demander si vous voulez en savoir plus.
+Il existe des fonctionnalités plus avancés qui permettraient de faire ça plus proprement, et de se passer de l'enum `TokenType` dans la structure `Token` (les `std::variant`). Vous pouvez vous renseigner ou me demander si vous voulez en savoir plus.
 :::
 
 1. Créer deux fonctions (surchargées) qui permettent de construire la structure `Token` à partir d'un nombre flottant ou de la valeur de l’énumération `Operator`.
@@ -212,7 +212,7 @@ Pour cela, il existe un algorithme appelé **Shunting-yard algorithm** (littéra
 Son principe est d'utiliser également une **pile** pour stocker les opérateurs rencontrés, et de les dépiler lorsque l'on rencontre un opérateur de priorité supérieure. 
 
 
-::info
+:::info
 
 On va devoir tenir compte des parenthèses pour déterminer l'ordre des opérations.
 On peut donc les ajouter à notre enum `Operator` pour les traiter comme des opérateurs.
@@ -228,29 +228,29 @@ Voilà comment il fonctionne :
 - **Si** on rencontre un nombre, on l'ajoute à la sortie
 - **Si** on rencontre un opérateur:
   - **Si** on rencontre une parenthèse ouvrante (`(`), on la met sur la pile des opérateurs
-  - **Si** on rencontre une parenthèse fermante (`)`), on dépile les opérateurs jusqu'à ce qu'on rencontre une parenthèse ouvrante, et on ajoute les opérateurs défilés à la sortie
+  - **Si** on rencontre une parenthèse fermante (`)`), on dépile les opérateurs jusqu'à ce qu'on rencontre une parenthèse ouvrante, et on ajoute les opérateurs dépilés à la sortie
   - **Tant qu**'il y a un opérateur sur la pile des opérateurs de priorité supérieure ou égale à l'opérateur courant, on dépile les opérateurs et on les ajoute à la sortie. **Puis** on ajoute l'opérateur courant à la pile des opérateurs.
 
 - Enfin, on dépile les opérateurs restants et on les ajoute à la sortie.
 
 Voici un exemple d'application de l'algorithme  avec l'expression `3 + 4 ^ 2 / ( 1 - 5 ) ^ 6 ` :
 
-| Entrée | Sortie | Pile des opérateurs | commentaire |
-| --- | --- | --- | --- |
-| 3 | 3 | | on ajoute 3 à la sortie |
-| + | 3 | + | on ajoute + à la pile des opérateurs |
-| 4 | 3 4 | + | on ajoute 4 à la sortie |
-| ^ | 3 4 | + ^ | on ajoute ^ à la pile des opérateurs |
-| 2 | 3 4 2 | + ^ | on ajoute 2 à la sortie |
-| / | 3 4 2 ^ | + | on dépile ^ et on l'ajoute à la sortie car / a une priorité inférieure à ^ |
-| ( | 3 4 2 ^ | + / ( | on ajoute ( à la pile des opérateurs |
-| 1 | 3 4 2 ^ 1 | + / ( | on ajoute 1 à la sortie |
-| - | 3 4 2 ^ 1 | + / ( - | on ajoute - à la pile des opérateurs |
-| 5 | 3 4 2 ^ 1 5 | + / ( - | on ajoute 5 à la sortie |
-| ) | 3 4 2 ^ 1 5 - | + / | on dépile les opérateurs jusqu'à ( et on les ajoute à la sortie |
-| ^ | 3 4 2 ^ 1 5 - | + / ^ | on ajoute ^ à la pile des opérateurs |
-| 6 | 3 4 2 ^ 1 5 - 6 | + / ^ | on ajoute 6 à la sortie |
-|   | 3 4 2 ^ 1 5 - 6 ^ | + / | on dépile le reste des opérateurs et on les ajoute à la sortie |
+| Entrée | Sortie            | Pile des opérateurs | commentaire                                                                |
+| ------ | ----------------- | ------------------- | -------------------------------------------------------------------------- |
+| 3      | 3                 |                     | on ajoute 3 à la sortie                                                    |
+| +      | 3                 | +                   | on ajoute + à la pile des opérateurs                                       |
+| 4      | 3 4               | +                   | on ajoute 4 à la sortie                                                    |
+| ^      | 3 4               | + ^                 | on ajoute ^ à la pile des opérateurs                                       |
+| 2      | 3 4 2             | + ^                 | on ajoute 2 à la sortie                                                    |
+| /      | 3 4 2 ^           | +                   | on dépile ^ et on l'ajoute à la sortie car / a une priorité inférieure à ^ |
+| (      | 3 4 2 ^           | + / (               | on ajoute ( à la pile des opérateurs                                       |
+| 1      | 3 4 2 ^ 1         | + / (               | on ajoute 1 à la sortie                                                    |
+| -      | 3 4 2 ^ 1         | + / ( -             | on ajoute - à la pile des opérateurs                                       |
+| 5      | 3 4 2 ^ 1 5       | + / ( -             | on ajoute 5 à la sortie                                                    |
+| )      | 3 4 2 ^ 1 5 -     | + /                 | on dépile les opérateurs jusqu'à ( et on les ajoute à la sortie            |
+| ^      | 3 4 2 ^ 1 5 -     | + / ^               | on ajoute ^ à la pile des opérateurs                                       |
+| 6      | 3 4 2 ^ 1 5 - 6   | + / ^               | on ajoute 6 à la sortie                                                    |
+|        | 3 4 2 ^ 1 5 - 6 ^ | + /                 | on dépile le reste des opérateurs et on les ajoute à la sortie             |
 
 **Résultat final** : `3 4 2 ^ 1 5 - 6 ^ / +` 
 
