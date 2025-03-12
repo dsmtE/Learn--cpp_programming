@@ -83,7 +83,7 @@ std::vector<std::string> split_string(std::string const& s)
 
 Utilisez ce code pour séparer les éléments de l'expression en NPI entrée par l'utilisateur et créer un `std::vector<std::string>` qui représenterons les éléments (`tokens`) de l'expression en **NPI**.
 
-3. Écrire une fonction qui prends un **token** (sous forme de chaîne de caractères) et permet de dire si celui-ci représente un nombre flottant ou non.
+3. Écrire une fonction qui prends un **token** (sous forme de chaîne de caractères) et permet de dire si celui-ci représente un nombre flottant ou non (NB : on ne fait pas la distinction avec les nombres entiers : `"3"` sera considéré comme un nombre flottant, tout comme `"3.14"`).
 On utilisera le prototype suivant :
 ```cpp
 bool is_floating(std::string const& s);
@@ -260,7 +260,7 @@ La suite de l'exercice est présenté en utilisant les fonctions et structures d
 
 1. Écrire une fonction `operator_precedence` qui prends en paramètre un `Operator` et retour sous forme d'un **nombre entier positif** la priorité de cet opérateur.
 ```cpp
-size_t operator_precedence(Operator const op);
+int operator_precedence(Operator const op);
 ```
 
 2. Écrire une fonction qui prend en paramètre une chaîne de caractères représentant une expression en **notation infixe**, qui retourne un tableau de `Token` représentant l'expression en **NPI**.
