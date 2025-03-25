@@ -24,9 +24,9 @@ Je vous donne la fonction lambda suivante qui permet de savoir si un caractère 
 auto const is_space = [](char letter){ return letter == ' '; };
 ```
 
-Le mot clé `auto` ici permet de "stocker" la fonction dans une variable pour la passé en paramètre. En réalité se cache derrière des pointeur de fonction ou le type `std::function` qui permet d'avoir une variable qui représente une fonction comme cela. 
+Le mot clé `auto` ici permet de stocker la "fonction" dans une variable pour la passer en paramètre. (En réalité se cache derrière ce auto une struct générée automatiquement par le compilateur, et qui va se comporter comme une fonction car elle surcharge l'opérateur `()`.)
 
-Cela va permettre d'utiliser les fonctions `std::find_if_not` et `find_if` (qui retourne des itérateurs) pour rechercher ou non des espaces dans une chaîne de caractère.
+Cela va permettre d'utiliser les fonctions `std::find_if_not` et `find_if` (qui retournent des itérateurs) pour rechercher les espaces dans une chaîne de caractère.
 
 1. Écrire une fonction (à l'aide des fonctions `std::find` et `std::distance`) qui prendre en paramètre une référence constante sur une `std::string` et qui retourne le nombre de lettres du premier mot de la phrase.
 
