@@ -12,6 +12,14 @@ Dans ce TD nous allons mettre en pratique les notions vues en cours sur les tabl
 size_t folding_string_hash(std::string const& s, size_t max);
 ```
 
+> $$
+> \text{hash}(s) = \sum_{i=0}^{n-1} (s[i] \mod m)
+> $$
+> Avec:
+> - $s$ la chaîne de caractères
+> - $n$ la taille de la chaîne de caractères
+> - $s[i]$ le code ASCII du caractère à l'index $i$ dans la chaîne de caractères
+
 Ce que nous venons de faire s'appel la technique dite de **folding** (pliage en français). Cela consiste à découper notre donnée en plusieurs parties, calculer une valeur(hash) pour chacune de ces parties, sommer ces valeurs et enfin appliquer un modulo pour obtenir un entier compris entre 0 et `max`.  Ici on traite une chaîne de caractère, on va donc faire la somme des valeurs de hachage de chaque caractère.
 
 :::info
@@ -24,6 +32,12 @@ Le choix de `max` dépend du contexte d'utilisation de la table de hachage, gén
 ```cpp
 size_t folding_string_ordered_hash(std::string const& s, size_t max);
 ```
+
+> $$
+> \text{hash}(s) = \sum_{i=0}^{n-1} ((s[i] * (i+1)) \mod m)
+> $$
+>
+> Ici j'utilise `i+1` pour éviter que la position 0 (le 1er caractère)  ne soit pas prise en compte dans le calcul du hash car multipliée par 0.
 
 3. Écrire une fonction de hachage sur une chaîne de caractères utilisant la technique de **polynomial rolling hash**.
 
@@ -39,9 +53,6 @@ size_t polynomial_rolling_hash(const std::string& s, size_t p, size_t m);
 > $$
 >
 > Avec:
-> - $s$ la chaîne de caractères
-> - $n$ la taille de la chaîne de caractères
-> - $s[i]$ le code ASCII du caractère à l'index $i$ dans la chaîne de caractères
 > - $p$ un nombre (généralement un nombre premier)
 > - $m$ un nombre (généralement une puissance de 2)
 
