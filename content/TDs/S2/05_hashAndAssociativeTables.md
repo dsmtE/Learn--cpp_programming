@@ -330,7 +330,7 @@ std::string card_name(Card const& card) {
     unsigned int card_value {(static_cast<unsigned int>(card.value)+2) % 14};
 
     if (card_value < 10) {
-        name += '0' + card_value;
+        name += '0' + std::to_string(card_value);
     }else if (card_value == 10) {
         name += "10";
     }else if (card_value == 11) {
