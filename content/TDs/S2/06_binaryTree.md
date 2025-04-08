@@ -8,7 +8,7 @@ Dans ce TD, nous allons voir comment implémenter un arbre binaire de recherche.
 
 ## Exercice 1 (Implémentation)
 
-Donnons nous pour commencer la structure suivante pour représenter un nœud d'un arbre binaire.
+Donnons nous pour commencer la structure suivante pour représenter un nœud d'un arbre binaire :
 
 ```cpp
 struct Node {
@@ -27,7 +27,7 @@ src/
     L main.cpp
     L node.hpp
     L node.cpp
-CmakeLists.txt
+CMakeLists.txt
 ```
 :::
 
@@ -72,7 +72,7 @@ void Node::insert(int value);
 On utilisera la fonction `create_node` pour créer le nouveau nœud.
 :::
 
-4. Écrire une méthode `height` qui retourne la hauteur de l'arbre binaire (c'est à dire la longueur du plus long chemin entre la racine et une feuille).
+4. Écrire une méthode `height` qui retourne la hauteur de l'arbre binaire (c'est à dire la longueur du plus long chemin entre la racine et une feuille) (On va se donner la convention qu'un arbre binaire contenant un seul nœud a une hauteur de 1)
 ```cpp
 int Node::height() const;
 ```
@@ -82,44 +82,42 @@ On peut utiliser de la récursivité pour calculer la hauteur de l'arbre.
 :::
 
 
-5.  Écrire une fonction `delete_childs` sur la structure `Node` qui permet de supprimer les fils d'un nœud (et de libérer la mémoire).
+5.  Écrire une fonction `delete_children` sur la structure `Node` qui permet de supprimer les fils d'un nœud (et de libérer la mémoire).
 ```cpp
-void Node::delete_childs();
+void Node::delete_children();
 ```
 
 :::tip
 On peut utiliser de la récursivité pour supprimer les nœuds de l'arbre.
 :::
 
-On va se donner la convention qu'un arbre binaire contenant un seul nœud a une hauteur de 1.
-
-6. Écrire une **méthode** `display_infixe` qui affiche les valeurs des nœuds parcourus dans l'ordre [**infixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
+6. Écrire une **méthode** `display_infix` qui affiche les valeurs des nœuds parcourus dans l'ordre [**infixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
 ```cpp
-void Node::display_infixe() const;
+void Node::display_infix() const;
 ```
 
-7. Écrire une **méthode** `prefixe` qui retourne un vecteur contenant des pointeurs vers les nœuds de l'arbre binaire parcourus en [**prefixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
+7. Écrire une **méthode** `prefix` qui retourne un vecteur contenant des pointeurs vers les nœuds de l'arbre binaire parcourus en [**prefixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
 ```cpp
-std::vector<Node const*> Node::prefixe() const;
+std::vector<Node const*> Node::prefix() const;
 ```
 
 :::tip
 Pour le faire par **récursivité** on pourra utiliser la méthode `insert` du `std::vector` qui permet d’insérer plusieurs éléments à l'aide d’itérateurs.
 ```cpp
-auto left_nodes {left->infixe()};
+auto left_nodes {left->prefix()};
 nodes.insert(nodes.end(), left_nodes.begin(), left_nodes.end());
 ```
 Cela va permettre de concaténer dans un seul vecteur les nœuds des sous arbres gauche et droit.
 :::
 
-8. (**BONUS**) De même, écrire une autre méthode `postfixe` qui retournent les nœuds parcourus dans l'ordre [**postfixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
+8. (**BONUS**) De même, écrire une autre méthode `postfix` qui retournent les nœuds parcourus dans l'ordre [**postfixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
 
 <details>
 <summary>BONUS: Itératif</summary>
 
-si tu le souhaites, tu peux essayer de le faire de manière itérative (sans récursivité).
+Si tu le souhaites, tu peux essayer de le faire de manière itérative (sans récursivité).
 
-Pour faire cela tu peux utiliser une pile (`std::stack`) pour stocker les nœuds à parcourir. L'idée est de parcourir l'arbre en commençant par la racine (premier élément de la pile). Puis, de déplier un nœud de la pile, s'il a un fils droit, on le met dans la pile et on recommence. Sinon, s'il a un fils gauche, on le met dans la pile et on recommence. enfin s'il n'a pas de fils, on le traite (on peut l'ajouter à un vecteur par exemple). Il faut aussi faire attention à conserver un pointeur vers le nœud précédent afin de savoir si on remonte ou si on descend dans l'arbre.
+Pour faire cela tu peux utiliser une pile (`std::stack`) pour stocker les nœuds à parcourir. L'idée est de parcourir l'arbre en commençant par la racine (premier élément de la pile). Puis, de dépiler un nœud de la pile, s'il a un fils droit, on le met dans la pile et on recommence. Sinon, s'il a un fils gauche, on le met dans la pile et on recommence. Enfin s'il n'a pas de fils, on le traite (on peut l'ajouter à un vecteur par exemple). Il faut aussi faire attention à conserver un pointeur vers le nœud précédent afin de savoir si on remonte ou si on descend dans l'arbre.
 
 Exemple:
 Si on a l'arbre suivant:
@@ -143,10 +141,10 @@ C'est un peu plus compliqué que la version récursive mais c'est un bon exercic
 Voilà un bout de code pour vous aider à démarrer:
 ```cpp
 
-std::vector<Node const*> Node::postfixe() const {
+std::vector<Node const*> Node::postfix() const {
     std::vector<Node const*> nodes {};
     std::stack<Node const*> to_process {};
-    Node* previous {nullptr};
+    Node const* previous {nullptr};
     to_process.push(this);
 
     while (!to_process.empty()) {
@@ -216,7 +214,7 @@ Il existe trois cas de figure lorsqu'on supprime un nœud d'un arbre binaire:
 - Le nœud n'a pas de fils: on peut le supprimer directement (exemple précédent).
 - Le nœud a un seul fils: on peut le supprimer et le remplacer par son fils.
 - Le nœud a deux fils:
-    Il faut remplacer la valeur du nœud à supprimer par une valeur préserver l'ordre de l'arbre. Pour cela, on utilisera la fonction `most_left` qui permettent de trouver le nœud le plus à gauche d'un arbre binaire (autrement dit, le nœud de valeur minimale).
+    Il faut remplacer la valeur du nœud à supprimer par une valeur pour préserver l'ordre de l'arbre. Pour cela, on utilisera la fonction `most_left` qui permettent de trouver le nœud le plus à gauche d'un arbre binaire (autrement dit, le nœud de valeur minimale).
     Il faut ensuite remplacer la valeur du nœud à supprimer par la valeur du nœud trouvé précédemment et supprimer ce dit nœud pour ne pas avoir de doublon. (cela revient à intervertir les deux nœuds sans avoir à modifier les pointeurs puis à supprimer le nœud dont la valeur a été copiée).
 
 Ce troisième cas est le plus compliqué à gérer. N'hésitez pas à demander de l'aide et prendre le temps de faire des schémas pour comprendre le fonctionnement.
@@ -224,7 +222,7 @@ Il faudra utiliser la fonction `most_left` pour trouver le nœud le plus à gauc
 :::
 
 :::warning
-Il faut faire attention à bien libérer la mémoire des nœuds supprimés.
+Il faut faire attention à bien libérer la mémoire des nœuds supprimés, avec `delete`.
 :::
 
 11. Écrire une **fonction** `delete_tree` qui permet de supprimer un arbre binaire (et de libérer la mémoire).
@@ -244,7 +242,7 @@ Testons maintenant notre implémentation en créant un programme qui permet de c
 
 3. (**BONUS**) Afficher la valeur minimale et maximale de l'arbre.
 
-4. Afficher la somme des valeurs des nœuds de l'arbre binaire en utilisant la fonction `prefixe` qui retourne un vecteur contenant les nœuds parcourus dans l'ordre **prefixe**.
+4. Afficher la somme des valeurs des nœuds de l'arbre binaire en utilisant la fonction `prefix` qui retourne un vecteur contenant les nœuds parcourus dans l'ordre **prefixe**.
 
 5. Afficher la hauteur de l'arbre binaire.
 
@@ -253,7 +251,7 @@ Testons maintenant notre implémentation en créant un programme qui permet de c
 
 Nous allons maintenant améliorer et simplifier notre code en utilisant des [**pointeurs intelligents**](/Lessons/S1/MemoryAllocation). En effet la partie la plus compliquée de notre code est la gestion de la mémoire et des pointeurs. Les pointeurs intelligents vont nous permettre de nous débarrasser de cette gestion et de nous passer de la fonction `delete_tree` par exemple.
 
-1.  Copier coller votre fichier pour garder une version de votre code précédent et créer un nouveau fichier `smartNode.hpp` dans lequel vous allez réécrire votre code en utilisant des **pointeurs intelligents**.
+1.  Copier-coller votre fichier pour garder une version de votre code précédent et créer un nouveau fichier `smartNode.hpp` dans lequel vous allez réécrire votre code en utilisant des **pointeurs intelligents**.
 Renommer la structure `Node` en `SmartNode` pour pouvoir faire la différence entre les deux versions et remplacer les pointeurs "bruts" par des **pointeurs intelligents** `std::unique_ptr` dans la structure `SmartNode`.
 
 Je vous donne le contenu du fichier `smartNode.hpp`:
@@ -296,7 +294,7 @@ if (ptr) {
 
 Elle s'utilise de la manière suivante:
 ```cpp
-std::unique_ptr<float> ptr {std::make_unique<float>(3.14)};
+std::unique_ptr<float> ptr {std::make_unique<float>(3.14f)};
 ```
 
 3. Modifier la méthode `most_left` pour qu'elle retourne une référence vers un pointeur intelligent au lieu d'un pointeur brut.
@@ -306,7 +304,7 @@ std::unique_ptr<float> ptr {std::make_unique<float>(3.14)};
 5. Modifier la méthode `remove` pour qu'elle utilise des pointeurs intelligents.
 
 :::tip
-C'est un peu plus compliqué car il faut utiliser des références vers des pointeurs intelligents pour pouvoir les modifier. On peut utiliser les méthodes `reset` et `release` pour gérer la mémoire et les pointeurs intelligents. Ou utiliser un concept plus avancé `std::move` pour transférer la propriété d'un pointeur intelligent d'un objet à un autre.
+C'est un peu plus compliqué car il faut utiliser des références vers des pointeurs intelligents pour pouvoir les modifier. On peut utiliser les méthodes `reset` et `release` (allez lire la documentation pour voir la différence entre les deux !) pour gérer la mémoire et les pointeurs intelligents. Ou utiliser un concept plus avancé `std::move` pour transférer la propriété d'un pointeur intelligent d'un objet à un autre.
 Si vous voulez essayer, n'hésitez pas à demander de l'aide.
 :::
 
@@ -314,7 +312,7 @@ Si vous voulez essayer, n'hésitez pas à demander de l'aide.
 
 Le but est de créer une structure `BinaryTree` qui encapsule la structure `Node` ou `SmartNode` et qui permet d'utiliser les même méthodes sans connaître la structure interne de l'arbre binaire. Cela permet aussi de gérer le cas où l'arbre binaire est vide (c'est à dire que la racine est un pointeur nul).
 
-C'est moins pertinent dans notre cas pour ce TDs mais lorsque vous découvrirez la notion de **visibilité** vous comprendrez l'intérêt de cette encapsulation.
+C'est moins pertinent dans notre cas pour ce TD mais lorsque vous découvrirez la notion de **visibilité** (public / privé) vous comprendrez l'intérêt de cette encapsulation.
 
 Voilà le contenu du fichier `binaryTree.hpp`:
 
