@@ -93,7 +93,7 @@ Si le nœuds de destination n'existe pas (comme clé du tableau associatif `adja
 
 3. Implémenter la méthode `add_undirected_edge` en utilisant `add_directed_edge` pour ajouter deux edges dans les deux sens pour connecter deux nœuds passés en paramètre.
 
-4. Implémenter la fonction `adjacency_list_from_adjacency_matrix` qui prend en paramètre une **matrice d'adjacence** (sous la forme d'un vecteur de vecteurs d'entiers) et qui retourne un graphe.
+4. Implémenter la fonction `build_from_adjacency_matrix` qui prend en paramètre une **matrice d'adjacence** (sous la forme d'un vecteur de vecteurs d'entiers) et qui retourne un graphe.
 
 :::info Exemple
 Exemple pour le graphe suivant:
@@ -132,7 +132,7 @@ std::unordered_map<int, std::vector<WeightedGraphEdge>> adjacency_list {
 
 :::
 
-5. Écrire dans la fonction `main` un exemple d'utilisation de la fonction `adjacency_list_from_adjacency_matrix` pour créer un graphe à partir d'une matrice d'adjacence et créer un deuxième graphe en utilisant les méthodes `add_vertex` et `add_undirected_edge` pour ajouter les mêmes sommets et les mêmes arrêtes que dans le premier graphe. Ensuite, comparer les deux graphes pour vérifier qu'ils sont égaux.
+5. Écrire dans la fonction `main` un exemple d'utilisation de la fonction `build_from_adjacency_matrix` pour créer un graphe à partir d'une matrice d'adjacence et créer un deuxième graphe en utilisant les méthodes `add_vertex` et `add_undirected_edge` pour ajouter les mêmes sommets et les mêmes arrêtes que dans le premier graphe. Ensuite, comparer les deux graphes pour vérifier qu'ils sont égaux.
 
 ## Exercice 2 (traverser un graphe)
 
@@ -146,7 +146,7 @@ Voilà la signature de la méthode à implémenter:
 void DFS(int const start, std::function<void(int const)> const& callback) const;
 ```
 
-`std::function` (`#include <functional>`) est un objet qui peut "stocker" n'importe quelle fonction qui a la même signature que celle donnée en paramètre (entre  <kbd> < </kbd> et <kbd> > </kbd>). Cela permet de passer une fonction en paramètre d'une autre fonction. C'est très utile pour faire des fonctions génériques qui peuvent être utilisées de différentes manières. On peut passer en paramètre une fonction définit dans le code ou une fonction **lambda** (une fonction anonyme) qui est définie directement dans le code. C'est comme cela que fonctionne les fonctions `std::sort`, `std::find_if`, `std::accumulate`, ... de la STL.
+`std::function` (`#include <functional>`) est un objet qui peut "stocker" n'importe quelle fonction qui a la même signature que celle donnée en paramètre (entre  <kbd> < </kbd> et <kbd> > </kbd>). Cela permet de passer une fonction en paramètre d'une autre fonction. C'est très utile pour faire des fonctions génériques qui peuvent être utilisées de différentes manières. On peut passer en paramètre une fonction définie dans le code ou une fonction **lambda** (une fonction anonyme). C'est comme cela que fonctionnent les fonctions `std::sort`, `std::find_if`, `std::accumulate`, ... de la STL.
 
 Voilà à quoi ressemble l'appel de cette méthode avec une fonction **lambda** qui affiche les sommets visités (pour reproduire le comportement de la méthode `print_DFS`):
 ```cpp
@@ -159,7 +159,7 @@ std::cout << std::endl;
 
 L'algorithme de Dijkstra permet de trouver le plus court chemin entre un sommet de départ et un sommet d'arrivée dans un graphe pondéré.
 
-Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs/#dijkstra);
+Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs/#dijkstra).
 
 1. Donnons nous le graphe suivant:
 
@@ -184,13 +184,13 @@ Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs/#dijkst
 ```cpp
 std::unordered_map<int, std::pair<float, int>> dijkstra(WeightedGraph const& graph, int const& start, int const end) {
     // On crée un tableau associatif pour stocker les distances les plus courtes connues pour aller du sommet de départ à chaque sommet visité
-    // La clé est l'identifiant du sommet et la valeur est un pair (distance, sommet précédent)
+    // La clé est l'identifiant du sommet et la valeur est une paire (distance, sommet précédent)
     std::unordered_map<int, std::pair<float, int>> distances {};
 
     // On crée une file de priorité pour stocker les sommets à visiter
-    // la pair contient la distance pour aller jusqu'au sommet et l'identifiant du sommet
+    // la paire contient la distance pour aller jusqu'au sommet et l'identifiant du sommet
 
-    // Ce type compliqué permet d'indiquer que l'on souhaite trier les éléments par ordre croissant (std::greater) et donc les éléments les plus petits seront au début de la file (top) (Min heap)
+    // Ce type compliqué permet d'indiquer que l'on souhaite trier les éléments par ordre croissant (std::greater) et donc les éléments les plus petits seront au début de la file (top) (C'est ce qu'on appelle un "Min heap")
     std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>, std::greater<std::pair<float, int>>> to_visit {};
 
     // 1. On ajoute le sommet de départ à la liste des sommets à visiter avec une distance de 0 (on est déjà sur le sommet de départ)
@@ -203,7 +203,7 @@ std::unordered_map<int, std::pair<float, int>> dijkstra(WeightedGraph const& gra
         if (/* TODO */) {
             return distances;
         }
-        // 3. On parcoure la liste des voisins (grâce à la liste d'adjacence) du nœud courant
+        // 3. On parcoure la liste des voisins du nœud courant (grâce à la liste d'adjacence)
         for (/* TODO */) {
             // 4. on regarde si le nœud existe dans le tableau associatif (si oui il a déjà été visité)
 
@@ -211,13 +211,12 @@ std::unordered_map<int, std::pair<float, int>> dijkstra(WeightedGraph const& gra
             bool const visited { /* TODO */ };
 
              if (!visited) {
-                    // 5. Si le nœud n'a pas été visité, on l'ajoute au tableau associatif en calculant la distance pour aller jusqu'à ce nœud
-                    // la distance actuelle + le point de l'arrête)
+                    // 5. Si le nœud n'a pas été visité, on l'ajoute au tableau associatif en calculant la distance pour aller jusqu'à ce nœud (la distance actuelle + le point de l'arrête)
 
-                    // 6. On ajout également le nœud de destination à la liste des nœud à visité (avec la distance également pour prioriser les nœuds les plus proches)
+                    // 6. On ajoute également le nœud de destination à la liste des nœuds à visiter (avec la distance également pour prioriser les nœuds les plus proches)
                 }else {
-                    // 7. Si il a déjà été visité, On test si la distance dans le tableau associatif est plus grande
-                    // Si c'est le cas on à trouvé un plus court chemin, on met à jour le tableau associatif et on ajoute de nouveau le sommet de destination dans la liste à visité
+                    // 7. Si il a déjà été visité, on teste si la distance dans le tableau associatif est plus grande
+                    // Si c'est le cas on a trouvé un chemin plus court, on met à jour le tableau associatif et on ajoute de nouveau le sommet de destination dans la liste à visiter
                     if (/* TODO */) {
                         
                     }
