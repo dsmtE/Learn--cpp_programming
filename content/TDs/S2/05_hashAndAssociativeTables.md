@@ -27,6 +27,17 @@ On veux se ramener à un entier compris entre 0 et `max` car cette valeur haché
 Le choix de `max` dépend du contexte d'utilisation de la table de hachage, généralement on choisit une valeur qui est une puissance de 2 (par exemple 1024, 2048, 4096, etc.).
 :::
 
+:::warning
+Dans l'implementation concrète (utilisant une boucle for pour sommer les valeurs ASCII), on préférera appliquer le modulo à chaque itération plutôt qu'à la fin de la boucle. En effet, si la chaîne de caractères est très longue, la somme des valeurs ASCII peut dépasser la taille maximale d'un entier (**overflow**). En appliquant le modulo à chaque itération, on évite ce problème et on s'assure que la valeur hachée reste dans les limites de `size_t`.
+
+Le résultat sera identique car le modulo est [distributif](https://fr.wikipedia.org/wiki/Modulo_(op%C3%A9ration)#:~:text=.-,Distributivit%C3%A9) par rapport à l'addition:
+$$
+(a+b) \mod m = ((a \mod m) + (b \mod m)) \mod m
+$$
+
+Cela va être d'autant plus important pour les questions suivantes où l'on va devoir faire des multiplications supplémentaires et donc des risques d'overflow plus importants.
+:::
+
 2. Écrire une nouvelle fonction de hachage sur une chaîne de caractères pour laquelle l'ordre des caractères a de l'importance. Par exemple, les chaînes de caractères "abc" et "cba" ne doivent pas avoir la même valeur hachée. Ce qui est le cas avec la fonction de hachage précédente.
 > Utiliser par exemple la somme des codes ASCII des caractères multipliée par leur position dans la chaîne de caractères.
 ```cpp
