@@ -44,7 +44,7 @@ Ici, on ne veut pas utiliser de `std::unique_ptr` pour simplifier l'écriture de
 
 2. Surcharger l'opérateur `<` pour la structure `Node` de telle sorte que l'opérateur `<` retourne `true` si la fréquence du nœud de gauche est inférieure à la fréquence du nœud de droite.
 3. Écrire une fonction `createNode` qui prend en paramètre un caractère et une fréquence et qui retourne un `Node*`.
-4. Écrire une fonction `createSymbolNode` qui prend en paramètre (par valeur) deux `Node*` et qui retourne un `Node*` dont le caractère est `0` et la fréquence est la somme des fréquences des deux nœuds passés en paramètre et les deux nœuds passés en paramètre sont les fils du nœud retourné.
+4. Écrire une fonction `createSymbolNode` qui prend en paramètre (par valeur) deux `Node*` et qui retourne un `Node*` dont le caractère est `'\0'` (caractère nul spécial) et la fréquence est la somme des fréquences des deux nœuds passés en paramètre et les deux nœuds passés en paramètre sont les fils du nœud retourné.
 
     > Cette fonction va être utilisée pour créer un nœud qui représente un "symbole" (un ensemble de caractères) et qui va être utilisé pour construire l'arbre de Huffman.
 
@@ -56,22 +56,22 @@ Ici, on ne veut pas utiliser de `std::unique_ptr` pour simplifier l'écriture de
 
 6. Écrire une fonction `build_encoding_table` qui prend en paramètre le sommet de l'arbre de Huffman et qui retourne un `std::unordered_map<char, std::string>` qui associe à chaque caractère le code de Huffman correspondant.
 
-> Pour construire le code de Huffman, on va parcourir l'arbre de Huffman en ajoutant un `0` à une chaîne de caractère à chaque fois qu'on descend à gauche et un `1` à chaque fois qu'on descend à droite. On va s'arrêter lorsqu'on arrive à une feuille et on va associer la chaîne de caractère obtenue à la feuille.
+> Pour construire le code de Huffman, on va parcourir l'arbre de Huffman en ajoutant un `'0'` à une chaîne de caractère à chaque fois qu'on descend à gauche et un `'1'` à chaque fois qu'on descend à droite. On va s'arrêter lorsqu'on arrive à une feuille et on va associer la chaîne de caractère obtenue à la feuille.
 
-Il faudra utiliser une fonction intermédiaire `fill_encoding_table` qui prend en paramètre un nœud, la chaîne de caractères associé avec représentation binaire du nœud et qui remplit ta table (`std::unordered_map<char, std::string>`) passé par référence.
+Il faudra utiliser une fonction intermédiaire `fill_encoding_table` qui prend en paramètre un nœud, la chaîne de caractères associée avec représentation binaire du nœud et qui remplit ta table (`std::unordered_map<char, std::string>`) passée par référence.
 C'est cette fonction qui va être appelée récursivement pour parcourir l'arbre de Huffman et remplir la table.
 
-Voila les signatures des fonctions:
+Voilà les signatures des fonctions:
 
 ```cpp
-void fill_encoding_table(Node const* node, std::unordered_map<char, std::string>& table, std::string str);
+void fill_encoding_table(Node const* node, std::unordered_map<char, std::string>& table, std::string const& str);
 std::unordered_map<char, std::string> build_encoding_table(Node const* root);
 ```
 
 7. Écrire une fonction `encode` qui prend en paramètre une chaîne de caractères et un `std::unordered_map<char, std::string>` et qui retourne une chaîne de caractères représentant la chaîne de caractères encodée en utilisant le code de Huffman.
 
 ```cpp
-std::string encode(std::string str, std::unordered_map<char, std::string> const& table);
+std::string encode(std::string const& str, std::unordered_map<char, std::string> const& table);
 ```
 
 8. Écrire une fonction `decode` qui prend en paramètre une chaîne de caractères encodée en utilisant le code de Huffman et le sommet de l'arbre de Huffman et qui retourne une chaîne de caractères représentant la chaîne de caractères décodée.
