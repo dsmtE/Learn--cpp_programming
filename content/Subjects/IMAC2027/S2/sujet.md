@@ -47,9 +47,11 @@ import './customStyles.css';
 
 **Nombre de personnes par projet** : 2 ou 3
 
-**Date de rendu** : 02 juin 2025 (au plus tard 23h59)
+**Annonce du sujet** : 29 avril 2025
 
-**Soutenance** : 03 juin 2025
+**Date de rendu** : 05 juin 2025 (au plus tard 23h59)
+
+**Soutenance** : vendredi matin 06 juin 2025
 
 ---
 
