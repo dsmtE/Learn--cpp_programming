@@ -49,7 +49,7 @@ Vous avez le choix entre deux algorithmes de tri:
 
 Voilà les prototypes des fonctions à utiliser et implémenter:
 ```cpp
-size_t quick_sort_partition(std::vector<int> & vec, size_t left, size_t right, size_t const pivot);
+size_t quick_sort_partition(std::vector<int> & vec, size_t left, size_t right);
 void quick_sort(std::vector<int> & vec, size_t const left, size_t const right);
 void quick_sort(std::vector<int> & vec) {
     quick_sort(vec, 0, vec.size() - 1);
