@@ -1,0 +1,1 @@
+function n(t){return t.map((r,e)=>({value:r,index:e})).sort((r,e)=>r.value-e.value).map(({index:r})=>r)}function o(t){let r=Array(t.length);for(let e=0;e<t.length;e++)r[t[e]]=e;return r}function*s(...t){const r=t.map(e=>e[Symbol.iterator]());for(;;){const e=r.map(a=>a.next());if(e.some(({done:a})=>a))break;yield e.map(({value:a})=>a)}}export{o as r,n as s,s as z};

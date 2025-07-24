@@ -49,15 +49,15 @@ Vous avez le choix entre deux algorithmes de tri:
 
 Voilà les prototypes des fonctions à utiliser et implémenter:
 ```cpp
-size_t quick_sort_partition(std::vector<float> & vec, size_t left, size_t right, size_t const pivot);
-void quick_sort(std::vector<float> & vec, size_t const left, size_t const right);
-void quick_sort(std::vector<float> & vec) {
+size_t quick_sort_partition(std::vector<int> & vec, size_t left, size_t right);
+void quick_sort(std::vector<int> & vec, size_t const left, size_t const right);
+void quick_sort(std::vector<int> & vec) {
     quick_sort(vec, 0, vec.size() - 1);
 }
 
-void merge_sort_merge(std::vector<float> & vec, size_t const left, size_t const middle, size_t const right);
-void merge_sort(std::vector<float> & vec, size_t const left, size_t const right);
-void merge_sort(std::vector<float> & vec) {
+void merge_sort_merge(std::vector<int> & vec, size_t const left, size_t const middle, size_t const right);
+void merge_sort(std::vector<int> & vec, size_t const left, size_t const right);
+void merge_sort(std::vector<int> & vec) {
     merge_sort(vec, 0, vec.size() - 1);
 }
 ```
@@ -123,9 +123,9 @@ Elle fonctionne de la manière suivante:
 }
 ```
 
-Elle affichera le temps écoulé entre sa création et sa destruction(c'est à dire à la fin du bloc de code, c'est pourquoi il est déclaré dans un bloc entre accolades (**Scope**) dans l'exemple ci-dessus).
+Elle affichera le temps écoulé entre sa création et sa destruction (c'est-à-dire à la fin du bloc de code, c'est pourquoi il est déclaré dans un bloc entre accolades (**Scope**) dans l'exemple ci-dessus).
 
-### bibliothèque standard
+### Bibliothèque standard
 
 La **bibliothèque standard** de C++ fournit une fonction de tri `std::sort` qui permet de trier des conteneurs (incluse dans la bibliothèque `<algorithm>`)
 
@@ -150,7 +150,7 @@ Avec cette fonction, vous pouvez comparer les temps d'exécution de vos algorith
 
 1. Écrire une fonction `search` qui prend en paramètre un tableau d'entiers (`std::vector`) trié par ordre croissant et une valeur entière et retourne l'indice de la valeur dans le tableau. Si la valeur n'est pas présente dans le tableau, la fonction retournera `-1` (on pourrait utiliser quelques chose de plus propre comme `std::optional` que l'on découvrira dans le prochain cours pour éviter de retourner `-1` pour indiquer que l'on ne trouve pas la valeur).
 
-la fonction devra utiliser l'algorithme de recherche **dichotomique**.
+La fonction devra utiliser l'algorithme de recherche **dichotomique**.
 
 :::tip
 On utilisera deux indices pour définir la partie du tableau à traiter:
@@ -168,7 +168,7 @@ Exemple simple avec le tableau suivant `[1, 2, 2, 3, 4, 8, 12]` (nombre d'élém
     la valeur au milieu du tableau est `8` qui est égale à la valeur recherchée, on retourne l'indice `5` de la valeur dans le tableau.
 :::
 
-4. tester la fonction `search` avec les tableaux suivants et afficher le résultat de la recherche:
+4. Tester la fonction `search` avec les tableaux suivants et afficher le résultat de la recherche:
    - `[1, 2, 2, 3, 4, 8, 12]` (valeur recherchée: `8`)
    - `[1, 2, 3, 3, 6, 14, 12, 15]` (valeur recherchée: `15`)
    - `[2, 2, 3, 4, 5, 8, 12, 15, 16]` (valeur recherchée: `16`)

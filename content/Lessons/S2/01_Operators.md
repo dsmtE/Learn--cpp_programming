@@ -154,6 +154,9 @@ Point operator*(int const a, Point const& b) {
 }
 
 Point operator*(Point const& b, int const a) {
+    // Comme la multiplication est commutative, on peut définir l'opérateur en fonction de l'autre
+    // On utilise l'opérateur * que l'on vient de définir (int * Point) pour définir notre opérateur (Point * int)
+    // highlight-next-line
     return a * b;
 }
 
@@ -183,13 +186,12 @@ bool operator==(Point const& a, Point const& b) {
 }
 
 bool operator!=(Point const& a, Point const& b) {
+    // Ici on utilise l'opérateur == que l'on vient de définir pour définir !=
     return !(a == b);
 }
 ```
 
 Dans notre cas définir les opérateurs de comparaison `<`, `<=`, `>`, `>=` fait moins sens car on ne peut pas vraiment dire qu'un point est plus grand qu'un autre.
-
-```cpp
 
 ## default et C++ 20
 
@@ -324,7 +326,69 @@ std::istream& operator>>(std::istream& is, Point& p) {
 Notez que dans ce cas il faut signaler si l’entrée est invalide en mettant le flux dans un état invalide avec `std::ios::failbit`, ce qui permet à l’utilisateur de faire `if (std::cin.fail())`.
 </details>
 
-Ces opérateurs s’écrivent toujours sous la forme libre car leur premier argument est toujours un flux. 
+Ces opérateurs s’écrivent toujours sous la forme libre car leur premier argument est toujours un flux.
+
+<details>
+<summary>Opérateur de flux pour les vecteurs</summary>
+
+Voilà un exemple supplémentaire pour implémenter l'opérateur de flux pour un vecteur (que je prends en référence constante pour éviter de le copier).
+
+```cpp
+#include <iostream>
+#include <vector>
+
+std::ostream& operator<<(std::ostream& os, std::vector<int> const& array)
+{
+    os << "[ ";
+    for (size_t i {0}; i<array.size()-1; ++i)
+    {
+        os << array[i] << ", ";
+    }
+    os << array[array.size()-1] << "]";
+    return os;
+}
+```
+
+Il est même possible de faire mieux avec une fonctionnalité avancée de C++ qui permet de définir une fonction "générique" pour n'importe quel type de vecteur. Cela permet de ne pas avoir à redéfinir l'opérateur pour chaque type de vecteur.
+
+Je vous donne le code afin que vous puissiez l'utiliser si vous en avez besoin. Vous n'avez pas besoin de comprendre le code pour l'instant.
+Vous apprendrez à manipuler les templates l'année prochaine.
+```cpp
+#include <iostream>
+#include <vector>
+
+template<typename T>
+std::ostream& operator<<(std::ostream& os, std::vector<T> const& array)
+{
+    os << "[ ";
+    for (size_t i {0}; i<array.size()-1; ++i)
+    {
+        os << array[i] << ", ";
+    }
+    os << array[array.size()-1] << "]";
+    return os;
+}
+```
+
+:::tip
+
+En **C++20** il est possible de passer par la fonction `std::format` qui permet de formater une chaîne de caractères et supporte les vecteurs.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <format>
+
+int main()
+{
+    std::vector<int> v {1, 2, 3, 4, 5};
+    std::cout << std::format("{}", v) << std::endl;
+}
+```
+
+:::
+
+</details>
 
 ## Opérateurs d'affectation par copie
 

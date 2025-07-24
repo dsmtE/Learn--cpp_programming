@@ -15,7 +15,7 @@ Nous allons vous proposer [une liste d'exercices](./Exercices), plus ou moins di
 
 Vous êtes évalué.es non seulement sur la qualité du travail rendu, mais aussi – de manière tout aussi importante – sur votre sérieux et votre implication tout au long de la semaine de workshop.
 
-À la fin de la semaine il y aura [une mini-soutenance](#soutenance) (optionnelle, et qui est plus un exercice de vulgarisation qu'autre chose), et il faudra rendre [un mini-rapport](#rapport).
+À la fin de la semaine il y aura [une mini-soutenance](#soutenance) (optionnelle, et qui est plus un exercice de vulgarisation qu'autre chose), et il faudra rendre [un mini-rapport](#rendu-et-rapport).
 
 ## Pour bien démarrer
 

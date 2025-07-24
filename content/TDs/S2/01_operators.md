@@ -2,10 +2,15 @@
 title: TD1 - Opérateurs
 ---
 
-L'idée de ce TD est de reprendre le **TD08** du premier semestre est d'améliorer notre structure `Fraction` en utilisant la **surcharge d'opérateurs**.
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
-Reprendre les fichiers `fraction.hpp`, `fraction.cpp`, `utils.hpp` et `utils.cpp` du TD08 du premier semestre.
+L'idée de ce TD est de partir d'une implémentation simple de structure `Fraction` et de la transformer en une structure plus complète en surchargeant les **opérateurs** pour pouvoir faire des opérations mathématiques avec des fractions.
 
+Je vous fourni donc une base de code pour la structure `Fraction` avec les fichiers `fraction.hpp`, `fraction.cpp`, `utils.hpp` et `utils.cpp` que vous pouvez télécharger : <a target="_blank" href={ useBaseUrl("/code/S2/S2_TD01_Fraction.zip") } download={"S2_TD01_Fraction.zip"}>S2_TD01_Fraction.zip</a>
+
+
+
+*utils* contient une fonction **simplify** permettant de simplifier nos fractions.
 ## Exercice 1 (opérations)
 
 Transformer les méthodes `add`, `sub`, `mul` et `div` en surcharge des opérateurs `+`, `-`, `*` et `/` pour pouvoir utiliser les opérateurs avec des fractions.
@@ -37,6 +42,27 @@ Il existe une autre façon de faire en comparant les **produits en croix des fra
 - Ajouter les opérateurs d'affectation `+=`, `-=`, `*=` et `/=`.
 - Réécrire les opérateurs `+`, `-`, `*` et `/` en utilisant les opérateurs affectation afin d'éviter de dupliquer le code ([deux-en-un](/Lessons/S2/Operators/#deux-en-un)) (Commenter l'ancienne version des opérateurs par exemple)
 
+:::tip
+
+Il est possible d'utiliser la fonction **simplify** sur l'objet courant dans une **méthode** en utilisant `this` qui est le pointeur vers "moi-même":
+
+Exemple:
+```cpp
+void Fraction::operator+=(Fraction const& f) {
+    numerator = numerator * f.denominator + f.numerator * denominator;
+    denominator = denominator * f.denominator;
+
+    *this = simplify(*this);
+
+    // Ou alors la version simplify_ref qui prend une référence d'une fraction à modifier
+    // simplify_ref(*this);
+}
+```
+
+Ici `*this` est donc une référence vers "moi-même" que je peux donc passer en paramètre à la fonction simplify.
+Enfin, je me sers du résultat pour l'assigner à moi-même avec l'opérateur d'affectation "=" (toujours avec "*this").
+
+:::
 
 ## Exercice 6 (conversion)
 
@@ -44,7 +70,7 @@ Il existe une autre façon de faire en comparant les **produits en croix des fra
 
 Il est aussi possible de définir des opérateurs de conversion pour convertir une fraction en un autre type.
 
-la syntaxe est la suivante:
+La syntaxe est la suivante :
 
 ```cpp
 operator type() const {
@@ -54,7 +80,7 @@ operator type() const {
 
 2. Ajouter l'opérateur de conversion `float` pour pouvoir convertir une fraction en `float` en utilisant la méthode `to_float`.
 
-le prototype de la méthode pour notre structure `Fraction` sera le suivant:
+Le prototype de la méthode pour notre structure `Fraction` sera le suivant:
 
 ```cpp
 Fraction::operator float() const;

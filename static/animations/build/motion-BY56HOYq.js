@@ -1,0 +1,1 @@
+import{j as h,R as n}from"./_virtual_settings-W9jktp4-.js";function r(t,i,o){return()=>t().topLeft().addX(i*o)}function f(t,i,o,e,s=1){return h(n,{ref:i,stroke:o,lineWidth:6,radius:8,opacity:s,position:()=>t().position(),width:()=>t().width()+2*e,height:()=>t().height()+2*e})}export{f as c,r as p};

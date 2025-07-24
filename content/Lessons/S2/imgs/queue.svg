@@ -1,0 +1,23 @@
+<svg version="1.1" width="370" height="370" viewBox="0 0 370 370"
+xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+
+    <text x="213" y="337" fill="#000" font-family="Helvetica" font-size="12px" text-anchor="middle">Dequeue</text>
+    <text x="171" y="23" fill="#000" font-family="Helvetica" font-size="12px" text-anchor="middle">Enqueue</text>
+    <text x="66" y="64" fill="#000" font-family="Helvetica" font-size="12px" text-anchor="middle">Queue Back</text>
+    <text x="289" y="254" fill="#000" font-family="Helvetica" font-size="12px" text-anchor="middle" >Queue Front</text>
+    <text x="282" y="162" fill="#000" font-family="Helvetica" font-size="12px" text-anchor="middle" >Queue</text>
+    <rect id="rectEnqueue" fill="#d5e8d4" stroke="#000" width="80" height="40" x="230" y="10" rx="6" ry="6"/>
+    <g id="arrow01" >
+        <path d="m 220,30 q -30,0 -37.99,23.96" fill="none" stroke="#000" stroke-miterlimit="10"/>
+        <path d="m 180.35,58.94 -1.1,-7.75 2.76,2.77 3.88,-0.55 z" fill="#000" stroke="#000" stroke-miterlimit="10"/>
+    </g>
+    <use x="0" y="0" href="#arrow01" transform="rotate(-120,162,90)"/>
+    <use x="0" y="0" href="#arrow01" transform="matrix(0.5,-0.866,-0.866,-0.5,195,465)" />
+    <use x="0" y="0" href="#arrow01" transform="matrix(0.2618,-0.965,-0.965,-0.2618,153.7,530.6)" />
+    <use x="0" y="0" href="#rectEnqueue" id="rectQueue" transform="translate(-90,56)" />
+    <use x="0" y="0" href="#rectQueue" transform="translate(0,49)" />
+    <use x="0" y="0" href="#rectQueue" transform="translate(0,98)" />
+    <use x="0" y="0" href="#rectQueue" transform="translate(0,147)" />
+    <use x="0" y="0" href="#rectQueue" transform="translate(0,198)" />
+    <use x="0" y="0" href="#rectEnqueue" transform="translate(-176,307)" />
+</svg>

@@ -4,6 +4,8 @@ tags:
     - C++
 ---
 
+import OriginalMotionCanvasPlayer from '@site/src/components/OriginalMotionCanvasPlayer';
+
 export const Array = ({values, boldIndices}) => (
     <div style={{display: "flex", justifyContent: "center"}}>
     <table>
@@ -55,7 +57,7 @@ Voilà les itérations suivantes:
 
 Voilà, le tableau est trié.
 
-Je t'invite à regarder le fonctionnement de cet algorithme sur [cette animation](https://www.toptal.com/developers/sorting-algorithms/selection-sort) ou encore [ici](https://visualgo.net/en/sorting) (clique sur "SEL" ou "Selection Sort" dans la barre de navigation).
+<OriginalMotionCanvasPlayer name="selectionSort" />
 
 ### Tri à bulles (bubble sort)
 
@@ -86,6 +88,8 @@ Voilà les itérations suivantes:
 1. <Array values={[2, 1, 5, 3, 6, 8, 9]} />
 2. <Array values={[1, 2, 3, 5, 6, 8, 9]} />
 3. Dernier passage, aucun échange n'est effectué. Le tableau est trié.
+
+<OriginalMotionCanvasPlayer name="bubbleSort" />
 
 ## Parlons un peu de complexité
 
@@ -236,6 +240,8 @@ Il y a donc deux "phases" dans cet algorithme:
 - la phase de **division** du tableau en deux parties égales
 - la phase de **fusion** des deux parties triées
 
+<OriginalMotionCanvasPlayer name="mergeSort_intro" />
+
 #### Phase de division
 
 Pour la phase de division, on va choisir de diviser et trier le tableau en deux parties égales pour maximiser l'efficacité de l'algorithme (ou presque égales si le tableau a une taille impaire).
@@ -291,6 +297,8 @@ On obtient ainsi un tableau trié.
 La **condition d'arrêt** de la récursion est quand la taille de la partie du tableau à trier est inférieure ou égale à `1`, car un tableau de taille `1` est déjà trié (de même pour un tableau vide).
 :::
 
+<OriginalMotionCanvasPlayer name="mergePhase" />
+
 #### Récursion
 
 Dans l'exemple précédent, je n'ai pas détaillé la phase de tri des deux sous-tableaux, on pourrait par exemple utiliser un tri précédemment vu comme le **tri par sélection** pour trier les deux sous-tableaux.
@@ -320,6 +328,8 @@ Il est plus efficace cependant les copies effectuées pour l'étape de fusion de
 
 On va découvrir un autre algorithme de tri qui à la même complexité en temps que le tri fusion mais qui ne nécessite pas de copies intermédiaires (En TDs, si vous les implémentez tout les deux je vous suggère de comparer les deux algorithmes pour vous rendre compte de la différence de performance).
 :::
+
+<OriginalMotionCanvasPlayer name="recursiveMergeSort" />
 
 ### Tri rapide (quick sort)
 
@@ -491,6 +501,7 @@ Exemple simple avec le tableau suivant `[1, 2, 2, 4, 5, 8, 12]` (nombre d'élém
 
     On peut donc s'arrêter et renvoyer l'indice `5`.
 
+<OriginalMotionCanvasPlayer name="dichotomicSearch" />
 
 ### Complexité
 
@@ -528,3 +539,7 @@ Ce qui fait un total de $log_2(8) = 3$ itérations.
         > C'est un algorithme qui fonctionne en comptant le nombre d'occurrences de chaque valeur, puis en reconstruisant le tableau en plaçant les valeurs dans l'ordre.
         > C'est un algorithme qui ne fonctionne que pour des données **entières** et où la valeur maximale des données est connue à l'avance et relativement petite.
 - La **recherche dichotomique** est une méthode de recherche dans un tableau trié qui consiste à diviser le tableau en deux parties égales et à ne garder que la partie qui contient la valeur recherchée. On répète l'opération jusqu'à trouver la valeur souhaitée.
+
+:::info
+Je t'invite à regarder le fonctionnement des algorithmes sur [ce site](https://www.toptal.com/developers/sorting-algorithms) qui propose des visualisation ou encore [ici](https://visualgo.net/en/sorting).
+:::
