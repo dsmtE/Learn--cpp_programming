@@ -121,9 +121,9 @@ Chaque pixel va prendre comme couleur le rouge d'un pixel un peu à sa droite, s
 
 ## ⭐⭐ Luminosité
 
-| ![](images/photo.jpg)  | ![](output/luminosity+.jpg)  |![](output/luminosity-.jpg)  |
-|---|----|----|
-| Image originale | Après éclaircissement | Après assombrissement |
+| ![](images/photo.jpg) | ![](output/luminosity+.jpg) | ![](output/luminosity-.jpg) |
+| --------------------- | --------------------------- | --------------------------- |
+| Image originale       | Après éclaircissement       | Après assombrissement       |
 
 <details>
     <summary>Indice</summary>
@@ -319,9 +319,9 @@ Sur l'image ci-dessus j'ai utilisé de l'*ordered dithering* avec une matrice de
 
 ## ⭐⭐⭐(⭐) Normalisation de l'histogramme
 
-| ![](images/photo_faible_contraste.jpg)  | ![](output/normalize_histogram.jpg)  |
-|---|----|
-| Avant | Après |
+| ![](images/photo_faible_contraste.jpg) | ![](output/normalize_histogram.jpg) |
+| -------------------------------------- | ----------------------------------- |
+| Avant                                  | Après                               |
 
 L'algorithme consiste à trouver le pixel le moins lumineux et le pixel le plus lumineux de l'image, puis à appliquer une transformation à chaque pixel de sorte à ce que le pixel le plus sombre devienne un noir pur (`0`) et le plus lumineux devienne un blanc pur (`1`).<br/>
 (PS : testez avec l'image `"images/photo_faible_contraste.jpg"`, vous verrez bien l'intérêt de l'effet.)
@@ -363,18 +363,18 @@ Conseil : une fois que vous savez que votre algo marche, si vous voulez tester a
 
 ### ⭐ Netteté, Contours, etc.
 
-| ![](output/emboss.png)  | ![](output/outline.png)  |![](output/sharpen.png)  |
-|---|----|----|
-| Emboss | Outline | Sharpen |
+| ![](output/emboss.png) | ![](output/outline.png) | ![](output/sharpen.png) |
+| ---------------------- | ----------------------- | ----------------------- |
+| Emboss                 | Outline                 | Sharpen                 |
 
 Une fois que vous avez implémenté l'algo générique de convolution qui prend n'importe quel kernel, vous pourrez trouver sur [ce site](https://setosa.io/ev/image-kernels/) une liste de kernels pour faire différents effets.
 
 ### ⭐⭐ Filtres séparables
 
-| Box blur naïf, 100x100  | Box blur séparé, 100x100 |
-|---|----|
+| Box blur naïf, 100x100       | Box blur séparé, 100x100                      |
+| ---------------------------- | --------------------------------------------- |
 | ![](output/big_box_blur.png) | ![](output/big_box_blur_separable_filter.png) |
-| 7.44 secondes | 0.18 secondes |
+| 7.44 secondes                | 0.18 secondes                                 |
 
 Quand vous voulez faire un gros flou il faut augmenter la taille du kernel, ce qui peut considérablement ralentir l'algorithme. Heureusement, certains kernels ont une propriété qui nous permet de calculer leur convolution **BEAUCOUP** plus rapidement. Le *box blur* et le *gaussian blur* sont de tels kernels. Voici une vidéo expliquant tout ça :
 
@@ -393,9 +393,9 @@ Voici une vidéo expliquant l'algorithme :
 
 ## ⭐⭐⭐⭐⭐ K-means : trouver les couleurs les plus présentes dans une image
 
-| ![](images/photo.jpg)  | ![](output/k_means_2_colors.jpg) | ![](output/k_means_3_colors.jpg)  | ![](output/k_means_16_colors.jpg)  |
-|---|----|----|----|
-| Originale | 2 couleurs | 3 couleurs | 16 couleurs |
+| ![](images/photo.jpg) | ![](output/k_means_2_colors.jpg) | ![](output/k_means_3_colors.jpg) | ![](output/k_means_16_colors.jpg) |
+| --------------------- | -------------------------------- | -------------------------------- | --------------------------------- |
+| Originale             | 2 couleurs                       | 3 couleurs                       | 16 couleurs                       |
 
 Trouvez les k couleurs les plus représentatives de l'image, puis assignez à chaque pixel la couleur dont il est le plus proche parmi les k.
 

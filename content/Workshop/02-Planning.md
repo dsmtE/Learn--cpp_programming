@@ -24,6 +24,6 @@
 ## Vendredi
 
 - [ ] *Cours* : Présentation de Markdown pour l'écriture du rapport
-- [ ] Écriture du rapport (Vous avez jusqu'à dimanche 9h pour les rendre)
+- [ ] Écriture du rapport (Vous avez jusqu'à samedi 23h59 pour le rendre)
 - [ ] Préparation de la présentation pour celleux concerné.es
 - [ ] Présentations l'après-midi

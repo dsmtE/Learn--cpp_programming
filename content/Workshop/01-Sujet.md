@@ -2,14 +2,14 @@
 
 Durant ce workshop vous aller apprendre à coder des effets sur des images. (Comme on peut en trouver dans Photoshop, les filtres Instagram, etc.). Ce sera une première introduction à certains concepts de synthèse d'image, et une bonne occasion de vous entraîner en C++ !
 
-| ![](output/emboss.png)  | ![](output/outline.png)  |![](output/glitch.png)  |
-|---|----|----|
-| ![](output/ordered_dithering.png) | ![](output/difference_of_gaussians.png) | ![](output/kuwahara.jpg) |
-| ![](output/rosace.png) | ![](output/diamond_square_colored.png) | ![](output/mandelbrot.png) |
+| ![](output/emboss.png)            | ![](output/outline.png)                 | ![](output/glitch.png)     |
+| --------------------------------- | --------------------------------------- | -------------------------- |
+| ![](output/ordered_dithering.png) | ![](output/difference_of_gaussians.png) | ![](output/kuwahara.jpg)   |
+| ![](output/rosace.png)            | ![](output/diamond_square_colored.png)  | ![](output/mandelbrot.png) |
 
 ## Attendus
 
-Vous pouvez faire ce projet en solo ou à deux.
+Ce projet est à faire en solo.
 
 Nous allons vous proposer [une liste d'exercices](./Exercices), plus ou moins difficiles (la difficulté est indiquée par le nombre d'étoiles ⭐). Nous ne nous attendons pas à ce que vous fassiez tous les exercices, mais faites en un maximum ! **Et il faudra au minimum faire un exercice de niveau 3 ou plus (⭐⭐⭐).** Vous êtes aussi les bienvenu.es pour inventer vos propres effets ou en faire que vous avez vu quelque part, même si ils ne sont pas dans la liste !
 
@@ -92,7 +92,7 @@ int main()
 
 ## Rendu et Rapport
 
-__*À rendre avant dimanche à 9h*__.<br/>
+__*À rendre avant samedi à 23h59*__.<br/>
 *Pour le rendu, il suffit de [mettre votre lien git ici](https://docs.google.com/spreadsheets/d/1x2uqvKdhndstidmW4xoWkNTlbwHFDWGlpohdb6TRORY/edit?usp=sharing)*. Attention, vérifiez bien que votre repo est en public, ou si il est en privé, pensez à m'inviter dessus ([*julesfouchy*](https://github.com/julesfouchy/)).
 
 Pour le rapport, faites une section par exercice que vous avez fait. Montrez une image avant et après application de l'effet (comme c'est fait dans l'énoncé des exercices). Si vous jugez cela utile, vous pouvez mettre un petit texte expliquant des spécificités de l'algo que vous avez implémenté, et les pièges potentiels dans lesquels il ne faut pas tomber.
