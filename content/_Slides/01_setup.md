@@ -41,7 +41,6 @@ blockquote {
 
 - Pas besoin de connaissances préalables
 - CM: 10 séances
-- TD: 10 séances (non notées mais à rendre pour suivi)
 - Mini Examen: Demi séance pendant CM (~30min - noté)
 - Workshop: 1 semaine (noté)
 - Projet (~ 2 semaines - Individuel - noté)
@@ -89,7 +88,7 @@ blockquote {
 
 ---
 
-# Premiers programme
+# Premier programme
 
 ```cpp
 #include <iostream>
@@ -109,17 +108,17 @@ int main()
 # Utiliser CMake et VSCode
 
 ```cmake title="CMakeLists.txt"
-# Nous voulons un cmake "récent" pour utiliser les dernières fonctionnalités
-cmake_minimum_required(VERSION 3.0)
+# Optional: Nous voulons un cmake "récent" pour utiliser les dernières fonctionnalités
+# cmake_minimum_required(VERSION 3.24)
 
 # La version du C++ que l'on souhaite utiliser (dans notre cas C++17)
 set(CMAKE_CXX_STANDARD 17)
 
 # Le nom du projet
-project(IMAC_project)
+project(hello_imac_cmake)
 
 # On indique que l'on veut créer un exécutable "helloImac" compilé à partir du fichier helloImac.cpp
-add_executable(helloImac helloImac.cpp)
+add_executable(helloImac src/helloImac.cpp)
 ```
 
 ---
