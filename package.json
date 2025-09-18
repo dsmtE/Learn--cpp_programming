@@ -18,19 +18,19 @@
     "@docusaurus/core": "^3.8.1",
     "@docusaurus/preset-classic": "^3.8.1",
     "@docusaurus/theme-mermaid": "^3.8.1",
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@iconify/react": "5.0.2",
     "@mdx-js/react": "^3.0.0",
     "@motion-canvas/2d": "3.17.2",
     "@motion-canvas/core": "3.17.2",
     "@motion-canvas/player": "3.17.2",
-    "@mui/material": "^5.15.2",
+    "@mui/material": "^7.3.2",
     "axios": "^1.6.3",
     "cheerio": "^1.0.0-rc.12",
     "clsx": "^2.1.0",
     "docusaurus-lunr-search": "^3.3.1",
-    "prism-react-renderer": "^2.3.1",
+    "prism-react-renderer": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rehype-katex": "^7.0.0",
@@ -40,7 +40,7 @@
     "@docusaurus/module-type-aliases": "^3.8.1",
     "@docusaurus/tsconfig": "^3.8.1",
     "@docusaurus/types": "^3.8.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.9.2"
   },
   "browserslist": {
     "production": [
