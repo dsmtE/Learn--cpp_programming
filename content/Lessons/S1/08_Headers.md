@@ -323,7 +323,7 @@ On va également régler une variable **Cmake** ```CMAKE_RUNTIME_OUTPUT_DIRECTOR
 
 ```cmake title="CMakeLists.txt"
 # la version de cmake à utiliser
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 
 # La version du C++ que l'on souhaite utiliser (dans notre cas C++17)
 set(CMAKE_CXX_STANDARD 17)
@@ -385,7 +385,7 @@ Notre fichier ```CMakeLists.txt``` devient:
 
 ```cmake
 # la version de cmake à utiliser
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 
 # La version du C++ que l'on souhaite utiliser (dans notre cas C++17)
 set(CMAKE_CXX_STANDARD 17)
