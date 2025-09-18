@@ -53,7 +53,7 @@ int main()
 Ensuite, nous allons créer un fichier `CMakeLists.txt` à la racine du projet avec le contenu suivant :
 
 ```cmake title="CMakeLists.txt"
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 
 project(TD01)
