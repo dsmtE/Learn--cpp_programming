@@ -77,7 +77,7 @@ int main()
 ```
 :::
 
-### La logique booléenne
+### Opérateurs logiques
 
 Maintenant que nous disposons d'un moyen d'obtenir une valeur booléenne (via les opérateurs de comparaison) nous allons pouvoir manipuler ces valeurs avec ce que l'on nomme des **opérateurs logiques**.
 
@@ -147,11 +147,11 @@ Je ne détaillerai pas dans ce chapitre son utilité mais il est important de le
 De même pour l'opérateur **OR** (```||```) différent de <kbd>|</kbd>.
 :::
 
-### Des structures de contrôle
+## Des structures de contrôle
 
 C'est bien beau toutes ces valeurs booléennes mais comment on peut s'en servir pour exécuter une partie d'un code ou un autre en fonction d'une condition ?
 
-#### Si
+### If
 Notre première structure de contrôle va s'utiliser avec le mot clé **if**.
 De l'anglais, ce mot clé signifiant **"si"**, exécute des instructions si et seulement si la condition donnée est vraie.
 
@@ -230,7 +230,7 @@ if ( isExpensive )
 ```
 :::
 
-#### Sinon
+### Else
 
 C'est très bien de pouvoir effectuer quelque chose si une condition est vérifée mais comment faire si l'on veut effectuer une action A si la condition est vérifée et une autre action B si ce n'est pas le cas ?
 
@@ -322,7 +322,7 @@ int main()
 
 Mais comment tester une succession de conditions différentes avant de faire "tout le reste" ?
 
-#### Sinon si
+### Else if
 
 On pourrait très bien chaîner plusieurs ```if``` et ```else``` imbriqués de cette manière:
 
@@ -389,7 +389,7 @@ int main()
 ```
 
 :::note
-Enfin, il existe une dernière syntaxe (le ```switch``` pour les curieux) qui permet de faire quelque chose de similaire au ```else if``` mais il nous manque quelques notions et je vous le présenterai juste après les boucles.
+Enfin, il existe une dernière syntaxe (le ```switch``` pour les curieux) qui permet de faire quelque chose de similaire au ```else if``` lorsque nos conditions sont des égalités sur une même variable. mais il nous manque quelques notions avant de pouvoir l'aborder correctement. Nous y reviendrons plus tard dans ce chapitre.
 :::
 
 ### Faux-ami
@@ -409,7 +409,7 @@ En **C++**, l'assignation retourne la valeur de la variable assignée. Ici, la c
 
 Les valeurs numériques non nulles sont considérées comme vraies et la valeur 0 est considérée comme fausse.
 
-### Combinaison d'expressions
+### Combinaison d'expressions et logique booléenne
 
 Avec tous les opérateurs logiques vu précédemment il est même possible de tester plusieurs conditions dans un même ```if```.
 
@@ -455,7 +455,7 @@ Cela permet parfois de simplifier le code ou alors d'exprimer la condition sous 
 
 Dans mon exemple précédent la condition ```(!isRaining || (isRaining && ownsAnUmbrella))``` est équivalente à écrire ```(!isRaining || ownsAnUmbrella)```.
 
-En effet, si il ne **pleut pas**(`!isRaining`) , peu importe si j'ai un parapluie ou non, je peux sortir, Si cependant la première condition est fausse (il pleut) alors inutile de vérifier de nouveau si il pleut (`!isRaining || (isRaining &&...`) c'est impliqué par la première condition et donc il suffit de vérifier si j'ai un parapluie.
+En effet, si il ne **pleut pas**(`!isRaining`) , peu importe si j'ai un parapluie ou non, je peux sortir, Si cependant la première condition est fausse (il pleut) alors inutile de vérifier de nouveau si il pleut (`!isRaining || (isRaining &&...`) c'est implicite par la première condition et donc il suffit de vérifier si j'ai un parapluie.
 
 Il existe aussi le **théorème de De Morgan** qui permet d'exprimer la négation d'un **ET** avec un **OU** et inversement.
 
@@ -470,135 +470,6 @@ On peut s'en convaincre en essayant de traduire ces conditions en phrases:
 
 Vous trouverez des exemples de propriétés et simplifications possibles sur la page Wikipédia suivante:
 [Algèbre de Boole](https://fr.wikipedia.org/wiki/Alg%C3%A8bre_de_Boole_(logique))
-
-### Switch
-
-Maintenant que nous avons toutes les cartes en main revenons brièvement au **switch** dont je vous parlais précédemment.
-
-Très souvent on veut seulement tester la valeur d'une variable et effectuer telle ou telle action en fonction. On pourrait très bien écrire cela avec des ```else if```:
-
-```cpp
-#include <iostream>
-int main()
-{
-    int value { 42 };
-    if ( value == 12 )
-    {
-        // ...
-    }
-    else if ( value == 33 )
-    {
-        // ...
-    }
-    else  if ( value == 52)
-    {
-        //...
-    }
-    else
-    {
-        //...  
-    }
-    return 0;
-}
-```
-
-C'est avec le mot clé ```switch``` que l'on va pouvoir faire cela de façon plus lisible:
-
-```cpp
-#include <iostream>
-int main()
-{
-    int value { 42 };
-    switch (value)
-    {
-        case 12:
-            // ...
-            break; // permet de quitter le bloc switch
-        case 33:
-            // ...
-            break;
-        case 52:
-            // ...
-            break;
-        default:
-            // ...
-            break;
-    }
-
-    return 0;
-}
-```
-
-Lorsque l'expression testée est égale à une des valeurs listées avec les mots-clés ```case``` la **totalité** des instructions qui suivent sont exécutées. 
-Le mot clé ```break``` indique la sortie de la structure de contrôle.
-Le mot clé ```default``` indique quelles instructions exécuter si l'expression n'est jamais égale à une des valeurs.
-
-:::danger
-De manière générale, n'oubliez pas d'insérer des instructions ```break``` entre chaque test, ce genre d'oubli est difficile à détecter car aucune erreur n'est signalée...
-En effet la **totalité** des instructions suivant le ```case``` sont exécutées et donc on pourrait se retrouver à exécuter des instructions de manière involontaire.
-
-```cpp
-#include <iostream>
-int main()
-{
-    int value { 33 };
-    switch (value)
-    {
-        case 12:
-            std::cout << "value est égale à 12" << std::endl;
-        case 33:
-            std::cout << "value est égale à 33" << std::endl;
-        default:
-            std::cout << "value est différent de 12 ou 33" << std::endl;
-    }
-
-    return 0;
-}
-```
-qui nous donne:
-
-```bash
-value est égale à 33
-value est différent de 12 ou 33
-```
-
-Cela peut être parfois voulu mais ici on se rend bien compte qu'il y a un problème et il ne faut donc pas oublier le mot clé ```break```.
-
-Voici un exemple où cela peut être utile:
-
-```cpp
-#include <iostream>
-int main()
-{
-    char letter { 'e' };
-    switch(letter)
-    {
-        case 'a':
-        case 'e':
-        case 'i':
-        case 'o':
-        case 'u':
-        case 'y':
-            std::cout << "You entered a vowel." << std::endl;
-            break;
-        default:
-            std::cout << "You entered a consonant." << std::endl;
-            break;
-    }
-
-    return 0;
-}
-```
-
-Certains warnings de compilateur permette d'indiquer ce genre de cas mais c'est mieux d'y faire attention.
-:::
-
-:::warning Switch et chaînes de caractères
-
-Il est important de noter que le mot clé `switch` ne peut pas être utilisé avec des chaînes de caractères. Il ne peut être utilisé qu'avec des types entiers (`int`, `char`, `short`, `long`, etc...) ou encore les [**énumérations**](/Lessons/S1/Variables/#enum-un-type-supplémentaire).
-
-il est possible de faire cela avec des `if` et `else if` mais généralement lors de l'utilisation de switch on connaît à l'avance les valeurs possibles et donc on utilisera de préférence des [**énumérations**](/Lessons/S1/Variables/#enum-un-type-supplémentaire) ou des constantes.
-:::
 
 ## Boucles
 
@@ -671,7 +542,9 @@ Il est donc parfois utile de faire des boucles de ce type, pour s'assurer que l'
 int main()
 {
     int sum {0};
-    int number;
+    // On déclare la variable en dehors de la boucle pour pouvoir l'utiliser après
+    // Il n'est pas nécessaire de l'initialiser ici car on va écrire une valeur avant de l'utiliser mais c'est une bonne pratique pour éviter les valeurs indéfinies
+    int number {};
     
 	do {
 		std::cout << "Entre un nombre: ";
@@ -895,6 +768,135 @@ int main()
 
 Ici, l'instruction de ```count--;``` ne sera donc jamais appelée une fois que ```count``` devient égal à 5.
 ```count``` restera donc égal à 5 indéfiniment: C'est une **boucle infinie**.
+:::
+
+## Nouvelle structure de contrôle: switch
+
+Maintenant que nous avons toutes les cartes en main revenons brièvement au **switch** dont je vous parlais précédemment.
+
+Très souvent on veut seulement tester la valeur d'une variable et effectuer telle ou telle action en fonction. On pourrait très bien écrire cela avec des ```else if```:
+
+```cpp
+#include <iostream>
+int main()
+{
+    int value { 42 };
+    if ( value == 12 )
+    {
+        // ...
+    }
+    else if ( value == 33 )
+    {
+        // ...
+    }
+    else  if ( value == 52)
+    {
+        //...
+    }
+    else
+    {
+        //...  
+    }
+    return 0;
+}
+```
+
+C'est avec le mot clé ```switch``` que l'on va pouvoir faire cela de façon plus lisible:
+
+```cpp
+#include <iostream>
+int main()
+{
+    int value { 42 };
+    switch (value)
+    {
+        case 12:
+            // ...
+            break; // permet de quitter le bloc switch
+        case 33:
+            // ...
+            break;
+        case 52:
+            // ...
+            break;
+        default:
+            // ...
+            break;
+    }
+
+    return 0;
+}
+```
+
+Lorsque l'expression testée est égale à une des valeurs listées avec les mots-clés ```case``` la **totalité** des instructions qui suivent sont exécutées. 
+Le mot clé ```break``` indique la sortie de la structure de contrôle.
+Le mot clé ```default``` indique quelles instructions exécuter si l'expression n'est jamais égale à une des valeurs.
+
+:::danger
+De manière générale, n'oubliez pas d'insérer des instructions ```break``` entre chaque test, ce genre d'oubli est difficile à détecter car aucune erreur n'est signalée...
+En effet la **totalité** des instructions suivant le ```case``` sont exécutées et donc on pourrait se retrouver à exécuter des instructions de manière involontaire.
+
+```cpp
+#include <iostream>
+int main()
+{
+    int value { 33 };
+    switch (value)
+    {
+        case 12:
+            std::cout << "value est égale à 12" << std::endl;
+        case 33:
+            std::cout << "value est égale à 33" << std::endl;
+        default:
+            std::cout << "value est différent de 12 ou 33" << std::endl;
+    }
+
+    return 0;
+}
+```
+qui nous donne:
+
+```bash
+value est égale à 33
+value est différent de 12 ou 33
+```
+
+Cela peut être parfois voulu mais ici on se rend bien compte qu'il y a un problème et il ne faut donc pas oublier le mot clé ```break```.
+
+Voici un exemple où cela peut être utile:
+
+```cpp
+#include <iostream>
+int main()
+{
+    char letter { 'e' };
+    switch(letter)
+    {
+        case 'a':
+        case 'e':
+        case 'i':
+        case 'o':
+        case 'u':
+        case 'y':
+            std::cout << "You entered a vowel." << std::endl;
+            break;
+        default:
+            std::cout << "You entered a consonant." << std::endl;
+            break;
+    }
+
+    return 0;
+}
+```
+
+Certains warnings de compilateur permette d'indiquer ce genre de cas mais c'est mieux d'y faire attention.
+:::
+
+:::warning Switch et chaînes de caractères
+
+Il est important de noter que le mot clé `switch` ne peut pas être utilisé avec des chaînes de caractères. Il ne peut être utilisé qu'avec des types entiers (`int`, `char`, `short`, `long`, etc...) ou encore les [**énumérations**](/Lessons/S1/Variables/#enum-un-type-supplémentaire).
+
+il est possible de faire cela avec des `if` et `else if` mais généralement lors de l'utilisation de switch on connaît à l'avance les valeurs possibles et donc on utilisera de préférence des [**énumérations**](/Lessons/S1/Variables/#enum-un-type-supplémentaire) ou des constantes.
 :::
 
 ## En résumé
