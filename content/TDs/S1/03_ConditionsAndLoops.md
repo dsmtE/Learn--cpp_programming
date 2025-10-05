@@ -23,10 +23,9 @@ Saisir un entier : -5
 Un **ternaire** est une expression conditionnelle qui permet de faire un test comme un **if/else** et de retourner une valeur en fonction du résultat du test.
 
 ```cpp
-int a {5};
-int b {10};
+const bool is_student{true};
 // condition ? valeur si vrai : valeur si faux
-int c {(a > b) ? a : b }; // c = 10
+const int price {is_student ? 10 : 20}; // price = 10
 ```
 
 C'est réservé aux cas simples qui peuvent s'écrire sur une seule ligne.
