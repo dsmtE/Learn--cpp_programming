@@ -144,7 +144,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC terminal_ctrl)
 
 Voilà un exemple d'utilisation de la librairie:
 ```cpp
-#include <terminal_ctrl/terminal_ctrl.h>
+#include <terminal_ctrl.h>
 
 int main() {
     terminal_ctrl::clear_terminal();
