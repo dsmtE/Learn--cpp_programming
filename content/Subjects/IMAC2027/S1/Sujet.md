@@ -148,7 +148,7 @@ Voilà un exemple d'utilisation de la librairie:
 #include <terminal_ctrl/terminal_ctrl.h>
 
 int main() {
-    terminal_ctrl::clear_terminal();
+    terminal_ctrl::clear_screen();
     terminal_ctrl::move_cursor(1, 3);
     std::cout << "Hello World" << std::endl;
     return 0;
