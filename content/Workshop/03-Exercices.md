@@ -156,7 +156,7 @@ puis itérer sur les pixels pour les colorer.
 Quelle est l'équation d'un disque ? Comment peut on s'en servir pour savoir si un pixel est à l'intérieur ou à l'extérieur du disque ?
 </details>
 
-### ⭐⭐(⭐) Cercle
+### ⭐⭐ Cercle
 
 ![](output/circle.png)
 
