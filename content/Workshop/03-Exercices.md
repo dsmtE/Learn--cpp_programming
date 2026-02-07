@@ -211,7 +211,9 @@ Prendre un rectangle de pixels et l'intervertir avec un autre rectangle de pixel
 
 ## ⭐⭐⭐ Tri de pixels
 
-![](output/pixel_sorting.png)
+| ![](output/pixel_sorting.png) | ![](output/pixel_sorting2.png) | ![](output/pixel_sorting3.png) |
+| ----------------------------- | ------------------------------ | ------------------------------ |
+| Trier tous les pixels         | Trier les lignes               | Trier des parties aléatoires   |
 
 Voici une bonne vidéo expliquant l'algorithme (vous pouvez ignorer le début spécifique à Processing où on voit comment afficher l'image) :
 
@@ -219,7 +221,7 @@ Voici une bonne vidéo expliquant l'algorithme (vous pouvez ignorer le début sp
 
 Utilisez `image.pixels()` pour récupérer le tableau contenant tous les pixels de l'image et le trier.
 
-Ensuite, au lieu de trier tous les pixels de l'image, triez par colonne (ou par ligne) pour un effet plus joli. (Il faudra trier des sous-parties du tableau `image.pixels()`.) Ou encore, triez des sous-parties prises aléatoirement dans l'image.
+Ensuite, au lieu de trier tous les pixels de l'image, triez par ligne (ou par colonne) pour un effet plus joli. (Il faudra trier des sous-parties du tableau `image.pixels()`.) Ou encore, triez des sous-parties prises aléatoirement dans l'image.
 
 :::info
 Pour trier un tableau, vous pouvez utiliser `std::sort`. Vous verrez ça plus en détail au S2, mais voici une brève explication :
