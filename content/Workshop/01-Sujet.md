@@ -92,7 +92,7 @@ int main()
 ## Rendu et Rapport
 
 __*À rendre avant vendredi à 23h59*__.<br/>
-*Pour le rendu, il suffit de [mettre votre lien git ici](https://docs.google.com/spreadsheets/d/16nS6i0uq31Y3HzNI33xjXs4cC6H6AITeYHFn4fPQfsk/edit?usp=sharing)*. Attention, vérifiez bien que votre repo est en public, ou si il est en privé pensez à m'inviter dessus ([*julesfouchy*](https://github.com/julesfouchy/)).
+Pour le rendu, il suffit de mettre votre lien git sur la google sheet que je vais vous partager sur Discord. Attention, vérifiez bien que votre repo est en public, ou si il est en privé pensez à m'inviter dessus ([*julesfouchy*](https://github.com/julesfouchy/)).
 
 Pour le rapport, faites une section par exercice que vous avez fait. Montrez une image avant et après application de l'effet (comme c'est fait dans l'énoncé des exercices). **Le rapport n'a pas besoin d'être long**. Pour les exercices où vous jugez cela utile, mettez un petit texte expliquant des spécificités de l'algo que vous avez implémenté, et les pièges potentiels dans lesquels il ne faut pas tomber.
 
