@@ -1,5 +1,5 @@
 ---
-title: TD2 - Structures de données
+title: TD1 - Structures de données
 ---
 
 import OriginalMotionCanvasPlayer from '@site/src/components/OriginalMotionCanvasPlayer';
