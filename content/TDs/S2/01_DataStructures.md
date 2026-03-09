@@ -1,9 +1,12 @@
 ---
-title: TD2 - Structures de données
+title: TD1 - Structures de données
 ---
 
 import OriginalMotionCanvasPlayer from '@site/src/components/OriginalMotionCanvasPlayer';
 
+Ce TD a pour but de vous faire manipuler des **structures de données** afin de réaliser un programme qui permet d'évaluer une expression mathématique à la manière d'une calculatrice.
+
+Durée: 2 séances
 ## Exercice 1 (Evaluation NPI)
 
 Le but de cet exercice est d'écrire un programme qui permet d'évaluer une expression mathématique.

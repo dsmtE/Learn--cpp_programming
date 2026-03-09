@@ -1,12 +1,15 @@
 ---
-title: TD5 - Hachage et tableaux associatifs
+title: TD5 - Hachage et patrouille
 ---
 
-Dans ce TD nous allons mettre en pratique les notions vues en cours sur les tables de hachage et les tables associatives.
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
-## Exercice 1 (Fonction de hachage)
+Il s'agit d'un TD noté dans lequel nous allons mettre en application les notions des précédents CM (Opérateurs, tables de hachage et tables associatives).
 
-1. Écrire une fonction de hachage qui prend en paramètre une chaîne de caractères, fait la somme des valeurs ASCII des caractères et renvoie un entier compris entre 0 et un maximum donné nommé `max` (le type de retour du hash doit être `size_t`).
+## Exercice 1 - Fonctions de hachage
+
+### 1 - Hashing simple
+Écrire une fonction de hachage qui prend en paramètre une chaîne de caractères, fait la somme des valeurs ASCII des caractères et renvoie un entier compris entre 0 et un maximum donné nommé `max` (le type de retour du hash doit être `size_t`).
 > Nous utiliserons une simple somme des codes ASCII des caractères suivie d'un modulo pour obtenir un entier compris entre 0 et `max`.
 ```cpp
 size_t folding_string_hash(std::string const& s, size_t max);
@@ -38,7 +41,8 @@ $$
 Cela va être d'autant plus important pour les questions suivantes où l'on va devoir faire des multiplications supplémentaires et donc des risques d'overflow plus importants.
 :::
 
-2. Écrire une nouvelle fonction de hachage sur une chaîne de caractères pour laquelle l'ordre des caractères a de l'importance. Par exemple, les chaînes de caractères "abc" et "cba" ne doivent pas avoir la même valeur hachée. Ce qui est le cas avec la fonction de hachage précédente.
+### 2 - Hashing Ordonné
+Écrire une nouvelle fonction de hachage sur une chaîne de caractères pour laquelle l'ordre des caractères a de l'importance. Par exemple, les chaînes de caractères "abc" et "cba" ne doivent pas avoir la même valeur hachée. Ce qui est le cas avec la fonction de hachage précédente.
 > Utiliser par exemple la somme des codes ASCII des caractères multipliée par leur position dans la chaîne de caractères.
 ```cpp
 size_t folding_string_ordered_hash(std::string const& s, size_t max);
@@ -50,7 +54,13 @@ size_t folding_string_ordered_hash(std::string const& s, size_t max);
 >
 > Ici j'utilise `i+1` pour éviter que la position 0 (le 1er caractère)  ne soit pas prise en compte dans le calcul du hash car multipliée par 0.
 
-3. Écrire une fonction de hachage sur une chaîne de caractères utilisant la technique de **polynomial rolling hash**.
+### 3 - BONUS non noté - Polynomial Rolling Hash
+
+⚠️ Cette question est un **bonus non noté**, elle ne comptera pas dans la note finale.
+<details>
+<summary> polynomial rolling hash </summary>
+
+Écrire une fonction de hachage sur une chaîne de caractères utilisant la technique de **polynomial rolling hash**.
 
 > Voila le prototype de la fonction à écrire:
 ```cpp
@@ -80,166 +90,236 @@ On va donc utiliser une variable `power` (initialisée à 1 au début) et multip
 Le choix de `p` et `m` va influencer la qualité (probabilité de collision) et les performances de notre fonction de hachage. Sans rentrer dans les détails, on choisit généralement `p` un **nombre premier** et `m` un nombre suffisamment grand pour éviter les collisions tout en restant petit pour rester performant et éviter des erreur numériques. Par exemple, on peut choisir `p` = **31** et `m` = **10^9 + 9** (que l'on peut noter `1e9 + 9` en C++ ou tout simplement `1000000009`).
 :::
 
-## Exercice 2 (Analyse du nombre d'insectes)
+</details>
 
-L'idée de cet exercice est d'utiliser une [table associative](/Lessons/S2/HashAndAssociativeTables/#tableau-associatif) pour résoudre un problème.
 
-Vous êtes un entomologiste qui a pour mission de **recenser** les insectes dans un jardin afin de vérifier la biodiversité de ce jardin et confirmer vos hypothèses sur la présence de certaines espèces (probabilité de présence de certaines espèces, etc.).
+## Exercice 2 - Guard Patrol
 
-Vous disposez d'une liste d'insectes que vous pouvez rencontrer dans ce jardin (sous forme d'**énumération**):
-```cpp
-enum class Insect {
-    ClassicBee,
-    Ladybug,
-    Butterfly,
-    Dragonfly,
-    Ant,
-    Grasshopper,
-    Beetle,
-    Wasp,
-    Caterpillar,
-    Spider,
-    GuimielBee
-};
+### Contexte
+
+Vous êtes un explorateur temporel qui a été envoyé dans le passé mais vous devez éviter de croiser les habitants de cette époque pour ne pas créer de paradoxes temporels. Il y a un garde qui patrouille dans la zone et vous devez prédire son parcours pour éviter de le croiser.
+
+Ses mouvements sont simple et suivent un protocole strict :
+- Le garde se déplace d'une case dans la direction qu'il regarde.
+- S'il rencontre un obstacle, il tourne à droite
+
+Vous disposerez d'une carte représentant la zone dans laquelle le garde patrouille. La carte est une grille de caractères où :
+- `.` représente une case vide
+- `#` représente un obstacle
+- `^`, `>`, `v`, `<` représentent la position du garde et la direction dans laquelle il regarde (haut, droite, bas, gauche).
+
+Exemple de carte :
+```
+....#.....
+.........#
+..........
+..#.......
+.......#..
+..........
+.#..^.....
+........#.
+#.........
+......#...
 ```
 
-Je vous fournis également une liste des valeurs de l'énumération `Insect` sous forme de vecteur (pour pouvoir itérer sur les valeurs de l'énumération et éviter de faire des `static_cast` pour obtenir les valeurs de l'énumération à partir d'un entier (index) ou encore avoir le nombre d'éléments de l'énumération). Rappels sur les cast avec enum [ici](/Lessons/S1/Variables/#cast-et-enum).
-```cpp
-#include <vector>
-std::vector<Insect> const insect_values {
-    Insect::ClassicBee,
-    Insect::Ladybug,
-    Insect::Butterfly,
-    Insect::Dragonfly,
-    Insect::Ant,
-    Insect::Grasshopper,
-    Insect::Beetle,
-    Insect::Wasp,
-    Insect::Caterpillar,
-    Insect::Spider,
-    Insect::GuimielBee
-};
+Dans cet exemple, le garde est positionné initialement à la position (4, 6) et regarde vers le haut (`^`).
+En suivant les règles de mouvement, le garde se déplacera vers le haut jusqu'à rencontrer l'obstacle `#` à la position (4, 0).
+
+```
+....#.....
+....^....#
+....*.....
+..#.*.....
+....*..#..
+....*.....
+.#..*.....
+........#.
+#.........
+......#...
 ```
 
-Ainsi qu'un tableau associatif qui permet de convertir une valeur de l'énumération `Insect` en une chaîne de caractères (pour pouvoir afficher le nom de l'insecte):
-:::info
-Il n'existe pas de fonction dans la bibliothèque standard C++ pour obtenir le nom d'une valeur d'une énumération. L'astuce est donc de créer un tableau associatif pour faire cette correspondance. Il existe des bibliothèques comme [Magic Enum](https://github.com/Neargye/magic_enum) qui permettent de manipuler plus facilement les énumérations mais nous n'utiliserons pas de bibliothèque dans cet exercice.
-:::
-```cpp
-#include <unordered_map>
-#include <string>
+```
+....#.....
+....XXXXX#
+....X...X.
+..#.X...X.
+..XXXXX#X.
+..X.X.X.X.
+.#XXXXXXX.
+.XXXXXXX#.
+#XXXXXXX..
+......#X..
 
-std::unordered_map<Insect, std::string> const insect_to_string = {
-    {Insect::ClassicBee, "ClassicBee"},
-    {Insect::Ladybug, "Ladybug"},
-    {Insect::Butterfly, "Butterfly"},
-    {Insect::Dragonfly, "Dragonfly"},
-    {Insect::Ant, "Ant"},
-    {Insect::Grasshopper, "Grasshopper"},
-    {Insect::Beetle, "Beetle"},
-    {Insect::Wasp, "Wasp"},
-    {Insect::Caterpillar, "Caterpillar"},
-    {Insect::Spider, "Spider"},
-    {Insect::GuimielBee, "GuimielBee"}
-};
 ```
 
-Enfin, vous disposez d'une liste de comptage d'insectes attendus pour un échantillon de **1000** insectes (obtenue en faisant la moyenne des observations de plusieurs entomologistes):
-Cette liste se présente sous forme d'un vecteur avec les nombres d'individus attendus pour chaque espèce d'insecte (dans le même ordre que l'énumération `Insect`):
+A la fin de la simulation, le garde aura visité plusieurs positions et sera sorti de la carte par la position (7, 9).
+Il aura visité 41 positions différentes, dont certaines plusieurs fois.
 
-```cpp
-#include <vector>
-std::vector<int> const expected_insect_counts {
-    75, // ClassicBee
-    50, // Ladybug
-    100, // Butterfly
-    20, // Dragonfly
-    400, // Ant
-    150, // Grasshopper
-    60, // Beetle
-    10, // Wasp
-    40, // Caterpillar
-    90, // Spider 
-    5, // GuimielBee
-};
+### Objectif
+
+Votre objectif est de prédire le parcours du garde sur la carte et de déterminer les cases qu'il va visiter. Vous devez écrire un programme qui simule le mouvement du garde en fonction des règles décrites ci-dessus et qui "enregistre" les cases visitées.
+
+### Question 1 - Directions et Position
+1. Créer une énumération `Direction` qui représente les quatre directions possibles (Haut, Droite, Bas, Gauche).
+2. Créer une structure `Position` qui contient des coordonnées ```int``` (x, y).
+
+```info
+
+On se donne comme convention que la position (0, 0) est en haut à gauche de la carte.
+La position (0, 1) est juste en dessous de la position (0, 0) et la position (1, 0) est juste à droite de la position (0, 0).
+
+Les directions sont représentées comme suit :
+- `Direction::Haut` correspond à (0, -1)
+- `Direction::Droite` correspond à (1, 0)
+- `Direction::Bas` correspond à (0, 1)
+- `Direction::Gauche` correspond à (-1, 0)
 ```
 
-Vous avez un grand nombre d'insectes à recenser et vous avez besoin d'une méthode pour compter le nombre d'apparitions de chaque insecte.
+3. Ajouter l'opérateur d'égalité `==` pour comparer deux deux positions. Deux positions sont égales si leurs coordonnées x et y sont égales.
+   
+4. Ajouter l'opérateur `<<` pour afficher une `Position` sous la forme `(x, y)`.
 
-Le plus simple pour vous est juste de **noter au fur et à mesure** vos observations (espèce et nombre d'individus observés) et de faire le compte à la fin. (par exemple, vous notez "2 abeilles" lorsque vous voyez 2 abeilles et "1 coccinelle" lorsque vous voyez une coccinelle).
+5. Ajouter l'opérateur `+=` pour additionner deux `Position`, ce qui somme les coordonnées x et y de deux positions. Par exemple, si on additionne `(2, 3)` et `(1, 1)`, on obtient `(3, 4)`.
+  
+6. Ajouter les opérateurs `+` et `+=` pour additionner une `Position` et une `Direction`, ce qui permet de déplacer la position d'une case dans la direction donnée.
 
-Voilà une fonction qui génère une liste d'observations aléatoires pour simuler vos observations:
+On souhaite pouvoir faire : 
 ```cpp
-#include <functional>
-#include <random>
-#include <vector>
-#include <algorithm>
-#include <iterator>
+Position pos(2, 3);
+Direction dir = Direction::Haut;
+Position newPos { pos + dir }; // newPos devient (2, 2)
+newPos += dir; // newPos devient (2, 1)
+```
 
-std::vector<std::pair<Insect, int>> get_insect_observations(
-    size_t const number_of_observations,
-    std::vector<float> const& insect_probabilities,
-    unsigned int const seed = std::random_device{}()
-) {
-    // Create a random engine with a given seed
-    std::default_random_engine random_engine{seed};
+7. Ajouter une fonction `turn_right` qui prend une `Direction` et retourne la direction obtenue en tournant à droite. Par exemple, si on tourne à droite depuis `Direction::Haut`, on obtient `Direction::Droite`.
 
-    auto rand_insect_index { std::bind(std::discrete_distribution<size_t>{insect_probabilities.begin(), insect_probabilities.end()}, random_engine) };
-    
-    std::vector<std::pair<Insect, int>> observations {};
-    observations.reserve(number_of_observations);
+### Question 2 - Lecture de la carte
 
-    for(size_t i {0}; i < number_of_observations; ++i) {
-        size_t const random_insect_index { rand_insect_index() };
-        Insect const random_insect { insect_values[random_insect_index] };
-        
-        // If we have already seen the same insect, increment the count on the last observation
-        if(!observations.empty() && observations.back().first == random_insect) {
-            observations.back().second++;
-            i -= 1;
-        } else {
-            observations.push_back({random_insect, 1});
-        }
+Écrire une fonction `read_input` qui prend en paramètre un fichier (une chaîne de caractère ou un inputStream (std::istream)) contenant la carte et qui retourne une **structure** de données représentant la carte (les positions des obstacles) ainsi que la position et direction initiales du garde.
+
+vous êtes libres ici de représenter ces infos de carte comme vous le souhaitez mais vous devez garder en tête que vous devez pouvoir facilement savoir si une position est un obstacle ou non, et où se trouve la position initiale garde.
+
+:::tip
+Vous pouvez utiliser std::getline pour lire le fichier ligne par ligne:
+```cpp
+Input_Map parse_input(std::istream& input_stream) {
+    //...
+    for (std::string line{}; std::getline(input_stream, line, '\n') and line != "";) {
+        // ...
     }
-
-    return observations;
 }
 ```
-1. Créer une fonction `std::vector<float> probabilities_from_count(std::vector<int> const& counts)` qui prend en paramètre un vecteur de comptages et retourne un vecteur de probabilités à partir de ces comptages. (on divise chaque comptage par la somme de tous les comptages pour obtenir une probabilité normalisée).
+:::
 
-2. Utiliser la fonction `get_insect_observations` pour générer une liste suffisamment grande d'observations (par exemple **10000** observations) puis utiliser une table de hachage `std::unordered_map` pour compter le nombre d'apparitions de chaque insecte dans les observations précédemment générées et **afficher le résultat** (le nombre d'individus observés pour chaque insecte).
+### Question 3 - Simulation et résolution du problème
+
+Dans cette partie on va simuler le mouvement du garde sur la carte et enregistrer les positions visitées. On va utiliser un `std::unordered_set<Position>` pour stocker les positions visitées, ce qui permet d'éviter les doublons et de vérifier rapidement si une position a déjà été visitée.
+On pourrait également utiliser un `std::vector<Position>` mais cela nous obligerait à vérifier si la position a déjà été visitée avant de l'ajouter, ce qui est moins efficace. Ici on va donc utiliser la force des **hashmaps** pour stocker les positions visitées.
+
+`std::unordered_set` est une structure de données qui permet de stocker des éléments uniques et de les rechercher rapidement. Elle utilise une fonction de hachage pour déterminer l'emplacement de chaque élément dans la table de hachage.
+Elle fonctionne comme une `std::unordered_map` vu en cours mais sans valeur associée, on va juste stocker les positions visitées.
+
+1. implementer une fonction de Hash pour la structure `Position` afin de pouvoir l'utiliser dans un `std::unordered_set`. 
+  je vous donne le code suivant pour vous aider et qui permet de définir une fonction de hachage pour la structure `Position` utilisable par tous les conteneurs de la librairie standard qui utilisent des fonctions de hachage.
+```cpp
+namespace std {
+    template <>
+    struct hash<Position> {
+        std::size_t operator()(const Position& pos) const {
+            return /* */;
+        }
+    };
+}
+```
+
 :::tip
-On utilisera la valeur de l'énumération `Insect` comme **clé** dans la table de hachage et le nombre d'individus observés (initialisé à 0) comme **valeur** associée à cette clé (`std::unordered_map<Insect, int>`).
+Vous pouvez utiliser la technique de "folding hash" qui consiste à combiner les hash des coordonnées x et y (`std::hash<int>()(pos.x)`) par une opération **XOR** ou une multiplication par un nombre premier (ou autre technique de votre choix) afin de créer un hash unique pour la position.
+L'idée ici est de convertir une position (x, y) en un entier unique qui représente cette position dans l'espace (et minimiser les collisions pour identifier de façon unique chaque position).
+:::
+
+---
+
+Je vous donne la structure suivante pour représenter les informations souhaitées à la fin de la simulation :
+```cpp
+struct WalkResult {
+    Position final_position;
+    size_t steps_taken;
+    std::unordered_set<Position> visited_positions;
+};
+```
+
+2. Écrire une fonction qui prend en paramètre les informations de la carte (position du garde, direction initiale, obstacles) et qui simule le mouvement du garde en suivant les règles décrites. La fonction doit retourner un `WalkResult` contenant :
+   - La position finale du garde après un certain nombre de pas (par example 1000 pas).
+   - Le nombre de pas effectués.
+   - Les positions visitées par le garde.
+
+
+3. Tester votre fonction avec la carte d'example fournie et vérifier que les positions visitées sont correctes. Vous devez obtenir 41 positions visitées différentes. Vous pouvez obtenir le nombre de positions visitées en utilisant la méthode `size()` de `std::unordered_set`.
+
+4. Tester maintenant votre fonction avec le fichier d'entrée fourni dans le sujet. (la réponse attendu est entre 5300 et 5500 positions visitées différentes).
+
+**Vous pouvez télécharger le fichier d'entrée ici <a target="_blank" href={ useBaseUrl("/code/S2/input_guard_patrol.txt") } download={"input_guard_patrol.txt"}>input_guard_patrol.txt</a>.**
+
+### Question 4 - Trouver les boucles
+
+Je vous propose vous aussi de résoudre la partie deux étoiles de l'énoncé originale de l'Advent of Code.
+
+:::warning
+Cette partie est significativement plus difficile que la première.
+:::
+
+**Cette question comptera dans la note finale mais étant plus difficile que les questions précédentes, elle comptera peu dans la note finale.**
+
+il s'agit de trouver le nombre de position actuellement vide de la carte pour lesquelles si on ajoute un obstacle, le garde se retrouve coincé dans une boucle infinie dans laquelle il ne peut pas sortir.
+
+Par exemple dans notre carte d'exemple, si on ajoute un obstacle à la position (3, 6) juste à droit de la position initiale du garde, le garde se retrouve coincé dans une boucle infinie et ne peut pas sortir de la carte.
+
+```
+....#.....
+....+---+#
+....|...|.
+..#.|...|.
+....|..#|.
+....|...|.
+.#.O^---+.
+........#.
+#.........
+......#...
+```
+
+un autre exemple de boucle avec un obstacle à la position (6, 7).
+
+```
+....#.....
+....+---+#
+....|...|.
+..#.|...|.
+..+-+-+#|.
+..|.|.|.|.
+.#+-^-+-+.
+......O.#.
+#.........
+......#...
+```
+
+:::tip
+Pour résoudre ce problème on va devoir identifier une **boucle**. On pourrait se dire que si le garde revient à une position déjà visitée, c'est qu'il est dans une boucle. Cependant, ce n'est pas toujours vrai (voir le deuxième exemple de boucle ci-dessus) car si il repasse par une position déjà visitée mais dans une direction différente, il peut sortir de la boucle.
+
+Je vous propose donc de créer une structure qui contient la position du garde ainsi que la direction dans laquelle il se déplace. On va appeler cette structure `GuardState`. On va ensuite utiliser un `std::unordered_set<GuardState>` pour stocker les états du garde (position + direction) visités. Si on rencontre un état déjà visité, c'est qu'on est dans une boucle.
+Il nous faut ajouter les opérateurs `==` et `hash` pour la structure `GuardState` afin de pouvoir l'utiliser dans un `std::unordered_set`.
+
+Enfin, il faut tester tout les ajouts possibles d'obstacles sur la carte et vérifier si le garde se retrouve dans une boucle. :warning: toutes les positions vides ne sont pas forcément des positions "intéressantes" pour ajouter un obstacle.
 :::
 
 :::info
-Le paramètre `seed` de la fonction `get_insect_observations` permet de fixer la graine du générateur de nombres aléatoires. Cela permet de reproduire les mêmes observations à chaque exécution du programme. Si vous ne spécifiez pas de graine, le générateur de nombres aléatoires utilisera une graine aléatoire à chaque exécution du programme.
+Cet exercice est inspiré d'une question de l'Advent of Code 2024 Day 6 - Guard Gallivant (https://adventofcode.com/2024/day/6)
 :::
+## Exercice 3 - BONUS Noté - Hashing sur une structure
 
-3. Utiliser de nouveau la fonction `probabilities_from_count` pour obtenir les probabilités des insectes observés. Il faudra au préalable convertir le résultat de la table de hachage en un vecteur de comptage pour pouvoir utiliser la fonction `probabilities_from_count`.
+Cette question est un **Bonus noté** (elle permettra d'améliorer la note sans la pénalisé si non réalisée).
 
-4. **Afficher** et **comparer** les probabilités des insectes observés avec les probabilités initiales. Si la différence entre les probabilités observées et les probabilités initiales est trop grande, indiquer que les observations ne sont pas conformes aux probabilités initiales. On pourra se fixer un seuil de 1% (0.01) pour considérer que les observations sont conformes.
-
-exemple de présentation des résultats:
-```
-Probabilities of observed insects vs expected probabilities
-ClassicBee : 0.076 vs 0.075 OK
-Ladybug : 0.048 vs 0.050 OK
-Butterfly : 0.100 vs 0.100 OK
-Dragonfly : 0.035 vs 0.020 BAD
-...
-```
-
-:::info
-Avec un grand nombre d'observations, on s'attend à ce que les probabilités observées se rapprochent des probabilités initiales. C'est le principe des lois des grands nombres. Plus on a d'observations, plus les probabilités observées se rapprocheront des probabilités initiales. Avec 10 000 vous devriez être sous le seuil de 1% pour chaque insecte (OK).
-:::
-
-:::tip
-Vous pouvez utiliser l'include `<iomanip>` pour formater l'affichage des nombres à virgule flottante.
-Ajouter `std::cout << std::fixed << std::setprecision(3);` avant d'afficher les nombres pour afficher les nombres avec 3 chiffres après la virgule.
-:::
-
-## Exercice 3 (Hash sur une structure)
+<details>
+<summary> Hashing sur structure de carte </summary>
 
 Donnons nous les enums et structures suivantes:
 
@@ -366,3 +446,4 @@ std::string card_name(Card const& card) {
     return name;
 }
 ```
+</details>
