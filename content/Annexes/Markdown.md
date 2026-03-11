@@ -38,6 +38,11 @@ En résumé :
 ```
 
 ```md
+- [ ] to-do
+- [x] done
+```
+
+```md
 ```cpp
 // Bloc de code C++
 int x{0};
@@ -61,11 +66,11 @@ Notes de bas de page \[^1]
 \> Citation
 
 ```txt
-| Tableaux      | :grin:        | :sparkles:  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Tableaux      |    :grin:     | :sparkles: |
+| ------------- | :-----------: | ---------: |
+| col 3 is      | right-aligned |      $1600 |
+| col 2 is      |   centered    |        $12 |
+| zebra stripes |   are neat    |         $1 |
 ```
 
 Séparateur :
@@ -92,6 +97,9 @@ Image :
 - avec
 - plusieurs items
 
+- [ ] to-do
+- [x] done
+
 ```cpp
 // Bloc de code C++
 int x{0};
@@ -111,11 +119,11 @@ Notes de bas de page [^1]
 
 > Citation
 
-| Tableaux      | 😁        | ✨  |
-| ------------- |:-------------:| -----:|
+| Tableaux      |       😁       |     ✨ |
+| ------------- | :-----------: | ----: |
 | col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
 
 Séparateur :
 
@@ -142,3 +150,5 @@ Salut, ceci est un secret !
 
 VS Code peut générer automatiquement une table des matières pour votre document, qui va lister toutes les différentes sections que vous aurez délimitées avec des titres (`#`, `##`, `###`, etc.).<br/>
 Pour cela, mettez votre curseur là où vous voulez la générer (typiquement au début de votre document), puis faites <kbd>F1</kbd> et cherchez et sélectionnez `Markdown All In One: Create Table of Contents` (ou juste `toc` pour faire court).
+
+![](Markdown_imgs/toc.png)
