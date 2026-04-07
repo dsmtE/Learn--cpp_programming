@@ -39,6 +39,13 @@ $$
 $$
 
 Cela va être d'autant plus important pour les questions suivantes où l'on va devoir faire des multiplications supplémentaires et donc des risques d'overflow plus importants.
+
+En pratique on ne veux donc pas faire le modulo sur la quantité qu'on ajoute mais bien sur la valeur hachée totale à chaque itération pour éviter les problèmes d'overflow. On fera donc :
+```cpp
+hash = (hash + s[i]) % max;
+// et pas 
+// hash = hash + (s[i] % max);
+```
 :::
 
 ### 2 - Hashing Ordonné
@@ -177,7 +184,7 @@ Les directions sont représentées comme suit :
 
 3. Ajouter l'opérateur d'égalité `==` pour comparer deux deux positions. Deux positions sont égales si leurs coordonnées x et y sont égales.
    
-4. Ajouter l'opérateur `<<` pour afficher une `Position` sous la forme `(x, y)`.
+4. Ajouter l'opérateur de flux `<<` pour afficher une `Position` sous la forme `(x, y)`.
 
 5. Ajouter l'opérateur `+=` pour additionner deux `Position`, ce qui somme les coordonnées x et y de deux positions. Par exemple, si on additionne `(2, 3)` et `(1, 1)`, on obtient `(3, 4)`.
   
@@ -195,14 +202,22 @@ newPos += dir; // newPos devient (2, 1)
 
 ### Question 2 - Lecture de la carte
 
-Écrire une fonction `read_input` qui prend en paramètre un fichier (une chaîne de caractère ou un inputStream (std::istream)) contenant la carte et qui retourne une **structure** de données représentant la carte (les positions des obstacles) ainsi que la position et direction initiales du garde.
+Nous allons maintenant lire la carte à partir d'un fichier d'entrée et stocker les informations de la carte dans une structure de données adaptée.
 
-vous êtes libres ici de représenter ces infos de carte comme vous le souhaitez mais vous devez garder en tête que vous devez pouvoir facilement savoir si une position est un obstacle ou non, et où se trouve la position initiale garde.
+Dans un premier temps, il faut définir une structure de données les informations de la carte (que je nomme pour l'exemple `Input_Structure`). Cette structure doit contenir :
+- La position et la direction initiale du garde
+- Les positions des obstacles sur la carte (les cases avec `#`).
+
+Concernant les positions des obstacles, vous pouvez les stocker dans une structure de données de votre choix. L'important est que vous puissiez facilement vérifier si une position est un obstacle ou non.
+
+Écrire une fonction `read_input` qui prend en paramètre un fichier (une chaîne de caractère ou un inputStream (`std::istream`)) contenant la carte et qui notre structure de données représentant les informations de la carte.
+
+Pour vous aider à lire le fichier d'entrée, voici un exemple d'utilisation de `std::getline` pour lire un fichier ligne par ligne :
 
 :::tip
 Vous pouvez utiliser std::getline pour lire le fichier ligne par ligne:
 ```cpp
-Input_Map parse_input(std::istream& input_stream) {
+Input_Structure parse_input(std::istream& input_stream) {
     //...
     for (std::string line{}; std::getline(input_stream, line, '\n') and line != "";) {
         // ...
@@ -219,7 +234,7 @@ On pourrait également utiliser un `std::vector<Position>` mais cela nous oblige
 `std::unordered_set` est une structure de données qui permet de stocker des éléments uniques et de les rechercher rapidement. Elle utilise une fonction de hachage pour déterminer l'emplacement de chaque élément dans la table de hachage.
 Elle fonctionne comme une `std::unordered_map` vu en cours mais sans valeur associée, on va juste stocker les positions visitées.
 
-1. implementer une fonction de Hash pour la structure `Position` afin de pouvoir l'utiliser dans un `std::unordered_set`. 
+1. implementer une fonction de Hash pour la structure `Position` afin de pouvoir l'utiliser dans un `std::unordered_set`.
   je vous donne le code suivant pour vous aider et qui permet de définir une fonction de hachage pour la structure `Position` utilisable par tous les conteneurs de la librairie standard qui utilisent des fonctions de hachage.
 ```cpp
 namespace std {
@@ -249,10 +264,9 @@ struct WalkResult {
 ```
 
 2. Écrire une fonction qui prend en paramètre les informations de la carte (position du garde, direction initiale, obstacles) et qui simule le mouvement du garde en suivant les règles décrites. La fonction doit retourner un `WalkResult` contenant :
-   - La position finale du garde après un certain nombre de pas (par example 1000 pas).
-   - Le nombre de pas effectués.
-   - Les positions visitées par le garde.
-
+   - La position finale du garde (la position à laquelle il sort de la carte)
+   - Le nombre de pas effectués (le nombre de mouvements du garde)
+   - Les positions visitées par le garde (sans doublons)
 
 3. Tester votre fonction avec la carte d'example fournie et vérifier que les positions visitées sont correctes. Vous devez obtenir 41 positions visitées différentes. Vous pouvez obtenir le nombre de positions visitées en utilisant la méthode `size()` de `std::unordered_set`.
 
