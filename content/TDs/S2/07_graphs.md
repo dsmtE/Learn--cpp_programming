@@ -2,228 +2,82 @@
 title: TD7 - Graphes
 ---
 
-Pour ce TD, nous allons travailler sur les graphes. Les graphes peuvent être représentés de différentes manières. Nous allons travailler principalement avec une représentation sous forme de **liste d'adjacence** et d'un graphe pondéré et orienté plus intéressant pour les algorithmes de plus court chemin.
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
-Je vous donne les structures suivantes pour représenter un graphe ainsi que les méthodes et fonctions que l'on va implémenter:
+Dans ce TD, vous allez travailler sur un projet C++ fourni basé sur des données OpenStreetMap (OSM): extraction du graphe, simplification, puis visualisation avec **raylib**.
 
-```cpp
-#include <vector>
-#include <unordered_map>
-#include <utility>
+Le code de départ est fourni ici: <a target="_blank" href={ useBaseUrl("/code/S2/osmGraph.zip") } download={"osmGraph.zip"}>osmGraph.zip</a>.
 
-namespace Graph {
-    struct WeightedGraphEdge {
-        int to {};
-        float weight {1.0f};
+Un fichier README est inclus dans le projet pour détailler le contenu du code fourni.
 
-        // default ici permet de définit les opérateurs de comparaison membres à membres automatiquement
-        // Cela ne fonction qu'en C++20, si vous n'avez pas accès à cette version je vous donne les implémentations des opérateurs plus bas
-        bool operator==(WeightedGraphEdge const& other) const = default;
-        bool operator!=(WeightedGraphEdge const& other) const = default;
-    };
+## Objectifs
 
-    struct WeightedGraph {
-        // L'utilisation d'un tableau associatif permet d'avoir une complexité en O(1) pour l'ajout et la recherche d'un sommet.
-        // Cela permet de stocker les sommets dans un ordre quelconque (et pas avoir la contrainte d'avoir des identifiants (entiers) de sommets consécutifs lors de l'ajout de sommets).
-        // Cela permet également de pouvoir utiliser des identifiants de sommets de n'importe quel type (string, char, int, ...) et pas seulement des entiers.
-        std::unordered_map<int, std::vector<WeightedGraphEdge>> adjacency_list {};
+- Manipuler un graphe pondéré orienté dans un contexte réel (données OSM).
+- Lire et comprendre une base de code C++ modulaire (commandes, structures de données, visualisation).
+- Implémenter puis tester un algorithme de plus court chemin (Dijkstra).
 
-        void add_vertex(int const id);
+## Mise en place
 
-        void add_directed_edge(int const from, int const to, float const weight = 1.0f);
-        void add_undirected_edge(int const from, int const to, float const weight = 1.0f);
-        
-        // Même fonctionnement que pour WeightedGraphEdge
-        bool operator==(WeightedGraph const& other) const = default;
-        bool operator!=(WeightedGraph const& other) const = default;
+1. Téléchargez et décompressez <a target="_blank" href={ useBaseUrl("/code/S2/osmGraph.zip") } download={"osmGraph.zip"}>osmGraph.zip</a>.
+2. Ouvrez le dossier dans VS Code.
+3. Configurez et compilez le projet avec CMake.
+4. Lancez le binaire sans arguments pour voir l'aide des commandes disponibles.
 
-        void print_DFS(int const start) const;
-        void print_BFS(int const start) const;
-    };
+Le projet contient déjà un fichier OSM de test dans `data/test.osm` ainsi qu'un fichier `.vscode/launch.json` pour faciliter le lancement en mode debug avec ce fichier de test.
 
-    WeightedGraph build_from_adjacency_matrix(std::vector<std::vector<float>> const& adjacency_matrix);
+## Exercice 1 - Prise en main du projet OSM
 
-} // namespace
-```
+Le projet s'articule autour de quatre commandes : `extract`, `simplify`, `visualize` et `visualizeAndProcess`. Vous pouvez utiliser l'option `--help` sur chaque sous-commande pour en connaître les arguments.
 
-:::info Opérateurs de comparaison
-Pour se simplifier la vie ici car c'est des structures simples et que l'on souhaite une égalité membres à membres, on peut utiliser le **C++20** et le mot clé `défault` ici.
+Commencez par exécuter un cycle complet `extract -> simplify -> visualize` sur le fichier de test fourni (`data/test.osm`) afin de vous familiariser avec le pipeline et le résultat visuel.
 
-Il faut indiquer la version dans le fichier `CMakeLists.txt` pour utiliser le C++20 en ajoutant la ligne suivante:
-```cmake
-set(CMAKE_CXX_STANDARD 20)
-```
-ou alors pour une target spécifique:
-```cmake
-target_compile_features(${TARGET_NAME} PUBLIC cxx_std_20)
-```
+## Exercice 2 - Lecture de code et compréhension
 
-Il faut ajouter à droite de la définition du prototype (dans le header directement) `= default;` comme je vous le fourni. Un exemple ici: [Defaulted equality comparison](https://en.cppreference.com/w/cpp/language/default_comparisons#:~:text=Defaulted%20equality%20comparison).
+En vous appuyant sur le code du projet:
 
-Si vous n'avez pas accès à cette version, je vous donne les implémentations des opérateurs de comparaison à ajouter dans le fichier source (`.cpp`):
+1. Identifiez où sont définies les structures principales du graphe (`WeightedGraph` / `PositionedGraph`) et expliquez brièvement leur rôle et comment elles sont utilisées.
+2. Expliquez en quelques lignes le rôle des modules:
+   - extraction OSM,
+   - simplification,
+   - visualisation.
+3. Expliquez ce que vous comprenez des différentes étapes de simplification implémentées (fichier `src/simplification/simplify.cpp`) et les raisons pour lesquelles elles sont utilisées (leur impact sur la structure du graphe, les avantages/inconvénients, etc.).
 
-```cpp
-namespace Graph {
-    bool WeightedGraphEdge::operator==(WeightedGraphEdge const& other) const {
-        return to == other.to && weight == other.weight;
-    }
-    bool WeightedGraphEdge:: operator!=(WeightedGraphEdge const& other) const {
-        return !(*this == other);
-    }
+## Exercice 3 - Dijkstra dans le projet OsmGraph
 
-    bool WeightedGraph::operator==(WeightedGraph const& other) const {
-        return adjacency_list == other.adjacency_list;
-    }
+Vous devez implémenter Dijkstra dans le projet fourni (pas dans un mini-code séparé).
 
-    bool WeightedGraph::operator!=(WeightedGraph const& other) const {
-        return !(*this == other);
-    }
-} // namespace
-```
+Rappel cours: [Dijkstra - plus court chemin](/Lessons/S2/graphs/#dijkstra).
+
+:::tip Petite aide sur les fonctions à utiliser
+
+- `Dijkstra(graph, start, end)` calcule les meilleures distances connues depuis `start`.
+- Paramètres:
+   - `graph`: le graphe pondéré,
+   - `start`: le nœud de départ,
+   - `end`: le nœud cible.
+- Structure de retour: un tableau associatif de la forme `node_id -> (distance, parent)`.
+   - `distance` est le coût cumulé pour atteindre `node_id`,
+   - `parent` est le nœud précédent pour reconstruire le chemin.
+- `dijkstra_path(...)` utilise le résultat de `Dijkstra(...)` pour reconstruire le chemin final (liste ordonnée de nœuds du départ vers l'arrivée).
+
 :::
 
-## Exercice 1 (construire un graphe)
+1. Compléter la fonction `Dijkstra(...)` dans `src/dataStructure/graphUtils.cpp`.
+2. Vérifier que `dijkstra_path(...)` reconstruit correctement un chemin.
+3. Tester sur le graphe chargé par le projet en mode visualisation raylib (interaction dans la fenêtre) pour afficher le chemin trouvé.
 
-1. Implémenter la méthode `add_vertex` qui prend en paramètre un identifiant de sommet et ajoute un sommet au graphe si il n'existe pas déjà. Il faut donc tester si le sommet existe déjà avant de créer la liste des edges. (vous pouvez utiliser la méthode [`find`](https://cplusplus.com/reference/unordered_map/unordered_map/find) de `std::unordered_map` pour cela).
-
-2. Implémenter la méthode `add_directed_edge` qui ajoute une arrête dans le graphe en prenant en paramètre les IDs des deux nœuds à connecter (source vers destination) et le poids de l'arrête.
 :::note
-Si le nœuds de destination n'existe pas (comme clé du tableau associatif `adjacency_list`) il est possible et recommandé de l'ajouter au passage (en utilisant add_vertex). Ainsi, tout les sommets du graphe sont ajoutés automatiquement lors de l'ajout d'une arrête.
+Le cours reste la référence pour l'algorithme. Ici, l'objectif est de l'intégrer dans un code existant et de valider son comportement sur un vrai graphe OSM.
 :::
 
-3. Implémenter la méthode `add_undirected_edge` en utilisant `add_directed_edge` pour ajouter deux edges dans les deux sens pour connecter deux nœuds passés en paramètre.
+## Exercice 4 - Points Bonus - Ajout de fonctionnalités
 
-4. Implémenter la fonction `build_from_adjacency_matrix` qui prend en paramètre une **matrice d'adjacence** (sous la forme d'un vecteur de vecteurs d'entiers) et qui retourne un graphe.
+Voici quelques idées de fonctionnalités supplémentaires, n'hésitez pas à être créatifs :
 
-:::info Exemple
-Exemple pour le graphe suivant:
-```mermaid
-    graph LR
-    0 --1--> 1
-    0 --2--> 4
-    1 --2--> 2
-    1 --4--> 3
-    2 --1--> 3
-    3 --6--> 4
-```
+1. Ajouter un affichage du coût total du chemin trouvé.
+2. Mesurer les temps d'exécution avant/après simplification pour une même requête de chemin.
+3. Proposer une amélioration de l'UX de la visualisation (feedback, couleurs, raccourcis, etc.).
+4. Modifier l'implémentation de Dijkstra pour pouvoir l'exécuter pas à pas et visualiser l'évolution de l'algorithme en temps réel.
+5. Implémenter un autre algorithme de plus court chemin (A*, etc.) et comparer les résultats.
 
-Représenté par la matrice d'adjacence suivante:
-
-$$
-\begin{bmatrix}
-0 & 1 & 0 & 0 & 2 \\
-0 & 0 & 2 & 4 & 0 \\
-0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 6 \\
-0 & 0 & 0 & 0 & 0 \\
-\end{bmatrix}
-$$
-
-la liste d'adjacence correspondante est la suivante:
-```cpp
-std::unordered_map<int, std::vector<WeightedGraphEdge>> adjacency_list {
-    {0, {{1, 1.0f}, {4, 2.0f}}},
-    {1, {{2, 2.0f}, {3, 4.0f}}},
-    {2, {{3, 1.0f}}},
-    {3, {{4, 6.0f}}},
-    {4, {}},
-};
-```
-
-:::
-
-5. Écrire dans la fonction `main` un exemple d'utilisation de la fonction `build_from_adjacency_matrix` pour créer un graphe à partir d'une matrice d'adjacence et créer un deuxième graphe en utilisant les méthodes `add_vertex` et `add_undirected_edge` pour ajouter les mêmes sommets et les mêmes arrêtes que dans le premier graphe. Ensuite, comparer les deux graphes pour vérifier qu'ils sont égaux.
-
-## Exercice 2 (traverser un graphe)
-
-1. Implémenter la méthode `print_DFS` qui prend en paramètre l'id du sommet de départ et qui affiche les sommets du graphe en utilisant un [parcours en profondeur](/Lessons/S2/graphs/#parcours-en-profondeur) (DFS) à partir du sommet de départ (`depth-first search`).
-
-2. Implémenter la méthode `print_BFS` qui utilise cette fois-ci un [parcours en largeur](/Lessons/S2/graphs/#parcours-en-largeur) (BFS) à partir du sommet de départ (`breadth-first search`).
-
-3. (Bonus) Implémenter le parcours en profondeur (BFS) à prenant en paramètre une fonction de **callback** pour chaque sommet visité. L'idée est de ne pas contraindre l'utilisateur à afficher les sommets mais de lui donner la possibilité de faire ce qu'il veut avec les sommets visités.
-Voilà la signature de la méthode à implémenter:
-```cpp
-void DFS(int const start, std::function<void(int const)> const& callback) const;
-```
-
-`std::function` (`#include <functional>`) est un objet qui peut "stocker" n'importe quelle fonction qui a la même signature que celle donnée en paramètre (entre  <kbd> < </kbd> et <kbd> > </kbd>). Cela permet de passer une fonction en paramètre d'une autre fonction. C'est très utile pour faire des fonctions génériques qui peuvent être utilisées de différentes manières. On peut passer en paramètre une fonction définie dans le code ou une fonction **lambda** (une fonction anonyme). C'est comme cela que fonctionnent les fonctions `std::sort`, `std::find_if`, `std::accumulate`, ... de la STL.
-
-Voilà à quoi ressemble l'appel de cette méthode avec une fonction **lambda** qui affiche les sommets visités (pour reproduire le comportement de la méthode `print_DFS`):
-```cpp
-std::cout << "DFS from node 0:" << std::endl << "Visited nodes: ";
-graph.DFS(0, [](int const node_id) { std::cout << node_id << " "; });
-std::cout << std::endl;
-```
-
-## Dijkstra: algorithme de plus court chemin
-
-L'algorithme de Dijkstra permet de trouver le plus court chemin entre un sommet de départ et un sommet d'arrivée dans un graphe pondéré.
-
-Je vous invite à relire l'explication du cours [ici](/Lessons/S2/graphs/#dijkstra).
-
-1. Donnons nous le graphe suivant:
-
-```mermaid
-    graph LR
-    A --1--> B
-    A --5--> C
-    B --4--> C
-    D --2--> C
-    B --5--> D
-    A --2--> D
-    C --3--> E
-    C --4--> F
-    D --5--> E
-    E --3--> F
-```
-
-Écrivez les différentes étapes de l'algorithme de Dijkstra selon le même modèle que [l'illustration du cours](/Lessons/S2/graphs/#illustration-de-lalgorithme-de-dijkstra) pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.
-
-2. (BONUS) En se donnant un bout de code pour démarrer l'implémentation de l'algorithme de Dijkstra, complétez le code pour implémenter l'algorithme de Dijkstra.
-3. (BONUS) Testez votre implémentation avec le graphe donné en exemple pour trouver le plus court chemin entre le sommet `A` et le sommet `E`.
-```cpp
-std::unordered_map<int, std::pair<float, int>> dijkstra(WeightedGraph const& graph, int const& start, int const end) {
-    // On crée un tableau associatif pour stocker les distances les plus courtes connues pour aller du sommet de départ à chaque sommet visité
-    // La clé est l'identifiant du sommet et la valeur est une paire (distance, sommet précédent)
-    std::unordered_map<int, std::pair<float, int>> distances {};
-
-    // On crée une file de priorité pour stocker les sommets à visiter
-    // la paire contient la distance pour aller jusqu'au sommet et l'identifiant du sommet
-
-    // Ce type compliqué permet d'indiquer que l'on souhaite trier les éléments par ordre croissant (std::greater) et donc les éléments les plus petits seront au début de la file (top) (C'est ce qu'on appelle un "Min heap")
-    std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>, std::greater<std::pair<float, int>>> to_visit {};
-
-    // 1. On ajoute le sommet de départ à la liste des sommets à visiter avec une distance de 0 (on est déjà sur le sommet de départ)
-    
-    // Tant qu'il reste des sommets à visiter
-    while (!to_visit.empty()) {
-        // 2. On récupère le sommet le plus proche du sommet de départ dans la liste de priorité to_visit
-
-        // 3.Si on atteins le point d'arrivé, on s'arrête
-        if (/* TODO */) {
-            return distances;
-        }
-        // 3. On parcoure la liste des voisins du nœud courant (grâce à la liste d'adjacence)
-        for (/* TODO */) {
-            // 4. on regarde si le nœud existe dans le tableau associatif (si oui il a déjà été visité)
-
-            auto find_node { /* TODO */ };
-            bool const visited { /* TODO */ };
-
-             if (!visited) {
-                    // 5. Si le nœud n'a pas été visité, on l'ajoute au tableau associatif en calculant la distance pour aller jusqu'à ce nœud (la distance actuelle + le point de l'arrête)
-
-                    // 6. On ajoute également le nœud de destination à la liste des nœuds à visiter (avec la distance également pour prioriser les nœuds les plus proches)
-                }else {
-                    // 7. Si il a déjà été visité, on teste si la distance dans le tableau associatif est plus grande
-                    // Si c'est le cas on a trouvé un chemin plus court, on met à jour le tableau associatif et on ajoute de nouveau le sommet de destination dans la liste à visiter
-                    if (/* TODO */) {
-                        
-                    }
-                } 
-        }
-    }
-
-    return distances;
-}
-```
+Si vous réalisez un ou plusieurs bonus, indiquez clairement dans votre rendu (ou dans un `README.md` du dossier de projet) ce qui a été ajouté.
