@@ -31,6 +31,22 @@ Le projet s'articule autour de quatre commandes : `extract`, `simplify`, `visual
 
 Commencez par exécuter un cycle complet `extract -> simplify -> visualize` sur le fichier de test fourni (`data/test.osm`) afin de vous familiariser avec le pipeline et le résultat visuel.
 
+:::info commandes
+En C++, il est possible de passer des arguments à un exécutable pour déclencher différentes fonctionnalités. Cela se fait via les arguments de la fonction `main(int argc, char* argv[])` où `argc` est le nombre d'arguments et `argv` est un tableau de chaînes de caractères représentant les arguments (sous forme de chaînes de caractères).
+
+Dans ce projet, différentes commandes sont implémentées pour lancer différentes parties du code (**extraction**, **simplification**, **visualisation**). De plus, une librairie de parsing d'arguments ([argparse](https://github.com/p-ranav/argparse/)) est utilisée pour faciliter l'utilisation de ces commandes et la gestion des options (ex: `--help`, `--input`, etc.).
+
+Il peut y avoir des arguments positionnels (juste l'ordre des arguments) et des argument optionnels (généralement précédés de `--` ou `-` pour les différencier).
+
+Par exemple:
+```bash
+./osmGraph.exe extract data/test.osm data/test_extract.graph
+```
+Ici, `extract` est la commande, `data/test.osm` est un argument positionnel (fichier d'entrée) et `data/test_extract.graph` est un autre argument positionnel (fichier de sortie).
+
+Il est possible d'ajouter l'argument `--help` pour obtenir des informations sur les arguments attendus pour chaque commande.
+:::
+
 ## Exercice 2 - Lecture de code et compréhension
 
 En vous appuyant sur le code du projet:
@@ -70,7 +86,7 @@ Rappel cours: [Dijkstra - plus court chemin](/Lessons/S2/graphs/#dijkstra).
 Le cours reste la référence pour l'algorithme. Ici, l'objectif est de l'intégrer dans un code existant et de valider son comportement sur un vrai graphe OSM.
 :::
 
-## Exercice 4 - Points Bonus - Ajout de fonctionnalités
+## Exercice 4 - Bonus non noté - Ajout de fonctionnalités
 
 Voici quelques idées de fonctionnalités supplémentaires, n'hésitez pas à être créatifs :
 
