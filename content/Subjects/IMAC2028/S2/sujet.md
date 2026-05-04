@@ -7,6 +7,7 @@ geometry: margin=2cm
 sidebar_position: 0
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import './customStyles.css';
 
 import IMAC_logo from './imgs/IMAC_logo.png';
@@ -55,6 +56,8 @@ Le projet s'appuie sur un squelette contenant déjà :
 - un affichage 3D interactif d'une île (maillage + texture) utilisant **Raylib**
 - des points/objets affichés sur le terrain
 - des paramètres manipulables dans une UI simple (**ImGui**)
+
+Vous pouvez télécharger le projet via ce lien : <a target="_blank" href={ useBaseUrl("/code/S2/IslandViewerStudents.zip") } download={"IslandViewerStudents.zip"}>IslandViewerStudents.zip</a>
 
 Voilà ce qu'affiche l'application fournie:
 
