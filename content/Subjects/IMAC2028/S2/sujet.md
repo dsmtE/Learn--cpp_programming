@@ -45,6 +45,8 @@ import maskRadialExemple from './imgs/maskRadialExemple.jpg';
 
 **Soutenance** : à préciser (semaine du 15 juin 2026)
 
+:warning: L'usage d'IA est interdit pour ce projet
+
 ---
 
 # Introduction
@@ -105,6 +107,17 @@ Vous pouvez implémenter votre propre version de bruit de base (ex : Simplex) si
 
 #### Pour résumer :
 - implémentation d'une fonction (`octaveNoise`) qui prend en entrée une **position**, une fonction de bruit de base, des paramètres pour générer le bruit fractal (nombre d'octaves, lacunarity, gain, ...) et qui retourne une valeur de bruit fractal correspondante (dans une plage cohérente, par exemple `[-1,1]` ou `[0,1]`).
+<details>
+  <summary>octaveNoise et std::function</summary>
+
+Le projet fournit la signature d'une fonction `octaveNoise` utilisant [`std::function`](https://en.cppreference.com/cpp/utility/functional/function) pour permettre de passer n'importe quelle fonction de bruit de base en paramètre.
+```cpp
+float octaveNoise(glm::vec2 const& position, std::function<float(glm::vec2 const&)> noiseFunction)
+```
+
+ Cette technique s'apparente à ce que l'on avait évoqué ensemble sur les fonctions [lambda](/Lessons/S2/AutoAndAlgorithm#les-fonctions-lambda). A la différence que l'on peut utiliser à la fois une fonction lambda ou alors une fonction classique définie ailleurs (ex: `perlinNoise`) en argument. [`std::function`](https://en.cppreference.com/cpp/utility/functional/function) est une classe de la bibliothèque standard C++ qui permet de "stocker" une fonction avec une signature donnée (ex: `float(glm::vec2 const&)`) et de l'appeler plus tard de manière générique, sans se soucier de la nature exacte de la fonction (lambda, fonction classique, etc).
+
+</details>
 - exposition des paramètres dans l'interface pour permettre l'exploration visuelle
   
 Vous trouverez de nombreuses ressources en ligne sur le sujet :
@@ -231,12 +244,14 @@ Total : **/21** qui sera ramené à 20 pour la notation finale
 
 Voilà quelques idées d'améliorations que vous pouvez implémenter. Ce sont des suggestions, n'hésitez pas à être créatifs et à proposer vos propres idées (à valider) :
 
-- Ajout de plusieurs types de bruits (Simplex, Worley, etc) **et** possibilité de les combiner.
-- Génération de différentes formes d'îles (ex: île en croissant, île avec un lac intérieur, etc) via des masques plus complexes (au moins 3 formes différentes).
+- Import d'un mesh 3D pour le placement d'objets (ex: un modèle d'arbre) plutôt que des cubes simples (il existe des exemples [ici](https://www.raylib.com/examples.html) ou [ici](https://www.raylib.com/examples/models/loader.html?name=models_loading) de chargement de modèles dans raylib). Les modèles 3D utilisés doivent être libres de droits ou alors réalisés par vous même.
+- Gestion de palettes de couleurs pour la coloration du terrain
 - Couleurs/textures plus avancées (ex: mélange en fonction de la pente, d'un type de biome, etc).
+- Ajout de plusieurs types de bruits ([Simplex](https://www.researchgate.net/publication/216813608_Simplex_noise_demystified), Worley, etc) **et** possibilité de les combiner.
+- Placement des objets amélioré (variation de la taille, de la rotation, etc)
+- Génération de différentes formes d'îles (ex: île en croissant, île avec un lac intérieur, etc) via des masques plus complexes (au moins 3 formes différentes).
 - Distribution de plusieurs types d'objets avec conditions (ex: arbres sur les pentes douces, rochers sur les pentes raides, etc). Utilisation de plusieurs palettes de couleurs.
 - Ajout de biomes (ex: plage, forêt, montagne) qui peuvent avoir différents types d'impact sur la génération (différentes couleurs, différentes règles de distribution d'objets, différents types de bruit, etc).
-- Import d'un mesh 3D pour le placement d'objets (ex: un modèle d'arbre) plutôt que des cubes simples (il existe des exemples [ici](https://www.raylib.com/examples.html) ou [ici](https://www.raylib.com/examples/models/loader.html?name=models_loading) de chargement de modèles dans raylib). Les modèles 3D utilisés doivent être libres de droits ou alors réalisés par vous même.
 - Détection des îles (pouvoir détecter les zones connectées sur une même île sans passer par la "mer" (niveau d'élévation inférieur ou égal à 0)) afin de faire varier les couleurs, le placement d'objets, ou ajouter des ponts (plus difficile). Ce type d'algorithme s'appelle "connected components detection". Vous pouvez trouver un article à ce sujet [ici](https://www.redblobgames.com/pathfinding/distance-to-any/#islands).
 
 ## Conseils de réalisation
