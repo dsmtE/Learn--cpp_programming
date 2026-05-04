@@ -84,6 +84,7 @@ Voici les indications que vous devez respecter pour ce projet. Néanmoins, si vo
 - Le projet est à faire par **binôme** ou **trinôme**. Les **trinômes** devront réaliser une fonctionnalité supplémentaire par rapport aux binômes.
 - Les **retards** de rendu seront également sanctionnés (en cas exceptionnel, il faut me prévenir à l'avance, et non le jour du rendu ou de la présentation)
 - Si vous choisissez une fonctionnalité qui n'est pas dans la liste des suggestions d'amélioration, vous devez la faire valider avant de l'implémenter. De même, si vous souhaitez faire une amélioration qui est dans la liste mais que vous souhaitez l'adapter ou la faire évoluer d'une manière ou d'une autre, vous devrez en faire part pour la faire valider.
+- :warning: Pensez à ajouter un fichier `.gitignore` pour éviter de commiter des fichiers temporaires de compilation ou des fichiers binaires (principalement les fichiers dans les dossiers `build/` ou `bin/`)
 
 ## Objectifs algorithmiques obligatoires
 
