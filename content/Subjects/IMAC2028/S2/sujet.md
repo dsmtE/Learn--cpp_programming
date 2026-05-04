@@ -13,6 +13,8 @@ import IMAC_logo from './imgs/IMAC_logo.png';
 import islandTemplate from './imgs/islandTemplate.jpg';
 import islandExempleResult from './imgs/islandExempleResult.jpg';
 import islandExempleResult2D from './imgs/islandExempleResult2D.jpg';
+import Poisson_Disk_Sampling_comparaison from './imgs/Poisson_Disk_Sampling_comparaison.jpg';
+import maskRadialExemple from './imgs/maskRadialExemple.jpg';
 
 <div style={{ width: '30%', float: 'left' }}>
 
@@ -34,7 +36,7 @@ import islandExempleResult2D from './imgs/islandExempleResult2D.jpg';
 
 ---
 
-**Nombre de personnes par projet** : 2
+**Nombre de personnes par projet** : 2 ou 3 (binôme ou trinôme)
 
 **Date de rendu** : à compléter
 
@@ -56,12 +58,12 @@ Voilà ce qu'affiche l'application fournie:
 
 <img src={islandTemplate} width="600" class="center" />
 
-Votre travail va être de remplacer les implémentations de génération de la heightmap, de la couleur du terrain et de distribution des points par des algorithmes plus avancés :
-- **Bruit fractal (FBM)** pour la heightmap
+Votre travail va être de remplacer les implémentations de génération de la heightmap (carte d'élévation), de la couleur du terrain et de distribution des points par des algorithmes plus avancés :
+- **Bruit fractal (du type bruit FBM)** pour la heightmap (en accumulant plusieurs octaves de bruit de base)
 - **Coloration** avec interpolation linéaire en fonction de la hauteur (valeur dans la heightmap)
 - **Poisson disk sampling** pour la distribution des points
 
-Ainsi que d'ajouter des fonctionnalités supplémentaires pour améliorer la qualité de la génération et de l'application en général.
+Ainsi que d'ajouter au moins une fonctionnalité supplémentaire pour améliorer la qualité de la génération et de l'application en général.
 
 ## Cahier des charges
 
@@ -74,64 +76,105 @@ Voici les indications que vous devez respecter pour ce projet. Néanmoins, si vo
 - Le projet doit être versionné avec **Git**
 - Le rendu doit inclure le code source du projet avec vos ajouts ainsi qu'un fichier `README.md` faisant office de présentation et de rapport de votre travail.
 - Un minimum de commits (de tout les membres du groupe) est attendu pour valider le projet (un commit de dernière minute avec tout le code ajouté d'un coup sera sanctionné)
-- Le projet est à faire par **binôme** ou **trinôme**. Les **trinômes** devront obligatoirement réaliser **deux** fonctionnalités supplémentaires par rapport aux binômes qui devront en ajouter qu'une. Si vous choisissez une amélioration qui n'est pas dans la liste des améliorations suggérées, vous devrez nous en faire part pour la faire valider.
+- Le projet est à faire par **binôme** ou **trinôme**. Les **trinômes** devront réaliser une  fonctionnalités supplémentaires par rapport aux binômes.
 - Les **retards** de rendu seront également sanctionnés (si cas exceptionnel, il faut me prévenir à l'avance et pas le jour du rendu ou de la présentation)
+- Si vous choisissez une fonctionnalité qui n'est pas dans la liste des suggestions d'amélioration, vous devez la faire valider avant de l'implémenter. De même, si vous souhaitez faire une amélioration qui est dans la liste mais que vous souhaitez l'adapter ou la faire évoluer d'une manière ou d'une autre, vous devrez nous en faire part pour la faire valider.
 
 ## Objectifs algorithmiques obligatoires
 
-### 1) Bruit fractal (FBM)
+### 1) Bruit fractal
 
-Implémenter une fonction de bruit fractal (FBM) qui accumule plusieurs "octaves" de bruit de base (ex: Perlin) pour produire une heightmap plus riche et naturelle.
+Implémenter une fonction de bruit fractal en particulier du type **FBM (Fractal Brownian Motion)** qui accumule plusieurs octaves d'un bruit de base (ex: **Perlin** (fourni dans le template), **Simplex**, etc) pour générer une carte de hauteur plus riche et réaliste.
+
+Un bruit fractal est obtenu en **sommant** plusieurs "octaves" de bruit de base, chacune avec une **fréquence** et une **amplitude** différentes. Les paramètres principaux à contrôler sont :
+- **Nombre d'octaves** : combien de couches de bruit accumuler
+- **Lacunarity** : facteur de multiplication de la fréquence pour chaque octave (ex: 2.0 signifie que chaque octave a une fréquence deux fois plus élevée que la précédente)
+- **Gain** : facteur de multiplication de l'amplitude pour chaque octave (ex: 0.5 signifie que chaque octave a une amplitude moitié de la précédente)
+- **Seed** : valeur de départ pour la génération du bruit, permettant d'obtenir des résultats différents à chaque exécution ou de reproduire les mêmes résultats en utilisant la même seed. 
+:::note
+Une implementation d'un bruit de **perlin** avec seed est fournie dans le template.
+Vous pouvez implementer votre propre version de bruit de base (ex: simplex) si vous le souhaitez et cela pourra être pris en compte comme amélioration (dans le cas où cette implementation ne viens pas d'une ressource externe ou librairie).
+:::
+- **Scale** : facteur d'échelle pour contrôler la "taille" des features générées par le bruit (généralement en multipliant les coordonnées d'entrée du bruit par ce facteur)
 
 #### Attendus :
-- implementation d'une fonction `octaveNoise` qui prend en entrée une position, une fonction de bruit de base, et des paramètres pour générer un bruit fractal (accumulation d'octaves, lacunarity, gain)
-- exposition de paramètres dans l'interface pour permettre l'exploration visuelle
+- implementation d'une fonction (`octaveNoise`) qui prend en entrée une **position**, une fonction de bruit de base, et des paramètres pour générer le bruit fractal (nombre d'octaves, lacunarity, gain, ...)
+- exposition des paramètres dans l'interface pour permettre l'exploration visuelle
 - Résultat du noise normalisé (dans l'intervalle [0,1])
   
-Vous trouvez de nombreuses ressources en ligne sur le sujet: https://thebookofshaders.com/13/?lan=fr
+Vous trouvez de nombreuses ressources en ligne sur le sujet: 
+- https://thebookofshaders.com/13/?lan=fr
+- https://iquilezles.org/articles/fbm/
 
 ### 2) Génération de heightmap et couleurs
 
 Réécrire la génération de la carte de hauteur pour produire une île procédurale crédible.
 
+Le but est de créer une carte d’élévation qui ressemble à une île, c'est à dire avec des zones d'élévation plus élevée au centre et des zones plus basses vers les bords (qui peuvent être sous le niveau de la mer).
+Pour cela, on va combiner(par une simple multiplication par exemple) le bruit fractal généré précédemment avec un **masque** qui va faire diminuer les valeurs d'élévation vers les bords de la carte. 
+
+Un masque radial (ex: fonction gaussienne centrée ou juste linéaire) est un choix simple et efficace, mais vous pouvez être créatif et utiliser d'autres types de masques pour créer des formes d'îles différentes (ex: île en croissant, île avec un lac intérieur, etc).
+
+Voilà un exemple de masque radial simple:
+
+<img src={maskRadialExemple} width="300" class="center" />
+
+Enfin, il va falloir convertir les valeurs de hauteur en couleurs pour texturer le maillage de l'île. Par exemple, on peut faire du **bleu** pour les zones sous le niveau de la mer(inférieur à 0), du vert pour les plaines, du gris pour les montagnes, etc. Une simple interpolation linéaire entre différentes couleurs en fonction de la valeur de hauteur est attendue, mais vous pouvez aller plus loin en ajoutant des règles plus complexes (ex: mélange de textures en fonction de la pente, d'un type de biomes etc).
+
 #### Attendus
 - combiner le **bruit fractal** avec un **masque radial** (ou similaire de votre choix) pour créer une forme d'île.
 - résultat final normalisé/contraint pour rester dans une plage cohérente
-- 
-- conversion des valeurs de bruit en couleurs pour texturer le maillage (ex: bleu pour mer, vert pour plaine, gris pour montagne) (une implementation simple de remapping linéaire est demandée mais il est possible d'aller plus loin en améliorations)
+- conversion des valeurs de bruit en couleurs pour texturer le maillage (**minimum** 3 couleurs différentes  avec une interpolation linéaire simple)
 - exposer les paramètres de génération dans l'interface
 
 ### 3) Distribution de points par Poisson disk sampling
 
 Remplacer la génération aléatoire naïve de positions 2D par un algorithme de **Poisson disk sampling** et particulièrement la version "Bridson's algorithm".
 
-//TODO: exemple brièvement l'idée de l'aglgorithme
+L'idée de cet algorithme est de générer des points de manière à ce qu'ils soient **uniformément répartis** tout en respectant une **distance minimale** entre eux. Cela permet d'obtenir une distribution plus naturelle et réaliste pour les objets placés sur l'île (ex: arbres, rochers, etc).
 
-Exemple de répartition utilisant cet algorithme:
+Fonctionnement de l'algorithme de Bridson:
+1. Choisir un point de départ aléatoire et l'ajouter à une liste de points actifs
+2. Tant que la liste de points actifs n'est pas vide:
+   - Choisir un point actif aléatoire
+   - Générer jusqu'à `k` points candidats autour de ce point actif (dans un anneau entre `r` et `2r`, où `r` est la distance minimale)
+   - Si un point candidat est à une distance d'au moins `r` de tous les points déjà générés, l'ajouter à la liste de points actifs et à la liste finale de points
+   - Si après `k` essais aucun point candidat n'est valide, retirer le point actif de la liste
+
+Dans la version de Bridson, une grille est utilisée pour accélérer la recherche de points voisins et vérifier rapidement si un point candidat est valide (pour éviter de parcourir tous les points générés à chaque fois).
+
+Voilà une image qui illustre le résultat de cet algorithme en 2D en comparaison avec une génération aléatoire naïve:
+
+<img src={Poisson_Disk_Sampling_comparaison} width="600" class="center" />
+
+Cette image provient de [cet](http://devmag.org.za/2009/05/03/poisson-disk-sampling/) article qui peut vous être utile pour comprendre et implémenter l'algorithme de Poisson disk sampling.
+
+Voila un exemple de résultat que vous pouvez viser dans votre application:
 <img src={islandExempleResult2D} width="600" class="center" />
 
 #### Attendus
 - génération de points dans l'espace normalisé `[0,1] x [0,1]`
 - distance minimale entre deux points respectée
-- paramètres contrôlables (rayon, essais avant rejet, nombre de points maximum éventuel)
+- paramètres contrôlables (rayon minimal, essais avant rejet, nombre de points maximum éventuel)
 
 ### 4) Placement des objets sur le terrain
 
-Les points 2D générés sont projetés sur le terrain via l'échantillonnage de la heightmap.
+Une fois les points 2D générés, il va falloir les projeter sur le terrain pour obtenir des positions 3D correspondantes à la surface de l'île. Le projet fourni déjà une fonction qui fait cela en échantillonnant la heightmap pour obtenir la hauteur correspondante à chaque point 2D.
+
+Votre but et d'ajouter une possibilité de filtrage pour par exemple ne pas placer de points dans la mer (hauteur inférieure ou égale à 0) ou au sommet des montagnes (hauteur supérieure à un certain seuil). Cela permettra d'obtenir un placement plus réaliste des objets sur l'île (ex: pas d'arbres dans la mer).
 
 #### Attendus
 - Ajouter une possibilité de filtrage des points générés en fonction de la hauteur du terrain (ex: pas de points dans la mer, ou au sommet des montagnes)
 
 ### 5) Améliorations
 
-Une fois les objectifs principaux atteints, vous devez implémenter au moins une amélioration parmi les suggestions listées à la fin de ce document ou proposer votre propre idée d'amélioration (à valider).
+Une fois les objectifs principaux atteints, vous **devez** implémenter au moins une amélioration parmi les suggestions listées à la fin de ce document ou proposer votre propre idée d'amélioration (à valider).
 
-Les **trinômes** devront obligatoirement réaliser **deux** amélioration supplémentaires par rapport aux binômes.
-
+Les **trinômes** devront obligatoirement réaliser **deux** améliorations (par rapport aux binômes qui doivent en faire au moins une).
 
 ### Résultat 
 
-Voilà un exemple de résultat final que vous pouvez viser (mais n'hésitez pas à être créatifs et à faire votre propre style d'île):
+Voilà un exemple de résultat (mais n'hésitez pas à être créatifs et à faire votre propre style d'île):
 
 <img src={islandExempleResult} width="600" class="center" />
 
@@ -145,7 +188,7 @@ Votre interface doit permettre au minimum :
 
 L'objectif n'est pas une interface complexe, mais un outil de debug/exploration efficace.
 
-Le projet fourni un exempl d'UI via **raylib** et **imGui**.
+Le projet fourni un exemple d'UI via **raylib** et **imGui**.
 
 ## Rapport
 
@@ -163,27 +206,27 @@ Le rapport doit être concis par exemple 2 à 5 pages sans les illustrations.
 
 Voilà un barème non definif à titre indicatif:
 
-- Implémentation du bruit fractal (FBM) : **/2**
+- Implémentation du bruit fractal : **/2**
 - Génération de heightmap (couleurs, masque "radiale", etc) : **/4**
 - Poisson disk sampling  : **/4**
 - Améliorations : **/4**
-- BONUS : **/3**
+- BONUS (améliorations suplémentaires ou plus avancées, originalité, etc) : **/3**
 - Qualité du code : **/2**
 - Rapport : **/2**
 
-Total : **/20**
+Total : **/21** qui sera ramené à 20 pour la notation finale
 
 ## Améliorations suggérées
 
-Voilà quelques idées d'amélioration que vous pouvez implémenter. Ce sont des suggestions, n'hésitez pas à être créatifs et à proposer vos propres idées (à valider avec l’enseignant):
+Voilà quelques idées d'améliorations que vous pouvez implémenter. Ce sont des suggestions, n'hésitez pas à être créatifs et à proposer vos propres idées (à valider avec l’enseignant):
 
 - Ajout de plusieurs types de bruits (Simplex, Worley, etc) **et** possibilité de les combiner.
-- Génération de différentes formes d'îles (ex: île en croissant, île avec un lac intérieur, etc) via des masques plus complexes.
+- Génération de différentes formes d'îles (ex: île en croissant, île avec un lac intérieur, etc) via des masques plus complexes (au moins 3 formes différentes).
 - Couleurs/textures plus avancées (ex: mélange de textures en fonction de la pente, d'un type de biomes etc).
 - Distribution de plusieurs type d'objets avec conditions (ex: arbres sur les pentes douces, rochers sur les pentes raides, etc).
 - Ajout de biomes (ex: plage, forêt, montagne) qui peuvent avoir différents type d'impact sur la génération (différentes couleurs, différentes règles de distribution d'objets, différents types de bruit, etc).
-- import d'un mesh 3D pour le placement d'objets (ex: un modèle de'arbre) plutôt que des cube simples (il existe des [exemples](https://www.raylib.com/examples.html) de chargement de mesh dans raylib).
-- Detection des îles (pouvoir detecter les zones connectés sur la même iles sans passé par la "mer" (niveau d'elevation inférieur ou égal à 0) pour pouvoir faire varier des couleurs, placement d'objets, ajouter des ponts (plus difficiles) ) Ce genre d’algorithme d'appel "connected components detection", vous pouvez trouver un article qui en parle [ici](https://www.redblobgames.com/pathfinding/distance-to-any/#islands).
+- import d'un mesh 3D pour le placement d'objets (ex: un modèle de'arbre) plutôt que des cube simples (il existe des exemples [ici](https://www.raylib.com/examples.html) ou [ici](https://www.raylib.com/examples/models/loader.html?name=models_loading) de chargement de modèles dans raylib).
+- Detection des îles (pouvoir detecter les zones connectés sur la même îles sans passé par la "mer" (niveau d'elevation inférieur ou égal à 0) pour pouvoir faire varier des couleurs, placement d'objets, ajouter des ponts (plus difficiles) ) Ce genre d’algorithme s'appel "connected components detection", vous pouvez trouver un article qui en parle [ici](https://www.redblobgames.com/pathfinding/distance-to-any/#islands).
 
 ## Conseils de réalisation
 
@@ -195,5 +238,3 @@ Voilà quelques idées d'amélioration que vous pouvez implémenter. Ce sont des
   - Poisson disk sampling
 - Privilégiez la lisibilité et la stabilité à la complexité inutile
 - Faite des commits **fréquents** et bien nommés pour documenter votre progression
-
-// TODO: ajouter des ressources utiles (exemple raylib)
