@@ -39,11 +39,11 @@ import maskRadialExemple from './imgs/maskRadialExemple.jpg';
 
 **Nombre de personnes par projet** : 2 ou 3 (binôme ou trinôme)
 
-**Date de début** : 5 mai 2026
+**Date de début** : mardi 5 mai 2026
 
-**Date de rendu** : 9 juin 2026 à 23h59
+**Date de rendu** : mardi 9 juin 2026 à 23h
 
-**Soutenance** : à préciser (semaine du 15 juin 2026)
+**Soutenance** : mercredi matin 17 juin 2026
 
 :warning: L'usage d'IA est interdit pour ce projet
 
