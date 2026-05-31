@@ -156,7 +156,7 @@ puis itérer sur les pixels pour les colorer.
 Quelle est l'équation d'un disque ? Comment peut on s'en servir pour savoir si un pixel est à l'intérieur ou à l'extérieur du disque ?
 </details>
 
-### ⭐ Cercle
+### ⭐⭐ Cercle
 
 ![](output/circle.png)
 
@@ -180,12 +180,6 @@ Maintenant que vous savez dessiner un cercle, dessinez-en plusieurs sur la même
 
 Comment passer de coordonnées polaires (angle et rayon) à des coordonnées cartésiennes (x et y) ?
 </details>
-
-### ⭐⭐ Animation
-
-![](output/animation.gif)
-
-Pour faire une animation, on va exporter plein d'images les unes après les autres, en faisant légèrement bouger le disque entre deux images. Vous pouvez ensuite utiliser un outil externe pour assembler ces images en une vidéo / gif. Par exemple [Ezgif](https://ezgif.com/maker).
 
 ## ⭐⭐ Mosaïque
 
@@ -217,7 +211,9 @@ Prendre un rectangle de pixels et l'intervertir avec un autre rectangle de pixel
 
 ## ⭐⭐⭐ Tri de pixels
 
-![](output/pixel_sorting.png)
+| ![](output/pixel_sorting.png) | ![](output/pixel_sorting2.png) | ![](output/pixel_sorting3.png) |
+| ----------------------------- | ------------------------------ | ------------------------------ |
+| Trier tous les pixels         | Trier les lignes               | Trier des parties aléatoires   |
 
 Voici une bonne vidéo expliquant l'algorithme (vous pouvez ignorer le début spécifique à Processing où on voit comment afficher l'image) :
 
@@ -225,7 +221,7 @@ Voici une bonne vidéo expliquant l'algorithme (vous pouvez ignorer le début sp
 
 Utilisez `image.pixels()` pour récupérer le tableau contenant tous les pixels de l'image et le trier.
 
-Ensuite, au lieu de trier tous les pixels de l'image, triez par colonne (ou par ligne) pour un effet plus joli. (Il faudra trier des sous-parties du tableau `image.pixels()`.) Ou encore, triez des sous-parties prises aléatoirement dans l'image.
+Ensuite, au lieu de trier tous les pixels de l'image, triez par ligne (ou par colonne) pour un effet plus joli. (Il faudra trier des sous-parties du tableau `image.pixels()`.) Ou encore, triez des sous-parties prises aléatoirement dans l'image.
 
 :::info
 Pour trier un tableau, vous pouvez utiliser `std::sort`. Vous verrez ça plus en détail au S2, mais voici une brève explication :
@@ -263,29 +259,6 @@ On passe ce qu'on appelle une *lambda* en 3ème argument : c'est une fonction d�
 :::
 
 <ExplanationsAboutRandom/>
-
-## ⭐⭐⭐ Dégradés dans l'espace de couleur Lab
-
-Pour commencer, repartez de l'exo [⭐ Dégradé](#-dégradé) et adaptez-le pour faire un dégradé de couleur :
-
-![](./output/gradient_srgb.png)
-
-<details>
-    <summary>Indice</summary>
-
-    Vous pouvez utiliser la fonction [`glm::mix`](https://glm.g-truc.net/0.9.4/api/a00129.html#ga3f64b3986efe205cf30300700667e761) pour mélanger deux couleurs en fonction d'un pourcentage.
-</details>
-
-Maintenant, on peut remarquer que ce dégradé n'est pas super, et que la couleur au milieu est très sombre par rapport aux couleurs aux extrémités. Le problème c'est que nos couleurs sont exprimées dans l'espace de couleur sRGB, qui n'est pas adapté pour ce genre d'opérations de mélange entre couleurs. D'autres espaces de couleur ont été développés exprès pour ça, notamment Lab :
-
-<YoutubeVideo id="nJlZT5AE9zY"/>
-<br/>
-
-[Voici l'article original introduisant Oklab](https://bottosson.github.io/posts/oklab/), vous y trouverez toutes les infos nécessaires pour implémenter les conversions entre sRGB et Oklab :
-
-![](./output/gradient_oklab.png)
-
-Comparez les dégradés dans les différents espaces de couleur : lequel préférez vous ? Essayez des dégradés avec d'autres couleurs : est-ce que Oklab est toujours mieux que sRGB ? Que se passe-t-il si on fait le mélange dans d'autres espaces de couleur, comme Linear RGB ou HSL ?
 
 ## ⭐⭐⭐(⭐) Fractale de Mandelbrot
 

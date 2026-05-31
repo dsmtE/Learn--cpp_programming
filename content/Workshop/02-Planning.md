@@ -7,7 +7,7 @@
 ## Mardi
 
 - [ ] *Cours* : Présentation de git
-- [ ] Test et prise en main de git (l'un push quelque chose et l'autre le pull par exemple)
+- [ ] Test et prise en main de git
 - [ ] Mettre sur le repository les exercices que vous avez fait hier
 - [ ] Autonomie, avancer dans les exercices
 
@@ -24,6 +24,6 @@
 ## Vendredi
 
 - [ ] *Cours* : Présentation de Markdown pour l'écriture du rapport
-- [ ] Écriture du rapport (Vous avez jusqu'à samedi 23h59 pour le rendre)
+- [ ] Écriture du rapport (Vous avez jusqu'à vendredi 23h59 pour le rendre)
 - [ ] Préparation de la présentation pour celleux concerné.es
 - [ ] Présentations l'après-midi
