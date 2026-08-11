@@ -21,8 +21,6 @@ module.exports = async function configCreatorAsync() {
     tagline: '',
     url: `https://dsmte.github.io/`,
     baseUrl: isDev ? '/' : '/Learn--cpp_programming/',
-    onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
     favicon: 'imgs/favicon.ico',
 
     // GitHub pages deployment config.
@@ -37,6 +35,10 @@ module.exports = async function configCreatorAsync() {
 
     markdown: {
       mermaid: true,
+      hooks: {
+        onBrokenMarkdownLinks: 'warn',
+        onBrokenMarkdownImages: 'throw',
+      },
     },
     themes: ['@docusaurus/theme-mermaid'],
 
