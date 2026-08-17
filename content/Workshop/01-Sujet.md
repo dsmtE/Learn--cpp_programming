@@ -46,11 +46,10 @@ for (glm::vec3& color : image.pixels())
   - Pour créer une couleur avec les trois composantes identiques (donc un niveau de gris), la syntaxe `glm::vec3{grey}` est équivalente à `glm::vec3{grey, grey, grey}`.
   - Vous pouvez généralement faire vos opérations directement sur les couleurs, pas besoin de les faire 3 fois sur chacun des canaux :
 ```cpp
-glm::vec3 color1{};
-glm::vec3 color2{};
-glm::vec3 final_color{};
+glm::vec3 const color1{};
+glm::vec3 const color2{};
 
-final_color = color1 + color2;
+glm::vec3 const final_color = color1 + color2;
 // équivalent à :
 // final_color.r = color1.r + color2.r;
 // final_color.g = color1.g + color2.g;
@@ -92,17 +91,17 @@ int main()
 
 ## Rendu et Rapport
 
-__*À rendre avant samedi à 23h59*__.<br/>
-*Pour le rendu, il suffit de [mettre votre lien git ici](https://docs.google.com/spreadsheets/d/1x2uqvKdhndstidmW4xoWkNTlbwHFDWGlpohdb6TRORY/edit?usp=sharing)*. Attention, vérifiez bien que votre repo est en public, ou si il est en privé, pensez à m'inviter dessus ([*julesfouchy*](https://github.com/julesfouchy/)).
+__*À rendre avant vendredi à 23h59*__.<br/>
+Pour le rendu, il suffit de mettre votre lien git sur la google sheet que je vais vous partager sur Discord. Attention, vérifiez bien que votre repo est en public, ou si il est en privé pensez à m'inviter dessus ([*julesfouchy*](https://github.com/julesfouchy/)).
 
-Pour le rapport, faites une section par exercice que vous avez fait. Montrez une image avant et après application de l'effet (comme c'est fait dans l'énoncé des exercices). Si vous jugez cela utile, vous pouvez mettre un petit texte expliquant des spécificités de l'algo que vous avez implémenté, et les pièges potentiels dans lesquels il ne faut pas tomber.
+Pour le rapport, faites une section par exercice que vous avez fait. Montrez une image avant et après application de l'effet (comme c'est fait dans l'énoncé des exercices). **Le rapport n'a pas besoin d'être long**. Pour les exercices où vous jugez cela utile, mettez un petit texte expliquant des spécificités de l'algo que vous avez implémenté, et les pièges potentiels dans lesquels il ne faut pas tomber.
 
-À faire en Markdown obligatoirement (Si vous ne connaissez pas c'est l'occasion de découvrir, c'est super utile. Je vous montre tout ça vendredi).
+À faire en Markdown obligatoirement. (Si vous ne connaissez pas c'est l'occasion de découvrir, c'est super utile. Je vous montre tout ça vendredi).
 
-À mettre directement en tant que ReadMe.md à la racine du repo.
+À mettre directement en tant que `README.md` à la racine du repo.
 
 ## Soutenance
 
-Présentez un des algos avancés que vous avez fait, en 5-10 minutes. C'est de la vulgarisation, il faut que tous vos camarades puissent comprendre. Expliquez l'algo dans les grandes lignes, et parlez des petits pièges de code auxquels il faut faire attention.
+Présentez un des algos avancés que vous avez fait, en 5-10 minutes. C'est de la vulgarisation, il faut que tous vos camarades puissent comprendre. Expliquez l'algo dans les grandes lignes, et parlez des petits pièges de code auxquels il faut faire attention. **Attention** à ne pas juste montrer le code et le lire ligne par ligne!!
 
 PS : la soutenance est optionnelle, on va essayer de ne pas présenter plusieurs fois le même algo, donc vous n'êtes pas obligé.es de passer. Et si plusieurs groupes souhaitent passer sur le même algo, on va essayer de vous regrouper pour que vous fassiez une seule présentation, ensemble.
