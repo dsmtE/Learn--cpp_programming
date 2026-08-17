@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkprogramming_support_courses||=[]).push([[5211],{22291(e){e.exports=JSON.parse('{"categoryGeneratedIndex":{"title":"Annexes","slug":"/Annexes","permalink":"/Learn--cpp_programming/Annexes","sidebar":"Annexes","navigation":{"next":{"title":"L\'IDE VSCode","permalink":"/Learn--cpp_programming/Annexes/VSCode"}}}}')}}]);

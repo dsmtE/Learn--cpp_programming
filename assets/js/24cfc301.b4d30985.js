@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkprogramming_support_courses||=[]).push([[6905],{29643(o){o.exports=JSON.parse('{"metadata":{"permalink":"/Learn--cpp_programming/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":0,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
