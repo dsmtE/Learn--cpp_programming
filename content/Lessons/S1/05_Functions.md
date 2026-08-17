@@ -680,6 +680,80 @@ int fact(int n)
 
 Il est **préférable** d'utiliser des fonctions **non récursives** quand c'est possible car elle sont généralement plus performantes et moins propices à l'erreur (condition d'arrêt jamais valide, etc).
 
+### La pile d'appels
+
+Quand une fonction récursive est appelée, chaque appel est empilé sur la **pile d'appels** (*call stack*). Chaque appel réserve un nouvel espace mémoire pour ses paramètres et ses variables locales.
+
+```mermaid
+graph LR
+    A["fact(4)"] --> B["fact(3)"]
+    B --> C["fact(2)"]
+    C --> D["fact(1) retourne 1"]
+```
+
+C'est pour cela qu'un nombre trop élevé d'appels récursifs peut provoquer un **stack overflow** : la pile dépasse la mémoire allouée.
+
+### Récursivité vs itération
+
+La récursivité à l'avantage d'être souvent plus **lisible** et plus **naturelle** pour certains problèmes (comme les arbres ou les algorithmes de type "diviser pour régner").
+Cependant, elle peut être moins performante que l'itération en raison du coût supplémentaire lié à la gestion de la pile d'appels car chaque appel reste en mémoire jusqu'au retour. Dans les cas où c'est possible on préférera une version **itérative** pour des raisons de performance et éviter ce coût supplémentaire.
+
+:::info[Pour aller plus loin : la mémoïsation]
+Lorsque l'on calcule récursivement la suite de Fibonacci par exemple, on recalcule souvent les **mêmes valeurs** plusieurs fois :
+
+```cpp
+#include <iostream>
+int fib(int const n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fib(n - 1) + fib(n - 2);
+}
+```
+
+```
+fib(5) = fib(4) + fib(3)
+fib(4) = fib(3) + fib(2)  ← fib(3) est calculé deux fois !
+fib(3) = fib(2) + fib(1)  ← fib(2) est calculé trois fois !
+```
+
+La **mémoïsation** consiste à **stocker** les résultats déjà calculés dans un cache (par exemple un `std::vector` ou un `std::unordered_map`) pour ne pas les recaler. On transforme ainsi une récursion exponentielle en récursion **linéaire** :
+
+```cpp
+#include <unordered_map>
+#include <iostream>
+
+int fib(int const n, std::unordered_map<int, int>& cache) {
+    if (n <= 1) {
+        return n;
+    }
+
+    // Si déjà calculé, on retourne le résultat en cache
+    auto const it { cache.find(n) };
+    if (it != cache.end()) {
+        return it->second;
+    }
+
+    // Sinon, on calcule et on met en cache
+    int const result {fib(n - 1, cache) + fib(n - 2, cache)};
+    cache[n] = result;
+    return result;
+}
+
+int main() {
+    std::unordered_map<int, int> cache {};
+    std::cout << fib(50, cache) << std::endl;
+    // Des appels supplémentaires peuvent se resservir du même cache pour des valeurs déjà calculées
+    std::cout << fib(30, cache) << std::endl;
+}
+```
+
+Ce principe est au cœur de la **programmation dynamique** (*dynamic programming*), un paradigme algorithmique puissant qui consiste à décomposer un problème en sous-problèmes avec plusieurs approches (mémorisation, tabulation, rejet, etc) pour optimiser les performances.
+
+### Pour aller plus loin
+- [Dynamic Programming — CP-Algorithms](https://cp-algorithms.com/dynamic_programming/intro-to-dp.html)
+:::
+
 ## Résumé
 
 - Une **fonction** est un ensemble d'instructions délimité par des accolades (<kbd>{}</kbd>).
@@ -689,3 +763,6 @@ Il est **préférable** d'utiliser des fonctions **non récursives** quand c'est
 - Il est possible de manipuler la variable d'origine à l'aide de **référence** (en ajoutant une **esperluette** (<kbd>&</kbd>) **après** le **type** de notre variable).
 - Il est possible de **surcharger** un fonction, c'est à dire avoir le même nom mais **des paramètres différents**, on parle de **signatures** différentes.
 - Il est recommandé d'utiliser des paramètres **constants** (avec le mot-clé ```const```) pour **éviter des erreurs**, **éviter des copies** et **protéger nos variables**.
+- Une fonction peut s'appeler elle-même, on parle de **récursivité**. Il faut faire attention à la **condition d'arrêt** pour éviter une récursion infinie.
+- Une fonction récursive peut être moins performante qu'une fonction itérative à cause de la **pile d'appels**. Il est donc préférable d'utiliser une version itérative si possible.
+- Il est possible d'utiliser la **mémoïsation** pour optimiser les fonctions récursives en stockant les résultats déjà calculés.
