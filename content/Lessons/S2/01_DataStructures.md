@@ -218,6 +218,97 @@ On privilégie l'utilisation de **structures** de données avec des membres **ex
 Les **tuples** et **pair** sont utiles dans certains cas, mais il faut faire attention à ne pas en abuser.
 :::
 
+## File de priorité — std::priority_queue
+
+Une **file de priorité** est une structure de données similaire à `std::queue` mais qui ne retire pas l'élément le **premier** ajouté, mais l'élément avec la **priorité la plus élevée** (le plus grand ou le plus petit selon l'ordre choisi).
+
+:::note
+On l'appelle "file" car elle s'utilise comme une file, mais en interne elle est implémentée avec un **tas** (*heap*), une structure de données de type **arbre binaire** qui permet de maintenir l'ordre des éléments selon leur priorité.
+:::
+
+La classe [`std::priority_queue`](https://en.cppreference.com/w/cpp/container/priority_queue) est définie dans la bibliothèque `<queue>`.
+
+### Utilisation de base
+
+```cpp
+#include <queue>
+#include <iostream>
+
+int main() {
+    std::priority_queue<int> pq {};
+
+    pq.push(3);
+    pq.push(1);
+    pq.push(4);
+    pq.push(1);
+    pq.push(5);
+
+    // On retire les éléments du plus grand au plus petit
+    while (!pq.empty()) {
+        std::cout << pq.top() << " "; // Affiche 5 4 3 1 1
+        pq.pop();
+    }
+}
+```
+
+Par défaut, `std::priority_queue` est un **tas max** : l'élément le plus grand est en premier.
+
+### Tas min
+
+Pour obtenir un **tas min** (l'élément le plus petit en premier), on utilise `std::greater` comme comparateur :
+
+```cpp
+#include <queue>
+#include <vector>
+#include <functional> // Pour std::greater
+#include <iostream>
+
+std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap {};
+
+minHeap.push(3);
+minHeap.push(1);
+minHeap.push(4);
+
+std::cout << minHeap.top() << std::endl; // Affiche 1
+minHeap.pop();
+std::cout << minHeap.top() << std::endl; // Affiche 3
+```
+
+:::note
+Comme le nom de la variable est particulièrement long, on peut utiliser un [**alias**](https://learn.microsoft.com/en-us/cpp/cpp/aliases-and-typedefs-cpp?view=msvc-170) de type pour simplifier le code :
+
+```cpp
+using MinHeap = std::priority_queue<int, std::vector<int>, std::greater<int>>;
+MinHeap minHeap {};
+```
+:::
+
+### Utilisation pratique
+
+Les files de priorité sont très utilisées dans les algorithmes de **graphes** (comme l'algorithme de **Dijkstra** que nous verrons plus tard) pour toujours traiter le sommet le plus proche (avec la distance la plus **petite**) en **premier**.
+
+```cpp
+// Exemple : traitement de tâches par priorité
+struct Task {
+    std::string nom {};
+    int proirity {};
+};
+
+// Comparateur pour la file de priorité
+struct TaskPriorityComparator {
+    bool operator()(Task const& a, Task const& b) {
+        return a.proirity > b.proirity;
+    }
+};
+
+std::priority_queue<Task, std::vector<Task>, TaskPriorityComparator> fileTaches {};
+fileTaches.push({"Tâche 1", 3});
+```
+
+:::info
+`std::priority_queue` est un **adaptateur** de conteneur : il utilise un autre conteneur (par défaut `std::vector`) en interne pour stocker les éléments. **Mais** cela ne veux pas dire qu'il fournit toutes les fonctionnalités de ce conteneur. Par exemple, il n'y a pas d'itérateurs pour parcourir les éléments et on ne peut pas accéder aux éléments par index. On ne peut accéder qu'à l'élément avec la **priorité la plus élevée** avec `top()`.
+:::
+
 ## Pour aller plus loin
 
 <details>
@@ -309,6 +400,8 @@ Cela permet de ne pas avoir à utiliser des valeurs ***spéciales*** pour repré
 ## Résumé
 
 - Les **piles** et les **files** sont des structures de données qui permettent de stocker des éléments de façon à ce que le dernier élément ajouté soit le premier à être retiré (**LIFO**) ou le premier élément ajouté soit le premier à être retiré (**FIFO**). On utilise les classes `std::stack` et `std::queue` pour les représenter dans la bibliothèque standard de C++.
+
+- La classe `std::priority_queue` (`<queue>`) est une file qui retire toujours l'élément avec la **priorité la plus élevée** (ou la plus faible). Elle est implémentée avec un **tas** (*heap*) et est très utilisée dans les algorithmes de graphes (Dijkstra).
 
 - La classe `std::pair` (`<utility>`) permet de représenter une paire d'éléments de types différents. C'est une classe qui est utilisée par d'autres **conteneurs** de la bibliothèque standard comme `std::map`.
 - La classe `std::tuple` (`<tuple>`) permet de représenter un ensemble de données hétérogènes.
