@@ -1,0 +1,35 @@
+<svg version="1.1" width="560" height="75" viewBox="0 0 560 75"
+   xmlns="http://www.w3.org/2000/svg">
+   <style>
+       .pos { fill: #d6eaf8; stroke: #2980b9; }
+       .label { font-family: Helvetica, Arial; font-size: 7px; fill: #333; text-anchor: middle; letter-spacing: 1px; }
+       .header { font-family: Helvetica, Arial; font-size: 10px; fill: #666; letter-spacing: 1px; }
+       .cacheLine  { fill: none; stroke: #e67e22; stroke-width: 1.5; stroke-dasharray: 5,3; }
+       .title { font-family: Helvetica, Arial; font-size: 12px; fill: #000; text-anchor: middle; font-weight: bold; }
+   </style>
+   <defs>
+       <g id="cell"><rect class="pos" width="30" height="20" rx="2" stroke-width="1"/></g>
+   </defs>
+
+   <text class="title" x="280" y="16">SoA — Structure of Arrays</text>
+   <text class="header" x="12" y="50">x[]</text>
+
+   <!-- 16 cells -->
+   <use href="#cell" x="38"  y="38"/><use href="#cell" x="69"  y="38"/><use href="#cell" x="100" y="38"/>
+   <use href="#cell" x="131" y="38"/><use href="#cell" x="162" y="38"/><use href="#cell" x="193" y="38"/>
+   <use href="#cell" x="224" y="38"/><use href="#cell" x="255" y="38"/><use href="#cell" x="286" y="38"/>
+   <use href="#cell" x="317" y="38"/><use href="#cell" x="348" y="38"/><use href="#cell" x="379" y="38"/>
+   <use href="#cell" x="410" y="38"/><use href="#cell" x="441" y="38"/><use href="#cell" x="472" y="38"/>
+   <use href="#cell" x="503" y="38"/>
+
+   <!-- Labels -->
+   <text class="label" x="53"  y="52">x[0]</text><text class="label" x="84"  y="52">x[1]</text><text class="label" x="115" y="52">x[2]</text>
+   <text class="label" x="146" y="52">x[3]</text><text class="label" x="177" y="52">x[4]</text><text class="label" x="208" y="52">x[5]</text>
+   <text class="label" x="239" y="52">x[6]</text><text class="label" x="270" y="52">x[7]</text><text class="label" x="301" y="52">x[8]</text>
+   <text class="label" x="332" y="52">x[9]</text><text class="label" x="363" y="52">x[10]</text><text class="label" x="394" y="52">x[11]</text>
+   <text class="label" x="425" y="52">x[12]</text><text class="label" x="456" y="52">x[13]</text><text class="label" x="487" y="52">x[14]</text>
+   <text class="label" x="518" y="52">x[15]</text>
+
+   <!-- Cache line -->
+   <rect class="cacheLine" x="35" y="34" width="501" height="28" rx="3"/>
+</svg>
