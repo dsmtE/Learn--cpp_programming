@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkprogramming_support_courses||=[]).push([[6316],{91185(e){e.exports=JSON.parse('{"categoryGeneratedIndex":{"title":"TDs","slug":"/TDs","permalink":"/Learn--cpp_programming/TDs","sidebar":"TDs","navigation":{"next":{"title":"Fondamentaux","permalink":"/Learn--cpp_programming/TDs/Fundamentals"}}}}')}}]);
