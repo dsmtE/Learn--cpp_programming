@@ -3,7 +3,6 @@ title: L'IDE VSCode
 tags:
     - Tools
     - IDE
-sidebar_position: 1
 ---
 
 import { Chip } from "@mui/material";

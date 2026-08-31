@@ -5,7 +5,6 @@ tags:
     - C++
     - IDE
 
-sidebar_position: 1
 ---
 - Comme expliqué précédemment le **C++** est un langage compilé et il va donc falloir installer un **compilateur**.
 

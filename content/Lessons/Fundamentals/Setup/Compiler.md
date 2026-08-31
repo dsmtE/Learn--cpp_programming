@@ -4,7 +4,6 @@ tags:
     - Tools
     - C++
 
-sidebar_position: 0
 ---
 
 import Tabs from '@theme/Tabs';
