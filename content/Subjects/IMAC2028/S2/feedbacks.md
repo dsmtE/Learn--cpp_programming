@@ -39,7 +39,7 @@ enum class Biome {
     Forest, Mountain, Water
 };
 ```
-Vous pouvez retrouver la partie du cours qui en parle : [ici](/Lessons/S1/Variables#enum-un-type-supplémentaire)
+Vous pouvez retrouver la partie du cours qui en parle : [ici](/Lessons/Fundamentals/Variables#enum-un-type-supplémentaire)
 
 ## Algorithmes
 

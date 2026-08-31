@@ -3,7 +3,6 @@ title: CMake
 tags:
     - Tools
     - C++
-sidebar_position: 2
 ---
 
 import { Chip } from "@mui/material";

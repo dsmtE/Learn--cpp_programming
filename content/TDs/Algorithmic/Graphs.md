@@ -62,7 +62,7 @@ En vous appuyant sur le code du projet:
 
 Vous devez implémenter Dijkstra dans le projet fourni (pas dans un mini-code séparé).
 
-Rappel cours: [Dijkstra - plus court chemin](/Lessons/S2/graphs/#dijkstra).
+Rappel cours: [Dijkstra - plus court chemin](/Lessons/Algorithmic/Graphs/#dijkstra).
 
 :::tip Petite aide sur les fonctions à utiliser
 

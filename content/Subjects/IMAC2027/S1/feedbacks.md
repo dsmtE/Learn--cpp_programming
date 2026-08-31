@@ -42,7 +42,7 @@ Il est aussi possible de faire un **using** plus précis comme `using std::strin
 
 Les **include guards** sont des directives de préprocesseur qui permettent d'éviter les inclusions multiples d'un même header.
 Cela permet de s'assurer que le header ne sera inclus qu'une seule fois afin d'éviter les problèmes de liens multiples.
-Cela se fait en **C++** en ajoutant la directive `#pragma once` au début du header. ([lien du cours](/Lessons/S1/Headers#pragma-once-éviter-les-doublons)).
+Cela se fait en **C++** en ajoutant la directive `#pragma once` au début du header. ([lien du cours](/Lessons/Fundamentals/Headers#pragma-once-éviter-les-doublons)).
 
 Cependant, de part l'historique de C++ et sa rétrocompatibilité avec le C, il est encore courant de voir des include guards écrits de la manière suivante :
 
