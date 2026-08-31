@@ -131,7 +131,7 @@ img {
 }
 </style>
 
-![center](../Lessons/S1/Setup/IDE_imgs/VSCode_cmakePlay.png)
+![center](../Lessons/Fundamentals/Setup/IDE_imgs/VSCode_cmakePlay.png)
 
 ---
 

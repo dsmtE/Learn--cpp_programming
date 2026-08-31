@@ -22,7 +22,7 @@ Vous êtes toute fois libre de gérer ces cas si vous le souhaitez (et donc chan
 :::
 
 :::tip
-Petit rappel sur la définition des prototypes de méthodes pour les structures [ici](https://dsmte.github.io/Learn--cpp_programming/Lessons/S1/Struct#prototype-de-méthodes).
+Petit rappel sur la définition des prototypes de méthodes pour les structures [ici](https://dsmte.github.io/Learn--cpp_programming/Lessons/Fundamentals/Struct#prototype-de-méthodes).
 :::
 
 2. Créer un fichier `fraction.cpp` qui contiendra les définitions des méthodes et fonctions.

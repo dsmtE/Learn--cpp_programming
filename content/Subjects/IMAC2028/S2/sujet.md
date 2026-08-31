@@ -115,7 +115,7 @@ Le projet fournit la signature d'une fonction `octaveNoise` utilisant [`std::fun
 float octaveNoise(glm::vec2 const& position, std::function<float(glm::vec2 const&)> noiseFunction)
 ```
 
- Cette technique s'apparente à ce que l'on avait évoqué ensemble sur les fonctions [lambda](/Lessons/S2/AutoAndAlgorithm#les-fonctions-lambda). A la différence que l'on peut utiliser à la fois une fonction lambda ou alors une fonction classique définie ailleurs (ex: `perlinNoise`) en argument. [`std::function`](https://en.cppreference.com/cpp/utility/functional/function) est une classe de la bibliothèque standard C++ qui permet de "stocker" une fonction avec une signature donnée (ex: `float(glm::vec2 const&)`) et de l'appeler plus tard de manière générique, sans se soucier de la nature exacte de la fonction (lambda, fonction classique, etc).
+ Cette technique s'apparente à ce que l'on avait évoqué ensemble sur les fonctions [lambda](/Lessons/Algorithmic/AutoAndAlgorithm#les-fonctions-lambda). A la différence que l'on peut utiliser à la fois une fonction lambda ou alors une fonction classique définie ailleurs (ex: `perlinNoise`) en argument. [`std::function`](https://en.cppreference.com/cpp/utility/functional/function) est une classe de la bibliothèque standard C++ qui permet de "stocker" une fonction avec une signature donnée (ex: `float(glm::vec2 const&)`) et de l'appeler plus tard de manière générique, sans se soucier de la nature exacte de la fonction (lambda, fonction classique, etc).
 
 </details>
 - exposition des paramètres dans l'interface pour permettre l'exploration visuelle
