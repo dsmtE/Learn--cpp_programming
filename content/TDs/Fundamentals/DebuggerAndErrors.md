@@ -8,12 +8,12 @@ Il n'y a pas d'exercices à proprement parler, je vous invite à tester les diff
 
 Quelques suggestions d'exercices à déboguer:
 
-- [Fonction récursives: Fibonacci](/TDs/S1/Functions#exercice-3-fibonacci)
-    Vous pouvez observer le comportement de la fonction récursive de Fibonacci en mettant un [point d'arrêt conditionnel](/Lessons/S1/DebuggerAndErrors#points-darrêt-conditionnels) sur la valeur de `n` et inspecter la [pile d'appels](/Lessons/S1/DebuggerAndErrors#pile-dappel).
+- [Fonction récursives: Fibonacci](/TDs/Fundamentals/Functions#exercice-3-fibonacci)
+    Vous pouvez observer le comportement de la fonction récursive de Fibonacci en mettant un [point d'arrêt conditionnel](/Lessons/Fundamentals/DebuggerAndErrors#points-darrêt-conditionnels) sur la valeur de `n` et inspecter la [pile d'appels](/Lessons/Fundamentals/DebuggerAndErrors#pile-dappel).
 
 
-- [Conjecture de Syracuse](/TDs/S1/ConditionsAndLoops#exercice-7-conjecture-de-syracuse)
+- [Conjecture de Syracuse](/TDs/Fundamentals/ConditionsAndLoops#exercice-7-conjecture-de-syracuse)
     Vous pouvez observer le comportement de la conjecture de Syracuse si le nombre devient trop grand par exemple.
 
 - Tableaux
-    Vous pouvez vous servir des [watch](/Lessons/S1/DebuggerAndErrors#inspecter-les-variables) pour observer les valeurs des éléments d'un tableau comme dans l'exercice de [comptage](/TDs/S1/Arrays#exercice-3-comptage) ou de [suppression et tassement](/TDs/S1/Arrays#exercice-5-suppression-et-tassement)
+    Vous pouvez vous servir des [watch](/Lessons/Fundamentals/DebuggerAndErrors#inspecter-les-variables) pour observer les valeurs des éléments d'un tableau comme dans l'exercice de [comptage](/TDs/Fundamentals/Arrays#exercice-3-comptage) ou de [suppression et tassement](/TDs/Fundamentals/Arrays#exercice-5-suppression-et-tassement)

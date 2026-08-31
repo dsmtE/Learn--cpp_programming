@@ -8,7 +8,7 @@ Le but de ce TD est de manipuler plusieurs fichiers sources et de les compiler e
 
 Nous allons créer une structure qui permet de représenter une couleur avec trois composantes `red`, `green` et `blue`.
 
-1. Créer un fichier `color.hpp` qui contiendra un [espace de nom](/Lessons/S1/Headers#espaces-de-noms) `Color` avec la définition de la structure `Rgb` et les prototypes des fonctions et méthodes suivantes :
+1. Créer un fichier `color.hpp` qui contiendra un [espace de nom](/Lessons/Fundamentals/Headers#espaces-de-noms) `Color` avec la définition de la structure `Rgb` et les prototypes des fonctions et méthodes suivantes :
     - La structure devra s'appeler `Rgb` et contenir trois **entiers** nommés `red`, `green` et `blue` de type `unsigned int` avec une valeur par défaut initialisée à `0`.
     - La structure devra contenir une **méthode** `display` qui permet d'afficher (`std::cout`) la couleur sous la forme `rgb(red, green, blue)`.
 

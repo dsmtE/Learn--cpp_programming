@@ -91,12 +91,12 @@ void Node::delete_children();
 On peut utiliser de la récursivité pour supprimer les nœuds de l'arbre.
 :::
 
-6. Écrire une **méthode** `display_infix` qui affiche les valeurs des nœuds parcourus dans l'ordre [**infixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
+6. Écrire une **méthode** `display_infix` qui affiche les valeurs des nœuds parcourus dans l'ordre [**infixe**](/Lessons/Algorithmic/BinaryTree/#parcours-en-profondeur).
 ```cpp
 void Node::display_infix() const;
 ```
 
-7. Écrire une **méthode** `prefix` qui retourne un vecteur contenant des pointeurs vers les nœuds de l'arbre binaire parcourus en [**prefixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
+7. Écrire une **méthode** `prefix` qui retourne un vecteur contenant des pointeurs vers les nœuds de l'arbre binaire parcourus en [**prefixe**](/Lessons/Algorithmic/BinaryTree/#parcours-en-profondeur).
 ```cpp
 std::vector<Node const*> Node::prefix() const;
 ```
@@ -110,7 +110,7 @@ nodes.insert(nodes.end(), left_nodes.begin(), left_nodes.end());
 Cela va permettre de concaténer dans un seul vecteur les nœuds des sous arbres gauche et droit.
 :::
 
-8. (**BONUS**) De même, écrire une autre méthode `postfix` qui retournent les nœuds parcourus dans l'ordre [**postfixe**](/Lessons/S2/BinaryTree/#parcours-en-profondeur).
+8. (**BONUS**) De même, écrire une autre méthode `postfix` qui retournent les nœuds parcourus dans l'ordre [**postfixe**](/Lessons/Algorithmic/BinaryTree/#parcours-en-profondeur).
 
 <details>
 <summary>BONUS: Itératif</summary>
@@ -249,7 +249,7 @@ Testons maintenant notre implémentation en créant un programme qui permet de c
 ## Aller plus loin
 ### Exercice 3 (Pointeurs intelligents) (Bonus)
 
-Nous allons maintenant améliorer et simplifier notre code en utilisant des [**pointeurs intelligents**](/Lessons/S1/MemoryAllocation). En effet la partie la plus compliquée de notre code est la gestion de la mémoire et des pointeurs. Les pointeurs intelligents vont nous permettre de nous débarrasser de cette gestion et de nous passer de la fonction `delete_tree` par exemple.
+Nous allons maintenant améliorer et simplifier notre code en utilisant des [**pointeurs intelligents**](/Lessons/Fundamentals/MemoryAllocation). En effet la partie la plus compliquée de notre code est la gestion de la mémoire et des pointeurs. Les pointeurs intelligents vont nous permettre de nous débarrasser de cette gestion et de nous passer de la fonction `delete_tree` par exemple.
 
 1.  Copier-coller votre fichier pour garder une version de votre code précédent et créer un nouveau fichier `smartNode.hpp` dans lequel vous allez réécrire votre code en utilisant des **pointeurs intelligents**.
 Renommer la structure `Node` en `SmartNode` pour pouvoir faire la différence entre les deux versions et remplacer les pointeurs "bruts" par des **pointeurs intelligents** `std::unique_ptr` dans la structure `SmartNode`.
