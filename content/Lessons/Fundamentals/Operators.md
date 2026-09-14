@@ -4,7 +4,7 @@ tags:
     - C++
 ---
 
-Nous avons appris au semestre 1 à définir des **structures**. Cela permet de regrouper des données qui ont un lien entre elles. Par exemple, on peut créer une structure `Point` qui contient les coordonnées d'un point dans un plan.
+Nous avons appris à définir des **structures**. Cela permet de regrouper des données qui ont un lien entre elles. Par exemple, on peut créer une structure `Point` qui contient les coordonnées d'un point dans un plan.
 
 Nous avons aussi vu comment définir des **méthodes** pour utiliser la structure. Par exemple, on peut définir une méthode `add` qui permet d'ajouter deux **points** entre eux (en faisant la somme de leurs coordonnées respectives).
 
