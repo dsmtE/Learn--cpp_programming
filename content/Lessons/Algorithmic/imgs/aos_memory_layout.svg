@@ -1,0 +1,44 @@
+<svg version="1.1" width="510" height="80" viewBox="0 0 520 80"
+   xmlns="http://www.w3.org/2000/svg">
+   <style>
+       .pos { fill: #d6eaf8; stroke: #2980b9; }
+       .vel { fill: #d5f5e3; stroke: #27ae60; }
+       .col { fill: #fadbd8; stroke: #e74c3c; }
+       .label { font-family: Helvetica, Arial; font-size: 8px; fill: #333; text-anchor: middle; }
+       .header { font-family: Helvetica, Arial; font-size: 10px; fill: #666; text-anchor: middle; }
+       .cacheLine  { fill: none; stroke: #e67e22; stroke-width: 1.5; stroke-dasharray: 5,3; }
+       .title { font-family: Helvetica, Arial; font-size: 12px; fill: #000; text-anchor: middle; font-weight: bold; }
+   </style>
+   <defs>
+       <g id="pos"><rect class="pos" width="30" height="22" rx="2" stroke-width="1"/></g>
+       <g id="vel"><rect class="vel" width="30" height="22" rx="2" stroke-width="1"/></g>
+       <g id="col"><rect class="col" width="30" height="22" rx="2" stroke-width="1"/></g>
+   </defs>
+
+   <text class="title" x="260" y="16">AoS — Array of Structures</text>
+   <text class="header" x="58" y="32">Particule 0 (36 octets)</text>
+   <text class="header" x="342" y="32">Particule 1 (28 octets ...)</text>
+
+   <!-- Particule 0 -->
+   <use href="#pos" x="5"  y="40"/><use href="#pos" x="36" y="40"/><use href="#pos" x="67" y="40"/>
+   <use href="#vel" x="98" y="40"/><use href="#vel" x="129" y="40"/><use href="#vel" x="160" y="40"/>
+   <use href="#col" x="191" y="40"/><use href="#col" x="222" y="40"/><use href="#col" x="253" y="40"/>
+
+   <!-- Particule 1 -->
+   <use href="#pos" x="284" y="40"/><use href="#pos" x="315" y="40"/><use href="#pos" x="346" y="40"/>
+   <use href="#vel" x="377" y="40"/><use href="#vel" x="408" y="40"/><use href="#vel" x="439" y="40"/>
+   <use href="#col" x="470" y="40"/>
+
+   <!-- Labels Particule 0 -->
+   <text class="label" x="20"  y="54">x</text><text class="label" x="51"  y="54">y</text><text class="label" x="82"  y="54">z</text>
+   <text class="label" x="113" y="54">vx</text><text class="label" x="144" y="54">vy</text><text class="label" x="175" y="54">vz</text>
+   <text class="label" x="206" y="54">r</text><text class="label" x="237" y="54">g</text><text class="label" x="268" y="54">b</text>
+
+   <!-- Labels Particule 1 -->
+   <text class="label" x="299" y="54">x</text><text class="label" x="330" y="54">y</text><text class="label" x="361" y="54">z</text>
+   <text class="label" x="392" y="54">vx</text><text class="label" x="423" y="54">vy</text><text class="label" x="454" y="54">vz</text>
+   <text class="label" x="485" y="54">r</text>
+
+   <!-- Cache line -->
+   <rect class="cacheLine" x="2" y="36" width="501" height="30" rx="3"/>
+</svg>
