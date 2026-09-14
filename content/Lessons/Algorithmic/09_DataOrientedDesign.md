@@ -469,6 +469,28 @@ Les autres optimisations de `-O3` incluent :
 Compilez toujours avec `-O3` (ou `-O2`) pour les builds de release. Utilisez `-O0 -g` uniquement pour le debug.
 :::
 
+## Au-delà du CPU : GPU et Entity Component System
+
+Les concepts de cache efficiency et SoA ne s'arrêtent pas au CPU. Ils se retrouvent partout où les performances sont critiques, notamment dans les **moteurs de jeux vidéo** ou applications **scientifiques** ou de manière plus générale de calcul intensif.
+
+### GPU — parallélisation massive
+
+Les GPU ont des milliers de coeurs qui traitent les données en parallèle. Le même principe s'applique : données contiguës = traitement efficace. Un GPU déteste les données éparpillées encore plus qu'un CPU, car il doit nourrir des milliers de coeurs simultanément.
+
+Un *compute shader* GPU qui traite un tableau de positions est fondamentalement un SoA loop parallélisé sur des milliers de coeurs. Les frameworks de calcul GPU (CUDA, OpenCL, Vulkan compute) s'attendent à des données contiguës, c'est le SoA qui est le layout naturel du GPU.
+
+### Entity Component System (ECS) — le SoA dans les jeux vidéo
+
+En développement de jeux, le paradigme **ECS** pousse le SoA à l'extrême :
+
+- **Entity** = juste un ID (un entier)
+- **Component** = des données pures (Position, Velocity, Health...) stockées en **tableaux séparés**
+- **System** = de la logique qui traite un sous-ensemble de composants
+
+C'est exactement le pattern SoA : un système physique ne touche que `Position` + `Velocity`, un système de rendu que `Position` + `Mesh`. Chaque système accède à un sous-ensemble des données → cache optimal.
+
+Ce pattern est utilisé par les moteurs modernes comme Unity DOTS et Unreal Mass pour gérer des scènes avec des centaines milliers d'entités.
+
 ## Résumé
 
 - L'**organisation des données en mémoire** impacte directement les performances via les **lignes de cache** (~64 octets).
@@ -479,6 +501,8 @@ Compilez toujours avec `-O3` (ou `-O2`) pour les builds de release. Utilisez `-O
 - Les **bitfields** permettent de réduire drastiquement la taille d'une struct quand les valeurs ont un domaine limité.
 - `std::vector<T>` est **cache-friendly** (mémoire contiguë) — préférez-le par défaut à `std::list` ou `std::unordered_map`.
 - Compilez avec `-O3` pour bénéficier de l'**auto-vectorisation** (SIMD) et des autres optimisations du compilateur.
+- Le **GPU** exploite le même principe que le SoA : données contiguës = traitement parallèle efficace.
+- Le paradigme **ECS** (Entity Component System) applique le SoA au développement de jeux vidéo.
 
 :::info Pour aller plus loin
 - [Cache-Friendly C++ — Jonathan Müller, CppCon 2025](https://www.youtube.com/watch?v=g_X5g3xw43Q) (vidéo)
