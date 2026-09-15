@@ -77,17 +77,26 @@ void print_efficiency(double time_a, double time_b,
 // ============================================================
 
 // AoS : toutes les données d'une particule sont groupées
+//   sizeof == 56 octets — une ligne de cache (64o) contient ~1.1 particule.
+//   lifetime est placé à la fin pour accentuer l'effet scattered access.
 struct ParticuleAoS {
     float x {}, y {}, z {};       // position
     float vx {}, vy {}, vz {};    // vitesse
     float r {}, g {}, b {};       // couleur
+    float mass {};                // masse
+    float rotation {};            // angle de rotation
+    float health {};              // énergie / santé
+    uint32_t flags {};            // flags (actif, visible, etc.)
+    float lifetime {};            // durée de vie restante — loin de x/vx en mémoire
 };
 
 // SoA : chaque attribut est dans un tableau séparé
 struct ParticulesSoA {
-    std::vector<float> x {}, y {}, z {};
-    std::vector<float> vx {}, vy {}, vz {};
-    std::vector<float> r {}, g {}, b {};
+    std::vector<float> x {}, y {}, z {};        // position
+    std::vector<float> vx {}, vy {}, vz {};     // vitesse
+    std::vector<float> r {}, g {}, b {};        // couleur
+    std::vector<float> mass {}, rotation {}, health {}, lifetime {};
+    std::vector<uint32_t> flags {};
 
     size_t taille() const { return x.size(); }
 };
@@ -97,11 +106,14 @@ void benchmark_AoS_vs_SoA() {
     constexpr float dt {0.016f};
 
     std::cout << "  sizeof(ParticuleAoS) = " << sizeof(ParticuleAoS) << " octets\n";
+    std::cout << "  (ligne de cache = 64o, soit ~" << std::fixed << std::setprecision(1)
+              << 64.0 / static_cast<double>(sizeof(ParticuleAoS)) << " particule(s) par cache line)\n";
 
     // Remplir les données AoS
     std::vector<ParticuleAoS> particules_aos(N);
     for (size_t i {0}; i < N; ++i) {
-        particules_aos[i] = {1.0f, 2.0f, 3.0f, 0.1f, 0.2f, 0.3f, 1.0f, 0.0f, 0.0f};
+        particules_aos[i] = {1.0f, 2.0f, 3.0f, 0.1f, 0.2f, 0.3f, 1.0f, 0.0f, 0.0f,
+                             1.0f, 0.0f, 100.0f, 0xFFFFFFFFu, 10.0f};
     }
 
     // Remplir les données SoA
@@ -115,9 +127,14 @@ void benchmark_AoS_vs_SoA() {
     particules_soa.r.resize(N, 1.0f);
     particules_soa.g.resize(N, 0.0f);
     particules_soa.b.resize(N, 0.0f);
+    particules_soa.mass.resize(N, 1.0f);
+    particules_soa.rotation.resize(N, 0.0f);
+    particules_soa.health.resize(N, 100.0f);
+    particules_soa.flags.resize(N, 0xFFFFFFFFu);
+    particules_soa.lifetime.resize(N, 10.0f);
 
     // --- Test 1 : Accès partiel (x seul) ---
-    // SoA gagne car AoS gaspille le cache sur y, z, r, g, b
+    // SoA gagne car AoS gaspille le cache sur y, z, r, g, b, mass, rotation, health, flags
     double time_aos_x {};
     {
         ScopedTimer timer {"[AoS] Mise a jour x seul"};
@@ -141,11 +158,13 @@ void benchmark_AoS_vs_SoA() {
     print_efficiency(time_aos_x, time_soa_x, "AoS", "SoA");
     std::cout << "  (accès partiel : seul x est mis à jour)\n";
 
-    // --- Test 2 : Accès complet, code réaliste (1 boucle vs 3) ---
-    // AoS gagne car il fait 1 seule passe vs 3 pour SoA
+    // --- Test 2 : Accès complet (x, y, z) — même nombre de boucles ---
+    // AoS et SoA font le même travail en 1 seule boucle : seule l'organisation
+    // mémoire diffère. En SoA, on regroupe x, y et z dans une même boucle car
+    // ce sont des données liées (la position).
     double time_aos_full {};
     {
-        ScopedTimer timer {"[AoS] Mise a jour x, y, z (1 boucle)"};
+        ScopedTimer timer {"[AoS] Mise a jour position + vitesse (1 boucle)"};
         for (auto& p : particules_aos) {
             p.x += p.vx * dt;
             p.y += p.vy * dt;
@@ -157,14 +176,13 @@ void benchmark_AoS_vs_SoA() {
 
     double time_soa_full {};
     {
-        ScopedTimer timer {"[SoA] Mise a jour x, y, z (3 boucles)"};
-        for (size_t i {0}; i < particules_soa.taille(); ++i) {
+        ScopedTimer timer {"[SoA] Mise a jour position + vitesse (1 passe)"};
+        size_t const n {particules_soa.taille()};
+        // La position (x, y, z) et la vitesse (vx, vy, vz) sont quasi toujours
+        // utilisées ensemble : une seule boucle suffit, sur des tableaux contigus.
+        for (size_t i {0}; i < n; ++i) {
             particules_soa.x[i] += particules_soa.vx[i] * dt;
-        }
-        for (size_t i {0}; i < particules_soa.taille(); ++i) {
             particules_soa.y[i] += particules_soa.vy[i] * dt;
-        }
-        for (size_t i {0}; i < particules_soa.taille(); ++i) {
             particules_soa.z[i] += particules_soa.vz[i] * dt;
         }
         time_soa_full = timer.elapsed();
@@ -172,45 +190,76 @@ void benchmark_AoS_vs_SoA() {
     }
 
     print_efficiency(time_aos_full, time_soa_full, "AoS", "SoA");
-    std::cout << "  (accès complet : AoS fait 1 passe, SoA en fait 3)\n";
+    std::cout << "  (accès complet, mêmes passes : seule l'organisation mémoire diffère)\n";
 
-    // --- Test 3 : Accès complet, nombre de passes isolé (3 vs 3) ---
-    // SoA gagne car même nombre de passes, mais chaque passe est cache-friendly
-    double time_aos_3loops {};
+    // --- Test 3 : Scénario réel — physique + cull ---
+    // Deux "cas d'usage" distincts : la position/vitesse (pour la physique) et
+    // la durée de vie + flags (pour le cull, utilisé indépendamment). On compare
+    // 3 approches : AoS 1 boucle (éparpillé), SoA 1 boucle (contigu), SoA 2
+    // passes (une par cas d'usage, chacune cache-friendly).
+
+    double time_aos_scattered {};
     {
-        ScopedTimer timer {"[AoS] Mise a jour x, y, z (3 boucles)"};
+        ScopedTimer timer {"[AoS] Physique + cull (1 boucle)"};
         for (auto& p : particules_aos) {
             p.x += p.vx * dt;
-        }
-        for (auto& p : particules_aos) {
             p.y += p.vy * dt;
-        }
-        for (auto& p : particules_aos) {
             p.z += p.vz * dt;
+            p.lifetime -= dt;
+            if (p.lifetime <= 0.0f) {
+                p.flags = 0;
+            }
         }
-        time_aos_3loops = timer.elapsed();
+        time_aos_scattered = timer.elapsed();
         DoNotOptimize(particules_aos);
     }
 
-    // SoA refait les 3 passes pour isoler l'effet cache
-    double time_soa_3loops {};
+    // SoA 1 pass : même travail, même nombre de boucles, mais chaque accès
+    // est un tableau contigu → le processeur ne charge que les données utiles.
+    double time_soa_1pass {};
     {
-        ScopedTimer timer {"[SoA] Mise a jour x, y, z (3 boucles)"};
-        for (size_t i {0}; i < particules_soa.taille(); ++i) {
+        ScopedTimer timer {"[SoA] Physique + cull (1 passe)"};
+        size_t const n {particules_soa.taille()};
+        for (size_t i {0}; i < n; ++i) {
             particules_soa.x[i] += particules_soa.vx[i] * dt;
-        }
-        for (size_t i {0}; i < particules_soa.taille(); ++i) {
             particules_soa.y[i] += particules_soa.vy[i] * dt;
-        }
-        for (size_t i {0}; i < particules_soa.taille(); ++i) {
             particules_soa.z[i] += particules_soa.vz[i] * dt;
+            particules_soa.lifetime[i] -= dt;
+            if (particules_soa.lifetime[i] <= 0.0f) {
+                particules_soa.flags[i] = 0;
+            }
         }
-        time_soa_3loops = timer.elapsed();
+        time_soa_1pass = timer.elapsed();
         DoNotOptimize(particules_soa);
     }
 
-    print_efficiency(time_aos_3loops, time_soa_3loops, "AoS", "SoA");
-    std::cout << "  (même nombre de passes : avantage cache de SoA)\n";
+    // SoA 2 passes : chaque cas d'usage a sa boucle, encore plus concentré.
+    double time_soa_2passes {};
+    {
+        ScopedTimer timer {"[SoA] Physique + cull (2 passes)"};
+        size_t const n {particules_soa.taille()};
+        // Passe 1 : la physique — position + vitesse, une seule boucle
+        for (size_t i {0}; i < n; ++i) {
+            particules_soa.x[i] += particules_soa.vx[i] * dt;
+            particules_soa.y[i] += particules_soa.vy[i] * dt;
+            particules_soa.z[i] += particules_soa.vz[i] * dt;
+        }
+        // Passe 2 : le cull — lifetime (utilisé seul) + flags, une autre boucle
+        for (size_t i {0}; i < n; ++i) {
+            particules_soa.lifetime[i] -= dt;
+            if (particules_soa.lifetime[i] <= 0.0f) {
+                particules_soa.flags[i] = 0;
+            }
+        }
+        time_soa_2passes = timer.elapsed();
+        DoNotOptimize(particules_soa);
+    }
+
+    print_efficiency(time_aos_scattered, time_soa_1pass, "AoS", "SoA (1 passe)");
+    std::cout << "  (même travail, même nombre de passes : seul le layout change)\n";
+    print_efficiency(time_soa_1pass, time_soa_2passes, "SoA (1 passe)", "SoA (2 passes)");
+    std::cout << "  (2 passes = chaque cas d'usage concentre ses accès, encore plus cache-friendly)\n";
+    std::cout << "  (à -O0 l'overhead des boucles domine : compilez avec -O3 pour voir l'avantage cache)\n";
 }
 
 // ============================================================

@@ -38,6 +38,14 @@ struct Particule {
     float x {}, y {}, z {}; // position
     float vx {}, vy {}, vz {}; // vitesse
     float r {}, g {}, b {}; // couleur
+    float mass {};              // masse
+    float rotation {};          // angle de rotation
+    float health {};            // énergie / santé
+    uint32_t flags {};          // flags (actif, visible, etc.)
+    float lifetime {};          // durée de vie restante
+
+    // autres propriétés
+    // ...
 };
 
 std::vector<Particule> particules(1000);
@@ -51,7 +59,7 @@ En mémoire, les données de chaque particule sont **consécutives** :
     <AoSMemorySvg className="themed primaryFillRect" />
 </div>
 
-Une **ligne de cache** fait 64 octets. Chaque `Particule` fait 36 octets (9 × `float` à 4 octets). Donc une seule ligne de cache contient **à peine 1.7 particules**. Si on ne lit que `x`, on gaspille 32 octets de cache sur chaque particule!
+Une **ligne de cache** fait 64 octets. Chaque `Particule` fait 56 octets (13 × `float` + 1 × `uint32_t` à 4 octets). Donc une seule ligne de cache contient **à peine 1.1 particule**. Si on ne lit que `x`, on gaspille **52 octets** de cache sur chaque particule!
 
 ### Quand utiliser AoS ?
 
@@ -82,6 +90,8 @@ struct Particules {
     std::vector<float> x {}, y {}, z {}; // positions
     std::vector<float> vx {}, vy {}, vz {}; // vitesses
     std::vector<float> r {}, g {}, b {}; // couleurs
+    std::vector<float> mass {}, rotation {}, health {}, lifetime {};
+    std::vector<uint32_t> flags {};
 
     size_t taille() const { return x.size(); }
 };
@@ -111,18 +121,16 @@ Avec SoA, une seule ligne de cache (64 octets) contient **16 floats** = **16 par
 - Quand on veut exploiter la **parallélisation** du processeur (SIMD)
 
 ```cpp
-// On ne met à jour que la coordonnée x des particules, donc on ne charge que les données nécessaires en cache
+// La position (x, y, z) et la vitesse (vx, vy, vz) forment des données liées :
+// une SEULE boucle suffit pour les mettre à jour ensemble, sur des tableaux contigus
 for (size_t i {0}; i < particules.taille(); ++i) {
     particules.x[i] += particules.vx[i] * dt;
-}
-// puis on met à jour la coordonnée y
-for (size_t i {0}; i < particules.taille(); ++i) {
     particules.y[i] += particules.vy[i] * dt;
+    particules.z[i] += particules.vz[i] * dt;
 }
-// ...
 ```
 
-Les valeurs de `x` sont **contiguës en mémoire**, donc le processeur charge efficacement plusieurs positions d'un coup dans la cache.
+Les valeurs de **chaque attribut** sont **contiguës en mémoire**, donc le processeur charge efficacement plusieurs particules d'un coup dans la cache, pour `x` comme pour `y` ou `z`.
 
 ## Exemple concret : filtrage de particules
 
@@ -146,10 +154,61 @@ for (size_t i {0}; i < n; ++i) {
 
 Pour de grandes quantités de données, la différence de performance peut être **significative** (2x à 10x plus rapide selon les cas).
 
-:::warning SoA n'est pas toujours plus rapide
-Lorsqu'on met à jour **toutes les coordonnées** (x, y, z), le code naturel en SoA nécessite **3 boucles séparées** (une par attribut), tandis qu'AoS le fait en **1 seule boucle**. Si les deux font le même travail, AoS peut être plus rapide car il ne fait qu'une seule passe sur les données.
+### Des données éparpillées : la raison d'utiliser SoA
 
-La vraie force du SoA apparaît quand on n'accède qu'à **un sous-ensemble des attributs**. Si vous avez besoin de toutes les données, AoS reste un choix tout à fait valide. **Toujours benchmark votre cas d'usage spécifique.**
+Dans un vrai jeu, on ne met pas à jour qu'une seule coordonnée. La boucle principale touche des attributs **éloignés** dans la structure : la **position** (tout au début de `Particule`) et la **durée de vie** (`lifetime`, tout à la fin). Or une particule fait 56 octets : elle déborde presque toujours sur **2 lignes de cache** différentes. Résultat, en **AoS**, une seule boucle suffit mais chaque itération force le CPU à charger **2 blocs mémoire** au lieu d'un :
+
+```cpp
+// AoS — 1 boucle, mais des accès éparpillés sur 2 lignes de cache
+for (auto& p : particules) {
+    p.x += p.vx * dt;            // ligne de cache 1 : x, y, z, vx, vy, vz...
+    p.y += p.vy * dt;
+    p.z += p.vz * dt;
+    p.lifetime -= dt;            // ligne de cache 2 : lifetime tout à la fin !
+    if (p.lifetime <= 0.0f)
+        p.flags = 0;             // toujours sur la ligne de cache 2
+}
+```
+
+C'est la vraie raison d'intérêt du **SoA** : chaque attribut devient un tableau contigu. On organise le code autour des **cas d'usage** : la position (x, y, z) et la vitesse sont utilisées ensemble pour la physique → une **seule** boucle, sur des tableaux contigus. On passe à une autre boucle uniquement quand on traite **un autre cas d'usage** — comme le cull, qui n'utilise que `lifetime` et les `flags`.
+
+```cpp
+// SoA — passe 1 : la physique (position + vitesse, utilisées ensemble)
+for (size_t i {0}; i < n; ++i) {
+    particules.x[i] += particules.vx[i] * dt;
+    particules.y[i] += particules.vy[i] * dt;
+    particules.z[i] += particules.vz[i] * dt;
+}
+```
+
+Le cull, lui, n'a besoin que de `lifetime` (utilisé **indépendamment** de la position) et des `flags`. C'est le cas où une **seconde boucle** se justifie :
+
+```cpp
+// SoA — passe 2 : le cull (lifetime + flags — un autre cas d'usage)
+for (size_t i {0}; i < n; ++i) {
+    particules.lifetime[i] -= dt;
+    if (particules.lifetime[i] <= 0.0f) {
+        particules.flags[i] = 0;
+    }
+}
+```
+
+Le compromis est donc : **ajouter une boucle seulement quand on change de cas d'usage**. C'est ce que mesure le **Test 3** du benchmark `benchmark_cache.cpp` (scénario réel physique + cull). Il compare trois variantes :
+
+1. **AoS 1 boucle** — tout dans une seule boucle, mais les accès sont éparpillés sur 2 lignes de cache.
+2. **SoA 1 passe** — même nombre de boucles que l'AoS, mais chaque accès est un tableau contigu.
+3. **SoA 2 passes** — chaque cas d'usage (physique, cull) a sa propre boucle, encore plus concentré.
+
+À **-O3**, le constat est frappant :
+- **AoS 1 boucle vs SoA 1 passe** : presque rien (≈ 3 %). Le changement de layout seul, quand on touche **toutes** les données dans la même boucle, ne change pas grand-chose.
+- **SoA 1 passe vs SoA 2 passes** : **≈ 62 % plus rapide**. Le vrai gain vient de la **séparation par cas d'usage** : chaque boucle ne touche qu'un sous-ensemble étroit de tableaux, le processeur ne charge que ce dont il a besoin.
+
+La question n'est **jamais** « est-ce que SoA fait plus de boucles ? » mais « est-ce que chaque boucle ne charge que les données dont elle a besoin ? ».
+
+:::warning SoA n'est pas toujours plus rapide
+Le SoA augmente souvent le **nombre de boucles** (une par cas d'usage). Ce n'est pas un problème en soi : ce qui compte, c'est que chaque boucle **ne charge que les données dont elle a besoin**. Découper un même groupe de données (chaque tableau de la position, par exemple) en plusieurs boucles ne fait qu'ajouter du travail inutile.
+
+La vraie force du SoA apparaît quand on n'accède qu'à **un sous-ensemble des attributs** (un seul `x`, ou `lifetime` seul pour le cull), ou quand les attributs utilisés ensemble sont **éloignés** dans une grosse structure. **Toujours benchmark votre cas d'usage spécifique.**
 :::
 
 ## Utiliser des types plus petits
@@ -496,6 +555,7 @@ Ce pattern est utilisé par les moteurs modernes comme Unity DOTS et Unreal Mass
 - L'**organisation des données en mémoire** impacte directement les performances via les **lignes de cache** (~64 octets).
 - **AoS** (Array of Structures) : un tableau contenant des structures complètes. Naturel et simple, idéal quand on accède à toutes les données d'un élément.
 - **SoA** (Structure of Arrays) : une structure contenant des tableaux séparés pour chaque attribut. Plus complexe mais beaucoup plus performant pour le traitement par lot (*batch processing*).
+- **Regroupez les attributs par usage** : `x`, `y`, `z` et `vx`, `vy`, `vz` sont presque toujours traités ensemble → une seule boucle. Ajoutez une boucle seulement quand vous changez de **cas d'usage** (ex : `lifetime` pour le cull, utilisé seul). Le vrai gain ne vient pas du layout seul (~3 %), mais de la **séparation des passes** (~60 %).
 - Utilisez des **types plus petits** (`uint8_t` au lieu de `int`, `float` au lieu de `double`) pour réduire la pression sur la cache.
 - **Réordonnez les membres** de vos structures du plus grand au plus petit pour minimiser le padding.
 - Les **bitfields** permettent de réduire drastiquement la taille d'une struct quand les valeurs ont un domaine limité.
