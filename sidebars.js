@@ -39,7 +39,9 @@ module.exports = {
         'Lessons/Fundamentals/Struct',
         'Lessons/Fundamentals/Headers',
         'Lessons/Fundamentals/MemoryAllocation',
-        'Lessons/Fundamentals/OOP'],
+        'Lessons/Fundamentals/OOP',
+        'Lessons/Fundamentals/Operators'
+      ],
     }, {
       type: 'category',
       label: 'Algorithmique',
@@ -52,7 +54,6 @@ module.exports = {
       },
       items: [
         'Lessons/Algorithmic/DataStructures',
-        'Lessons/Algorithmic/Operators',
         'Lessons/Algorithmic/Sorting',
         'Lessons/Algorithmic/AutoAndAlgorithm',
         'Lessons/Algorithmic/HashAndAssociativeTables',
