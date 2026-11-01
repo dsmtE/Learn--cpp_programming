@@ -49,6 +49,108 @@ Pour des méthodes dont le seul but est d'accéder à un membre privé, on parle
 
 En pratique, on utilise `struct` pour des **agrégats de données simples** (sans logique interne) et `class` pour des **objets plus complexes** avec du **comportement** et de l'**encapsulation**. Cette distinction est une **convention**, pas une obligation technique.
 
+## Encapsulation
+
+L'**encapsulation** est un principe fondamental de la POO : on **masque** les détails internes d'un objet et on ne exposes que ce qui est nécessaire.
+
+```cpp
+class Guerrier {
+private:
+    std::string nom {};
+    int points_de_vie {};
+
+public:
+    // Constructeur, on y reviendra plus tard
+    Guerrier(std::string const nom, int const pdv)
+        : nom {nom}, points_de_vie {pdv}
+    {}
+
+    void RecevoirDegats(int const degats) {
+        if (degats > 0) {
+            points_de_vie -= degats;
+            if (points_de_vie < 0) {
+                points_de_vie = 0;
+            }
+        }
+    }
+
+    void Soigner(int const soins) {
+        if (soins > 0) {
+            points_de_vie += soins;
+            if (points_de_vie > 100) {
+                points_de_vie = 100;
+            }
+        }
+    }
+
+    // ici la méthode est const car elle ne modifie pas l'état de l'objet
+    void Afficher() const {
+        std::cout << nom << " - HP: " << points_de_vie << "/100" << std::endl;
+    }
+};
+```
+
+Ici, `points_de_vie` est **privé** : on ne peut pas le modifier directement de l'extérieur. On passe par les méthodes `RecevoirDegats` et `Soigner` qui contrôlent l'accès et appliquent des **règles** (pas de dégâts négatifs, HP plafonné à 100, etc.). La méthode `Afficher` permet d'afficher l'état du guerrier sans exposer directement ses membres, elle est marquée `const` car elle ne modifie pas l'état de l'objet, je vous invite à relire le passage sur les [méthodes constante](/Lessons/Fundamentals/Struct#méthode-constante) si besoin.
+
+```cpp
+int main() {
+    Guerrier hero {"Aragorn", 80};
+    hero.Afficher(); // Aragorn - HP: 80/100
+
+    hero.RecevoirDegats(30);
+    hero.Afficher(); // Aragorn - HP: 50/100
+
+    hero.Soigner(60);
+    hero.Afficher(); // Aragorn - HP: 100/100 (plafonné)
+
+    // Erreur : 'points_de_vie' est un membre privé
+    // hero.points_de_vie = 999;
+}
+```
+
+:::tip Bonne pratique
+Utilisez `private` par défaut et ne rendez **public** que ce qui doit être accessible de l'extérieur. Cela protège l'intégrité des données et rend le code plus facile à maintenir.
+:::
+
+:::note
+⚠️ Logique l'implique pas **"Utilisation de classe"**. Il est tout aussi possible d'utiliser des `struct` avec des méthodes ou encore des fonctions libres pour manipuler des données. La POO est un **paradigme** de programmation, pas une obligation d'utiliser des classes.
+:::
+
+## Getters et Setters
+
+Comme on vient de le voir les méthodes **RecevoirDegats** et **Soigner** permettent de contrôler l'accès aux membres privés. Mais parfois, on veut juste **récupérer la valeur**, **lire** ou **modifier** des membres privés sans logique "complexe". Dans ce cas on définit des **méthodes** publiques appelées **getters** (pour lire) et **setters** (pour modifier).
+
+```cpp
+class Personne {
+private:
+    std::string nom;
+    unsigned int age;
+
+public:
+    Personne(std::string nom, unsigned int age)
+        : nom {nom}, age {age}
+    {}
+
+    // Getter
+    std::string GetNom() const {
+        return nom;
+    }
+
+    // Setter avec validation
+    void SetAge(unsigned int nouvelAge) {
+        if (nouvelAge < 150) {
+            age = nouvelAge;
+        }
+    }
+
+    unsigned int GetAge() const {
+        return age;
+    }
+};
+```
+
+Les **setters** permettent d'ajouter de la **validation** lors de la modification des données, ce qui serait impossible avec un accès direct aux membres.
+
 ## Constructeur
 
 Un **constructeur** est une méthode spéciale appelée automatiquement lors de la création d'un objet. Il permet d'**initialiser** les membres de la classe.
@@ -168,104 +270,6 @@ On peut aussi le demander explicitement :
 On préfère donc utiliser `= default` pour demander un constructeur par défaut plutôt que de l'écrire soi-même (pour éviter les erreurs et garder le code propre) sauf si on veut faire quelque chose de spécifique dans le constructeur.
 :::
 
-## Getters et Setters
-
-Pour accéder aux membres privés, on définit des **méthodes** publiques appelées **getters** (pour lire) et **setters** (pour modifier).
-
-```cpp
-class Personne {
-private:
-    std::string nom;
-    unsigned int age;
-
-public:
-    Personne(std::string nom, unsigned int age)
-        : nom {nom}, age {age}
-    {}
-
-    // Getter
-    std::string GetNom() const {
-        return nom;
-    }
-
-    // Setter avec validation
-    void SetAge(unsigned int nouvelAge) {
-        if (nouvelAge < 150) {
-            age = nouvelAge;
-        }
-    }
-
-    unsigned int GetAge() const {
-        return age;
-    }
-};
-```
-
-Les **setters** permettent d'ajouter de la **validation** lors de la modification des données, ce qui serait impossible avec un accès direct aux membres.
-
-## Encapsulation
-
-L'**encapsulation** est un principe fondamental de la POO : on **masque** les détails internes d'un objet et on ne exposes que ce qui est nécessaire via une **interface publique**.
-
-```cpp
-class Guerrier {
-private:
-    std::string nom {};
-    int points_de_vie {};
-
-public:
-    Guerrier(std::string const nom, int const pdv)
-        : nom {nom}, points_de_vie {pdv}
-    {}
-
-    void RecevoirDegats(int const degats) {
-        if (degats > 0) {
-            points_de_vie -= degats;
-            if (points_de_vie < 0) points_de_vie = 0;
-        }
-    }
-
-    void Soigner(int const soins) {
-        if (soins > 0) {
-            points_de_vie += soins;
-            if (points_de_vie > 100) {
-                points_de_vie = 100;
-            }
-        }
-    }
-
-    void Afficher() const {
-        std::cout << nom << " - HP: " << points_de_vie << "/100" << std::endl;
-    }
-};
-```
-
-Ici, `points_de_vie` est **privé** : on ne peut pas le modifier directement de l'extérieur. On passe par les méthodes `RecevoirDegats` et `Soigner` qui contrôlent l'accès et appliquent des **règles** (pas de dégâts négatifs, HP plafonné à 100, etc.).
-
-```cpp
-int main() {
-    Guerrier hero {"Aragorn", 80};
-    hero.Afficher(); // Aragorn - HP: 80/100
-
-    hero.RecevoirDegats(30);
-    hero.Afficher(); // Aragorn - HP: 50/100
-
-    hero.Soigner(60);
-    hero.Afficher(); // Aragorn - HP: 100/100 (plafonné)
-
-    // Erreur : 'points_de_vie' est un membre privé
-    // hero.points_de_vie = 999;
-}
-```
-
-:::tip Bonne pratique
-Utilisez `private` par défaut et ne rendez **public** que ce qui doit être accessible de l'extérieur. Cela protège l'intégrité des données et rend le code plus facile à maintenir.
-:::
-
-:::note
-⚠️ Logique l'implique pas **"Utilisation de classe"**. Il est tout aussi possible d'utiliser des `struct` avec des méthodes ou encore des fonctions libres pour manipuler des données. La POO est un paradigme de programmation, pas une obligation d'utiliser des classes.
-:::
-
 ## Résumé
 
 - En C++, `struct` et `class` sont techniquement quasiment identiques. La différence est donc seulement la visibilité par défaut des membres le reste est plutôt une **convention** : `struct` pour des agrégats de données simples, `class` pour des objets avec encapsulation et de la logique.
@@ -273,6 +277,18 @@ Utilisez `private` par défaut et ne rendez **public** que ce qui doit être acc
 - Un **constructeur** est une méthode spéciale appelée à la création d'un objet pour l'initialiser.
 - Les **getters** et **setters** permettent de contrôler l'accès aux membres privés.
 
-## À suivre : Héritage
+## Pour aller plus loin : l'Héritage
 
-Vous êtes maintenant capables de créer des classes avec de l'encapsulation, des constructeurs, et des getters/setters. Mais que se passe-t-il quand on veut créer une **nouvelle classe** à partir d'une classe existante ? C'est l'**héritage**, un autre pilier de la POO qui sera plutôt abordé l'année prochaine.
+Vous êtes maintenant capables de créer des classes avec de l'encapsulation, des getters/setters et des constructeurs. Mais que se passe-t-il quand on veut créer une **nouvelle classe** à partir d'une classe existante pour étendre ses fonctionnalités ? C'est l'**héritage**, un autre pilier de la POO qui sera plutôt abordé l'année prochaine.
+
+<details>
+
+<summary>interface</summary>
+
+Cette notion d'héritage va de pair avec la notion d'**interface** qui est un paradigme de conception à part entière qui permet de définir un **contrat** que les classes dérivées doivent respecter. Une interface définit un ensemble de méthodes que les classes qui l'implémentent doivent fournir.
+
+Cela permet ensuite à un programme de manipuler des objets de différentes classes de manière uniforme, tant qu'ils respectent le même contrat.
+
+En C++, une interface est généralement représentée par une **classe abstraite** qui ne contient que des méthodes **pures virtuelles**. C'est des notions avancées qui seront abordées l'année prochaine, mais je vous donne les mots clés pour que vous puissiez vous documenter si vous le souhaitez : `virtual`, `= 0`, `override`, `final`, `abstract class`.
+
+</details>
