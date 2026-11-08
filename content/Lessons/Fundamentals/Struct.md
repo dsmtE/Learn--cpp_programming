@@ -132,6 +132,25 @@ struct Product
 ```
 :::
 
+### Initialisation désignée (C++20)
+
+Depuis **C++20**, il est aussi possible d'initialiser les membres d'une structure (lors de l'initialisation) en utilisant le nom du membre suivi de la valeur à lui attribuer.
+
+```cpp
+{
+    Product const product { 
+        .price = 0.32,
+        .name = "Tomatos",
+        .quantity = 12
+    };
+}
+```
+
+C'est pratique pour plusieurs raisons:
+- On peut initialiser les membres dans n'importe quel ordre (pas besoin de connaître l'ordre des membres dans la structure).
+- On peut ne pas initialiser tous les membres, ceux qui ne sont pas initialisés prendront la valeur par défaut définie dans la structure. (Cela permet de rendre la variable **constante** si on ne souhaite plutôt que de la modifier après l'initialisation pour remplir un des membres)
+- Cela peut être plus lisible pour certaines personnes de voir le nom du membre et la valeur qui lui est attribuée.
+
 ## Utilisation
 
 Pour manipuler un **membre**, c’est-à-dire une **variable** appartenant à la structure, il suffit d’utiliser la syntaxe ```structure.membre```.
