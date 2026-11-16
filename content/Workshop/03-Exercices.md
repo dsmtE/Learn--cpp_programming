@@ -432,9 +432,9 @@ Vous pouvez utiliser `glm::distance(color1, color2)` pour obtenir la distance en
 
 Algorithme de génération de height map, qui peut ensuite être utilisée pour créer des terrains procéduraux dans des jeux vidéos par exemple.
 
-Voici une bonne vidéo expliquant l'algorithme :
+Voici une bonne vidéo expliquant l'algorithme (attention à prendre son code avec des pincettes, il y a des parties spécifiques à p5, et il rajoute aussi des visualisations de debug qui ne sont pas nécessaires. Regardez surtout la partie au début où il explique l'algorithme, après les 5m40 de blabla au début) :
 
-<YoutubeVideo id="4GuAV1PnurU"/>
+<YoutubeVideo id="bs0BQk2hH6I?t=343"/>
 <br/>
 
 Conseil : commencez par travailler sur une image toute petite (e.g. 17x17), afin de bien voir les pixels et ce qu'il se passe.
